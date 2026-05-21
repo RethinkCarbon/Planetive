@@ -1,3 +1,6 @@
+import type { LucideIcon } from "lucide-react";
+import { Banknote, Droplets, Leaf, Sun } from "lucide-react";
+
 /** Local copies in public/images/about/ (from planetive.org/about-us) */
 const teamImg = (file: string) => `/images/about/team/${file}`;
 const partnerImg = (file: string) => `/images/about/partners/${file}`;
@@ -8,7 +11,15 @@ export const ABOUT_INTRO = {
   summary:
     "Planetive is an advisory firm that provides consultancy in areas of Clean Energy, Climate Change, Clean Water, Sustainable Finance and Business Sustainability, to stakeholders from around the globe with key focus on the Middle East and Pakistan.",
   body: "At Planetive we contribute towards the global ESG/SDG goals by supporting companies to reach their net-zero targets and bridging the capital gap of sustainability projects as well as project assessment and evaluations. Planetive team is determined to make a positive global change by working on the shared goal of a sustainable and greener world, economy and society with support of our advisors from different parts of the world.",
-  heroImage: teamImg("hero.jpg"),
+  /** Global engagement photo — color, on-stage advisory context */
+  heroImage: "/images/global-engagements/ICCI--DUBAI.jpg",
+  heroImagePosition: "50% 35%",
+  focusAreas: [
+    { label: "Clean Energy", icon: Sun },
+    { label: "Climate Change", icon: Leaf },
+    { label: "Clean Water", icon: Droplets },
+    { label: "Sustainable Finance", icon: Banknote },
+  ] as { label: string; icon: LucideIcon }[],
 };
 
 export type TeamMember = {

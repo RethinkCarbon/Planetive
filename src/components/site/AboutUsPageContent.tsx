@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, ExternalLink, Users } from "lucide-react";
+import { ChevronDown, ExternalLink, Globe2, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   ABOUT_INTRO,
@@ -62,7 +62,7 @@ function AboutHero() {
       </div>
       <div
         aria-hidden
-        className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-b from-transparent to-[var(--n50)]"
+        className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-[var(--n50)]"
       />
     </section>
   );
@@ -70,46 +70,56 @@ function AboutHero() {
 
 function AboutIntro() {
   return (
-    <section className="relative z-20 -mt-6 pb-16 md:pb-20">
+    <section className="relative z-20 -mt-10 md:-mt-14 pb-16 md:pb-24">
       <div className="container-x">
-        <ScrollReveal variant="scale-up">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-[32px] md:rounded-[40px] border border-n200/80 bg-white p-8 md:p-12 shadow-[var(--shadow-elevated)] overflow-hidden">
-            <div className="lg:col-span-5 relative overflow-hidden rounded-[24px] aspect-[4/3]">
+        <ScrollReveal variant="scale-up" duration={900}>
+          <article className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[32px] md:rounded-[40px] border border-n200/80 bg-white shadow-[var(--shadow-elevated)]">
+            <div className="relative lg:col-span-5 min-h-[280px] sm:min-h-[320px] lg:min-h-[420px]">
               <img
                 src={ABOUT_INTRO.heroImage}
-                alt="Planetive team and sustainable development"
-                className="absolute inset-0 h-full w-full object-cover [filter:none]"
+                alt="Planetive leadership at a global sustainability forum"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: ABOUT_INTRO.heroImagePosition }}
                 loading="eager"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-forest/40 to-transparent" />
-            </div>
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-forest">
-                <Users size={14} />
-                Middle East &amp; Pakistan focus · Global reach
+              <div className="absolute inset-0 bg-gradient-to-t from-forest/75 via-forest/15 to-transparent lg:bg-gradient-to-r lg:from-forest/65 lg:via-forest/10 lg:to-transparent" />
+              <div className="absolute top-5 left-5 font-mono text-[11px] tracking-widest text-white/90 uppercase">
+                Our mission
               </div>
-              <p className="mt-6 text-n600 leading-relaxed text-[15px] md:text-base">
+              <div className="absolute bottom-5 left-5 right-5">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-forest shadow-lg">
+                  <Globe2 size={16} className="text-canopy shrink-0" />
+                  Middle East &amp; Pakistan · Global reach
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 flex flex-col justify-center p-8 md:p-10 lg:p-12 border-t lg:border-t-0 lg:border-l border-n200/60">
+              <div className="inline-flex items-center gap-2 rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-forest w-fit">
+                <Users size={14} aria-hidden />
+                Advisory &amp; impact
+              </div>
+              <p className="mt-5 text-[15px] md:text-base text-n600 leading-relaxed">
                 {ABOUT_INTRO.body}
               </p>
-              <ul className="mt-8 grid grid-cols-2 gap-3 text-sm">
-                {[
-                  "Clean Energy",
-                  "Climate Change",
-                  "Clean Water",
-                  "Sustainable Finance",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 text-n800 font-medium"
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                {ABOUT_INTRO.focusAreas.map(({ label, icon: Icon }) => (
+                  <div
+                    key={label}
+                    className="group flex items-start gap-3 rounded-2xl border border-n200/70 bg-[var(--n50)] px-4 py-4 transition-colors hover:border-canopy/30 hover:bg-mint-soft/30"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-mint shrink-0" />
-                    {item}
-                  </li>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-mint-soft text-canopy transition-colors group-hover:bg-mint group-hover:text-forest">
+                      <Icon size={18} strokeWidth={2.25} aria-hidden />
+                    </span>
+                    <p className="pt-2 text-sm font-semibold text-forest leading-snug">
+                      {label}
+                    </p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
-          </div>
+          </article>
         </ScrollReveal>
       </div>
     </section>
