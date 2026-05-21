@@ -1,0 +1,282 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand palette */
+  --color-forest: var(--forest);
+  --color-canopy: var(--canopy);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --color-n900: var(--n900);
+  --color-n800: var(--n800);
+  --color-n600: var(--n600);
+  --color-n400: var(--n400);
+  --color-n200: var(--n200);
+  --color-n100: var(--n100);
+  --color-n50: var(--n50);
+
+  /* Brand typography — Rethink Carbon / Planetive brand kit */
+  --font-heading: "Segoe UI", "Segoe UI Variable", Segoe, system-ui, sans-serif;
+  --font-h2: Arial, "Arial MT", "Helvetica Neue", Helvetica, sans-serif;
+  --font-h3: Cambria, Georgia, "Times New Roman", serif;
+  --font-body: Cambria, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+  --font-mono: var(--font-h2);
+}
+
+:root {
+  --radius: 1.5rem;
+
+  /* Brand */
+  --forest: #0A3D2E;
+  --canopy: #1A6B4A;
+  --mint: #2ECC8A;
+  --mint-soft: #A8F0D4;
+  --n900: #0D1210;
+  --n800: #1C2420;
+  --n600: #3D4F47;
+  --n400: #7A9488;
+  --n200: #C8D8D2;
+  --n100: #EBF2EF;
+  --n50: #F5FAF7;
+
+  --background: #F5FAF7;
+  --foreground: #0D1210;
+  --card: #FFFFFF;
+  --card-foreground: #0D1210;
+  --popover: #FFFFFF;
+  --popover-foreground: #0D1210;
+  --primary: #0A3D2E;
+  --primary-foreground: #F5FAF7;
+  --secondary: #EBF2EF;
+  --secondary-foreground: #0A3D2E;
+  --muted: #EBF2EF;
+  --muted-foreground: #3D4F47;
+  --accent: #2ECC8A;
+  --accent-foreground: #0A3D2E;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #FFFFFF;
+  --border: #C8D8D2;
+  --input: #C8D8D2;
+  --ring: #2ECC8A;
+
+  --shadow-soft: 0 8px 24px -8px rgba(10, 61, 46, 0.12);
+  --shadow-elevated: 0 24px 60px -20px rgba(10, 61, 46, 0.25);
+  --gradient-hero: linear-gradient(135deg, #0A3D2E 0%, #1A6B4A 60%, #2ECC8A 100%);
+  --gradient-mint: linear-gradient(135deg, #A8F0D4 0%, #F5FAF7 100%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  h2 {
+    font-family: var(--font-h2);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  h3,
+  h4 {
+    font-family: var(--font-h3);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+}
+
+@layer utilities {
+  /* Logo / page titles — Segoe UI Bold */
+  .font-heading,
+  .font-logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+  /* H2 headlines — Arial MT Bold */
+  .font-h2 {
+    font-family: var(--font-h2);
+    font-weight: 700;
+  }
+  /* H3 sections — Cambria Bold */
+  .font-h3 {
+    font-family: var(--font-h3);
+    font-weight: 700;
+  }
+  /* Legacy utility: maps to correct level when combined with heading tags */
+  .font-display {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+  h1.font-display {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+  h2.font-display {
+    font-family: var(--font-h2);
+    font-weight: 700;
+  }
+  h3.font-display,
+  h4.font-display {
+    font-family: var(--font-h3);
+    font-weight: 700;
+  }
+  /* Body copy mistakenly tagged with font-display */
+  p.font-display {
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  /* Stat blocks & large numerals — Arial Bold (H2) */
+  div.font-display,
+  dt.font-display,
+  span.font-display {
+    font-family: var(--font-h2);
+    font-weight: 700;
+  }
+  /* Wordmark — Segoe UI Bold */
+  nav .font-display,
+  footer .font-display {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .glass {
+    background: color-mix(in oklab, white 70%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 60%, transparent);
+  }
+  .glass-dark {
+    background: color-mix(in oklab, #0A3D2E 35%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 18%, transparent);
+  }
+  .container-x { max-width: 1240px; margin-inline: auto; padding-inline: 1.25rem; }
+  @media (min-width: 768px) { .container-x { padding-inline: 2rem; } }
+
+  .btn-primary {
+    background: var(--forest);
+    color: var(--n50);
+    transition: all .25s ease;
+  }
+  .btn-primary:hover { background: var(--canopy); transform: translateY(-1px); box-shadow: var(--shadow-elevated); }
+  .btn-mint {
+    background: var(--mint);
+    color: var(--forest);
+    transition: all .25s ease;
+  }
+  .btn-mint:hover { background: var(--mint-soft); transform: translateY(-1px); box-shadow: var(--shadow-elevated); }
+  .btn-ghost-light {
+    background: color-mix(in oklab, white 14%, transparent);
+    color: white;
+    border: 1px solid color-mix(in oklab, white 30%, transparent);
+    transition: all .25s ease;
+  }
+  .btn-ghost-light:hover { background: color-mix(in oklab, white 22%, transparent); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity var(--reveal-duration, 0.8s) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--reveal-duration, 0.8s) cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-fade-up { transform: translate3d(0, 2rem, 0); }
+.reveal-fade-left { transform: translate3d(-2rem, 0, 0); }
+.reveal-fade-right { transform: translate3d(2rem, 0, 0); }
+.reveal-fade-in { transform: none; }
+.reveal-scale-up { transform: translate3d(0, 1.25rem, 0) scale(0.97); }
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero load-in */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.hero-enter {
+  opacity: 0;
+  animation: hero-enter 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-enter-d1 { animation-delay: 0.12s; }
+.hero-enter-d2 { animation-delay: 0.24s; }
+.hero-enter-d3 { animation-delay: 0.38s; }
+.hero-enter-d4 { animation-delay: 0.52s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero-enter {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

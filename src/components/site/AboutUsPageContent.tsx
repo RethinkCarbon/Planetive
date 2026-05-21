@@ -1,0 +1,382 @@
+import { useState, type CSSProperties } from "react";
+import { Link } from "@tanstack/react-router";
+import { ChevronDown, ExternalLink, Users } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  ABOUT_INTRO,
+  PARTNER_LOGOS,
+  TEAM,
+  partnerLogo,
+  type TeamMember,
+} from "@/lib/about-content";
+import { ScrollReveal } from "@/components/site/ScrollReveal";
+
+export function AboutUsPageContent() {
+  const leadership = TEAM.filter((m) => m.group === "leadership");
+  const advisors = TEAM.filter((m) => m.group === "advisors");
+  const team = TEAM.filter((m) => m.group === "team");
+
+  return (
+    <>
+      <AboutHero />
+      <AboutIntro />
+      <TeamSection title="Leadership" members={leadership} featured />
+      <TeamSection
+        title="Team & Advisors"
+        subtitle="Global advisors"
+        members={advisors}
+      />
+      <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
+      <PartnersSection />
+      <AboutClosingCta />
+    </>
+  );
+}
+
+function AboutHero() {
+  return (
+    <section
+      className="relative isolate overflow-hidden text-white"
+      style={{ background: "var(--gradient-hero)" }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 opacity-40"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 80% 20%, rgba(168,240,212,0.4), transparent 55%)",
+        }}
+      />
+      <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
+        <ScrollReveal variant="fade-up" className="max-w-3xl">
+          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
+            {ABOUT_INTRO.eyebrow}
+          </p>
+          <h1 className="mt-4 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
+            {ABOUT_INTRO.title}
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
+            {ABOUT_INTRO.summary}
+          </p>
+        </ScrollReveal>
+      </div>
+      <div
+        aria-hidden
+        className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-b from-transparent to-[var(--n50)]"
+      />
+    </section>
+  );
+}
+
+function AboutIntro() {
+  return (
+    <section className="relative z-20 -mt-6 pb-16 md:pb-20">
+      <div className="container-x">
+        <ScrollReveal variant="scale-up">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center rounded-[32px] md:rounded-[40px] border border-n200/80 bg-white p-8 md:p-12 shadow-[var(--shadow-elevated)] overflow-hidden">
+            <div className="lg:col-span-5 relative overflow-hidden rounded-[24px] aspect-[4/3]">
+              <img
+                src={ABOUT_INTRO.heroImage}
+                alt="Planetive team and sustainable development"
+                className="absolute inset-0 h-full w-full object-cover [filter:none]"
+                loading="eager"
+                decoding="async"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-forest/40 to-transparent" />
+            </div>
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-forest">
+                <Users size={14} />
+                Middle East &amp; Pakistan focus · Global reach
+              </div>
+              <p className="mt-6 text-n600 leading-relaxed text-[15px] md:text-base">
+                {ABOUT_INTRO.body}
+              </p>
+              <ul className="mt-8 grid grid-cols-2 gap-3 text-sm">
+                {[
+                  "Clean Energy",
+                  "Climate Change",
+                  "Clean Water",
+                  "Sustainable Finance",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-2 text-n800 font-medium"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-mint shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
+function TeamSection({
+  title,
+  subtitle,
+  members,
+  featured = false,
+}: {
+  title: string;
+  subtitle?: string;
+  members: TeamMember[];
+  featured?: boolean;
+}) {
+  if (members.length === 0) return null;
+
+  return (
+    <section className={cn("py-12 md:py-16", featured ? "bg-[var(--n50)]" : "bg-white")}>
+      <div className="container-x">
+        <ScrollReveal className="mb-10 md:mb-14">
+          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
+            {subtitle ?? "People"}
+          </span>
+          <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3rem)] text-forest">
+            {title}
+          </h2>
+        </ScrollReveal>
+
+        {featured ? (
+          <div className="space-y-8">
+            {members.map((m, i) => (
+              <FeaturedMemberCard key={m.id} member={m} delay={i * 80} />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
+            {members.map((m, i) => (
+              <MemberCard key={m.id} member={m} delay={i * 40} />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function teamImageClassName(member: TeamMember, extra?: string) {
+  return cn(
+    "h-full w-full object-cover [filter:none]",
+    !member.imagePosition && "object-top",
+    extra,
+  );
+}
+
+function teamImageStyle(member: TeamMember): CSSProperties | undefined {
+  return member.imagePosition ? { objectPosition: member.imagePosition } : undefined;
+}
+
+function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+  const [expanded, setExpanded] = useState(false);
+  const long = member.bio.join(" ").length > 480;
+
+  return (
+    <ScrollReveal variant="fade-up" delay={delay}>
+      <article className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[28px] md:rounded-[32px] border border-n200 bg-white shadow-[var(--shadow-soft)]">
+        <div className="lg:col-span-4 relative min-h-[320px] lg:min-h-0">
+          {member.image ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className={cn("absolute inset-0", teamImageClassName(member))}
+              style={teamImageStyle(member)}
+              loading="lazy"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center text-4xl font-display text-mint-soft"
+              style={{ background: "var(--gradient-hero)" }}
+            >
+              {member.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)}
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-forest/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-transparent" />
+        </div>
+        <div className="lg:col-span-8 p-8 md:p-10 lg:p-12 flex flex-col">
+          <span className="text-xs font-mono tracking-wider uppercase text-canopy">
+            {member.role}
+          </span>
+          <h3 className="mt-2 font-display text-3xl md:text-4xl text-forest">{member.name}</h3>
+          <BioText
+            paragraphs={member.bio}
+            className={cn("mt-5", !expanded && "max-h-[9.5rem] overflow-hidden")}
+          />
+          {member.link && (
+            <a
+              href={member.link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-canopy hover:text-mint"
+            >
+              {member.link.label}
+              <ExternalLink size={14} />
+            </a>
+          )}
+          {long && (
+            <button
+              type="button"
+              onClick={() => setExpanded((e) => !e)}
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-canopy self-start"
+            >
+              {expanded ? "Show less" : "Read more"}
+              <ChevronDown
+                size={16}
+                className={cn("transition-transform", expanded && "rotate-180")}
+              />
+            </button>
+          )}
+        </div>
+      </article>
+    </ScrollReveal>
+  );
+}
+
+function BioText({
+  paragraphs,
+  className,
+}: {
+  paragraphs: string[];
+  className?: string;
+}) {
+  return (
+    <div className={cn("space-y-3 text-n600 leading-relaxed", className)}>
+      {paragraphs.map((p) => (
+        <p key={p.slice(0, 40)} className="text-sm md:text-[15px]">
+          {p}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+  const [expanded, setExpanded] = useState(false);
+  const bioText = member.bio.join(" ");
+  const long = bioText.length > 320;
+
+  return (
+    <ScrollReveal variant="fade-up" delay={delay}>
+      <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-n200/80 bg-[var(--n50)] hover:shadow-[var(--shadow-elevated)] transition-shadow duration-300">
+        <div className="relative aspect-[4/3] overflow-hidden bg-n100">
+          {member.image ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className={teamImageClassName(
+                member,
+                "transition-transform duration-500 group-hover:scale-[1.02]",
+              )}
+              style={teamImageStyle(member)}
+              loading="lazy"
+            />
+          ) : (
+            <div
+              className="flex h-full items-center justify-center text-3xl font-display text-white"
+              style={{ background: "var(--gradient-hero)" }}
+            >
+              {member.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)}
+            </div>
+          )}
+        </div>
+        <div className="flex flex-1 flex-col p-6">
+          <span className="text-[10px] font-mono tracking-wider uppercase text-canopy">
+            {member.role}
+          </span>
+          <h3 className="mt-2 font-display text-xl text-forest leading-tight">{member.name}</h3>
+          <BioText
+            paragraphs={member.bio}
+            className={cn("mt-3 flex-1", !expanded && long && "max-h-[7.5rem] overflow-hidden")}
+          />
+          {long && (
+            <button
+              type="button"
+              onClick={() => setExpanded((e) => !e)}
+              className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-canopy hover:text-forest"
+            >
+              {expanded ? "Less" : "More"}
+              <ChevronDown
+                size={14}
+                className={cn("transition-transform", expanded && "rotate-180")}
+              />
+            </button>
+          )}
+        </div>
+      </article>
+    </ScrollReveal>
+  );
+}
+
+function PartnersSection() {
+  return (
+    <section className="py-16 md:py-24 bg-[var(--n100)] border-t border-n200/60">
+      <div className="container-x">
+        <ScrollReveal className="text-center max-w-xl mx-auto mb-12">
+          <h2 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
+            Our Partners
+          </h2>
+          <p className="mt-3 text-n600 text-sm leading-relaxed">
+            Collaborating with institutions and organizations that share our commitment to
+            sustainable development.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-up" delay={80}>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {PARTNER_LOGOS.map((p) => (
+              <div
+                key={p.name}
+                className="flex h-20 w-36 md:h-24 md:w-44 items-center justify-center rounded-2xl bg-white border border-n200/80 px-4 py-3 shadow-[var(--shadow-soft)]"
+              >
+                <img
+                  src={p.src}
+                  alt={p.name}
+                  className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
+function AboutClosingCta() {
+  return (
+    <section className="py-12 md:py-16 bg-[var(--n50)]">
+      <div className="container-x">
+        <ScrollReveal>
+          <div className="rounded-[28px] border border-n200 bg-white px-8 py-10 md:px-12 text-center shadow-[var(--shadow-soft)]">
+            <h2 className="font-display text-2xl md:text-3xl text-forest">
+              Work with Planetive
+            </h2>
+            <p className="mt-3 text-n600 max-w-lg mx-auto">
+              Connect with our team to explore advisory, project development, and climate
+              finance partnerships.
+            </p>
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold btn-mint"
+            >
+              Get in touch
+            </Link>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
