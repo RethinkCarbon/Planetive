@@ -1,5 +1,7 @@
-/** Local copies in public/images/global-engagements/ (from planetive.org/global-engagements) */
-const img = (file: string) => `/images/global-engagements/${file}`;
+/** Local copies in public/images/global-engagements/ (from planetive.org, no fx-gs grayscale) */
+const IMG_VERSION = "2";
+const img = (file: string) =>
+  `/images/global-engagements/${file}?v=${IMG_VERSION}`;
 
 export type GlobalEngagement = {
   id: string;

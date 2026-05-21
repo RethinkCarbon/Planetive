@@ -193,10 +193,11 @@ function TeamHighlight({
                   <img
                     src={section.image}
                     alt=""
-                    className="absolute inset-0 h-full w-full object-cover [filter:none]"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ filter: "none" }}
                     loading="lazy"
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-forest/40" />
                 </div>
               )}
               <div
@@ -240,10 +241,11 @@ function EngagementCard({
           <img
             src={engagement.image}
             alt=""
-            className="h-full w-full object-cover object-center [filter:none] transition-transform duration-500 group-hover:scale-[1.02]"
+            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            style={{ filter: "none" }}
             loading="lazy"
+            decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col p-6 md:p-7">
