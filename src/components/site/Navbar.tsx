@@ -9,7 +9,6 @@ const links = [
   { to: "/global-engagements", label: "Global Engagements" },
   { to: "/blog", label: "Blog" },
   { to: "/about-us", label: "About Us" },
-  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Navbar({ variant = "transparent" }: { variant?: "transparent" | "solid" }) {
