@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
+import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 
 export function Footer() {
   return (
@@ -12,16 +13,7 @@ export function Footer() {
           variant="fade-up"
         >
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2">
-              <span
-                aria-hidden
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full"
-                style={{ background: "var(--gradient-hero)" }}
-              >
-                <span className="block h-3 w-3 rounded-full bg-mint-soft" />
-              </span>
-              <span className="font-logo text-2xl text-white">Planetive</span>
-            </div>
+            <PlanetiveLogo onDark zoom="footer" />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-n400">
               Building climate intelligence for a sustainable future. Connecting strategy,
               technology, capital, and implementation for enterprises and financial

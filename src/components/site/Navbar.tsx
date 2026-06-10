@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { NavWhatWeDoMenu } from "@/components/site/NavWhatWeDoMenu";
 import { NavIndustriesMenu } from "@/components/site/NavIndustriesMenu";
+import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 
 const links = [
   { to: "/", label: "Home" },
@@ -61,21 +62,8 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
             isSolid ? "glass shadow-[var(--shadow-soft)]" : "glass-dark"
           }`}
         >
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <span
-              aria-hidden
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full"
-              style={{ background: "var(--gradient-hero)" }}
-            >
-              <span className="block h-3 w-3 rounded-full bg-mint-soft" />
-            </span>
-            <span
-              className={`font-logo text-xl tracking-tight ${
-                isSolid ? "text-forest" : "text-white"
-              }`}
-            >
-              Planetive
-            </span>
+          <Link to="/" className="flex shrink-0 items-center">
+            <PlanetiveLogo onDark={!isSolid} zoom />
           </Link>
 
           <ul className="hidden lg:flex items-center gap-1">
