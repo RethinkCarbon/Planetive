@@ -218,6 +218,60 @@
     transition: all .25s ease;
   }
   .btn-ghost-light:hover { background: color-mix(in oklab, white 22%, transparent); }
+
+  .blog-prose p { margin-top: 1.1em; }
+  .blog-prose p:first-child { margin-top: 0; }
+  .blog-prose h2,
+  .blog-prose h3 {
+    margin-top: 1.75em;
+    font-family: var(--font-display);
+    color: var(--forest);
+    line-height: 1.2;
+  }
+  .blog-prose h2 { font-size: 1.5rem; }
+  .blog-prose h3 { font-size: 1.25rem; }
+  .blog-prose ul {
+    margin-top: 1em;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .blog-prose li { margin-top: 0.5em; }
+  .blog-prose a {
+    color: var(--canopy);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .blog-prose a:hover { color: var(--forest); }
+  .blog-prose hr {
+    margin: 2em 0;
+    border: none;
+    border-top: 1px solid var(--n200);
+  }
+  .blog-prose .blog-figure,
+  .blog-prose figure {
+    margin: 1.75em 0;
+  }
+  .blog-prose img {
+    width: 100%;
+    border-radius: 1rem;
+    filter: none;
+  }
+  .blog-prose strong { color: var(--forest); font-weight: 600; }
+
+  .ecosystem-panel-enter {
+    animation: ecosystem-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes ecosystem-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Scroll reveal */
@@ -279,4 +333,102 @@
 @keyframes barGrow {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
+}
+
+/* Partner logo marquee — Global Engagements */
+.partner-marquee-bleed {
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.partner-marquee-viewport {
+  padding-inline: clamp(1.5rem, 5vw, 3.5rem);
+}
+
+@keyframes partner-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.partner-marquee-track {
+  animation: partner-marquee 42s linear infinite;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee-track {
+    animation: none;
+  }
+}
+
+.partner-map-shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Gentle zoom — scale only, keep inline SVG dimensions for correct aspect ratio */
+.partner-map-zoom {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  overflow: hidden;
+}
+
+.partner-map-world {
+  position: relative;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.partner-map-world__map {
+  width: 100%;
+}
+
+.partner-map-world .worldmap__wrapper,
+.partner-map-world .worldmap__figure-container {
+  width: 100%;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Hide broken PathTooltip overlay; we use MapCountryHint */
+.partner-map-world svg foreignObject {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.partner-map-world svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  transform: scale(1.18);
+  transform-origin: 50% 44%;
+}
+
+/* Country paths are focusable for clicks — suppress default focus ring (selection uses fill) */
+.partner-map-world svg path {
+  outline: none;
+}
+
+.partner-map-world svg path:focus,
+.partner-map-world svg path:focus-visible {
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .partner-map-world svg {
+    transform: scale(1.12);
+    transform-origin: 50% 44%;
+  }
 }

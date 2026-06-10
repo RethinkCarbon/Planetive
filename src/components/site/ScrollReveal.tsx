@@ -3,6 +3,7 @@ import {
   cloneElement,
   isValidElement,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -61,6 +62,12 @@ export function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
+    const revealIfInView = () => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (inView) setVisible(true);
+    };
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -74,8 +81,32 @@ export function ScrollReveal({
     );
 
     obs.observe(el);
-    return () => obs.disconnect();
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      revealIfInView();
+      requestAnimationFrame(() => {
+        revealIfInView();
+        obs.disconnect();
+        obs.observe(el);
+      });
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      obs.disconnect();
+    };
   }, [reducedMotion, once, threshold, rootMargin]);
+
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    if (inView) setVisible(true);
+  }, [reducedMotion]);
 
   return (
     <Tag
@@ -124,6 +155,12 @@ export function ScrollRevealGroup({
     const el = ref.current;
     if (!el) return;
 
+    const revealIfInView = () => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (inView) setVisible(true);
+    };
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -137,8 +174,32 @@ export function ScrollRevealGroup({
     );
 
     obs.observe(el);
-    return () => obs.disconnect();
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      revealIfInView();
+      requestAnimationFrame(() => {
+        revealIfInView();
+        obs.disconnect();
+        obs.observe(el);
+      });
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      obs.disconnect();
+    };
   }, [reducedMotion, once, threshold, rootMargin]);
+
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+    if (inView) setVisible(true);
+  }, [reducedMotion]);
 
   return (
     <div ref={ref} className={className}>

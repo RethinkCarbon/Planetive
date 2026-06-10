@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { NavWhatWeDoMenu } from "@/components/site/NavWhatWeDoMenu";
+import { NavIndustriesMenu } from "@/components/site/NavIndustriesMenu";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/what-we-do", label: "What We Do" },
   { to: "/impact", label: "Impact" },
   { to: "/global-engagements", label: "Global Engagements" },
   { to: "/blog", label: "Blog" },
@@ -17,18 +18,42 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
+    const sync = () => onScroll();
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      sync();
+      if (!event.persisted) return;
+      document.querySelectorAll(".hero-enter").forEach((node) => {
+        const el = node as HTMLElement;
+        el.style.opacity = "1";
+        el.style.transform = "none";
+        el.style.animation = "none";
+      });
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("pageshow", onPageShow);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("pageshow", onPageShow);
+    };
   }, []);
 
   const isSolid = variant === "solid" || scrolled;
+  const linkClass = (extra?: string) =>
+    `px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+      isSolid
+        ? "text-n800 hover:bg-n100"
+        : "text-white/90 hover:text-white hover:bg-white/10"
+    } ${extra ?? ""}`;
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 hero-enter transition-all duration-300 ${
-        isSolid ? "py-2" : "py-4"
-      }`}
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        variant === "transparent" ? "hero-enter" : ""
+      } ${isSolid ? "py-2" : "py-4"}`}
     >
       <div className="container-x">
         <nav
@@ -54,21 +79,34 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
           </Link>
 
           <ul className="hidden lg:flex items-center gap-1">
-            {links.map((l) => (
+            <li>
+              <Link
+                to="/"
+                className={linkClass()}
+                activeProps={{
+                  className: linkClass(isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white"),
+                }}
+                activeOptions={{ exact: true }}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <NavWhatWeDoMenu isSolid={isSolid} />
+            </li>
+            <li>
+              <NavIndustriesMenu isSolid={isSolid} />
+            </li>
+            {links.slice(1).map((l) => (
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
-                    isSolid
-                      ? "text-n800 hover:bg-n100"
-                      : "text-white/90 hover:text-white hover:bg-white/10"
-                  }`}
+                  className={linkClass()}
                   activeProps={{
-                    className: `px-3 py-2 rounded-full text-sm font-medium ${
-                      isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white"
-                    }`,
+                    className: linkClass(
+                      isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white",
+                    ),
                   }}
-                  activeOptions={{ exact: l.to === "/" }}
                 >
                   {l.label}
                 </Link>
@@ -78,7 +116,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
 
           <div className="flex items-center gap-2">
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="hidden md:inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold btn-mint"
             >
               Work With Us
@@ -96,9 +134,28 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
         </nav>
 
         {open && (
-          <div className="lg:hidden mt-2 glass rounded-3xl p-4 shadow-[var(--shadow-soft)]">
+          <div className="lg:hidden mt-2 glass rounded-3xl p-4 shadow-[var(--shadow-soft)] max-h-[min(85vh,32rem)] overflow-y-auto">
             <ul className="flex flex-col">
-              {links.map((l) => (
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setOpen(false)}
+                  className="block px-3 py-2.5 rounded-xl text-sm font-medium text-n800 hover:bg-n100"
+                >
+                  Home
+                </Link>
+              </li>
+              <NavWhatWeDoMenu
+                variant="list"
+                isSolid
+                onNavigate={() => setOpen(false)}
+              />
+              <NavIndustriesMenu
+                variant="list"
+                isSolid
+                onNavigate={() => setOpen(false)}
+              />
+              {links.slice(1).map((l) => (
                 <li key={l.to}>
                   <Link
                     to={l.to}
@@ -111,7 +168,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
               ))}
               <li className="mt-2">
                 <Link
-                  to="/contact"
+                  to="/work-with-us"
                   onClick={() => setOpen(false)}
                   className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold btn-primary"
                 >

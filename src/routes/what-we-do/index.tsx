@@ -3,7 +3,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatWeDoPageContent } from "@/components/site/WhatWeDoPageContent";
 
-export const Route = createFileRoute("/what-we-do")({
+export const Route = createFileRoute("/what-we-do/")({
   head: () => ({
     meta: [
       { title: "What We Do — Planetive" },

@@ -9,17 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WhatWeDoRouteImport } from './routes/what-we-do'
+import { Route as WorkWithUsRouteImport } from './routes/work-with-us'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GlobalEngagementsRouteImport } from './routes/global-engagements'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WhatWeDoIndexRouteImport } from './routes/what-we-do/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as WhatWeDoSlugRouteImport } from './routes/what-we-do/$slug'
+import { Route as IndustriesSlugRouteImport } from './routes/industries/$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
-const WhatWeDoRoute = WhatWeDoRouteImport.update({
-  id: '/what-we-do',
-  path: '/what-we-do',
+const WorkWithUsRoute = WorkWithUsRouteImport.update({
+  id: '/work-with-us',
+  path: '/work-with-us',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpactRoute = ImpactRouteImport.update({
@@ -37,14 +42,14 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AboutUsRoute = AboutUsRouteImport.update({
   id: '/about-us',
   path: '/about-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRouteRoute = BlogRouteRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -52,82 +57,138 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhatWeDoIndexRoute = WhatWeDoIndexRouteImport.update({
+  id: '/what-we-do/',
+  path: '/what-we-do/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+const WhatWeDoSlugRoute = WhatWeDoSlugRouteImport.update({
+  id: '/what-we-do/$slug',
+  path: '/what-we-do/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/industries/$slug',
+  path: '/industries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
   '/about-us': typeof AboutUsRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
-  '/what-we-do': typeof WhatWeDoRoute
+  '/work-with-us': typeof WorkWithUsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/what-we-do/$slug': typeof WhatWeDoSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/what-we-do/': typeof WhatWeDoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
-  '/what-we-do': typeof WhatWeDoRoute
+  '/work-with-us': typeof WorkWithUsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/what-we-do/$slug': typeof WhatWeDoSlugRoute
+  '/blog': typeof BlogIndexRoute
+  '/what-we-do': typeof WhatWeDoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteRouteWithChildren
   '/about-us': typeof AboutUsRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
-  '/what-we-do': typeof WhatWeDoRoute
+  '/work-with-us': typeof WorkWithUsRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/what-we-do/$slug': typeof WhatWeDoSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/what-we-do/': typeof WhatWeDoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about-us'
     | '/blog'
+    | '/about-us'
     | '/contact'
     | '/global-engagements'
     | '/impact'
-    | '/what-we-do'
+    | '/work-with-us'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/what-we-do/$slug'
+    | '/blog/'
+    | '/what-we-do/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about-us'
-    | '/blog'
     | '/contact'
     | '/global-engagements'
     | '/impact'
+    | '/work-with-us'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/what-we-do/$slug'
+    | '/blog'
     | '/what-we-do'
   id:
     | '__root__'
     | '/'
-    | '/about-us'
     | '/blog'
+    | '/about-us'
     | '/contact'
     | '/global-engagements'
     | '/impact'
-    | '/what-we-do'
+    | '/work-with-us'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/what-we-do/$slug'
+    | '/blog/'
+    | '/what-we-do/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRouteRoute: typeof BlogRouteRouteWithChildren
   AboutUsRoute: typeof AboutUsRoute
-  BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   GlobalEngagementsRoute: typeof GlobalEngagementsRoute
   ImpactRoute: typeof ImpactRoute
-  WhatWeDoRoute: typeof WhatWeDoRoute
+  WorkWithUsRoute: typeof WorkWithUsRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
+  WhatWeDoSlugRoute: typeof WhatWeDoSlugRoute
+  WhatWeDoIndexRoute: typeof WhatWeDoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/what-we-do': {
-      id: '/what-we-do'
-      path: '/what-we-do'
-      fullPath: '/what-we-do'
-      preLoaderRoute: typeof WhatWeDoRouteImport
+    '/work-with-us': {
+      id: '/work-with-us'
+      path: '/work-with-us'
+      fullPath: '/work-with-us'
+      preLoaderRoute: typeof WorkWithUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impact': {
@@ -151,18 +212,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about-us': {
       id: '/about-us'
       path: '/about-us'
       fullPath: '/about-us'
       preLoaderRoute: typeof AboutUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -172,17 +233,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/what-we-do/': {
+      id: '/what-we-do/'
+      path: '/what-we-do'
+      fullPath: '/what-we-do/'
+      preLoaderRoute: typeof WhatWeDoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
+    '/what-we-do/$slug': {
+      id: '/what-we-do/$slug'
+      path: '/what-we-do/$slug'
+      fullPath: '/what-we-do/$slug'
+      preLoaderRoute: typeof WhatWeDoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/industries/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
   }
 }
 
+interface BlogRouteRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteRouteChildren: BlogRouteRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
+  BlogRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRouteRoute: BlogRouteRouteWithChildren,
   AboutUsRoute: AboutUsRoute,
-  BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   GlobalEngagementsRoute: GlobalEngagementsRoute,
   ImpactRoute: ImpactRoute,
-  WhatWeDoRoute: WhatWeDoRoute,
+  WorkWithUsRoute: WorkWithUsRoute,
+  IndustriesSlugRoute: IndustriesSlugRoute,
+  WhatWeDoSlugRoute: WhatWeDoSlugRoute,
+  WhatWeDoIndexRoute: WhatWeDoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

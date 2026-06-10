@@ -58,6 +58,7 @@ export function Footer() {
                 ["/global-engagements", "Global Engagements"],
                 ["/blog", "Blog"],
                 ["/about-us", "About Us"],
+                ["/work-with-us", "Work With Us"],
               ].map(([to, label]) => (
                 <li key={to}>
                   <Link to={to} className="hover:text-mint transition-colors">

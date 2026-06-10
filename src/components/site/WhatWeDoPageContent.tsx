@@ -1,18 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
+  ECOSYSTEM_PILLARS,
   WHAT_WE_DO_HERO,
   WHAT_WE_DO_SERVICES,
   WHAT_WE_DO_ECOSYSTEM,
+  whatWeDoServicePath,
   type WhatWeDoService,
+  type EcosystemPillar,
 } from "@/lib/what-we-do-content";
-import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
+import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
+import { cn } from "@/lib/utils";
 
 export function WhatWeDoPageContent() {
   return (
     <>
       <WhatWeDoHero />
+      <WhatWeDoEcosystemSection />
+      <WhatWeDoPillarsStrip />
       <WhatWeDoServicesSection />
       <WhatWeDoClosingBanner />
     </>
@@ -21,205 +27,235 @@ export function WhatWeDoPageContent() {
 
 function WhatWeDoHero() {
   return (
-    <section
-      className="relative isolate overflow-hidden text-white"
-      style={{ background: "var(--gradient-hero)" }}
-    >
+    <section className="relative isolate overflow-hidden border-b border-n200/50">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 50% at 20% 30%, rgba(168,240,212,0.3), transparent 55%), radial-gradient(ellipse 55% 45% at 90% 70%, rgba(26,107,74,0.45), transparent 50%)",
-        }}
+        className="absolute inset-0 -z-10"
+        style={{ background: "var(--gradient-mint)" }}
       />
-      <div
+      <svg
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
+        className="pointer-events-none absolute -right-16 -top-8 h-[420px] w-[420px] text-canopy/12"
+        viewBox="0 0 200 200"
+        fill="none"
+      >
+        <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="0.5" />
+        <circle cx="100" cy="100" r="60" stroke="currentColor" strokeWidth="0.5" />
+        <circle cx="100" cy="100" r="40" stroke="currentColor" strokeWidth="0.5" />
+      </svg>
 
-      <div className="container-x relative z-10 pt-40 md:pt-48 pb-0">
+      <div className="container-x relative z-10 pt-40 md:pt-48 pb-12 md:pb-16">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-3 py-1 text-xs font-medium text-forest">
+            <span className="h-1.5 w-1.5 rounded-full bg-mint" aria-hidden />
             {WHAT_WE_DO_HERO.subtitle}
-          </p>
-          <h1 className="mt-4 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
+          </span>
+          <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.25rem)] text-forest leading-[1.02]">
             {WHAT_WE_DO_HERO.title}
           </h1>
-          <p className="mt-6 max-w-2xl text-base md:text-lg text-n200/95 leading-relaxed">
+          <p className="mt-5 max-w-2xl text-base md:text-lg text-n600 leading-relaxed">
             {WHAT_WE_DO_HERO.intro}
           </p>
-          <p className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-mint-soft">
-            <span className="h-2 w-2 rounded-full bg-mint" />
-            Six core service areas
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-up" className="mt-8 md:mt-10">
+          <p className="text-xs font-mono uppercase tracking-wider text-n500 mb-3">
+            Four ways we deliver
           </p>
+          <div className="flex flex-wrap gap-2">
+            {ECOSYSTEM_PILLARS.map((pillar) => (
+              <Link
+                key={pillar.id}
+                to={whatWeDoServicePath(pillar.id)}
+                className="inline-flex items-center gap-2 rounded-full border border-n200/80 bg-white/90 px-4 py-2 text-sm font-semibold text-forest shadow-[var(--shadow-soft)] hover:border-canopy hover:text-canopy transition-colors"
+              >
+                <span
+                  className="h-2 w-2 rounded-full shrink-0"
+                  style={{ background: pillar.colorActive }}
+                  aria-hidden
+                />
+                {pillar.shortLabel}
+              </Link>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
-
-      <div
-        aria-hidden
-        className="relative z-10 h-20 md:h-28 mt-12 md:mt-16 bg-gradient-to-b from-transparent to-[var(--n50)]"
-      />
     </section>
+  );
+}
+
+function WhatWeDoEcosystemSection() {
+  return (
+    <section id="ecosystem" className="relative z-10 py-14 md:py-20 bg-[var(--n50)] scroll-mt-24">
+      <div className="container-x">
+        <ScrollReveal className="max-w-2xl mb-8 md:mb-10">
+          <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight">
+            {WHAT_WE_DO_ECOSYSTEM.title}
+          </h2>
+          <p className="mt-3 text-n600 leading-relaxed">{WHAT_WE_DO_ECOSYSTEM.intro}</p>
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-up">
+          <div
+            className="relative isolate overflow-hidden rounded-[28px] md:rounded-[32px] border border-forest/15 text-white shadow-[0_32px_64px_rgba(10,61,46,0.18)]"
+            style={{ background: "var(--gradient-hero)" }}
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.06]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
+                backgroundSize: "48px 48px",
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 70% 55% at 30% 20%, rgba(168,240,212,0.22), transparent 55%)",
+              }}
+            />
+            <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
+              <EcosystemExplorer />
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  );
+}
+
+function WhatWeDoPillarsStrip() {
+  return (
+    <section className="pb-14 md:pb-20 bg-[var(--n50)] border-t border-n200/40">
+      <div className="container-x">
+        <ScrollReveal className="mb-8 md:mb-10">
+          <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] text-forest leading-tight">
+            Explore each lens
+          </h2>
+          <p className="mt-3 text-n600 max-w-xl leading-relaxed">
+            Dive deeper into advisory, platforms, agents, and programs — each with its own mandate
+            and delivery model.
+          </p>
+        </ScrollReveal>
+
+        <ScrollRevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" stagger={80}>
+          {ECOSYSTEM_PILLARS.map((pillar) => (
+            <PillarCard key={pillar.id} pillar={pillar} />
+          ))}
+        </ScrollRevealGroup>
+      </div>
+    </section>
+  );
+}
+
+function PillarCard({ pillar }: { pillar: EcosystemPillar }) {
+  return (
+    <Link
+      to={whatWeDoServicePath(pillar.id)}
+      className="group flex flex-col overflow-hidden border border-n200/80 bg-white transition-colors hover:border-canopy/40"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <img
+          src={pillar.image}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          style={pillar.imagePosition ? { objectPosition: pillar.imagePosition } : undefined}
+        />
+      </div>
+      <div className="flex flex-1 flex-col border-t border-n200/80 p-5">
+        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-n500">{pillar.shortLabel}</p>
+        <h3 className="mt-2 font-display text-lg text-forest group-hover:text-canopy transition-colors leading-snug">
+          {pillar.title}
+        </h3>
+        <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-2 flex-1">{pillar.tagline}</p>
+        <span className="mt-4 text-xs font-semibold text-canopy group-hover:underline underline-offset-4">
+          Read more
+        </span>
+      </div>
+    </Link>
   );
 }
 
 function WhatWeDoServicesSection() {
   return (
-    <section className="relative z-20 -mt-4 pb-16 md:pb-24 bg-[var(--n50)]">
+    <section className="pb-16 md:pb-24 bg-[var(--n100)]">
       <div className="container-x">
-        <ScrollReveal className="max-w-2xl mx-auto text-center mb-14 md:mb-18">
-          <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
-            Our services
-          </span>
-          <h2 className="mt-4 font-display text-[clamp(1.75rem,3.5vw,2.75rem)] text-forest leading-tight">
-            From advisory to execution
+        <ScrollReveal className="max-w-2xl mb-10 md:mb-12">
+          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
+            Hands-on work
+          </p>
+          <h2 className="mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight">
+            Service areas
           </h2>
-          <p className="mt-4 text-n600 leading-relaxed max-w-2xl mx-auto">
-            End-to-end support across sustainability strategy, carbon markets, climate
-            finance, clean energy, emerging tech, and leadership.
-          </p>
-          <p className="mt-5 text-sm text-n600/90 leading-relaxed max-w-2xl mx-auto">
-            {WHAT_WE_DO_ECOSYSTEM.context}
-          </p>
-          <p
-            className="mt-6 text-[11px] text-n400 leading-relaxed max-w-xl mx-auto"
-            aria-label="How Planetive work is organized"
-          >
-            {WHAT_WE_DO_ECOSYSTEM.lenses.map((lens, i) => (
-              <span key={lens}>
-                {i > 0 && <span className="mx-1.5 text-n300" aria-hidden>·</span>}
-                {lens}
-              </span>
-            ))}
+          <p className="mt-4 text-n600 leading-relaxed max-w-xl">
+            Where mandates land in practice — carbon, capital, energy, technology, and leadership.
+            Often combined across a single engagement.
           </p>
         </ScrollReveal>
 
-        <div className="space-y-6 md:space-y-8">
-          {WHAT_WE_DO_SERVICES.map((service, index) => (
-            <ServiceBlock key={service.id} service={service} index={index} />
-          ))}
-        </div>
+        <ScrollRevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" stagger={70}>
+          {WHAT_WE_DO_SERVICES.filter((s) => !ECOSYSTEM_PILLARS.some((p) => p.id === s.id)).map(
+            (service) => (
+              <ServiceCard key={service.id} service={service} />
+            ),
+          )}
+        </ScrollRevealGroup>
       </div>
     </section>
   );
 }
 
-function ServiceBlock({
-  service,
-  index,
-}: {
-  service: WhatWeDoService;
-  index: number;
-}) {
-  const imageRight = index % 2 === 1;
-  const Icon = service.icon;
-  const num = String(index + 1).padStart(2, "0");
-
+function ServiceCard({ service }: { service: WhatWeDoService }) {
   return (
-    <ScrollReveal variant="fade-up" delay={index % 3 === 0 ? 0 : 50}>
-      <article
-        className={cn(
-          "group grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[28px] md:rounded-[32px]",
-          "border border-n200/80 bg-white shadow-[var(--shadow-soft)]",
-          "hover:shadow-[var(--shadow-elevated)] transition-shadow duration-500",
-          imageRight && "lg:[&>*:first-child]:order-2",
+    <Link
+      to={whatWeDoServicePath(service.id)}
+      className={cn(
+        "group block border border-n200/80 bg-white p-6 md:p-7",
+        "transition-colors hover:border-canopy/40 hover:bg-white",
+      )}
+    >
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-n500">Service</p>
+        {service.highlight && (
+          <span className="text-xs font-mono text-canopy">{service.highlight}</span>
         )}
-      >
-        <div className="relative lg:col-span-5 min-h-[240px] sm:min-h-[280px] lg:min-h-[320px] overflow-hidden">
-          <img
-            src={service.image}
-            alt={service.title}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-forest/55 via-forest/5 to-transparent" />
-          <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] text-white/90 uppercase">
-            {num}
-          </span>
-          <div className="absolute bottom-4 left-4 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-forest shadow-md">
-            <Icon size={20} aria-hidden />
-          </div>
-        </div>
-
-        <div
-          className={cn(
-            "lg:col-span-7 flex flex-col justify-center p-7 md:p-10 lg:p-12",
-            "border-t lg:border-t-0 border-n200/50",
-            imageRight ? "lg:border-r lg:border-l-0" : "lg:border-l",
-          )}
-        >
-          <div className="flex items-start gap-4">
-            <span
-              aria-hidden
-              className="mt-1.5 h-10 w-1 shrink-0 rounded-full bg-gradient-to-b from-mint to-canopy"
-            />
-            <div className="min-w-0 flex-1">
-              <h3 className="font-display text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-tight">
-                {service.title}
-              </h3>
-
-              {service.highlight && (
-                <div className="mt-4 inline-flex items-baseline gap-2 rounded-2xl bg-mint-soft/80 px-4 py-2 border border-mint/30">
-                  <span className="text-xs font-mono uppercase tracking-wider text-canopy">
-                    Annual gap
-                  </span>
-                  <span className="font-display text-2xl md:text-3xl text-forest leading-none">
-                    {service.highlight}
-                  </span>
-                </div>
-              )}
-
-              <div className="mt-5 space-y-3.5">
-                {service.paragraphs.map((p, i) => (
-                  <p
-                    key={p.slice(0, 32)}
-                    className={cn(
-                      "leading-relaxed text-n600",
-                      i === 0 ? "text-[15px] md:text-base text-n800" : "text-sm md:text-[15px]",
-                    )}
-                  >
-                    {p}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-    </ScrollReveal>
+      </div>
+      <h3 className="mt-3 font-display text-xl text-forest group-hover:text-canopy transition-colors">
+        {service.title}
+      </h3>
+      <p className="mt-2 text-sm text-n600 leading-relaxed">{service.summary}</p>
+      <span className="mt-5 text-xs font-semibold text-canopy group-hover:underline underline-offset-4">
+        Learn more
+      </span>
+    </Link>
   );
 }
 
 function WhatWeDoClosingBanner() {
   return (
-    <section className="py-12 md:py-16">
+    <section className="py-14 md:py-20 bg-[var(--n50)] border-t border-n200/60">
       <div className="container-x">
-        <ScrollReveal variant="scale-up">
+        <ScrollReveal>
           <div
-            className="rounded-[32px] md:rounded-[40px] px-8 py-10 md:px-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-6 border border-n200 bg-white shadow-[var(--shadow-soft)]"
+            className="rounded-[28px] px-8 py-10 md:px-12 md:py-12 text-white"
+            style={{ background: "var(--gradient-hero)" }}
           >
-            <div className="max-w-xl">
-              <h2 className="font-display text-2xl md:text-3xl text-forest leading-tight">
-                Ready to integrate sustainability into your next project?
-              </h2>
-              <p className="mt-3 text-n600 leading-relaxed">
-                From net-zero planning to climate finance — Planetive partners with you
-                across the full journey.
-              </p>
-            </div>
+            <h2 className="font-display text-2xl md:text-3xl leading-tight max-w-lg">
+              Ready to structure a mandate?
+            </h2>
+            <p className="mt-4 text-n200/90 max-w-xl leading-relaxed">
+              Tell us where you are in the transition — we will map advisory, platforms, agents, and
+              programs to your timeline.
+            </p>
             <Link
-              to="/contact"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold btn-mint"
+              to="/work-with-us"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-white text-forest px-6 py-3 text-sm font-semibold hover:bg-mint-soft transition-colors"
             >
-              Start a conversation
-              <ArrowRight size={16} />
+              Work with us
+              <ArrowRight size={14} aria-hidden />
             </Link>
           </div>
         </ScrollReveal>

@@ -488,30 +488,18 @@ export function GlobalSection() {
 }
 
 /* ------------------------------- Insights ------------------------------- */
-export function InsightsSection() {
-  const posts = [
-    {
-      tag: "Climate Finance",
-      title: "Bridging the $2.5 trillion SDG financing gap",
-      excerpt:
-        "Stakeholders need to collaborate across capital, policy, and implementation to close the gap by 2030.",
-      date: "May 2026",
-    },
-    {
-      tag: "Carbon Markets",
-      title: "Why MRV is the unlock for credible decarbonization",
-      excerpt:
-        "Audit-grade measurement, reporting, and verification is the difference between intent and impact.",
-      date: "Apr 2026",
-    },
-    {
-      tag: "Energy Transition",
-      title: "Clean energy in emerging markets: project-level realities",
-      excerpt:
-        "What it actually takes to move from feasibility to financial close in high-growth geographies.",
-      date: "Mar 2026",
-    },
-  ];
+export function InsightsSection({
+  posts,
+}: {
+  posts: Array<{
+    slug: string;
+    title: string;
+    summary: string;
+    publishedAt: string;
+    imageUrl: string | null;
+    categories?: string[];
+  }>;
+}) {
 
   return (
     <section className="py-24 md:py-32 bg-[var(--n100)]">
@@ -533,39 +521,45 @@ export function InsightsSection() {
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
           {posts.map((p) => (
-            <article
-              key={p.title}
+            <Link
+              key={p.slug}
+              to="/blog/$slug"
+              params={{ slug: p.slug }}
               className="group rounded-[28px] overflow-hidden bg-white border border-n200 hover:shadow-[var(--shadow-elevated)] transition-all duration-300"
             >
-              <div
-                className="h-40 relative"
-                style={{ background: "var(--gradient-mint)" }}
-              >
-                <svg
-                  aria-hidden
-                  className="absolute inset-0 h-full w-full text-canopy/20"
-                  viewBox="0 0 300 160"
-                  fill="none"
-                >
-                  <circle cx="240" cy="40" r="60" stroke="currentColor" strokeWidth="0.5" />
-                  <circle cx="240" cy="40" r="40" stroke="currentColor" strokeWidth="0.5" />
-                  <path d="M0 130 Q 100 100 200 120 T 300 110" stroke="currentColor" strokeWidth="0.8" />
-                </svg>
-                <span className="absolute top-4 left-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white/80 text-forest">
-                  {p.tag}
-                </span>
+              <div className="h-40 relative overflow-hidden bg-mint-soft">
+                {p.imageUrl ? (
+                  <img
+                    src={p.imageUrl}
+                    alt=""
+                    className="h-full w-full object-cover [filter:none]"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="h-full w-full" style={{ background: "var(--gradient-mint)" }} />
+                )}
+                {p.categories?.[0] && (
+                  <span className="absolute top-4 left-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white/80 text-forest">
+                    {p.categories[0]}
+                  </span>
+                )}
               </div>
               <div className="p-6">
-                <div className="text-xs text-n400">{p.date}</div>
-                <h3 className="mt-2 font-display text-xl text-forest leading-tight">
+                <div className="text-xs text-n400">
+                  {new Date(p.publishedAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </div>
+                <h3 className="mt-2 font-display text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
                   {p.title}
                 </h3>
-                <p className="mt-2 text-sm text-n600 leading-relaxed">{p.excerpt}</p>
+                <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-3">{p.summary}</p>
                 <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-canopy group-hover:text-mint transition-colors">
                   Read article <ArrowUpRight size={14} />
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -612,7 +606,7 @@ export function FinalCTASection() {
               implementation, and the systems to sustain it.
             </p>
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold btn-mint"
             >
               Start a Conversation <ArrowRight size={16} />

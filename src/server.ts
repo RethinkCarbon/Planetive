@@ -25,7 +25,7 @@ function brandedErrorResponse(): Response {
   });
 }
 
-function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boolean {
+function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boolean { 
   let payload: unknown;
   try {
     payload = JSON.parse(body);

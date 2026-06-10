@@ -8,6 +8,7 @@ import {
   type GlobalEngagementSection,
 } from "@/lib/global-engagements-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { GlobalPartnersMapSection } from "@/components/site/GlobalPartnersMap";
 
 const YEAR_FILTERS = [
   { id: "all", label: "All" },
@@ -37,6 +38,7 @@ export function GlobalEngagementsPageContent() {
   return (
     <>
       <GlobalEngagementsHero count={engagementCount} />
+      <GlobalPartnersMapSection />
       <FilterBar active={activeFilter} onChange={setActiveFilter} />
       <div className="pb-20 md:pb-28">
         {visibleSections.map((section, i) => (

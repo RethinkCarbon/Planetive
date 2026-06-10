@@ -72,7 +72,7 @@ export function Hero() {
               <ArrowRight size={16} />
             </Link>
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
             >
               Work With Planetive
