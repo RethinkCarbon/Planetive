@@ -2,8 +2,10 @@ import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
+import { useSiteForm } from "@/hooks/use-site-form";
 
 export function Footer() {
+  const { submit, isSubmitting, isSuccess, error } = useSiteForm();
   return (
     <footer className="bg-[var(--n900)] text-[var(--n200)] mt-24">
       <div className="container-x py-16">
@@ -69,21 +71,46 @@ export function Footer() {
               Monthly sustainability insights, delivered to your inbox.
             </p>
             <form
-              className="mt-4 flex items-center gap-2"
-              onSubmit={(e) => e.preventDefault()}
+              className="mt-4 space-y-2"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.currentTarget;
+                const data = new FormData(form);
+                const ok = await submit({
+                  kind: "newsletter",
+                  email: String(data.get("email") ?? ""),
+                  source: "footer",
+                });
+                if (ok) form.reset();
+              }}
             >
-              <input
-                type="email"
-                required
-                placeholder="you@company.com"
-                className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-n400 focus:outline-none focus:border-mint"
-              />
-              <button
-                type="submit"
-                className="rounded-full px-4 py-2.5 text-sm font-semibold btn-mint"
-              >
-                Join
-              </button>
+              <div className="flex items-center gap-2">
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  disabled={isSubmitting || isSuccess}
+                  placeholder="you@company.com"
+                  className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-n400 focus:outline-none focus:border-mint disabled:opacity-60"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting || isSuccess}
+                  className="rounded-full px-4 py-2.5 text-sm font-semibold btn-mint disabled:opacity-60"
+                >
+                  {isSubmitting ? "…" : isSuccess ? "Joined" : "Join"}
+                </button>
+              </div>
+              {isSuccess && (
+                <p className="text-xs text-mint-soft" role="status">
+                  Thanks — you&apos;re on the list.
+                </p>
+              )}
+              {error && (
+                <p className="text-xs text-red-300" role="alert">
+                  {error}
+                </p>
+              )}
             </form>
           </div>
         </ScrollRevealGroup>

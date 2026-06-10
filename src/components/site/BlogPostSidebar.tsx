@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { formatBlogPostDate, type BlogPostSummary } from "@/lib/blog";
+import { useSiteForm } from "@/hooks/use-site-form";
 
 type BlogPostSidebarProps = {
   recentPosts: BlogPostSummary[];
@@ -16,7 +16,7 @@ export function BlogPostSidebar({ recentPosts }: BlogPostSidebarProps) {
 }
 
 function BlogSubscribeCard() {
-  const [submitted, setSubmitted] = useState(false);
+  const { submit, isSubmitting, isSuccess, error } = useSiteForm();
 
   return (
     <div className="rounded-[20px] border border-n200/80 bg-white p-6 shadow-[var(--shadow-soft)]">
@@ -27,16 +27,23 @@ function BlogSubscribeCard() {
         Join our email list to receive updates and information.
       </p>
 
-      {submitted ? (
+      {isSuccess ? (
         <p className="mt-5 text-sm font-medium text-canopy" role="status">
           Thanks — you&apos;re on the list.
         </p>
       ) : (
         <form
           className="mt-5 space-y-3"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            setSubmitted(true);
+            const form = e.currentTarget;
+            const data = new FormData(form);
+            const ok = await submit({
+              kind: "newsletter",
+              email: String(data.get("email") ?? ""),
+              source: "blog",
+            });
+            if (ok) form.reset();
           }}
         >
           <label htmlFor="blog-sidebar-email" className="sr-only">
@@ -48,15 +55,22 @@ function BlogSubscribeCard() {
             name="email"
             required
             autoComplete="email"
+            disabled={isSubmitting}
             placeholder="Email address"
-            className="w-full rounded-lg border border-n200 bg-[var(--n50)] px-4 py-3 text-sm text-forest placeholder:text-n400 focus:outline-none focus:border-canopy focus:ring-2 focus:ring-canopy/15"
+            className="w-full rounded-lg border border-n200 bg-[var(--n50)] px-4 py-3 text-sm text-forest placeholder:text-n400 focus:outline-none focus:border-canopy focus:ring-2 focus:ring-canopy/15 disabled:opacity-60"
           />
           <button
             type="submit"
-            className="w-full rounded-lg px-4 py-3 text-xs font-bold tracking-[0.12em] uppercase bg-n200/80 text-forest hover:bg-n200 transition-colors"
+            disabled={isSubmitting}
+            className="w-full rounded-lg px-4 py-3 text-xs font-bold tracking-[0.12em] uppercase bg-n200/80 text-forest hover:bg-n200 transition-colors disabled:opacity-60"
           >
-            Sign up
+            {isSubmitting ? "Signing up…" : "Sign up"}
           </button>
+          {error && (
+            <p className="text-sm text-red-600" role="alert">
+              {error}
+            </p>
+          )}
         </form>
       )}
     </div>

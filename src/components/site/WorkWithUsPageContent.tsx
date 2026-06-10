@@ -9,6 +9,7 @@ import {
 } from "@/lib/engagement-programs-content";
 import { EngagementProgramsSection } from "@/components/site/EngagementProgramsSection";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { useSiteForm } from "@/hooks/use-site-form";
 import { Route } from "@/routes/work-with-us";
 
 export function WorkWithUsPageContent() {
@@ -16,7 +17,7 @@ export function WorkWithUsPageContent() {
   const [interest, setInterest] = useState<EngagementProgramId>(
     interestFromUrl ?? "fellows",
   );
-  const [sent, setSent] = useState(false);
+  const form = useSiteForm();
 
   useEffect(() => {
     if (interestFromUrl) setInterest(interestFromUrl);
@@ -24,7 +25,7 @@ export function WorkWithUsPageContent() {
 
   const selectInterest = (id: EngagementProgramId) => {
     setInterest(id);
-    setSent(false);
+    form.reset();
     const url = new URL(window.location.href);
     url.searchParams.set("interest", id);
     window.history.replaceState(null, "", url);
@@ -42,9 +43,8 @@ export function WorkWithUsPageContent() {
       />
       <ApplicationSection
         interest={interest}
-        sent={sent}
+        form={form}
         onSelectInterest={selectInterest}
-        onSubmitted={() => setSent(true)}
       />
     </>
   );
@@ -90,15 +90,14 @@ function WorkWithUsHero() {
 
 function ApplicationSection({
   interest,
-  sent,
+  form,
   onSelectInterest,
-  onSubmitted,
 }: {
   interest: EngagementProgramId;
-  sent: boolean;
+  form: ReturnType<typeof useSiteForm>;
   onSelectInterest: (id: EngagementProgramId) => void;
-  onSubmitted: () => void;
 }) {
+  const { submit, isSubmitting, isSuccess, error } = form;
   return (
     <section
       id="apply"
@@ -143,16 +142,27 @@ function ApplicationSection({
 
               <form
                 className="mt-8 space-y-5"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
-                  onSubmitted();
+                  const formEl = e.currentTarget;
+                  const data = new FormData(formEl);
+                  const ok = await submit({
+                    kind: "application",
+                    interest: PROGRAM_LABELS[interest],
+                    name: String(data.get("name") ?? ""),
+                    email: String(data.get("email") ?? ""),
+                    phone: String(data.get("phone") ?? "") || undefined,
+                    message: String(data.get("message") ?? ""),
+                  });
+                  if (ok) formEl.reset();
                 }}
               >
-                <input type="hidden" name="interest" value={interest} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <Field label="Name" required>
                     <input
+                      name="name"
                       required
+                      disabled={isSubmitting || isSuccess}
                       className={INPUT_CLASS}
                       placeholder="Your full name"
                       autoComplete="name"
@@ -160,7 +170,9 @@ function ApplicationSection({
                   </Field>
                   <Field label="Phone">
                     <input
+                      name="phone"
                       type="tel"
+                      disabled={isSubmitting || isSuccess}
                       className={INPUT_CLASS}
                       placeholder="+92 …"
                       autoComplete="tel"
@@ -169,8 +181,10 @@ function ApplicationSection({
                 </div>
                 <Field label="Email" required>
                   <input
+                    name="email"
                     required
                     type="email"
+                    disabled={isSubmitting || isSuccess}
                     className={INPUT_CLASS}
                     placeholder="you@email.com"
                     autoComplete="email"
@@ -178,8 +192,10 @@ function ApplicationSection({
                 </Field>
                 <Field label="Tell us about your interest" required>
                   <textarea
+                    name="message"
                     required
                     rows={5}
+                    disabled={isSubmitting || isSuccess}
                     className={`${INPUT_CLASS} resize-none`}
                     placeholder={
                       interest === "partner"
@@ -190,15 +206,21 @@ function ApplicationSection({
                 </Field>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-primary"
+                  disabled={isSubmitting || isSuccess}
+                  className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-primary disabled:opacity-60"
                 >
                   <Send size={14} aria-hidden />
-                  Submit application
+                  {isSubmitting ? "Submitting…" : "Submit application"}
                 </button>
-                {sent && (
-                  <p className="text-sm text-canopy">
+                {isSuccess && (
+                  <p className="text-sm text-canopy" role="status">
                     Thanks — we&apos;ll review your application and respond within a few
                     business days.
+                  </p>
+                )}
+                {error && (
+                  <p className="text-sm text-red-600" role="alert">
+                    {error}
                   </p>
                 )}
               </form>
