@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ChevronDown, Globe2, Users } from "lucide-react";
+import { CalendarDays, ChevronDown, Globe2, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   GLOBAL_ENGAGEMENTS_HERO,
@@ -10,6 +10,15 @@ import {
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { GlobalPartnersMapSection } from "@/components/site/GlobalPartnersMap";
 
+const CATEGORY_FILTERS = [
+  { id: "all", label: "All categories" },
+  { id: "climate-energy", label: "Climate & Energy" },
+  { id: "finance-policy", label: "Finance & Policy" },
+  { id: "leadership-learning", label: "Leadership & Learning" },
+  { id: "partnerships", label: "Partnerships" },
+  { id: "team-milestones", label: "Team milestones" },
+] as const;
+
 const YEAR_FILTERS = [
   { id: "all", label: "All" },
   { id: "year-2025", label: "2025" },
@@ -18,18 +27,128 @@ const YEAR_FILTERS = [
   { id: "year-earlier", label: "Earlier" },
 ] as const;
 
+type CategoryFilterId = (typeof CATEGORY_FILTERS)[number]["id"];
+type YearFilterId = (typeof YEAR_FILTERS)[number]["id"];
+type FilterMode = "category" | "year";
+
+const ENGAGEMENT_CATEGORY_BY_ID: Record<string, CategoryFilterId> = {
+  "pcc-2025": "finance-policy",
+  "ief-paris-2025": "finance-policy",
+  "acoa-2025": "leadership-learning",
+  "liibs-2025": "leadership-learning",
+  "acca-bhc-2025": "finance-policy",
+  "pmif-2025": "climate-energy",
+  "ccus-mena-2025": "climate-energy",
+  "ief-riyadh-2025": "climate-energy",
+  "finance-minister-2025": "finance-policy",
+  "lums-2025": "partnerships",
+  "wwf-2025": "partnerships",
+  "oicci-2025": "partnerships",
+
+  "buraq-2024": "leadership-learning",
+  "ygl-morocco-2024": "leadership-learning",
+  "wef-riyadh-2024": "climate-energy",
+  "liibs-2024": "climate-energy",
+  "icci-dubai-2024": "finance-policy",
+  "mwc-2024": "climate-energy",
+
+  "fii-2023": "finance-policy",
+  "cop28-2023": "climate-energy",
+  "wef-gfc-2023": "partnerships",
+  "buraq-2023": "leadership-learning",
+  "eisenhower-2023": "leadership-learning",
+  "gastech-2023": "climate-energy",
+  "cpec-2023": "climate-energy",
+  "liibs-2023": "leadership-learning",
+  "finland-pakistan-2023": "climate-energy",
+  "iwd-2023": "leadership-learning",
+  "leap-2023": "climate-energy",
+
+  "cif-2021": "climate-energy",
+  "davos-2020": "finance-policy",
+  "wef-dalian-2020": "climate-energy",
+  "wef-dubai-2020": "climate-energy",
+  "ntu-2019": "leadership-learning",
+};
+
+function classifyEngagement(engagement: GlobalEngagement): CategoryFilterId {
+  const curatedCategory = ENGAGEMENT_CATEGORY_BY_ID[engagement.id];
+  if (curatedCategory) return curatedCategory;
+
+  const text = `${engagement.event} ${engagement.headline} ${engagement.body.join(" ")}`
+    .toLowerCase();
+
+  if (/(workshop|team hosted|team conducted|planetive team)/.test(text)) {
+    return "team-milestones";
+  }
+  if (/(finance|investment|minister|policy|esg|transparency|public financial|bank)/.test(text)) {
+    return "finance-policy";
+  }
+  if (/(partnership|collaborat|forum with|wwf|oicci|lums|hawkamah|relp)/.test(text)) {
+    return "partnerships";
+  }
+  if (/(camp|youth|leadership|fellowship|learning|education|summit)/.test(text)) {
+    return "leadership-learning";
+  }
+  return "climate-energy";
+}
+
 export function GlobalEngagementsPageContent() {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [filterMode, setFilterMode] = useState<FilterMode>("category");
+  const [activeCategory, setActiveCategory] = useState<CategoryFilterId>("all");
+  const [activeYear, setActiveYear] = useState<YearFilterId>("all");
+  const [activeEvent, setActiveEvent] = useState<string>("all");
+  const [showYearOptions, setShowYearOptions] = useState(false);
+
+  const yearEventFilters = useMemo(() => {
+    if (filterMode !== "year" || activeYear === "all") return [];
+
+    return GLOBAL_ENGAGEMENT_SECTIONS.flatMap((section) => {
+      if (section.kind !== "grid" || section.id !== activeYear) return [];
+      return (section.items ?? []).map((item) => ({
+        id: item.id,
+        label: item.event,
+      }));
+    });
+  }, [filterMode, activeYear]);
 
   const visibleSections = useMemo(() => {
-    if (activeFilter === "all") return GLOBAL_ENGAGEMENT_SECTIONS;
-    return GLOBAL_ENGAGEMENT_SECTIONS.filter((s) => {
-      if (s.id === activeFilter) return true;
-      if (activeFilter === "year-2024" && s.id === "team-relp-2024") return true;
-      if (activeFilter === "year-2023" && s.id === "team-hawkamah-2023") return true;
-      return false;
+    return GLOBAL_ENGAGEMENT_SECTIONS.flatMap((section) => {
+      if (filterMode === "year") {
+        const sectionYearMatch =
+          activeYear === "all" ||
+          section.id === activeYear ||
+          (activeYear === "year-2024" && section.id === "team-relp-2024") ||
+          (activeYear === "year-2023" && section.id === "team-hawkamah-2023");
+
+        if (!sectionYearMatch) return [];
+      }
+
+      if (section.kind === "highlight") {
+        if (
+          filterMode === "category" &&
+          activeCategory !== "all" &&
+          activeCategory !== "team-milestones"
+        ) {
+          return [];
+        }
+        return [section];
+      }
+
+      const filteredItems = (section.items ?? []).filter((item) => {
+        const categoryMatch =
+          filterMode !== "category" ||
+          activeCategory === "all" ||
+          classifyEngagement(item) === activeCategory;
+        const eventMatch =
+          filterMode !== "year" || activeEvent === "all" || item.id === activeEvent;
+        return categoryMatch && eventMatch;
+      });
+
+      if (filteredItems.length === 0) return [];
+      return [{ ...section, items: filteredItems }];
     });
-  }, [activeFilter]);
+  }, [filterMode, activeCategory, activeYear, activeEvent]);
 
   const engagementCount = GLOBAL_ENGAGEMENT_SECTIONS.flatMap((s) =>
     s.kind === "grid" ? (s.items ?? []) : [],
@@ -39,7 +158,30 @@ export function GlobalEngagementsPageContent() {
     <>
       <GlobalEngagementsHero count={engagementCount} />
       <GlobalPartnersMapSection />
-      <FilterBar active={activeFilter} onChange={setActiveFilter} />
+      <FilterBar
+        filterMode={filterMode}
+        onFilterModeChange={setFilterMode}
+        activeCategory={activeCategory}
+        onCategoryChange={(category) => {
+          setFilterMode("category");
+          setActiveCategory(category);
+          setActiveYear("all");
+          setActiveEvent("all");
+        }}
+        activeYear={activeYear}
+        onYearChange={(year) => {
+          setFilterMode("year");
+          setActiveYear(year);
+          setActiveEvent("all");
+          setActiveCategory("all");
+          setShowYearOptions(false);
+        }}
+        showYearOptions={showYearOptions}
+        onToggleYearOptions={() => setShowYearOptions((open) => !open)}
+        activeEvent={activeEvent}
+        onEventChange={setActiveEvent}
+        yearEvents={yearEventFilters}
+      />
       <div className="pb-20 md:pb-28">
         {visibleSections.map((section, i) => (
           <SectionBlock key={section.id} section={section} index={i} />
@@ -100,32 +242,135 @@ function GlobalEngagementsHero({ count }: { count: number }) {
 }
 
 function FilterBar({
-  active,
-  onChange,
+  filterMode,
+  onFilterModeChange,
+  activeCategory,
+  onCategoryChange,
+  activeYear,
+  onYearChange,
+  showYearOptions,
+  onToggleYearOptions,
+  activeEvent,
+  onEventChange,
+  yearEvents,
 }: {
-  active: string;
-  onChange: (id: string) => void;
+  filterMode: FilterMode;
+  onFilterModeChange: (mode: FilterMode) => void;
+  activeCategory: CategoryFilterId;
+  onCategoryChange: (id: CategoryFilterId) => void;
+  activeYear: YearFilterId;
+  onYearChange: (id: YearFilterId) => void;
+  showYearOptions: boolean;
+  onToggleYearOptions: () => void;
+  activeEvent: string;
+  onEventChange: (id: string) => void;
+  yearEvents: Array<{ id: string; label: string }>;
 }) {
+  const activeYearLabel =
+    YEAR_FILTERS.find((item) => item.id === activeYear)?.label ?? "All";
+
   return (
     <section className="sticky top-[4.5rem] z-30 border-b border-n200/80 bg-[var(--n50)]/95 backdrop-blur-md">
       <div className="container-x py-3 md:py-4">
         <ScrollReveal variant="fade-up" duration={500}>
-          <div className="flex flex-wrap items-center gap-2">
-            {YEAR_FILTERS.map((f) => (
+          <div className="space-y-2.5">
+            <div className="relative flex flex-wrap items-center gap-2.5">
+              {CATEGORY_FILTERS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => {
+                    onFilterModeChange("category");
+                    onCategoryChange(f.id);
+                  }}
+                  className={cn(
+                    "rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200",
+                    filterMode === "category" && activeCategory === f.id
+                      ? "bg-forest text-white shadow-[var(--shadow-soft)] ring-1 ring-forest/20"
+                      : "bg-white text-n600 border border-n200 hover:border-canopy/40 hover:text-forest",
+                  )}
+                >
+                  {f.label}
+                </button>
+              ))}
               <button
-                key={f.id}
                 type="button"
-                onClick={() => onChange(f.id)}
+                onClick={() => {
+                  onFilterModeChange("year");
+                  onToggleYearOptions();
+                }}
                 className={cn(
-                  "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
-                  active === f.id
-                    ? "bg-forest text-white shadow-[var(--shadow-soft)]"
-                    : "bg-white text-n600 border border-n200 hover:border-canopy/40 hover:text-forest",
+                  "inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold border transition-all duration-200",
+                  filterMode === "year"
+                    ? "bg-canopy text-white border-canopy shadow-[var(--shadow-soft)]"
+                    : "bg-white text-n700 border-n200 hover:border-canopy/40 hover:text-forest",
                 )}
+                aria-label="Filter by year"
+                title="Filter by year"
               >
-                {f.label}
+                <CalendarDays size={15} className="shrink-0" />
+                <span>{activeYearLabel}</span>
+                <ChevronDown
+                  size={14}
+                  className={cn("transition-transform", showYearOptions && "rotate-180")}
+                />
               </button>
-            ))}
+            </div>
+
+            {showYearOptions && (
+              <div className="absolute top-full left-0 mt-2 w-48 rounded-xl border border-n200/80 bg-white p-1.5 shadow-[var(--shadow-elevated)] z-40">
+                {YEAR_FILTERS.map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => {
+                      onFilterModeChange("year");
+                      onYearChange(f.id);
+                    }}
+                    className={cn(
+                      "w-full text-left rounded-lg px-3 py-2 text-sm font-semibold transition-all duration-200",
+                      filterMode === "year" && activeYear === f.id
+                        ? "bg-canopy text-white"
+                        : "text-n600 hover:bg-n50 hover:text-forest",
+                    )}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {filterMode === "year" && activeYear !== "all" && yearEvents.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => onEventChange("all")}
+                  className={cn(
+                    "rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200",
+                    activeEvent === "all"
+                      ? "bg-mint text-forest"
+                      : "bg-white text-n600 border border-n200 hover:border-canopy/40 hover:text-forest hover:bg-n50",
+                  )}
+                >
+                  All dates/events
+                </button>
+                {yearEvents.map((ev) => (
+                  <button
+                    key={ev.id}
+                    type="button"
+                    onClick={() => onEventChange(ev.id)}
+                    className={cn(
+                      "rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200",
+                      activeEvent === ev.id
+                        ? "bg-mint text-forest"
+                        : "bg-white text-n600 border border-n200 hover:border-canopy/40 hover:text-forest hover:bg-n50",
+                    )}
+                  >
+                    {ev.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </ScrollReveal>
       </div>

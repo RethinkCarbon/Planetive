@@ -58,7 +58,7 @@ export const TEAM: TeamMember[] = [
     group: "advisors",
     image: teamImg("agnes-budzyn.jpg"),
     bio: [
-      "Agnes is a leader in financial and emerging technology markets, with a decade at BlackRock advising regulators and managing complex portfolios, and later roles at ConsenSys building relationships across global financial institutions and government bodies.",
+      "Agnes advises on finance and emerging technology strategy. She has led institutional and regulatory engagement across BlackRock and ConsenSys.",
     ],
   },
   {
@@ -68,7 +68,7 @@ export const TEAM: TeamMember[] = [
     group: "advisors",
     image: teamImg("mustapha-mokass.jpg"),
     bio: [
-      "Mustapha is Founder and CEO of Climate Finance Group, mobilizing investment for agriculture and large-scale renewable energy. A HEC Paris graduate and visiting professor, he has founded sustainability ventures across climate finance, waste-to-energy, and off-grid solar.",
+      "Mustapha is Founder and CEO of Climate Finance Group. He works on climate investment in renewable energy and sustainable infrastructure.",
     ],
   },
   {
@@ -79,7 +79,7 @@ export const TEAM: TeamMember[] = [
     image: teamImg("ali-adnan-ibrahim.jpg"),
     imagePosition: "center center",
     bio: [
-      "Dr. Ali Adnan Ibrahim leads sustainable transformation in Riyadh and previously headed social and sustainable finance at Al Baraka Banking Group. A Fulbright Scholar and WEF Young Global Leader, he advises on Islamic finance and sustainable fintech in the Gulf.",
+      "Dr. Ali Adnan Ibrahim leads sustainable transformation initiatives in Riyadh. He advises on Islamic finance, sustainable banking, and fintech in the Gulf.",
     ],
   },
   {
@@ -89,7 +89,7 @@ export const TEAM: TeamMember[] = [
     group: "advisors",
     image: teamImg("han-yik.jpg"),
     bio: [
-      "Han Yik is Managing Partner of Strategic Focus Investments and advises asset managers and think tanks on ESG, capital markets, and long-term investment strategy. He formerly led institutional investor engagement at the World Economic Forum and institutional portfolio strategy at Bank of America Merrill Lynch.",
+      "Han Yik advises on ESG, capital markets, and long-term investment strategy. He has held leadership roles at the World Economic Forum and Bank of America Merrill Lynch.",
     ],
   },
   {
@@ -99,7 +99,7 @@ export const TEAM: TeamMember[] = [
     group: "advisors",
     image: teamImg("malak-al-akiely.png"),
     bio: [
-      "Malak Al Akiely is a commodities and business development leader focused on food security and sustainable agriculture across the MENA region. A World Economic Forum Young Global Leader, she contributes to Jordan's economic forums and entrepreneurship councils while advising on grains, energy, and renewables markets.",
+      "Malak Al Akiely focuses on food security, commodities, and sustainable agriculture in MENA. She advises on energy and renewables markets.",
     ],
   },
   {
@@ -109,7 +109,7 @@ export const TEAM: TeamMember[] = [
     group: "team",
     image: teamImg("hira-mumtaz.jpg"),
     bio: [
-      "Hira Mumtaz is an energy and climate professional and Fulbright Scholar with a master's in energy policy from the University of Michigan. She consults across Pakistan, Asia, the US, and UK on energy policy, renewables, climate finance, and carbon markets.",
+      "Hira Mumtaz is an energy and climate consultant. She works on energy policy, renewables, climate finance, and carbon markets.",
     ],
   },
   {
@@ -119,7 +119,7 @@ export const TEAM: TeamMember[] = [
     group: "team",
     image: teamImg("kamal-rahim.jpg"),
     bio: [
-      "Kamal Rahim leads strategy and growth at Planetive, with a decade in energy and industrial digitization spanning power, ports, and digital twin solutions. A mechanical engineer and HBR Advisory Council member.",
+      "Kamal Rahim leads strategy and growth at Planetive. He has experience across energy, industrial digitization, and infrastructure sectors.",
     ],
   },
   {
@@ -129,7 +129,7 @@ export const TEAM: TeamMember[] = [
     group: "team",
     /* CDN asset fdf9f09 is Rija Zahid’s photo, not Maha — omit until a verified portrait is available */
     bio: [
-      "Maha Kamal is a climate governance and policy specialist with expertise in SDGs and the Paris Agreement. A Chevening Scholar and World Economic Forum Global Shaper, she writes and speaks on energy and climate policy and co-chairs Women in Energy Pakistan.",
+      "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
     ],
   },
   {
@@ -139,7 +139,7 @@ export const TEAM: TeamMember[] = [
     group: "team",
     image: teamImg("umair-farooqi.jpeg"),
     bio: [
-      "Umair Hussian Farooqi is a financial analyst with seven years in banking, audit, and accounts. He delivers financial analysis, planning, and regulatory compliance support that helps teams forecast trends and improve performance.",
+      "Umair Hussian Farooqi is a financial analyst with experience in banking, audit, and accounts. He supports planning, reporting, and compliance.",
     ],
   },
   {
@@ -149,7 +149,7 @@ export const TEAM: TeamMember[] = [
     group: "team",
     image: teamImg("zainab-ahmed.jpg"),
     bio: [
-      "Zainab Ahmed is a business analyst with a background in business finance, data analytics, and sustainable finance. She supports research, financial analysis, strategy, and proposal development across corporate and development-sector engagements.",
+      "Zainab Ahmed is a business analyst focused on finance and sustainability projects. She supports research, analysis, and strategy development.",
     ],
   },
   {
@@ -160,7 +160,7 @@ export const TEAM: TeamMember[] = [
     image: teamImg("shahid-jamal.jpeg"),
     imagePosition: "52% center",
     bio: [
-      "Shahid Jamal specializes in carbon credits and sustainable agriculture, researching mechanisms, regenerative practices, and carbon sequestration to support climate mitigation and compliance with international standards.",
+      "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
     ],
   },
 ];

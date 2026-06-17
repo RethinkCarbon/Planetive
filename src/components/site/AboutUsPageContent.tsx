@@ -184,8 +184,9 @@ function teamImageStyle(member: TeamMember): CSSProperties | undefined {
 }
 
 function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+  const isAyla = member.id === "ayla";
   const [expanded, setExpanded] = useState(false);
-  const long = member.bio.join(" ").length > 480;
+  const long = isAyla && member.bio.join(" ").length > 480;
 
   return (
     <ScrollReveal variant="fade-up" delay={delay}>
@@ -220,7 +221,10 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
           <h3 className="mt-2 font-display text-3xl md:text-4xl text-forest">{member.name}</h3>
           <BioText
             paragraphs={member.bio}
-            className={cn("mt-5", !expanded && "max-h-[9.5rem] overflow-hidden")}
+            className={cn(
+              "mt-5",
+              isAyla && !expanded && "max-h-[9.5rem] overflow-hidden",
+            )}
           />
           {member.link && (
             <a
@@ -271,10 +275,6 @@ function BioText({
 }
 
 function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
-  const [expanded, setExpanded] = useState(false);
-  const bioText = member.bio.join(" ");
-  const long = bioText.length > 320;
-
   return (
     <ScrollReveal variant="fade-up" delay={delay}>
       <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-n200/80 bg-[var(--n50)] hover:shadow-[var(--shadow-elevated)] transition-shadow duration-300">
@@ -310,21 +310,8 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
           <h3 className="mt-2 font-display text-xl text-forest leading-tight">{member.name}</h3>
           <BioText
             paragraphs={member.bio}
-            className={cn("mt-3 flex-1", !expanded && long && "max-h-[7.5rem] overflow-hidden")}
+            className="mt-3 flex-1"
           />
-          {long && (
-            <button
-              type="button"
-              onClick={() => setExpanded((e) => !e)}
-              className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-canopy hover:text-forest"
-            >
-              {expanded ? "Less" : "More"}
-              <ChevronDown
-                size={14}
-                className={cn("transition-transform", expanded && "rotate-180")}
-              />
-            </button>
-          )}
         </div>
       </article>
     </ScrollReveal>
