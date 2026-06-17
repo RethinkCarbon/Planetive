@@ -53,6 +53,7 @@
   --font-h3: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-body: "Lora", Georgia, "Times New Roman", serif;
   --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
   --font-display: var(--font-heading);
   --font-mono: var(--font-body);
 }
@@ -125,6 +126,30 @@
     font-family: var(--font-h3);
     font-weight: 700;
     line-height: 1.15;
+  }
+  p,
+  li,
+  label,
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+  }
+  /* Site header nav — Playfair Display (planetive.org) */
+  header nav,
+  header nav a,
+  header nav button,
+  header [data-site-mobile-nav],
+  header [data-site-mobile-nav] a,
+  header [data-site-mobile-nav] button {
+    font-family: var(--font-heading);
+  }
+  footer h4 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 }
 
@@ -220,12 +245,16 @@
   }
   .btn-ghost-light:hover { background: color-mix(in oklab, white 22%, transparent); }
 
+  .blog-prose {
+    font-family: var(--font-body);
+  }
   .blog-prose p { margin-top: 1.1em; }
   .blog-prose p:first-child { margin-top: 0; }
   .blog-prose h2,
   .blog-prose h3 {
     margin-top: 1.75em;
-    font-family: var(--font-display);
+    font-family: var(--font-heading);
+    font-weight: 700;
     color: var(--forest);
     line-height: 1.2;
   }

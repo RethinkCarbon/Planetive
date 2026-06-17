@@ -44,7 +44,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
 
   const isSolid = variant === "solid" || scrolled;
   const linkClass = (extra?: string) =>
-    `px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+    `px-3 py-2 rounded-full text-sm font-medium font-heading transition-colors ${
       isSolid
         ? "text-n800 hover:bg-n100"
         : "text-white/90 hover:text-white hover:bg-white/10"
@@ -105,7 +105,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
           <div className="flex items-center gap-2">
             <Link
               to="/work-with-us"
-              className="hidden md:inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold btn-mint"
+              className="hidden md:inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold font-heading btn-mint"
             >
               Work With Us
             </Link>
@@ -122,13 +122,16 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
         </nav>
 
         {open && (
-          <div className="lg:hidden mt-2 glass rounded-3xl p-4 shadow-[var(--shadow-soft)] max-h-[min(85vh,32rem)] overflow-y-auto">
+          <div
+            data-site-mobile-nav
+            className="lg:hidden mt-2 glass rounded-3xl p-4 shadow-[var(--shadow-soft)] max-h-[min(85vh,32rem)] overflow-y-auto"
+          >
             <ul className="flex flex-col">
               <li>
                 <Link
                   to="/"
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 rounded-xl text-sm font-medium text-n800 hover:bg-n100"
+                  className="block px-3 py-2.5 rounded-xl text-sm font-medium font-heading text-n800 hover:bg-n100"
                 >
                   Home
                 </Link>
@@ -148,7 +151,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                   <Link
                     to={l.to}
                     onClick={() => setOpen(false)}
-                    className="block px-3 py-2.5 rounded-xl text-sm font-medium text-n800 hover:bg-n100"
+                    className="block px-3 py-2.5 rounded-xl text-sm font-medium font-heading text-n800 hover:bg-n100"
                   >
                     {l.label}
                   </Link>
@@ -158,7 +161,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                 <Link
                   to="/work-with-us"
                   onClick={() => setOpen(false)}
-                  className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold btn-primary"
+                  className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold font-heading btn-primary"
                 >
                   Work With Us
                 </Link>
