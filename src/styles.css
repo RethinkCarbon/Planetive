@@ -47,14 +47,14 @@
   --color-n100: var(--n100);
   --color-n50: var(--n50);
 
-  /* Brand typography — Rethink Carbon / Planetive brand kit */
-  --font-heading: "Segoe UI", "Segoe UI Variable", Segoe, system-ui, sans-serif;
-  --font-h2: Arial, "Arial MT", "Helvetica Neue", Helvetica, sans-serif;
-  --font-h3: Cambria, Georgia, "Times New Roman", serif;
-  --font-body: Cambria, Georgia, "Times New Roman", serif;
+  /* Brand typography — matches planetive.org (Playfair Display + Lora) */
+  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-h2: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-h3: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Lora", Georgia, "Times New Roman", serif;
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
-  --font-mono: var(--font-h2);
+  --font-mono: var(--font-body);
 }
 
 :root {
@@ -129,23 +129,20 @@
 }
 
 @layer utilities {
-  /* Logo / page titles — Segoe UI Bold */
+  /* Display / hero titles — Playfair Display */
   .font-heading,
   .font-logo {
     font-family: var(--font-heading);
     font-weight: 700;
   }
-  /* H2 headlines — Arial MT Bold */
   .font-h2 {
     font-family: var(--font-h2);
     font-weight: 700;
   }
-  /* H3 sections — Cambria Bold */
   .font-h3 {
     font-family: var(--font-h3);
     font-weight: 700;
   }
-  /* Legacy utility: maps to correct level when combined with heading tags */
   .font-display {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -163,23 +160,27 @@
     font-family: var(--font-h3);
     font-weight: 700;
   }
-  /* Body copy mistakenly tagged with font-display */
   p.font-display {
     font-family: var(--font-body);
     font-weight: 400;
   }
-  /* Stat blocks & large numerals — Arial Bold (H2) */
   div.font-display,
   dt.font-display,
   span.font-display {
     font-family: var(--font-h2);
     font-weight: 700;
   }
-  /* Wordmark — Segoe UI Bold */
   nav .font-display,
   footer .font-display {
     font-family: var(--font-heading);
     font-weight: 700;
+  }
+  /* Eyebrows / labels — Lora (uppercase tracking on old site) */
+  .font-mono {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 }
 

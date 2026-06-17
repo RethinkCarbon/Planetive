@@ -118,7 +118,7 @@ export function MapCountryLabels({ mapRootRef, focusId }: MapCountryLabelsProps)
             fill="#0A3D2E"
             fontSize={fontSize}
             fontWeight={600}
-            fontFamily="Segoe UI, system-ui, sans-serif"
+            fontFamily="var(--font-body)"
             opacity={isActiveCountry ? 1 : 0.22}
           >
             {label.name}
