@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { PLANETIVE_LOGO_SRC } from "@/lib/site-brand";
 
-type ZoomSize = "nav" | "footer";
+type ZoomSize = "nav" | "footer" | "wheel";
 
 const ZOOM_SLOTS: Record<
   ZoomSize,
@@ -16,6 +16,11 @@ const ZOOM_SLOTS: Record<
     container: "h-12 w-[11rem] md:h-14 md:w-[12rem]",
     image: "h-16 md:h-[4.5rem]",
     scale: "scale-[2.15] md:scale-[2.3]",
+  },
+  wheel: {
+    container: "h-12 w-[8.5rem] sm:h-14 sm:w-[9.5rem]",
+    image: "h-16 sm:h-[4.5rem]",
+    scale: "scale-[2.05] sm:scale-[2.2]",
   },
 };
 

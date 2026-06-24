@@ -1,5 +1,5 @@
-import { EcosystemDonutExplorer } from "@/components/site/ecosystem/EcosystemDonutExplorer";
+import { PlanetiveEcosystemWheel } from "@/components/site/ecosystem/PlanetiveEcosystemWheel";
 
 export function EcosystemExplorer() {
-  return <EcosystemDonutExplorer panelVariant="dark" />;
+  return <PlanetiveEcosystemWheel />;
 }

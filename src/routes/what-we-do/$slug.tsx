@@ -6,9 +6,9 @@ import { WhatWeDoPillarPageContent } from "@/components/site/WhatWeDoPillarPageC
 import { getWhatWeDoDetail } from "@/lib/what-we-do-content";
 
 export const Route = createFileRoute("/what-we-do/$slug")({
-  loader: ({ params }) => getWhatWeDoDetail(params.slug) ?? null,
+  loader: ({ params }) => params.slug,
   head: ({ loaderData }) => {
-    const detail = loaderData;
+    const detail = getWhatWeDoDetail(loaderData);
     if (!detail) return {};
     if (detail.type === "pillar") {
       const { pillar } = detail;
@@ -37,7 +37,8 @@ export const Route = createFileRoute("/what-we-do/$slug")({
 });
 
 function WhatWeDoDetailPage() {
-  const detail = Route.useLoaderData();
+  const slug = Route.useLoaderData();
+  const detail = getWhatWeDoDetail(slug);
 
   if (!detail) {
     throw notFound();

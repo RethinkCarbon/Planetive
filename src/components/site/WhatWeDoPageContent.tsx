@@ -96,30 +96,8 @@ function WhatWeDoEcosystemSection() {
         </ScrollReveal>
 
         <ScrollReveal variant="fade-up">
-          <div
-            className="relative isolate overflow-hidden rounded-[28px] md:rounded-[32px] border border-forest/15 text-white shadow-[0_32px_64px_rgba(10,61,46,0.18)]"
-            style={{ background: "var(--gradient-hero)" }}
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.06]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)",
-                backgroundSize: "48px 48px",
-              }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse 70% 55% at 30% 20%, rgba(168,240,212,0.22), transparent 55%)",
-              }}
-            />
-            <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
-              <EcosystemExplorer />
-            </div>
+          <div className="flex justify-center py-2 md:py-4">
+            <EcosystemExplorer />
           </div>
         </ScrollReveal>
       </div>

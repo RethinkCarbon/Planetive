@@ -1,7 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+import { RotatingWords } from "@/components/site/RotatingWords";
+import { HeroMissionVision } from "@/components/site/MissionVisionSection";
+
+const HERO_FOCUS_WORDS = [
+  "Decarbonization",
+  "ESG",
+  "Energy",
+  "Sustainability",
+  "Carbon Markets",
+  "Clean Tech",
+] as const;
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -50,51 +61,42 @@ export function Hero() {
         />
       </div>
 
-      <div className="container-x relative z-10 pt-40 md:pt-44 pb-24 md:pb-32 min-h-[100svh] flex items-center">
-        <div className="max-w-3xl">
-          <h1 className="hero-enter font-heading text-white text-[clamp(2.4rem,6vw,4.75rem)]">
-            Building <em className="not-italic text-mint-soft">Climate Intelligence</em>
-            <br className="hidden md:block" /> for a Sustainable Future
-          </h1>
+      <div className="relative z-10 flex min-h-[100svh] w-full flex-col">
+        <div className="container-x flex w-full flex-1 items-center justify-start pt-40 md:pt-44 pb-8 md:pb-10">
+          <div className="max-w-4xl text-left">
+            <h1 className="hero-enter font-heading text-white text-[clamp(1.9rem,5vw,3.75rem)] leading-[1.15]">
+              <span className="block">
+                Where AI, <RotatingWords words={HERO_FOCUS_WORDS} />
+              </span>
+              <span className="block">and Climate Finance meet.</span>
+            </h1>
 
-          <p className="hero-enter hero-enter-d1 mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-n200">
-            Planetive connects strategy, technology, capital, and implementation to help
-            enterprises and financial institutions move from diagnosis to sustainable
-            impact.
-          </p>
+            <p className="hero-enter hero-enter-d1 mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-n200">
+              Operating across Pakistan, the Middle East, and South Asia, Planetive combines
+              three decades of leadership with cutting-edge tech to deliver scalable impact
+              in decarbonization, energy transition, and ESG.
+            </p>
 
-          <div className="hero-enter hero-enter-d2 mt-9 flex flex-wrap items-center gap-3">
-            <Link
-              to="/what-we-do"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
-            >
-              Explore What We Do
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/work-with-us"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
-            >
-              Work With Planetive
-            </Link>
-          </div>
-
-          <dl className="mt-14 grid grid-cols-3 max-w-xl gap-6 text-white">
-            {[
-              ["$2.5T", "Annual SDG financing gap we help bridge"],
-              ["9", "Ecosystem ventures & platforms"],
-              ["3", "Continents engaged"],
-            ].map(([k, v], i) => (
-              <div
-                key={k}
-                className="border-l border-white/20 pl-4 hero-enter"
-                style={{ animationDelay: `${0.52 + i * 0.1}s` }}
+            <div className="hero-enter hero-enter-d2 mt-9 flex flex-wrap items-center gap-3">
+              <Link
+                to="/what-we-do"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
               >
-                <dt className="font-display text-3xl md:text-4xl text-mint-soft">{k}</dt>
-                <dd className="mt-1 text-xs md:text-sm text-n200 leading-snug">{v}</dd>
-              </div>
-            ))}
-          </dl>
+                Explore What We Do
+                <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/work-with-us"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
+              >
+                Work With Planetive
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="container-x mt-auto w-full pb-10 md:pb-14">
+          <HeroMissionVision />
         </div>
       </div>
 

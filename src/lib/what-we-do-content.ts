@@ -170,7 +170,7 @@ export const ECOSYSTEM_PILLARS: EcosystemPillar[] = [
 export const WHAT_WE_DO_ECOSYSTEM = {
   title: "The Planetive ecosystem",
   intro:
-    "Select a segment to see how advisory, platforms, agents, and programs connect in a single mandate.",
+    "Nine ventures in one engine — hover a segment to explore how advisory, platforms, agents, and programs connect.",
 };
 
 export type WhatWeDoService = {
