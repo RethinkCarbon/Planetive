@@ -77,17 +77,17 @@ export function Hero() {
               in decarbonization, energy transition, and ESG.
             </p>
 
-            <div className="hero-enter hero-enter-d2 mt-9 flex flex-wrap items-center gap-3">
+            <div className="hero-enter hero-enter-d2 mt-9 flex flex-wrap items-center gap-4">
               <Link
                 to="/what-we-do"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
+                className="inline-flex items-center gap-2 rounded-md px-6 py-3.5 text-sm font-semibold btn-mint"
               >
                 Explore What We Do
                 <ArrowRight size={16} />
               </Link>
               <Link
                 to="/work-with-us"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
+                className="inline-flex items-center px-1 py-3.5 text-sm font-semibold text-white/90 transition-colors hover:text-white"
               >
                 Work With Planetive
               </Link>

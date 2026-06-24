@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
+import { RETHINK_CARBON } from "@/lib/industries-content";
 
 /* ------------------------------- Process -------------------------------- */
 export function ProcessSection() {
@@ -326,7 +327,9 @@ export function RethinkCarbonSection() {
               </div>
 
               <a
-                href="#"
+                href={RETHINK_CARBON.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-9 inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
               >
                 Explore Rethink Carbon <ArrowRight size={16} />

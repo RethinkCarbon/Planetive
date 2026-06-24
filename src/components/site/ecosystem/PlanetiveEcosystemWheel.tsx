@@ -137,16 +137,25 @@ function SegmentWedge({
         clipPath: annularWedgeClipPath(index),
         transform: `translate(${pop.x}%, ${pop.y}%)`,
       }}
-      role="button"
+      role={segment.url ? "link" : "button"}
       tabIndex={0}
-      aria-label={segment.name}
+      aria-label={segment.url ? `${segment.name} (opens in new tab)` : segment.name}
       onMouseEnter={onActivate}
       onFocus={onActivate}
       onBlur={onDeactivate}
+      onClick={() => {
+        if (segment.url) {
+          window.open(segment.url, "_blank", "noopener,noreferrer");
+        }
+      }}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onActivate();
+          if (segment.url) {
+            window.open(segment.url, "_blank", "noopener,noreferrer");
+          } else {
+            onActivate();
+          }
         }
       }}
     >

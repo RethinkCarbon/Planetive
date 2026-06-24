@@ -16,6 +16,8 @@ export type EcosystemWheelSegment = {
   description: string;
   icon: EcosystemWheelIcon;
   color: string;
+  /** Opens in a new tab when the segment is clicked. */
+  url?: string;
 };
 
 /** Clockwise from top — matches brand ecosystem wheel artwork. */
@@ -27,6 +29,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     description: "ESG and Sustainability Management Solution for enterprises.",
     icon: "bar-chart",
     color: "#1a4d3a",
+    url: "https://www.rethinkcarbon.io",
   },
   {
     id: "digital-mrv",
