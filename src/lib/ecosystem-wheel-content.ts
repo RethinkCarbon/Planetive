@@ -1,20 +1,20 @@
-export type EcosystemWheelIcon =
-  | "bar-chart"
-  | "shield-check"
-  | "wheat"
-  | "line-chart"
-  | "truck"
-  | "users"
-  | "bot"
-  | "compass"
-  | "hammer";
+export type EcosystemWheelShape =
+  | "circle"
+  | "crescent"
+  | "square"
+  | "chevron"
+  | "ring"
+  | "wave"
+  | "triangle"
+  | "house"
+  | "diamond";
 
 export type EcosystemWheelSegment = {
   id: string;
   name: string;
   lines: string[];
   description: string;
-  icon: EcosystemWheelIcon;
+  shape: EcosystemWheelShape;
   color: string;
   /** Opens in a new tab when the segment is clicked. */
   url?: string;
@@ -27,7 +27,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     name: "Rethink Carbon",
     lines: ["Rethink", "Carbon"],
     description: "ESG and Sustainability Management Solution for enterprises.",
-    icon: "bar-chart",
+    shape: "circle",
     color: "#1a4d3a",
     url: "https://www.rethinkcarbon.io",
   },
@@ -37,7 +37,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     lines: ["Digital MRV", "Platforms"],
     description:
       "Digitized Validation & verification for Energy Transition and Decarbonization Systems.",
-    icon: "shield-check",
+    shape: "crescent",
     color: "#1e5340",
   },
   {
@@ -46,7 +46,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     lines: ["Agri Tech", "Solutions"],
     description:
       "Automated Modern Farming Solutions and remote monitoring for Farms and Agri-service companies.",
-    icon: "wheat",
+    shape: "square",
     color: "#244c42",
   },
   {
@@ -54,7 +54,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     name: "Energy Sector Intelligence Platform",
     lines: ["Energy Sector", "Intelligence", "Platform"],
     description: "AI Powered Integrated Energy sector Global Financial Ecosystem.",
-    icon: "line-chart",
+    shape: "chevron",
     color: "#2a6250",
   },
   {
@@ -62,7 +62,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     name: "Green Supply Chain",
     lines: ["Green Supply", "Chain"],
     description: "Marketplace for decarbonized supply chains.",
-    icon: "truck",
+    shape: "ring",
     color: "#3d8b63",
   },
   {
@@ -71,7 +71,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     lines: ["Energy", "Transition", "Workforce"],
     description:
       "Skilled workforce powering the clean energy transition — tech, projects, and operations.",
-    icon: "users",
+    shape: "wave",
     color: "#2f6e50",
   },
   {
@@ -80,7 +80,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     lines: ["In-house", "Agents"],
     description:
       "Eco System of Opportunity Tracking, Partnership management, Financial Modelling Suite and HR Agents.",
-    icon: "bot",
+    shape: "triangle",
     color: "#2a6650",
   },
   {
@@ -88,7 +88,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     name: "Advisory House",
     lines: ["Advisory", "House"],
     description: "End to end advisory services from planning to implementation.",
-    icon: "compass",
+    shape: "house",
     color: "#1f4f3c",
   },
   {
@@ -97,7 +97,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     lines: ["Project", "Development"],
     description:
       "Designing and delivering high-impact Energy Transition and decarbonisation projects from concept to execution.",
-    icon: "hammer",
+    shape: "diamond",
     color: "#183b2f",
   },
 ];

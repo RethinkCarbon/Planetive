@@ -1,23 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  BarChart3,
-  Bot,
-  Compass,
-  Hammer,
-  LineChart,
-  ShieldCheck,
-  Truck,
-  Users,
-  Wheat,
-  type LucideIcon,
-} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import {
   ECOSYSTEM_WHEEL_SEGMENTS,
   WHEEL_COLORS,
-  type EcosystemWheelIcon,
+  type EcosystemWheelShape,
   type EcosystemWheelSegment,
 } from "@/lib/ecosystem-wheel-content";
 
@@ -29,7 +17,7 @@ const INNER_R = 92;
 const OUTER_RADIUS_FRAC = OUTER_R / CX;
 const INNER_RADIUS_FRAC = INNER_R / CX;
 const LABEL_RADIUS_PCT = ((INNER_R + OUTER_R) / 2 / CX) * 50;
-const ICON_RADIUS_PCT = ((INNER_R + (OUTER_R - INNER_R) * 0.82) / CX) * 50;
+const SHAPE_CORNER_RADIUS_FRAC = OUTER_RADIUS_FRAC * 0.91;
 const CENTER_SIZE_PCT = (CENTER_R / CX) * 100;
 const SEGMENT_COUNT = ECOSYSTEM_WHEEL_SEGMENTS.length;
 const SEGMENT_ANGLE = 360 / SEGMENT_COUNT;
@@ -47,6 +35,23 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 
 function segmentMidAngle(index: number) {
   return ROTATION_OFFSET + index * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
+}
+
+/** Upper outer corner of each wedge — nudged toward the rim peak on the top side of the slice. */
+function segmentShapeCornerPercent(index: number) {
+  const startAngle = ROTATION_OFFSET + index * SEGMENT_ANGLE;
+  const endAngle = ROTATION_OFFSET + (index + 1) * SEGMENT_ANGLE;
+  const startRad = ((startAngle - 90) * Math.PI) / 180;
+  const endRad = ((endAngle - 90) * Math.PI) / 180;
+  const upperCornerAngle =
+    Math.sin(startRad) <= Math.sin(endRad) ? startAngle : endAngle;
+  const midAngle = segmentMidAngle(index);
+  const angle = upperCornerAngle + (midAngle - upperCornerAngle) * 0.28;
+  const rad = ((angle - 90) * Math.PI) / 180;
+  return {
+    x: 50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.cos(rad),
+    y: 50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.sin(rad),
+  };
 }
 
 function pointToPercent(angleDeg: number, radiusFrac: number) {
@@ -81,27 +86,63 @@ function popTranslatePercent(midDeg: number) {
   };
 }
 
-const WHEEL_ICONS: Record<EcosystemWheelIcon, LucideIcon> = {
-  "bar-chart": BarChart3,
-  "shield-check": ShieldCheck,
-  wheat: Wheat,
-  "line-chart": LineChart,
-  truck: Truck,
-  users: Users,
-  bot: Bot,
-  compass: Compass,
-  hammer: Hammer,
-};
-
-function SegmentIcon({ icon }: { icon: EcosystemWheelIcon }) {
-  const Icon = WHEEL_ICONS[icon];
+function SegmentShape({ shape }: { shape: EcosystemWheelShape }) {
   return (
-    <Icon
-      className="shrink-0 text-white"
-      size={18}
-      strokeWidth={2}
+    <svg
+      viewBox="0 0 16 16"
+      className="h-[18px] w-[18px] shrink-0 text-white sm:h-5 sm:w-5"
       aria-hidden
-    />
+    >
+      {shape === "circle" && <circle cx="8" cy="8" r="3.75" fill="currentColor" />}
+      {shape === "square" && <rect x="4.25" y="4.25" width="7.5" height="7.5" fill="currentColor" />}
+      {shape === "diamond" && (
+        <polygon points="8,2.5 13.5,8 8,13.5 2.5,8" fill="currentColor" />
+      )}
+      {shape === "triangle" && (
+        <polygon points="8,3 13.5,13 2.5,13" fill="currentColor" />
+      )}
+      {shape === "house" && (
+        <polygon points="8,2.5 13.5,7.5 13.5,13.5 2.5,13.5 2.5,7.5" fill="currentColor" />
+      )}
+      {shape === "chevron" && (
+        <path
+          d="M5.5 3.5 L10.5 8 L5.5 12.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      )}
+      {shape === "crescent" && (
+        <path
+          d="M9.25 3.25 C5.75 4.25 4.25 7.25 4.75 10.25 C5.25 12.75 7.5 13.75 10.25 12.75 C7.25 13.25 5.25 11.25 5.25 8.25 C5.25 5.75 6.75 3.75 9.25 3.25 Z"
+          fill="currentColor"
+        />
+      )}
+      {shape === "ring" && (
+        <>
+          <circle
+            cx="8"
+            cy="8"
+            r="4.25"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <circle cx="8" cy="8" r="1.1" fill="currentColor" />
+        </>
+      )}
+      {shape === "wave" && (
+        <path
+          d="M2.25 8.75 C3.75 6.25 5.25 6.25 6.75 8.75 C8.25 11.25 9.75 11.25 11.25 8.75 C12 7.5 12.75 7.25 13.75 8.75"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      )}
+    </svg>
   );
 }
 
@@ -124,11 +165,9 @@ function SegmentWedge({
   const pop = isHovered ? popTranslatePercent(mid) : { x: 0, y: 0 };
   const labelOffset = segmentMidAngle(index);
   const labelRad = ((labelOffset - 90) * Math.PI) / 180;
-  const iconRad = ((labelOffset - 90) * Math.PI) / 180;
   const labelX = 50 + Math.cos(labelRad) * LABEL_RADIUS_PCT;
   const labelY = 50 + Math.sin(labelRad) * LABEL_RADIUS_PCT;
-  const iconX = 50 + Math.cos(iconRad) * ICON_RADIUS_PCT;
-  const iconY = 50 + Math.sin(iconRad) * ICON_RADIUS_PCT;
+  const shapeCorner = segmentShapeCornerPercent(index);
 
   return (
     <div
@@ -167,12 +206,12 @@ function SegmentWedge({
           <div
             className="absolute"
             style={{
-              left: `${iconX}%`,
-              top: `${iconY}%`,
+              left: `${shapeCorner.x}%`,
+              top: `${shapeCorner.y}%`,
               transform: `translate(-50%, -50%) rotate(${-wheelDeg}deg)`,
             }}
           >
-            <SegmentIcon icon={segment.icon} />
+            <SegmentShape shape={segment.shape} />
           </div>
           <div
             className="absolute flex flex-col items-center gap-0.5 px-2"
