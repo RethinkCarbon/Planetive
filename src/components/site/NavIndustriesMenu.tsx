@@ -145,7 +145,7 @@ export function NavIndustriesMenu({
           id={menuId}
           role="menu"
           className={cn(
-            "absolute left-0 top-full z-50 mt-2 min-w-[12.5rem]",
+            "absolute left-0 top-full z-50 mt-2 min-w-[12.5rem] max-h-[min(70vh,22rem)] overflow-y-auto",
             menuPanelClass,
           )}
         >

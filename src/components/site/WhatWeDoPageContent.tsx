@@ -46,11 +46,7 @@ function WhatWeDoHero() {
 
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-12 md:pb-16">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-3 py-1 text-xs font-medium text-forest">
-            <span className="h-1.5 w-1.5 rounded-full bg-mint" aria-hidden />
-            {WHAT_WE_DO_HERO.subtitle}
-          </span>
-          <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.25rem)] text-forest leading-[1.02]">
+          <h1 className="font-display text-[clamp(2.5rem,6vw,4.25rem)] text-forest leading-[1.02]">
             {WHAT_WE_DO_HERO.title}
           </h1>
           <p className="mt-5 max-w-2xl text-base md:text-lg text-n600 leading-relaxed">

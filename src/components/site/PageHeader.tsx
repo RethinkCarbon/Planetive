@@ -1,9 +1,8 @@
 export function PageHeader({
-  eyebrow,
   title,
   description,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
 }) {
@@ -24,10 +23,7 @@ export function PageHeader({
         <circle cx="100" cy="100" r="40" stroke="currentColor" strokeWidth="0.5" />
       </svg>
       <div className="container-x relative">
-        <span className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium bg-white/70 text-forest border border-white">
-          <span className="h-1.5 w-1.5 rounded-full bg-mint" /> {eyebrow}
-        </span>
-        <h1 className="mt-5 font-display text-[clamp(2.4rem,5vw,4.5rem)] text-forest max-w-3xl">
+        <h1 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] text-forest max-w-3xl">
           {title}
         </h1>
         {description && (

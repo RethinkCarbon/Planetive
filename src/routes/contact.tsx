@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { PageHeader } from "@/components/site/PageHeader";
+import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { Mail, MapPin, Send } from "lucide-react";
 import { useSiteForm } from "@/hooks/use-site-form";
 
@@ -36,8 +38,24 @@ function ContactPage() {
         description="Tell us where you are. We'll show you what comes next — diagnosis, implementation, and the systems to sustain it."
       />
 
+      <BookMeetingSection />
+
       <section className="py-16 md:py-24">
-        <div className="container-x grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="container-x">
+          <ScrollReveal className="max-w-2xl mb-10 md:mb-12">
+            <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
+              Or send a message
+            </span>
+            <h2 className="mt-3 font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
+              We&apos;ll get back to you
+            </h2>
+            <p className="mt-3 text-sm md:text-base text-n600 leading-relaxed">
+              Share context on your organisation and goals — we typically respond within two
+              business days.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="rounded-[32px] bg-white border border-n200 p-8 md:p-10 shadow-[var(--shadow-soft)]">
             <form
               className="space-y-5"
@@ -173,6 +191,7 @@ function ContactPage() {
               <p className="mt-3 text-sm text-n600">— Ernest Hemingway</p>
             </div>
           </div>
+        </div>
         </div>
       </section>
 

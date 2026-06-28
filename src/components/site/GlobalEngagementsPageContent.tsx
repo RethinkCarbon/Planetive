@@ -217,11 +217,7 @@ function GlobalEngagementsHero({ count }: { count: number }) {
 
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide bg-white/12 text-mint-soft border border-white/20 backdrop-blur-sm">
-            <Globe2 size={14} aria-hidden />
-            {GLOBAL_ENGAGEMENTS_HERO.eyebrow}
-          </span>
-          <h1 className="mt-6 font-display text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.04]">
+          <h1 className="font-display text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.04]">
             {GLOBAL_ENGAGEMENTS_HERO.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">

@@ -51,10 +51,7 @@ function AboutHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
-            {ABOUT_INTRO.eyebrow}
-          </p>
-          <h1 className="mt-4 font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
+          <h1 className="font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
             {ABOUT_INTRO.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">

@@ -39,10 +39,7 @@ export function WhatWeDoPillarPageContent({ pillar }: WhatWeDoPillarPageContentP
               <ArrowLeft size={16} aria-hidden />
               What we do
             </Link>
-            <p className="mt-8 font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
-              {pillar.shortLabel}
-            </p>
-            <h1 className="mt-3 font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+            <h1 className="mt-8 font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
               {pillar.title}
             </h1>
             <p className="mt-3 text-lg md:text-xl text-mint-soft/95">{pillar.tagline}</p>

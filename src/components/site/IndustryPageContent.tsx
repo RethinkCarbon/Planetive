@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   INDUSTRIES,
@@ -65,17 +65,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
         />
         <div className="container-x relative z-10 pt-40 md:pt-48 pb-20 md:pb-28">
           <ScrollReveal variant="fade-up" className="max-w-3xl flex flex-col items-start">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-mint-soft hover:text-white transition-colors"
-            >
-              <ArrowLeft size={16} aria-hidden />
-              Home
-            </Link>
-            <p className="mt-8 font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
-              Industries
-            </p>
-            <h1 className="mt-3 font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+            <h1 className="font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
               {industry.title}
             </h1>
             <p className="mt-3 text-lg md:text-xl text-mint-soft/95">{industry.tagline}</p>

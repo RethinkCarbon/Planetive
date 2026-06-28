@@ -624,12 +624,11 @@ export function FinalCTASection() {
 
 /* ----------------------------- Section Header --------------------------- */
 export function SectionHeader({
-  eyebrow,
   title,
   description,
   align = "center",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   align?: "center" | "left";
@@ -638,11 +637,7 @@ export function SectionHeader({
     <ScrollReveal
       className={align === "center" ? "max-w-2xl mx-auto text-center" : "max-w-2xl"}
     >
-      <span className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium bg-mint-soft text-forest">
-        <span className="h-1.5 w-1.5 rounded-full bg-mint" />
-        {eyebrow}
-      </span>
-      <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.25rem)] text-forest">
+      <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-forest">
         {title}
       </h2>
       {description && (

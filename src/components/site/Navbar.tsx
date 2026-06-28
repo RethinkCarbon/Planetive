@@ -1,21 +1,66 @@
-import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
-import { NavWhatWeDoMenu } from "@/components/site/NavWhatWeDoMenu";
-import { NavIndustriesMenu } from "@/components/site/NavIndustriesMenu";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
+import { NavAnimatedPanel } from "@/components/site/nav/NavAnimatedPanel";
+import {
+  ConsultingDropdownPanel,
+  NavConsultingMenu,
+} from "@/components/site/nav/NavConsultingMenu";
+import {
+  EcosystemDropdownPanel,
+  NavEcosystemMenu,
+} from "@/components/site/nav/NavEcosystemMenu";
+import {
+  InsightsDropdownPanel,
+  NavInsightsMenu,
+} from "@/components/site/nav/NavInsightsMenu";
+import {
+  NavSolutionsMenu,
+  SolutionsMegaPanel,
+  SolutionsNavTrigger,
+} from "@/components/site/nav/NavSolutionsMenu";
+import { ConsultingNavTrigger } from "@/components/site/nav/NavConsultingMenu";
+import { EcosystemNavTrigger } from "@/components/site/nav/NavEcosystemMenu";
+import { InsightsNavTrigger } from "@/components/site/nav/NavInsightsMenu";
+import { useNavHoverMenu } from "@/components/site/nav/useNavHoverMenu";
+import type { NavMenuId } from "@/lib/site-nav-content";
 
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/impact", label: "Impact" },
-  { to: "/global-engagements", label: "Global Engagements" },
-  { to: "/blog", label: "Blog" },
-  { to: "/about-us", label: "About Us" },
-] as const;
+function NavDropdownItem({
+  isOpen,
+  hoverHandlers,
+  onClose,
+  menu,
+  trigger,
+  panel,
+  panelClassName,
+}: {
+  menu: NavMenuId;
+  isOpen: boolean;
+  hoverHandlers: ReturnType<typeof useNavHoverMenu>["hoverHandlers"];
+  onClose: () => void;
+  trigger: ReactNode;
+  panel: ReactNode;
+  panelClassName: string;
+}) {
+  const handlers = hoverHandlers(menu);
+
+  return (
+    <li className="relative">
+      <div {...handlers}>{trigger}</div>
+      <NavAnimatedPanel show={isOpen} className={panelClassName} {...handlers}>
+        {panel}
+      </NavAnimatedPanel>
+    </li>
+  );
+}
 
 export function Navbar({ variant = "transparent" }: { variant?: "transparent" | "solid" }) {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { openMenu, close, hoverHandlers } = useNavHoverMenu();
+  const headerRef = useRef<HTMLElement>(null);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -42,16 +87,28 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
     };
   }, []);
 
+  useEffect(() => {
+    close();
+    setMobileOpen(false);
+  }, [pathname, close]);
+
+  useEffect(() => {
+    if (!openMenu) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [openMenu, close]);
+
   const isSolid = variant === "solid" || scrolled;
-  const linkClass = (extra?: string) =>
-    `px-3 py-2 rounded-full text-sm font-medium font-heading transition-colors ${
-      isSolid
-        ? "text-n800 hover:bg-n100"
-        : "text-white/90 hover:text-white hover:bg-white/10"
-    } ${extra ?? ""}`;
+  const solutionsHover = hoverHandlers("solutions");
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         variant === "transparent" ? "hero-enter" : ""
       } ${isSolid ? "py-2" : "py-4"}`}
@@ -66,40 +123,48 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
             <PlanetiveLogo onDark={!isSolid} zoom />
           </Link>
 
-          <ul className="hidden lg:flex items-center gap-1">
-            <li>
-              <Link
-                to="/"
-                className={linkClass()}
-                activeProps={{
-                  className: linkClass(isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white"),
-                }}
-                activeOptions={{ exact: true }}
-              >
-                Home
-              </Link>
+          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+            <li className="relative">
+              <div {...solutionsHover}>
+                <SolutionsNavTrigger isSolid={isSolid} isOpen={openMenu === "solutions"} />
+              </div>
             </li>
-            <li>
-              <NavWhatWeDoMenu isSolid={isSolid} />
-            </li>
-            <li>
-              <NavIndustriesMenu isSolid={isSolid} />
-            </li>
-            {links.slice(1).map((l) => (
-              <li key={l.to}>
-                <Link
-                  to={l.to}
-                  className={linkClass()}
-                  activeProps={{
-                    className: linkClass(
-                      isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white",
-                    ),
-                  }}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+
+            <NavDropdownItem
+              menu="consulting"
+              isOpen={openMenu === "consulting"}
+              hoverHandlers={hoverHandlers}
+              onClose={close}
+              trigger={
+                <ConsultingNavTrigger isSolid={isSolid} isOpen={openMenu === "consulting"} />
+              }
+              panel={<ConsultingDropdownPanel onClose={close} />}
+              panelClassName="absolute left-1/2 top-full z-[60] w-max -translate-x-1/2 pt-2"
+            />
+
+            <NavDropdownItem
+              menu="ecosystem"
+              isOpen={openMenu === "ecosystem"}
+              hoverHandlers={hoverHandlers}
+              onClose={close}
+              trigger={
+                <EcosystemNavTrigger isSolid={isSolid} isOpen={openMenu === "ecosystem"} />
+              }
+              panel={<EcosystemDropdownPanel onClose={close} />}
+              panelClassName="absolute left-1/2 top-full z-[60] w-max -translate-x-1/2 pt-2"
+            />
+
+            <NavDropdownItem
+              menu="insights"
+              isOpen={openMenu === "insights"}
+              hoverHandlers={hoverHandlers}
+              onClose={close}
+              trigger={
+                <InsightsNavTrigger isSolid={isSolid} isOpen={openMenu === "insights"} />
+              }
+              panel={<InsightsDropdownPanel onClose={close} />}
+              panelClassName="absolute right-0 top-full z-[60] w-max pt-2"
+            />
           </ul>
 
           <div className="flex items-center gap-2">
@@ -111,56 +176,57 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
             </Link>
             <button
               aria-label="Toggle menu"
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => {
+                close();
+                setMobileOpen((open) => !open);
+              }}
               className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full ${
                 isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white"
               }`}
             >
-              {open ? <X size={18} /> : <Menu size={18} />}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </nav>
 
-        {open && (
+        {mobileOpen ? (
           <div
             data-site-mobile-nav
             className="lg:hidden mt-2 glass rounded-3xl p-4 shadow-[var(--shadow-soft)] max-h-[min(85vh,32rem)] overflow-y-auto"
           >
             <ul className="flex flex-col">
-              <li>
-                <Link
-                  to="/"
-                  onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 rounded-xl text-sm font-medium font-heading text-n800 hover:bg-n100"
-                >
-                  Home
-                </Link>
-              </li>
-              <NavWhatWeDoMenu
+              <NavSolutionsMenu
                 variant="list"
                 isSolid
-                onNavigate={() => setOpen(false)}
+                isOpen={false}
+                onToggle={() => {}}
+                onClose={() => setMobileOpen(false)}
               />
-              <NavIndustriesMenu
+              <NavConsultingMenu
                 variant="list"
                 isSolid
-                onNavigate={() => setOpen(false)}
+                isOpen={false}
+                onToggle={() => {}}
+                onClose={() => setMobileOpen(false)}
               />
-              {links.slice(1).map((l) => (
-                <li key={l.to}>
-                  <Link
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className="block px-3 py-2.5 rounded-xl text-sm font-medium font-heading text-n800 hover:bg-n100"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              <NavEcosystemMenu
+                variant="list"
+                isSolid
+                isOpen={false}
+                onToggle={() => {}}
+                onClose={() => setMobileOpen(false)}
+              />
+              <NavInsightsMenu
+                variant="list"
+                isSolid
+                isOpen={false}
+                onToggle={() => {}}
+                onClose={() => setMobileOpen(false)}
+              />
               <li className="mt-2">
                 <Link
                   to="/work-with-us"
-                  onClick={() => setOpen(false)}
+                  onClick={() => setMobileOpen(false)}
                   className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold font-heading btn-primary"
                 >
                   Work With Us
@@ -168,8 +234,21 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
               </li>
             </ul>
           </div>
-        )}
+        ) : null}
       </div>
+
+      {openMenu === "solutions" ? (
+        <div
+          className="hidden lg:block absolute inset-x-0 top-full -mt-2 pt-3"
+          {...solutionsHover}
+        >
+          <NavAnimatedPanel show className="pt-2">
+            <div className="container-x">
+              <SolutionsMegaPanel onClose={close} />
+            </div>
+          </NavAnimatedPanel>
+        </div>
+      ) : null}
     </header>
   );
 }

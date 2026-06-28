@@ -13,6 +13,7 @@ import { Route as WorkWithUsRouteImport } from './routes/work-with-us'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GlobalEngagementsRouteImport } from './routes/global-engagements'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultingRouteImport } from './routes/consulting'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -20,6 +21,14 @@ import { Route as WhatWeDoIndexRouteImport } from './routes/what-we-do/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as WhatWeDoSlugRouteImport } from './routes/what-we-do/$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries/$slug'
+import { Route as EcosystemRethinkCarbonRouteImport } from './routes/ecosystem/rethink-carbon'
+import { Route as EcosystemProjectDevelopmentRouteImport } from './routes/ecosystem/project-development'
+import { Route as EcosystemInHouseAgentsRouteImport } from './routes/ecosystem/in-house-agents'
+import { Route as EcosystemEnergyTransitionWorkforceRouteImport } from './routes/ecosystem/energy-transition-workforce'
+import { Route as EcosystemEnergySectorIntelligenceRouteImport } from './routes/ecosystem/energy-sector-intelligence'
+import { Route as EcosystemDigitalMrvPlatformsRouteImport } from './routes/ecosystem/digital-mrv-platforms'
+import { Route as EcosystemAgriTechSolutionsRouteImport } from './routes/ecosystem/agri-tech-solutions'
+import { Route as EcosystemAdvisoryHouseRouteImport } from './routes/ecosystem/advisory-house'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const WorkWithUsRoute = WorkWithUsRouteImport.update({
@@ -40,6 +49,11 @@ const GlobalEngagementsRoute = GlobalEngagementsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultingRoute = ConsultingRouteImport.update({
+  id: '/consulting',
+  path: '/consulting',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutUsRoute = AboutUsRouteImport.update({
@@ -77,6 +91,51 @@ const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
   path: '/industries/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EcosystemRethinkCarbonRoute = EcosystemRethinkCarbonRouteImport.update({
+  id: '/ecosystem/rethink-carbon',
+  path: '/ecosystem/rethink-carbon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EcosystemProjectDevelopmentRoute =
+  EcosystemProjectDevelopmentRouteImport.update({
+    id: '/ecosystem/project-development',
+    path: '/ecosystem/project-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EcosystemInHouseAgentsRoute = EcosystemInHouseAgentsRouteImport.update({
+  id: '/ecosystem/in-house-agents',
+  path: '/ecosystem/in-house-agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EcosystemEnergyTransitionWorkforceRoute =
+  EcosystemEnergyTransitionWorkforceRouteImport.update({
+    id: '/ecosystem/energy-transition-workforce',
+    path: '/ecosystem/energy-transition-workforce',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EcosystemEnergySectorIntelligenceRoute =
+  EcosystemEnergySectorIntelligenceRouteImport.update({
+    id: '/ecosystem/energy-sector-intelligence',
+    path: '/ecosystem/energy-sector-intelligence',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EcosystemDigitalMrvPlatformsRoute =
+  EcosystemDigitalMrvPlatformsRouteImport.update({
+    id: '/ecosystem/digital-mrv-platforms',
+    path: '/ecosystem/digital-mrv-platforms',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EcosystemAgriTechSolutionsRoute =
+  EcosystemAgriTechSolutionsRouteImport.update({
+    id: '/ecosystem/agri-tech-solutions',
+    path: '/ecosystem/agri-tech-solutions',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EcosystemAdvisoryHouseRoute = EcosystemAdvisoryHouseRouteImport.update({
+  id: '/ecosystem/advisory-house',
+  path: '/ecosystem/advisory-house',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -87,11 +146,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteRouteWithChildren
   '/about-us': typeof AboutUsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
+  '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
+  '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
+  '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
+  '/ecosystem/in-house-agents': typeof EcosystemInHouseAgentsRoute
+  '/ecosystem/project-development': typeof EcosystemProjectDevelopmentRoute
+  '/ecosystem/rethink-carbon': typeof EcosystemRethinkCarbonRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/what-we-do/$slug': typeof WhatWeDoSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -100,11 +168,20 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
+  '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
+  '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
+  '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
+  '/ecosystem/in-house-agents': typeof EcosystemInHouseAgentsRoute
+  '/ecosystem/project-development': typeof EcosystemProjectDevelopmentRoute
+  '/ecosystem/rethink-carbon': typeof EcosystemRethinkCarbonRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/what-we-do/$slug': typeof WhatWeDoSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -115,11 +192,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteRouteWithChildren
   '/about-us': typeof AboutUsRoute
+  '/consulting': typeof ConsultingRoute
   '/contact': typeof ContactRoute
   '/global-engagements': typeof GlobalEngagementsRoute
   '/impact': typeof ImpactRoute
   '/work-with-us': typeof WorkWithUsRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
+  '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
+  '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
+  '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
+  '/ecosystem/in-house-agents': typeof EcosystemInHouseAgentsRoute
+  '/ecosystem/project-development': typeof EcosystemProjectDevelopmentRoute
+  '/ecosystem/rethink-carbon': typeof EcosystemRethinkCarbonRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/what-we-do/$slug': typeof WhatWeDoSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -131,11 +217,20 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/about-us'
+    | '/consulting'
     | '/contact'
     | '/global-engagements'
     | '/impact'
     | '/work-with-us'
     | '/blog/$slug'
+    | '/ecosystem/advisory-house'
+    | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv-platforms'
+    | '/ecosystem/energy-sector-intelligence'
+    | '/ecosystem/energy-transition-workforce'
+    | '/ecosystem/in-house-agents'
+    | '/ecosystem/project-development'
+    | '/ecosystem/rethink-carbon'
     | '/industries/$slug'
     | '/what-we-do/$slug'
     | '/blog/'
@@ -144,11 +239,20 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about-us'
+    | '/consulting'
     | '/contact'
     | '/global-engagements'
     | '/impact'
     | '/work-with-us'
     | '/blog/$slug'
+    | '/ecosystem/advisory-house'
+    | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv-platforms'
+    | '/ecosystem/energy-sector-intelligence'
+    | '/ecosystem/energy-transition-workforce'
+    | '/ecosystem/in-house-agents'
+    | '/ecosystem/project-development'
+    | '/ecosystem/rethink-carbon'
     | '/industries/$slug'
     | '/what-we-do/$slug'
     | '/blog'
@@ -158,11 +262,20 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/about-us'
+    | '/consulting'
     | '/contact'
     | '/global-engagements'
     | '/impact'
     | '/work-with-us'
     | '/blog/$slug'
+    | '/ecosystem/advisory-house'
+    | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv-platforms'
+    | '/ecosystem/energy-sector-intelligence'
+    | '/ecosystem/energy-transition-workforce'
+    | '/ecosystem/in-house-agents'
+    | '/ecosystem/project-development'
+    | '/ecosystem/rethink-carbon'
     | '/industries/$slug'
     | '/what-we-do/$slug'
     | '/blog/'
@@ -173,10 +286,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRouteRoute: typeof BlogRouteRouteWithChildren
   AboutUsRoute: typeof AboutUsRoute
+  ConsultingRoute: typeof ConsultingRoute
   ContactRoute: typeof ContactRoute
   GlobalEngagementsRoute: typeof GlobalEngagementsRoute
   ImpactRoute: typeof ImpactRoute
   WorkWithUsRoute: typeof WorkWithUsRoute
+  EcosystemAdvisoryHouseRoute: typeof EcosystemAdvisoryHouseRoute
+  EcosystemAgriTechSolutionsRoute: typeof EcosystemAgriTechSolutionsRoute
+  EcosystemDigitalMrvPlatformsRoute: typeof EcosystemDigitalMrvPlatformsRoute
+  EcosystemEnergySectorIntelligenceRoute: typeof EcosystemEnergySectorIntelligenceRoute
+  EcosystemEnergyTransitionWorkforceRoute: typeof EcosystemEnergyTransitionWorkforceRoute
+  EcosystemInHouseAgentsRoute: typeof EcosystemInHouseAgentsRoute
+  EcosystemProjectDevelopmentRoute: typeof EcosystemProjectDevelopmentRoute
+  EcosystemRethinkCarbonRoute: typeof EcosystemRethinkCarbonRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   WhatWeDoSlugRoute: typeof WhatWeDoSlugRoute
   WhatWeDoIndexRoute: typeof WhatWeDoIndexRoute
@@ -210,6 +332,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consulting': {
+      id: '/consulting'
+      path: '/consulting'
+      fullPath: '/consulting'
+      preLoaderRoute: typeof ConsultingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about-us': {
@@ -261,6 +390,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ecosystem/rethink-carbon': {
+      id: '/ecosystem/rethink-carbon'
+      path: '/ecosystem/rethink-carbon'
+      fullPath: '/ecosystem/rethink-carbon'
+      preLoaderRoute: typeof EcosystemRethinkCarbonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/project-development': {
+      id: '/ecosystem/project-development'
+      path: '/ecosystem/project-development'
+      fullPath: '/ecosystem/project-development'
+      preLoaderRoute: typeof EcosystemProjectDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/in-house-agents': {
+      id: '/ecosystem/in-house-agents'
+      path: '/ecosystem/in-house-agents'
+      fullPath: '/ecosystem/in-house-agents'
+      preLoaderRoute: typeof EcosystemInHouseAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/energy-transition-workforce': {
+      id: '/ecosystem/energy-transition-workforce'
+      path: '/ecosystem/energy-transition-workforce'
+      fullPath: '/ecosystem/energy-transition-workforce'
+      preLoaderRoute: typeof EcosystemEnergyTransitionWorkforceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/energy-sector-intelligence': {
+      id: '/ecosystem/energy-sector-intelligence'
+      path: '/ecosystem/energy-sector-intelligence'
+      fullPath: '/ecosystem/energy-sector-intelligence'
+      preLoaderRoute: typeof EcosystemEnergySectorIntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/digital-mrv-platforms': {
+      id: '/ecosystem/digital-mrv-platforms'
+      path: '/ecosystem/digital-mrv-platforms'
+      fullPath: '/ecosystem/digital-mrv-platforms'
+      preLoaderRoute: typeof EcosystemDigitalMrvPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/agri-tech-solutions': {
+      id: '/ecosystem/agri-tech-solutions'
+      path: '/ecosystem/agri-tech-solutions'
+      fullPath: '/ecosystem/agri-tech-solutions'
+      preLoaderRoute: typeof EcosystemAgriTechSolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecosystem/advisory-house': {
+      id: '/ecosystem/advisory-house'
+      path: '/ecosystem/advisory-house'
+      fullPath: '/ecosystem/advisory-house'
+      preLoaderRoute: typeof EcosystemAdvisoryHouseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -289,10 +474,21 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRouteRoute: BlogRouteRouteWithChildren,
   AboutUsRoute: AboutUsRoute,
+  ConsultingRoute: ConsultingRoute,
   ContactRoute: ContactRoute,
   GlobalEngagementsRoute: GlobalEngagementsRoute,
   ImpactRoute: ImpactRoute,
   WorkWithUsRoute: WorkWithUsRoute,
+  EcosystemAdvisoryHouseRoute: EcosystemAdvisoryHouseRoute,
+  EcosystemAgriTechSolutionsRoute: EcosystemAgriTechSolutionsRoute,
+  EcosystemDigitalMrvPlatformsRoute: EcosystemDigitalMrvPlatformsRoute,
+  EcosystemEnergySectorIntelligenceRoute:
+    EcosystemEnergySectorIntelligenceRoute,
+  EcosystemEnergyTransitionWorkforceRoute:
+    EcosystemEnergyTransitionWorkforceRoute,
+  EcosystemInHouseAgentsRoute: EcosystemInHouseAgentsRoute,
+  EcosystemProjectDevelopmentRoute: EcosystemProjectDevelopmentRoute,
+  EcosystemRethinkCarbonRoute: EcosystemRethinkCarbonRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
   WhatWeDoSlugRoute: WhatWeDoSlugRoute,
   WhatWeDoIndexRoute: WhatWeDoIndexRoute,

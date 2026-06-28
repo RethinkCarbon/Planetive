@@ -7,6 +7,7 @@ import {
   WORK_WITH_US_HERO,
   type EngagementProgramId,
 } from "@/lib/engagement-programs-content";
+import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { EngagementProgramsSection } from "@/components/site/EngagementProgramsSection";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { useSiteForm } from "@/hooks/use-site-form";
@@ -34,6 +35,7 @@ export function WorkWithUsPageContent() {
   return (
     <>
       <WorkWithUsHero />
+      <BookMeetingSection />
       <EngagementProgramsSection
         variant="full"
         onSelectProgram={(id) => {
@@ -66,10 +68,7 @@ function WorkWithUsHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
-            {WORK_WITH_US_HERO.eyebrow}
-          </p>
-          <p className="mt-4 text-sm font-semibold text-mint-soft/95">
+          <p className="text-sm font-semibold text-mint-soft/95">
             {WORK_WITH_US_HERO.subtitle}
           </p>
           <h1 className="mt-2 font-display text-[clamp(2.75rem,6.5vw,4.25rem)] leading-[1.02]">

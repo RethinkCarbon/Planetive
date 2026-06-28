@@ -47,11 +47,7 @@ function ImpactHero() {
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
           <ScrollReveal variant="fade-up" className="lg:col-span-7">
-            <span className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide bg-white/12 text-mint-soft border border-white/20 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-mint animate-pulse" />
-              Impact
-            </span>
-            <h1 className="mt-6 font-display text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[1.02]">
+            <h1 className="font-display text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[1.02]">
               Empowering
               <br />
               <em className="not-italic text-mint-soft">Sustainable</em> Future
@@ -107,9 +103,6 @@ function EnergyTransitionFeature() {
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-forest/70 via-forest/10 to-transparent lg:bg-gradient-to-r lg:from-forest/60 lg:via-transparent lg:to-transparent" />
-              <div className="absolute top-5 left-5 font-mono text-[11px] tracking-widest text-white/90 uppercase">
-                01 · Featured
-              </div>
               <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center justify-between gap-3">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-forest shadow-lg">
                   <Sun size={18} className="text-canopy" />

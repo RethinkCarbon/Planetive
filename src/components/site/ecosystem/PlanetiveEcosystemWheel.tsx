@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
@@ -151,15 +152,19 @@ function SegmentWedge({
   index,
   wheelDeg,
   isHovered,
+  isHighlighted,
   onActivate,
   onDeactivate,
+  onNavigate,
 }: {
   segment: EcosystemWheelSegment;
   index: number;
   wheelDeg: number;
   isHovered: boolean;
+  isHighlighted?: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
+  onNavigate: (segment: EcosystemWheelSegment) => void;
 }) {
   const mid = segmentMidAngle(index);
   const pop = isHovered ? popTranslatePercent(mid) : { x: 0, y: 0 };
@@ -169,29 +174,33 @@ function SegmentWedge({
   const labelY = 50 + Math.sin(labelRad) * LABEL_RADIUS_PCT;
   const shapeCorner = segmentShapeCornerPercent(index);
 
+  const isInteractive = Boolean(segment.route || segment.url);
+  const ariaNavigate =
+    segment.route ? `${segment.name} (opens page)` : segment.url ? `${segment.name} (opens in new tab)` : segment.name;
+
   return (
     <div
-      className={cn("ecosystem-segment-scene absolute inset-0 cursor-pointer outline-none", isHovered && "z-[15]")}
+      className={cn(
+        "ecosystem-segment-scene absolute inset-0 cursor-pointer outline-none",
+        (isHovered || isHighlighted) && "z-[15]",
+      )}
       style={{
         clipPath: annularWedgeClipPath(index),
         transform: `translate(${pop.x}%, ${pop.y}%)`,
       }}
-      role={segment.url ? "link" : "button"}
+      role={isInteractive ? "link" : "button"}
       tabIndex={0}
-      aria-label={segment.url ? `${segment.name} (opens in new tab)` : segment.name}
+      aria-label={ariaNavigate}
+      aria-current={isHighlighted ? "page" : undefined}
       onMouseEnter={onActivate}
       onFocus={onActivate}
       onBlur={onDeactivate}
-      onClick={() => {
-        if (segment.url) {
-          window.open(segment.url, "_blank", "noopener,noreferrer");
-        }
-      }}
+      onClick={() => onNavigate(segment)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          if (segment.url) {
-            window.open(segment.url, "_blank", "noopener,noreferrer");
+          if (isInteractive) {
+            onNavigate(segment);
           } else {
             onActivate();
           }
@@ -199,8 +208,11 @@ function SegmentWedge({
       }}
     >
       <div
-        className="ecosystem-segment-body absolute inset-0"
-        style={{ backgroundColor: isHovered ? WHEEL_COLORS.hover : segment.color }}
+        className={cn(
+          "ecosystem-segment-body absolute inset-0",
+          isHighlighted && !isHovered && "ring-2 ring-inset ring-white/70",
+        )}
+        style={{ backgroundColor: isHovered || isHighlighted ? WHEEL_COLORS.hover : segment.color }}
       >
         <div className={cn("ecosystem-segment-front-content", isHovered && "is-hidden")}>
           <div
@@ -306,7 +318,12 @@ function StaticCenter() {
   );
 }
 
-export function PlanetiveEcosystemWheel() {
+export function PlanetiveEcosystemWheel({
+  highlightSegmentId,
+}: {
+  highlightSegmentId?: string;
+} = {}) {
+  const navigate = useNavigate();
   const reducedMotion = usePrefersReducedMotion();
   const [wheelDeg, setWheelDeg] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -378,6 +395,23 @@ export function PlanetiveEcosystemWheel() {
     }, 0);
   };
 
+  const handleSegmentNavigate = useCallback(
+    (segment: EcosystemWheelSegment) => {
+      if (segment.route) {
+        navigate({ to: segment.route });
+        return;
+      }
+      if (segment.url) {
+        window.open(segment.url, "_blank", "noopener,noreferrer");
+      }
+    },
+    [navigate],
+  );
+
+  const highlightIndex = highlightSegmentId
+    ? ECOSYSTEM_WHEEL_SEGMENTS.findIndex((s) => s.id === highlightSegmentId)
+    : -1;
+
   return (
     <div
       ref={containerRef}
@@ -401,8 +435,10 @@ export function PlanetiveEcosystemWheel() {
                 index={index}
                 wheelDeg={wheelDeg}
                 isHovered={hoveredIndex === index}
+                isHighlighted={highlightIndex === index}
                 onActivate={() => activateSegment(index)}
                 onDeactivate={handleSegmentBlur}
+                onNavigate={handleSegmentNavigate}
               />
             ))}
           </div>

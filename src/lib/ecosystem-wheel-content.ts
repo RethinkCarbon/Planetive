@@ -16,6 +16,8 @@ export type EcosystemWheelSegment = {
   description: string;
   shape: EcosystemWheelShape;
   color: string;
+  /** In-app route when the segment is clicked. */
+  route?: string;
   /** Opens in a new tab when the segment is clicked. */
   url?: string;
 };
@@ -29,7 +31,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     description: "ESG and Sustainability Management Solution for enterprises.",
     shape: "circle",
     color: "#1a4d3a",
-    url: "https://www.rethinkcarbon.io",
+    route: "/ecosystem/rethink-carbon",
   },
   {
     id: "digital-mrv",
@@ -39,6 +41,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Digitized Validation & verification for Energy Transition and Decarbonization Systems.",
     shape: "crescent",
     color: "#1e5340",
+    route: "/ecosystem/digital-mrv-platforms",
   },
   {
     id: "agri-tech",
@@ -48,6 +51,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Automated Modern Farming Solutions and remote monitoring for Farms and Agri-service companies.",
     shape: "square",
     color: "#244c42",
+    route: "/ecosystem/agri-tech-solutions",
   },
   {
     id: "energy-intelligence",
@@ -56,6 +60,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     description: "AI Powered Integrated Energy sector Global Financial Ecosystem.",
     shape: "chevron",
     color: "#2a6250",
+    route: "/ecosystem/energy-sector-intelligence",
   },
   {
     id: "green-supply-chain",
@@ -73,6 +78,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Skilled workforce powering the clean energy transition — tech, projects, and operations.",
     shape: "wave",
     color: "#2f6e50",
+    route: "/ecosystem/energy-transition-workforce",
   },
   {
     id: "in-house-agents",
@@ -82,6 +88,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Eco System of Opportunity Tracking, Partnership management, Financial Modelling Suite and HR Agents.",
     shape: "triangle",
     color: "#2a6650",
+    route: "/ecosystem/in-house-agents",
   },
   {
     id: "advisory-house",
@@ -90,6 +97,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     description: "End to end advisory services from planning to implementation.",
     shape: "house",
     color: "#1f4f3c",
+    route: "/ecosystem/advisory-house",
   },
   {
     id: "project-development",
@@ -99,6 +107,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Designing and delivering high-impact Energy Transition and decarbonisation projects from concept to execution.",
     shape: "diamond",
     color: "#183b2f",
+    route: "/ecosystem/project-development",
   },
 ];
 

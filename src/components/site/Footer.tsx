@@ -47,7 +47,8 @@ export function Footer() {
             </h4>
             <ul className="mt-4 space-y-2 text-sm">
               {[
-                ["/what-we-do", "What We Do"],
+                ["/consulting", "Consulting"],
+                ["/what-we-do", "Ecosystem Overview"],
                 ["/impact", "Impact"],
                 ["/global-engagements", "Global Engagements"],
                 ["/blog", "Blog"],

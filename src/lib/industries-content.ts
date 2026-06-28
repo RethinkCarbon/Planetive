@@ -1,5 +1,13 @@
 import type { LucideIcon } from "lucide-react";
-import { Building2, Flame } from "lucide-react";
+import {
+  Building2,
+  Factory,
+  Flame,
+  Mountain,
+  Truck,
+  Wheat,
+  Zap,
+} from "lucide-react";
 
 /** Shared platform copy from rethinkcarbon.io */
 export const RETHINK_CARBON = {
@@ -64,7 +72,14 @@ export const RETHINK_CARBON = {
   ],
 } as const;
 
-export type IndustryId = "financial-institutions" | "oil-and-gas";
+export type IndustryId =
+  | "financial-institutions"
+  | "oil-and-gas"
+  | "textile-manufacturing"
+  | "agriculture"
+  | "power-utilities"
+  | "mining-metals"
+  | "transport-logistics";
 
 export type IndustryPage = {
   id: IndustryId;
@@ -179,6 +194,251 @@ export const INDUSTRIES: IndustryPage[] = [
       { value: "MRV", label: "Digitized assurance" },
       { value: "AI", label: "Rapid project evaluation" },
       { value: "Capital", label: "Optimized transition spend" },
+    ],
+  },
+  {
+    id: "textile-manufacturing",
+    title: "Textile & Manufacturing",
+    navLabel: "Textile & Manufacturing",
+    tagline: "Decarbonising production, supply chains, and industrial operations",
+    description:
+      "Manufacturers and textile groups need credible scope 1–3 pathways, efficiency gains, and ESG-ready reporting — supported by ReThink Carbon intelligence and Planetive implementation advisory.",
+    body: [
+      "Textile and manufacturing sectors face rising buyer requirements, border carbon adjustments, and energy cost volatility — while upgrading boilers, processes, renewables, and circular models across complex supplier networks.",
+      "Planetive helps industrial leaders evaluate abatement options, structure transition programs, and monitor performance with AI-assisted assessments and standardized reporting workflows.",
+    ],
+    icon: Factory,
+    accent: "#244c42",
+    accentSoft: "#3d8b63",
+    rethinkFocus: [
+      "Scope 1–3 hotspot analysis across plants, processes, and supplier tiers",
+      "Energy efficiency, fuel switching, and renewable integration scenario modeling",
+      "ESG healthchecks and disclosure alignment for buyers and regulators",
+      "Carbon credit and inset feasibility for hard-to-abate process emissions",
+      "Monitoring dashboards for intensity targets and science-based milestones",
+    ],
+    useCases: [
+      {
+        title: "Facility & process decarbonisation",
+        description:
+          "Prioritise boilers, cogeneration, electrification, and efficiency retrofits with rapid eligibility screening.",
+      },
+      {
+        title: "Supply chain emissions",
+        description:
+          "Map tiered supplier exposure and design engagement programs for measurable reductions.",
+      },
+      {
+        title: "Sustainable product lines",
+        description:
+          "Support low-carbon product claims and buyer questionnaires with consistent data layers.",
+      },
+      {
+        title: "Transition finance",
+        description:
+          "Build business cases for capex and green financing linked to verified abatement outcomes.",
+      },
+    ],
+    outcomes: [
+      { value: "Scope 3", label: "Supply chain visibility" },
+      { value: "Efficiency", label: "Process optimization" },
+      { value: "ESG", label: "Buyer-ready reporting" },
+    ],
+  },
+  {
+    id: "agriculture",
+    title: "Agriculture",
+    navLabel: "Agriculture",
+    tagline: "Climate-smart land use, resilience, and carbon programs",
+    description:
+      "Agribusiness, cooperatives, and food systems partners need rigorous MRV, nature-based solutions, and transition planning — from soil carbon to renewable energy across rural operations.",
+    body: [
+      "Agriculture sits at the intersection of food security, land use change, and nature-based climate solutions — with growing demand for credible carbon programs and sustainable sourcing.",
+      "Planetive supports feasibility, structuring, and monitoring of agricultural decarbonisation and carbon initiatives, combining field-level insight with ReThink Carbon assessment tools.",
+    ],
+    icon: Wheat,
+    accent: "#1f4f3c",
+    accentSoft: "#2f6e50",
+    rethinkFocus: [
+      "Nature-based and agricultural carbon project feasibility and structuring",
+      "Methane, fertilizer, and land-use emissions profiling across portfolios",
+      "Remote monitoring and MRV alignment for distributed farm assets",
+      "Agri-tech and renewable integration for diesel displacement",
+      "Reporting for buyers, standards bodies, and carbon market participation",
+    ],
+    useCases: [
+      {
+        title: "Carbon & nature programs",
+        description:
+          "Develop forests, soil carbon, and regenerative agriculture initiatives with robust baselines.",
+      },
+      {
+        title: "Farm energy transition",
+        description:
+          "Evaluate distributed solar, biogas, and efficiency projects across rural sites.",
+      },
+      {
+        title: "Sustainable sourcing",
+        description:
+          "Equip food and commodity buyers with supplier-level climate intelligence.",
+      },
+      {
+        title: "Program monitoring",
+        description:
+          "Track outcomes, leakage, and permanence with structured reporting workflows.",
+      },
+    ],
+    outcomes: [
+      { value: "MRV", label: "Field-to-market assurance" },
+      { value: "Nature", label: "Based solutions" },
+      { value: "Rural", label: "Energy transition" },
+    ],
+  },
+  {
+    id: "power-utilities",
+    title: "Power & Utilities",
+    navLabel: "Power & Utilities",
+    tagline: "Grid transition, clean generation, and utility-scale decarbonisation",
+    description:
+      "Utilities, IPPs, and grid operators need integrated planning for renewables, storage, and grid modernization — with credible emissions accounting and investor-grade transition roadmaps.",
+    body: [
+      "Power and utility companies are central to national decarbonisation — balancing reliability, affordability, and rapid deployment of clean generation, transmission upgrades, and demand-side solutions.",
+      "Planetive advises on project development, portfolio strategy, and ESG enablement — with ReThink Carbon powering scenario evaluation and performance monitoring across the asset lifecycle.",
+    ],
+    icon: Zap,
+    accent: "#0A3D2E",
+    accentSoft: "#1A6B4A",
+    rethinkFocus: [
+      "Renewable and storage portfolio screening with AI-assisted feasibility",
+      "Grid and generation emissions modeling for transition planning",
+      "Regulatory and taxonomy alignment for utility disclosures",
+      "Carbon market and offset strategy for residual emissions",
+      "Executive dashboards for capacity, intensity, and milestone tracking",
+    ],
+    useCases: [
+      {
+        title: "Clean generation portfolios",
+        description:
+          "Rank solar, wind, hydro, and hybrid projects against grid needs and carbon impact.",
+      },
+      {
+        title: "Grid modernization",
+        description:
+          "Support transmission, distribution, and flexibility investments with structured business cases.",
+      },
+      {
+        title: "Utility ESG & disclosures",
+        description:
+          "Align reporting with evolving standards and financed transition narratives.",
+      },
+      {
+        title: "Distributed energy programs",
+        description:
+          "Scale site-level renewables and efficiency across commercial and industrial offtakers.",
+      },
+    ],
+    outcomes: [
+      { value: "GW", label: "Pipeline intelligence" },
+      { value: "Grid", label: "Transition planning" },
+      { value: "24/7", label: "Performance monitoring" },
+    ],
+  },
+  {
+    id: "mining-metals",
+    title: "Mining & Metals",
+    navLabel: "Mining & Metals",
+    tagline: "Hard-to-abate operations, electrification, and responsible supply chains",
+    description:
+      "Mining and metals producers need rigorous abatement roadmaps — from diesel displacement and process heat to CCUS and green metals — backed by Planetive advisory and ReThink Carbon analytics.",
+    body: [
+      "Extractives and metals face intense scrutiny on scope 1 emissions, water, community impact, and downstream buyer requirements — while investing in electrification, renewables, and novel process technologies.",
+      "Planetive helps operators evaluate pathways, structure ESG programs, and monitor transition delivery with sector-specific intelligence and implementation support.",
+    ],
+    icon: Mountain,
+    accent: "#183b2f",
+    accentSoft: "#2a6250",
+    rethinkFocus: [
+      "Mine-site energy and diesel displacement feasibility assessments",
+      "Process emissions and CCUS screening for smelting and refining assets",
+      "Scope 3 and responsible sourcing intelligence for metals supply chains",
+      "Community and nature interface planning for land-based projects",
+      "Investor and buyer-grade transition reporting and monitoring",
+    ],
+    useCases: [
+      {
+        title: "Mine electrification",
+        description:
+          "Assess haul fleet, processing, and camp energy transitions with prioritized capex roadmaps.",
+      },
+      {
+        title: "Process decarbonisation",
+        description:
+          "Evaluate heat, hydrogen, and CCUS options for refining and metals production.",
+      },
+      {
+        title: "Green metals strategy",
+        description:
+          "Support low-carbon product positioning and offtake discussions with verified data.",
+      },
+      {
+        title: "ESG & permitting",
+        description:
+          "Strengthen climate narratives for lenders, regulators, and host communities.",
+      },
+    ],
+    outcomes: [
+      { value: "Sites", label: "Asset-level roadmaps" },
+      { value: "CCUS", label: "Pathway evaluation" },
+      { value: "ESG", label: "Stakeholder assurance" },
+    ],
+  },
+  {
+    id: "transport-logistics",
+    title: "Transport & Logistics",
+    navLabel: "Transport & Logistics",
+    tagline: "Fleet transition, freight decarbonisation, and mobility programs",
+    description:
+      "Airlines, shipping, logistics, and mobility operators need fleet and fuel transition strategies — from EV rollout to sustainable aviation fuel — with measurable emissions tracking.",
+    body: [
+      "Transport accounts for a growing share of global emissions — with corporates and carriers under pressure to decarbonise fleets, hubs, and freight networks while maintaining service levels.",
+      "Planetive supports transition planning, carbon program development, and monitoring across multimodal operations — leveraging ReThink Carbon for rapid assessments and reporting.",
+    ],
+    icon: Truck,
+    accent: "#1a4d3a",
+    accentSoft: "#2ECC8A",
+    rethinkFocus: [
+      "Fleet electrification and alternative fuel feasibility by route and asset class",
+      "Freight and logistics emissions baselining across scopes and corridors",
+      "Carbon credit and inset programs for aviation, maritime, and road freight",
+      "Hub and depot renewable energy and efficiency opportunities",
+      "Customer and regulator reporting for science-based transport targets",
+    ],
+    useCases: [
+      {
+        title: "Fleet transition roadmaps",
+        description:
+          "Prioritise EV, H2, and biofuel pathways with total cost and emissions modeling.",
+      },
+      {
+        title: "Freight & logistics",
+        description:
+          "Map corridor-level abatement levers for 3PLs, shippers, and last-mile operators.",
+      },
+      {
+        title: "Aviation & maritime",
+        description:
+          "Structure SAF, offset, and efficiency programs aligned to sector initiatives.",
+      },
+      {
+        title: "Mobility ESG reporting",
+        description:
+          "Deliver consistent disclosures for investors, customers, and climate frameworks.",
+      },
+    ],
+    outcomes: [
+      { value: "Fleet", label: "Transition planning" },
+      { value: "Fuel", label: "Pathway analysis" },
+      { value: "Scope 3", label: "Logistics visibility" },
     ],
   },
 ];
