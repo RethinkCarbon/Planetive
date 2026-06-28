@@ -1,3 +1,5 @@
+import { TEAM } from "@/lib/about-content";
+
 export type BookingRepresentative = {
   name: string;
   role: string;
@@ -5,16 +7,20 @@ export type BookingRepresentative = {
   imagePosition?: string;
 };
 
+export type BookingConsultant = {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  imagePosition?: string;
+  /** Per-person Google Calendar embed URL — add when ready. */
+  embedUrl?: string;
+};
+
 /**
- * Google Calendar appointment schedule embed URL.
+ * Google Calendar appointment schedule embed URL (shared fallback).
  *
  * Set up in Google Calendar → Appointment schedules → Share → Website embed → Inline embed.
- * The URL should look like:
- * https://calendar.google.com/calendar/appointments/schedules/AcZssZ...?gv=true
- *
- * When someone books, Google Calendar adds a Google Meet link to the event automatically
- * (enable "Google Meet video conferencing" on the appointment schedule).
- *
  * Override in production with VITE_GOOGLE_CALENDAR_BOOKING_URL.
  */
 const DEFAULT_BOOKING_EMBED_URL =
@@ -25,19 +31,48 @@ export const BOOKING_REP: BookingRepresentative = {
   role: "Consulting & advisory",
 };
 
-export function getBookingEmbedUrl(): string {
+function consultantFromTeam(id: string, embedUrl?: string): BookingConsultant {
+  const member = TEAM.find((t) => t.id === id);
+  if (!member?.image) {
+    throw new Error(`Booking consultant "${id}" needs a team portrait in about-content.`);
+  }
+  return {
+    id: member.id,
+    name: member.name,
+    role: member.role,
+    image: member.image,
+    imagePosition: member.imagePosition,
+    embedUrl,
+  };
+}
+
+/** Consultants available on the consulting booking flow. */
+export const BOOKING_CONSULTANTS: readonly BookingConsultant[] = [
+  consultantFromTeam("kamal"),
+  consultantFromTeam("umair"),
+];
+
+export function getBookingEmbedUrl(override?: string): string {
+  if (typeof override === "string" && override.trim()) return override.trim();
   const fromEnv = import.meta.env.VITE_GOOGLE_CALENDAR_BOOKING_URL;
   if (typeof fromEnv === "string" && fromEnv.trim()) return fromEnv.trim();
   if (DEFAULT_BOOKING_EMBED_URL.trim()) return DEFAULT_BOOKING_EMBED_URL.trim();
   return "";
 }
 
-export function getBookingPageUrl(): string {
-  const embedUrl = getBookingEmbedUrl();
-  if (!embedUrl) return "";
-  return embedUrl.replace(/([?&])gv=true(&|$)/, "$1").replace(/[?&]$/, "");
+export function getBookingPageUrl(embedUrl?: string): string {
+  const url = getBookingEmbedUrl(embedUrl);
+  if (!url) return "";
+  return url.replace(/([?&])gv=true(&|$)/, "$1").replace(/[?&]$/, "");
 }
 
-export function isBookingConfigured(): boolean {
-  return getBookingEmbedUrl().length > 0;
+export function isBookingConfigured(embedUrl?: string): boolean {
+  return getBookingEmbedUrl(embedUrl).length > 0;
+}
+
+export function resolveBookingConsultant(
+  consultants: readonly BookingConsultant[],
+  selectedId: string,
+): BookingConsultant {
+  return consultants.find((c) => c.id === selectedId) ?? consultants[0];
 }
