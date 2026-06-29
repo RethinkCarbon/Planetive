@@ -161,67 +161,29 @@ export function SharedResponsibilitySection() {
           <Tile
             in={gridIn}
             delay={100}
-            className="col-span-6 md:col-span-2 row-span-3 md:row-span-3 bg-white"
+            className="col-span-6 md:col-span-2 row-span-2 bg-white"
           >
             <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
               Global target &amp; current position
             </div>
-            <div className="mt-4 rounded-2xl border border-n200/70 bg-n50 p-3.5">
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="font-display text-2xl leading-none text-forest">54–57</p>
-                  <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
-                    GtCO2e emissions
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="font-display text-2xl leading-none text-canopy">29–32</p>
-                  <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
-                    GtCO2e gap to 1.5C
-                  </p>
-                </div>
-              </div>
-              <div className="mt-3 h-2 rounded-full bg-n200/90 overflow-hidden">
-                <div className="h-full w-[62%] rounded-full bg-canopy" />
-              </div>
-              <p className="mt-1.5 text-[10px] text-n500">
-                Approximate emissions gap relative to 1.5C pathway.
-              </p>
+            <div className="mt-4 space-y-4">
+              <GapRow
+                label="Global target"
+                valueLabel="~25 GtCO₂e"
+                weight={44}
+                animate={gridIn}
+                barClassName="bg-canopy"
+              />
+              <GapRow
+                label="Current position"
+                valueLabel="54–57 GtCO₂e"
+                weight={100}
+                animate={gridIn}
+                delay={120}
+              />
             </div>
-
-            <div className="mt-3 grid grid-cols-2 gap-2.5">
-              <div className="rounded-xl border border-n200/70 bg-white px-3 py-2.5">
-                <p className="font-display text-xl leading-none text-forest">$33.9T</p>
-                <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
-                  ESG assets projected
-                </p>
-              </div>
-              <div className="rounded-xl border border-n200/70 bg-white px-3 py-2.5">
-                <p className="font-display text-xl leading-none text-canopy">17%</p>
-                <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
-                  SDG targets on track
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-3 rounded-xl border border-n200/70 bg-white px-3 py-2.5">
-              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wide text-n500">
-                <span>Market cap without validated SBTs</span>
-                <span className="text-forest font-semibold">~60%</span>
-              </div>
-              <div className="mt-1.5 h-1.5 rounded-full bg-n200/90 overflow-hidden">
-                <div className="h-full w-[60%] rounded-full bg-forest" />
-              </div>
-            </div>
-
-            <p className="mt-3 text-[0.76rem] leading-relaxed text-n600">
-              2026 snapshot: high emissions, a material 1.5C gap, and uneven transition readiness
-              despite rapid ESG capital growth.
-            </p>
-
-            <p className="mt-auto pt-3 text-[10px] text-n500 leading-relaxed">
-              Sources: Climate Action Tracker, UN SDG Report, Bloomberg Intelligence ESG Outlook,
-              and SBTi tracking data.
+            <p className="mt-auto pt-3 text-[11px] text-n500 leading-snug">
+              1.5°C pathway vs. current emissions — bars scaled to today&apos;s level.
             </p>
           </Tile>
 
@@ -254,8 +216,19 @@ export function SharedResponsibilitySection() {
               Two gaps. One bridge.
             </div>
             <div className="mt-5 space-y-4">
-              <GapRow label="Information" weight={92} animate={gridIn} />
-              <GapRow label="Capital" weight={78} animate={gridIn} delay={120} />
+              <GapRow
+                label="Information"
+                weight={92}
+                animate={gridIn}
+                trackClassName="bg-white/60"
+              />
+              <GapRow
+                label="Capital"
+                weight={78}
+                animate={gridIn}
+                delay={120}
+                trackClassName="bg-white/60"
+              />
             </div>
             <div className="mt-auto pt-4 text-xs text-n800/80 leading-snug">
               We bridge with knowledge sharing, project evaluation, and structured
@@ -287,22 +260,32 @@ function GapRow({
   weight,
   animate,
   delay = 0,
+  barClassName = "bg-forest",
+  trackClassName = "bg-n200/90",
+  valueLabel,
 }: {
   label: string;
   weight: number;
   animate: boolean;
   delay?: number;
+  barClassName?: string;
+  trackClassName?: string;
+  /** When set, shown instead of a percentage (e.g. GtCO₂e). */
+  valueLabel?: string;
 }) {
   return (
     <div>
-      <div className="flex items-center justify-between text-xs">
+      <div className="flex items-center justify-between gap-3 text-xs">
         <span className="font-semibold text-forest">{label}</span>
-        <span className="font-mono text-n800/70">{weight}%</span>
+        <span className="font-mono text-n800/70 shrink-0">
+          {valueLabel ?? `${weight}%`}
+        </span>
       </div>
-      <div className="mt-1.5 h-1.5 rounded-full bg-white/60 overflow-hidden">
+      <div className={cn("mt-1.5 h-1.5 rounded-full overflow-hidden", trackClassName)}>
         <div
           className={cn(
-            "h-full rounded-full bg-forest origin-left",
+            "h-full rounded-full origin-left",
+            barClassName,
             animate && "animate-[barGrow_1.2s_ease-out_forwards]",
           )}
           style={{
