@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
-import { NAV_INSIGHTS_LINKS } from "@/lib/site-nav-content";
+import { NAV_PUBLICATIONS_LINKS } from "@/lib/site-nav-content";
 import { cn } from "@/lib/utils";
 import { navMegaLinkClass, navMegaPanelClass, navTriggerClass } from "./nav-menu-styles";
 
@@ -17,7 +17,7 @@ export function InsightsNavTrigger({
   isOpen,
 }: Pick<NavInsightsMenuProps, "isSolid" | "isOpen">) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isActive = NAV_INSIGHTS_LINKS.some(
+  const isActive = NAV_PUBLICATIONS_LINKS.some(
     (l) => pathname === l.to || pathname.startsWith(`${l.to}/`),
   );
 
@@ -27,7 +27,7 @@ export function InsightsNavTrigger({
       aria-expanded={isOpen}
       aria-haspopup="true"
     >
-      Insights
+      Publications
       <ChevronDown
         size={16}
         className={cn(
@@ -50,7 +50,7 @@ export function InsightsDropdownPanel({ onClose }: { onClose: () => void }) {
       onClick={(e) => e.stopPropagation()}
     >
       <ul>
-        {NAV_INSIGHTS_LINKS.map((item) => {
+        {NAV_PUBLICATIONS_LINKS.map((item) => {
           const active = pathname === item.to || pathname.startsWith(`${item.to}/`);
           return (
             <li key={item.to}>
@@ -81,15 +81,15 @@ export function NavInsightsMenu({
     return (
       <li>
         <span className="block px-3 pt-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-n500">
-          Insights
+          Publications
         </span>
         <ul className="mb-2">
-          {NAV_INSIGHTS_LINKS.map((item) => (
+          {NAV_PUBLICATIONS_LINKS.map((item) => (
             <li key={item.to}>
               <Link
                 to={item.to}
                 onClick={onClose}
-                className="block px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                className="block px-3 py-2 rounded-lg text-sm font-body text-n700 hover:bg-n100 hover:text-forest"
               >
                 {item.label}
               </Link>

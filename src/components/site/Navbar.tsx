@@ -4,14 +4,6 @@ import { Menu, X } from "lucide-react";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 import { NavAnimatedPanel } from "@/components/site/nav/NavAnimatedPanel";
 import {
-  ConsultingDropdownPanel,
-  NavConsultingMenu,
-} from "@/components/site/nav/NavConsultingMenu";
-import {
-  EcosystemDropdownPanel,
-  NavEcosystemMenu,
-} from "@/components/site/nav/NavEcosystemMenu";
-import {
   InsightsDropdownPanel,
   NavInsightsMenu,
 } from "@/components/site/nav/NavInsightsMenu";
@@ -20,10 +12,10 @@ import {
   SolutionsMegaPanel,
   SolutionsNavTrigger,
 } from "@/components/site/nav/NavSolutionsMenu";
-import { ConsultingNavTrigger } from "@/components/site/nav/NavConsultingMenu";
-import { EcosystemNavTrigger } from "@/components/site/nav/NavEcosystemMenu";
 import { InsightsNavTrigger } from "@/components/site/nav/NavInsightsMenu";
+import { navLinkClass } from "@/components/site/nav/nav-menu-styles";
 import { useNavHoverMenu } from "@/components/site/nav/useNavHoverMenu";
+import { isConsultingNavPath } from "@/lib/site-nav-content";
 import type { NavMenuId } from "@/lib/site-nav-content";
 
 function NavDropdownItem({
@@ -103,7 +95,8 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [openMenu, close]);
 
-  const isSolid = variant === "solid" || scrolled;
+  const isCompact = variant === "solid" || scrolled;
+  const isSolid = true;
   const solutionsHover = hoverHandlers("solutions");
 
   return (
@@ -111,66 +104,61 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
       ref={headerRef}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         variant === "transparent" ? "hero-enter" : ""
-      } ${isSolid ? "py-2" : "py-4"}`}
+      } ${isCompact ? "py-2" : "py-4"}`}
     >
       <div className="container-x">
         <nav
-          className={`flex items-center justify-between gap-6 rounded-full px-4 md:px-6 py-2.5 transition-all duration-300 ${
-            isSolid ? "glass shadow-[var(--shadow-soft)]" : "glass-dark"
-          }`}
+          className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-full px-4 md:px-6 py-2.5 transition-all duration-300 glass shadow-[var(--shadow-soft)]"
         >
-          <Link to="/" className="flex shrink-0 items-center">
-            <PlanetiveLogo onDark={!isSolid} zoom />
+          <Link to="/" className="flex shrink-0 items-center justify-self-start">
+            <PlanetiveLogo zoom className="-translate-y-px md:-translate-y-0.5" />
           </Link>
 
-          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+          <ul className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1">
             <li className="relative">
               <div {...solutionsHover}>
                 <SolutionsNavTrigger isSolid={isSolid} isOpen={openMenu === "solutions"} />
               </div>
             </li>
 
-            <NavDropdownItem
-              menu="consulting"
-              isOpen={openMenu === "consulting"}
-              hoverHandlers={hoverHandlers}
-              onClose={close}
-              trigger={
-                <ConsultingNavTrigger isSolid={isSolid} isOpen={openMenu === "consulting"} />
-              }
-              panel={<ConsultingDropdownPanel onClose={close} />}
-              panelClassName="absolute left-1/2 top-full z-[60] w-max -translate-x-1/2 pt-2"
-            />
+            <li>
+              <Link
+                to="/consulting"
+                className={navLinkClass(isSolid, isConsultingNavPath(pathname))}
+              >
+                Consulting
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/about-us"
+                className={navLinkClass(
+                  isSolid,
+                  pathname === "/about-us" || pathname.startsWith("/about-us/"),
+                )}
+              >
+                About Us
+              </Link>
+            </li>
 
             <NavDropdownItem
-              menu="ecosystem"
-              isOpen={openMenu === "ecosystem"}
+              menu="publications"
+              isOpen={openMenu === "publications"}
               hoverHandlers={hoverHandlers}
               onClose={close}
               trigger={
-                <EcosystemNavTrigger isSolid={isSolid} isOpen={openMenu === "ecosystem"} />
-              }
-              panel={<EcosystemDropdownPanel onClose={close} />}
-              panelClassName="absolute left-1/2 top-full z-[60] w-max -translate-x-1/2 pt-2"
-            />
-
-            <NavDropdownItem
-              menu="insights"
-              isOpen={openMenu === "insights"}
-              hoverHandlers={hoverHandlers}
-              onClose={close}
-              trigger={
-                <InsightsNavTrigger isSolid={isSolid} isOpen={openMenu === "insights"} />
+                <InsightsNavTrigger isSolid={isSolid} isOpen={openMenu === "publications"} />
               }
               panel={<InsightsDropdownPanel onClose={close} />}
               panelClassName="absolute right-0 top-full z-[60] w-max pt-2"
             />
           </ul>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2 justify-self-end">
             <Link
               to="/work-with-us"
-              className="hidden md:inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold font-heading btn-mint"
+              className="hidden md:inline-flex items-center rounded-full px-4 py-2.5 text-[15px] md:text-base font-semibold font-body btn-mint"
             >
               Work With Us
             </Link>
@@ -180,9 +168,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                 close();
                 setMobileOpen((open) => !open);
               }}
-              className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full ${
-                isSolid ? "bg-n100 text-forest" : "bg-white/15 text-white"
-              }`}
+              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-n100 text-forest"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -202,20 +188,24 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                 onToggle={() => {}}
                 onClose={() => setMobileOpen(false)}
               />
-              <NavConsultingMenu
-                variant="list"
-                isSolid
-                isOpen={false}
-                onToggle={() => {}}
-                onClose={() => setMobileOpen(false)}
-              />
-              <NavEcosystemMenu
-                variant="list"
-                isSolid
-                isOpen={false}
-                onToggle={() => {}}
-                onClose={() => setMobileOpen(false)}
-              />
+              <li>
+                <Link
+                  to="/consulting"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2.5 rounded-lg text-[15px] font-body font-medium text-n700 hover:bg-n100 hover:text-forest"
+                >
+                  Consulting
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about-us"
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-3 py-2.5 rounded-lg text-[15px] font-body font-medium text-n700 hover:bg-n100 hover:text-forest"
+                >
+                  About Us
+                </Link>
+              </li>
               <NavInsightsMenu
                 variant="list"
                 isSolid
@@ -227,7 +217,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                 <Link
                   to="/work-with-us"
                   onClick={() => setMobileOpen(false)}
-                  className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold font-heading btn-primary"
+                  className="block text-center rounded-full px-4 py-2.5 text-sm font-semibold font-body btn-primary"
                 >
                   Work With Us
                 </Link>

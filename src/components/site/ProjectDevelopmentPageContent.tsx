@@ -145,18 +145,12 @@ function HeroSection() {
               {description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
-              <a
-                href="#experience"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
-              >
-                Explore Projects
-                <ArrowRight size={15} aria-hidden />
-              </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
               >
-                Start A Conversation
+                Book a Consultation
+                <ArrowRight size={15} aria-hidden />
               </Link>
             </div>
           </motion.div>

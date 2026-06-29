@@ -47,11 +47,11 @@
   --color-n100: var(--n100);
   --color-n50: var(--n50);
 
-  /* Brand typography — matches planetive.org (Playfair Display + Lora) */
+  /* Brand typography — Playfair Display (headlines) + Public Sans (body/UI) */
   --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-h2: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-h3: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-body: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", Inter, "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-body);
   --font-serif: var(--font-heading);
   --font-display: var(--font-heading);
@@ -136,14 +136,14 @@
   button {
     font-family: inherit;
   }
-  /* Site header nav — Playfair Display (planetive.org) */
+  /* Site header nav — Public Sans for readability */
   header nav,
   header nav a,
   header nav button,
   header [data-site-mobile-nav],
   header [data-site-mobile-nav] a,
   header [data-site-mobile-nav] button {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
   }
   footer h4 {
     font-family: var(--font-body);
@@ -159,6 +159,14 @@
   .font-logo {
     font-family: var(--font-heading);
     font-weight: 700;
+  }
+  .font-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  .font-ui {
+    font-family: var(--font-body);
+    letter-spacing: 0.01em;
   }
   .font-h2 {
     font-family: var(--font-h2);
@@ -200,7 +208,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
   }
-  /* Eyebrows / labels — Lora (uppercase tracking on old site) */
+  /* Eyebrows / labels — Public Sans uppercase tracking */
   .font-mono {
     font-family: var(--font-body);
     font-weight: 600;
@@ -217,10 +225,11 @@
     border: 1px solid color-mix(in oklab, white 60%, transparent);
   }
   .glass-dark {
-    background: color-mix(in oklab, #0A3D2E 35%, transparent);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid color-mix(in oklab, white 18%, transparent);
+    background: color-mix(in oklab, #0A3D2E 58%, transparent);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid color-mix(in oklab, var(--mint-soft) 22%, transparent);
+    box-shadow: 0 4px 24px -4px rgba(10, 61, 46, 0.35);
   }
   .container-x { max-width: 1240px; margin-inline: auto; padding-inline: 1.25rem; }
   @media (min-width: 768px) { .container-x { padding-inline: 2rem; } }

@@ -4,7 +4,9 @@ import { Navbar } from "@/components/site/Navbar";
 import { Hero } from "@/components/site/Hero";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { TypewriterText } from "@/components/site/TypewriterText";
 import { SharedResponsibilitySection } from "@/components/site/SharedResponsibility";
+import { useHomeHeroScrollSnap } from "@/hooks/use-home-hero-scroll-snap";
 
 const FinalCTASection = lazy(() =>
   import("@/components/site/Sections").then((m) => ({ default: m.FinalCTASection })),
@@ -45,6 +47,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  useHomeHeroScrollSnap();
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -60,16 +64,27 @@ function Index() {
 }
 
 function HomeEcosystemWheelSection() {
+  const heading = "Strategic Growth Engine";
+  const supporting =
+    "Through nine integrated ventures, we help decision-makers turn sustainability goals into measurable profitability and long-term business upside.";
+  const headingDuration = heading.length * 30 + 280;
+
   return (
-    <section id="ecosystem" className="relative z-10 border-t border-n200/40 bg-background py-12 md:py-16 scroll-mt-24">
+    <section
+      id="ecosystem"
+      className="relative z-10 border-t border-n200/40 bg-background pt-24 pb-12 md:pt-28 md:pb-16 scroll-mt-24"
+    >
       <div className="container-x">
-        <ScrollReveal className="max-w-2xl mb-8 md:mb-10">
+        <ScrollReveal className="mb-8 md:mb-10 max-w-3xl">
           <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight">
-            The Planetive ecosystem
+            <TypewriterText text={heading} speedMs={30} />
           </h2>
-          <p className="mt-3 text-n600 leading-relaxed">
-            Nine ventures in one engine - hover a segment to explore how advisory, platforms,
-            agents, and programs connect.
+          <p className="mt-4 max-w-2xl text-n600 leading-relaxed">
+            <TypewriterText
+              text={supporting}
+              speedMs={16}
+              startDelayMs={headingDuration}
+            />
           </p>
         </ScrollReveal>
 

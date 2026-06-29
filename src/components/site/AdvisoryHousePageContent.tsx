@@ -154,15 +154,9 @@ function HeroSection() {
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
               >
-                Discuss A Project
+                Book a Consultation
                 <ArrowRight size={15} aria-hidden />
               </Link>
-              <a
-                href="#capabilities"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
-              >
-                Explore Capabilities
-              </a>
             </div>
           </motion.div>
 

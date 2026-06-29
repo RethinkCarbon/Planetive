@@ -83,7 +83,7 @@ export const RETHINK_CARBON_WHY = {
 
 export const RETHINK_CARBON_AUDIENCES = {
   title: "Designed For",
-  items: ["Industries", "Financial Institutions", "Banks"] as const,
+  items: ["Financial Institutions", "Oil and Gas", "Other industries"] as const,
 };
 
 export const RETHINK_CARBON_ECOSYSTEM = {

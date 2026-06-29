@@ -74,7 +74,7 @@ export function ConsultingDropdownPanel({ onClose }: { onClose: () => void }) {
           hash={NAV_CONSULTING_BOOK.hash}
           role="menuitem"
           onClick={onClose}
-          className="flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold font-heading btn-mint"
+          className="flex w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold font-body btn-mint"
         >
           <CalendarDays size={15} aria-hidden />
           {NAV_CONSULTING_BOOK.label}
@@ -102,7 +102,7 @@ export function NavConsultingMenu({
               <Link
                 to={item.to}
                 onClick={onClose}
-                className="block px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                className="block px-3 py-2 rounded-lg text-sm font-body text-n700 hover:bg-n100 hover:text-forest"
               >
                 {item.label}
               </Link>
@@ -113,7 +113,7 @@ export function NavConsultingMenu({
               to={NAV_CONSULTING_BOOK.to}
               hash={NAV_CONSULTING_BOOK.hash}
               onClick={onClose}
-              className="flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold font-heading btn-mint"
+              className="flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold font-body btn-mint"
             >
               <CalendarDays size={15} aria-hidden />
               {NAV_CONSULTING_BOOK.label}

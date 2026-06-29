@@ -92,7 +92,7 @@ export function NavEcosystemMenu({
               <Link
                 to={item.to}
                 onClick={onClose}
-                className="block px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                className="block px-3 py-2 rounded-lg text-sm font-body text-n700 hover:bg-n100 hover:text-forest"
               >
                 {item.label}
               </Link>

@@ -2,15 +2,15 @@ import { cn } from "@/lib/utils";
 
 export function navTriggerClass(isSolid: boolean, isActive: boolean, isOpen: boolean) {
   return cn(
-    "inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium font-heading transition-colors duration-200 cursor-default select-none",
-    isSolid
-      ? isActive || isOpen
-        ? "bg-n100 text-forest"
-        : "text-n800 hover:bg-n100"
-      : isActive || isOpen
-        ? "bg-white/15 text-white"
-        : "text-white/90 hover:text-white hover:bg-white/10",
+    "inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[15px] md:text-base transition-colors duration-200 cursor-default select-none font-body font-medium",
+    isActive || isOpen
+      ? "bg-n100 text-forest"
+      : "text-n800 hover:bg-n100",
   );
+}
+
+export function navLinkClass(isSolid: boolean, isActive: boolean) {
+  return cn(navTriggerClass(isSolid, isActive, false), "cursor-pointer");
 }
 
 export function navMegaPanelClass() {
@@ -21,15 +21,15 @@ export function navMegaPanelClass() {
 
 export function navMegaLinkClass(active: boolean) {
   return cn(
-    "group flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-heading transition-colors",
-    active ? "bg-mint-soft/40 text-forest font-medium" : "text-n700 hover:bg-n100 hover:text-forest",
+    "group flex items-center gap-2.5 rounded-lg px-2 py-2.5 text-base font-body font-normal transition-colors",
+    active ? "bg-mint-soft/40 text-forest" : "text-n700 hover:bg-n100 hover:text-forest",
   );
 }
 
 export function navMegaGroupTitleClass() {
-  return "font-mono text-[10px] tracking-[0.18em] uppercase text-canopy";
+  return "font-mono text-sm tracking-[0.14em] uppercase text-canopy font-medium";
 }
 
 export function navMegaColumnTitleClass() {
-  return "font-display text-lg text-forest leading-snug";
+  return navMegaGroupTitleClass();
 }

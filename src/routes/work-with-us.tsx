@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WorkWithUsPageContent } from "@/components/site/WorkWithUsPageContent";
-import { parseInterestParam } from "@/lib/engagement-programs-content";
+
+const workWithUsSearchSchema = z.object({
+  interest: z.enum(["fellows", "champions", "partner"]).optional(),
+});
 
 export const Route = createFileRoute("/work-with-us")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    interest: parseInterestParam(search.interest),
-  }),
+  validateSearch: workWithUsSearchSchema,
   head: () => ({
     meta: [
       { title: "Work With Us — Planetive" },

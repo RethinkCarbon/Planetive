@@ -4,7 +4,6 @@ import { INDUSTRIES_NAV } from "@/lib/industries-content";
 import { NAV_EXPLORE_LINKS, NAV_SOLUTION_GROUPS } from "@/lib/site-nav-content";
 import { cn } from "@/lib/utils";
 import {
-  navMegaColumnTitleClass,
   navMegaGroupTitleClass,
   navMegaLinkClass,
   navMegaPanelClass,
@@ -89,28 +88,24 @@ export function SolutionsMegaPanel({ onClose }: { onClose: () => void }) {
             </div>
 
             <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-n200/70 pt-6 lg:pt-0 lg:pl-6">
-              <p className={navMegaColumnTitleClass()}>Industries</p>
+              <p className={navMegaGroupTitleClass()}>Industries We Serve</p>
               <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-0.5">
-                {INDUSTRIES_NAV.map((item) => {
-                  const active = pathname === item.to;
-                  return (
-                    <li key={item.to}>
-                      <Link
-                        to={item.to}
-                        role="menuitem"
-                        onClick={onClose}
-                        className={navMegaLinkClass(active)}
-                      >
-                        <span
-                          className="h-2 w-2 shrink-0 rounded-full"
-                          style={{ backgroundColor: item.color }}
-                          aria-hidden
-                        />
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {INDUSTRIES_NAV.map((item) => (
+                  <li key={item.to}>
+                    <span
+                      role="note"
+                      aria-disabled="true"
+                      className="group flex items-center gap-2.5 rounded-lg px-2 py-2.5 text-base font-body font-normal text-n700/75 cursor-not-allowed"
+                    >
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                        aria-hidden
+                      />
+                      {item.label}
+                    </span>
+                  </li>
+                ))}
               </ul>
               {NAV_EXPLORE_LINKS.length > 0 ? (
                 <div className="mt-6 border-t border-n200/70 pt-5">
@@ -155,7 +150,7 @@ export function NavSolutionsMenu({
         </span>
         {NAV_SOLUTION_GROUPS.map((group) => (
           <div key={group.title} className="mb-3">
-            <p className="px-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-canopy">
+            <p className={cn(navMegaGroupTitleClass(), "px-3 pb-1")}>
               {group.title}
             </p>
             <ul>
@@ -164,7 +159,7 @@ export function NavSolutionsMenu({
                   <Link
                     to={item.to}
                     onClick={onClose}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                    className={cn(navMegaLinkClass(false), "px-3")}
                   >
                     {item.color ? (
                       <span
@@ -181,16 +176,15 @@ export function NavSolutionsMenu({
           </div>
         ))}
         <div className="mb-3">
-          <p className="px-3 pb-1 text-[10px] font-mono uppercase tracking-wider text-canopy">
-            Industries
+          <p className={cn(navMegaGroupTitleClass(), "px-3 pb-1")}>
+            Industries We Serve
           </p>
           <ul>
             {INDUSTRIES_NAV.map((item) => (
               <li key={item.to}>
-                <Link
-                  to={item.to}
-                  onClick={onClose}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                <span
+                  aria-disabled="true"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-base font-body font-normal text-n700/75 cursor-not-allowed"
                 >
                   <span
                     className="h-2 w-2 shrink-0 rounded-full"
@@ -198,7 +192,7 @@ export function NavSolutionsMenu({
                     aria-hidden
                   />
                   {item.label}
-                </Link>
+                </span>
               </li>
             ))}
           </ul>

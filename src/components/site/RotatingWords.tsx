@@ -10,7 +10,7 @@ type RotatingWordsProps = {
 
 export function RotatingWords({
   words,
-  intervalMs = 4500,
+  intervalMs = 2000,
   className,
 }: RotatingWordsProps) {
   const reducedMotion = usePrefersReducedMotion();

@@ -9,6 +9,42 @@ import {
 import { useInView } from "@/hooks/use-in-view";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { cn } from "@/lib/utils";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
+
+const HOW_WE_WORK_QUOTES = [
+  {
+    text: (
+      <>
+        Embed <span className="text-mint-soft">sustainability</span> in strategy, and{" "}
+        <span className="text-mint-soft/90">value</span> follows.
+      </>
+    ),
+  },
+  {
+    text: (
+      <>
+        <span className="text-mint-soft">Decarbonization</span> done right protects{" "}
+        <span className="text-mint-soft/90">margins</span> and unlocks growth.
+      </>
+    ),
+  },
+  {
+    text: (
+      <>
+        <span className="text-mint-soft">Climate intelligence</span> turns uncertainty into{" "}
+        <span className="text-mint-soft/90">boardroom confidence</span>.
+      </>
+    ),
+  },
+  {
+    text: (
+      <>
+        <span className="text-mint-soft">Sustainable operations</span> today build{" "}
+        <span className="text-mint-soft/90">resilient profitability</span> tomorrow.
+      </>
+    ),
+  },
+] as const;
 
 function useCountUp(target: number, durationMs: number, start: boolean) {
   const [v, setV] = useState(0);
@@ -33,8 +69,24 @@ function useCountUp(target: number, durationMs: number, start: boolean) {
 
 export function SharedResponsibilitySection() {
   const { ref: gridRef, inView: gridIn } = useInView<HTMLDivElement>({ threshold: 0.08 });
-  const gap = useCountUp(2.5, 1800, gridIn);
   const years = useCountUp(2030, 1400, gridIn);
+  const reducedMotion = usePrefersReducedMotion();
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [quoteVisible, setQuoteVisible] = useState(true);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    const timer = window.setInterval(() => {
+      setQuoteVisible(false);
+      window.setTimeout(() => {
+        setQuoteIndex((current) => (current + 1) % HOW_WE_WORK_QUOTES.length);
+        setQuoteVisible(true);
+      }, 260);
+    }, 3000);
+
+    return () => window.clearInterval(timer);
+  }, [reducedMotion]);
 
   return (
     <section className="relative py-24 md:py-36 bg-[var(--n50)] overflow-hidden">
@@ -84,7 +136,7 @@ export function SharedResponsibilitySection() {
 
         <div
           ref={gridRef}
-          className="mt-20 grid grid-cols-6 auto-rows-[120px] md:auto-rows-[150px] gap-3 md:gap-4"
+          className="mt-20 grid grid-cols-6 auto-rows-[minmax(120px,auto)] md:auto-rows-[minmax(150px,auto)] gap-3 md:gap-4"
         >
           <Tile
             in={gridIn}
@@ -93,29 +145,84 @@ export function SharedResponsibilitySection() {
             style={{ background: "var(--gradient-hero)" }}
           >
             <Quote size={28} className="text-mint-soft/70" />
-            <p className="mt-4 font-display text-[clamp(1.4rem,2.4vw,2.1rem)] leading-snug">
-              "Bring sustainability into{" "}
-              <span className="text-mint-soft italic">every</span> conversation —
-              and the world starts answering back."
+            <p
+              className={cn(
+                "mt-4 font-display text-[clamp(1.4rem,2.4vw,2.1rem)] leading-snug text-white/95 transition-opacity duration-300",
+                quoteVisible ? "opacity-100" : "opacity-0",
+              )}
+            >
+              &ldquo;{HOW_WE_WORK_QUOTES[quoteIndex].text}&rdquo;
             </p>
-            <div className="mt-auto pt-6 text-xs text-n200 font-mono tracking-wider">
+            <div className="mt-auto pt-6 text-xs text-mint-soft/75 font-mono tracking-wider">
               — How we work
             </div>
           </Tile>
 
-          <Tile in={gridIn} delay={100} className="col-span-3 md:col-span-2 row-span-2 bg-white">
+          <Tile
+            in={gridIn}
+            delay={100}
+            className="col-span-6 md:col-span-2 row-span-3 md:row-span-3 bg-white"
+          >
             <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
-              Annual SDG capital gap
+              Global target &amp; current position
             </div>
-            <div className="mt-auto">
-              <div className="font-display text-[clamp(3rem,7vw,5.5rem)] leading-none text-forest">
-                ${gap.toFixed(1)}
-                <span className="text-canopy">T</span>
+            <div className="mt-4 rounded-2xl border border-n200/70 bg-n50 p-3.5">
+              <div className="flex items-end justify-between">
+                <div>
+                  <p className="font-display text-2xl leading-none text-forest">54–57</p>
+                  <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
+                    GtCO2e emissions
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="font-display text-2xl leading-none text-canopy">29–32</p>
+                  <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
+                    GtCO2e gap to 1.5C
+                  </p>
+                </div>
               </div>
-              <div className="mt-3 text-sm text-n600 max-w-[14rem]">
-                The shortfall between intent and the projects actually getting funded.
+              <div className="mt-3 h-2 rounded-full bg-n200/90 overflow-hidden">
+                <div className="h-full w-[62%] rounded-full bg-canopy" />
+              </div>
+              <p className="mt-1.5 text-[10px] text-n500">
+                Approximate emissions gap relative to 1.5C pathway.
+              </p>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-2.5">
+              <div className="rounded-xl border border-n200/70 bg-white px-3 py-2.5">
+                <p className="font-display text-xl leading-none text-forest">$33.9T</p>
+                <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
+                  ESG assets projected
+                </p>
+              </div>
+              <div className="rounded-xl border border-n200/70 bg-white px-3 py-2.5">
+                <p className="font-display text-xl leading-none text-canopy">17%</p>
+                <p className="mt-1 text-[10px] font-mono uppercase tracking-wide text-n500">
+                  SDG targets on track
+                </p>
               </div>
             </div>
+
+            <div className="mt-3 rounded-xl border border-n200/70 bg-white px-3 py-2.5">
+              <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wide text-n500">
+                <span>Market cap without validated SBTs</span>
+                <span className="text-forest font-semibold">~60%</span>
+              </div>
+              <div className="mt-1.5 h-1.5 rounded-full bg-n200/90 overflow-hidden">
+                <div className="h-full w-[60%] rounded-full bg-forest" />
+              </div>
+            </div>
+
+            <p className="mt-3 text-[0.76rem] leading-relaxed text-n600">
+              2026 snapshot: high emissions, a material 1.5C gap, and uneven transition readiness
+              despite rapid ESG capital growth.
+            </p>
+
+            <p className="mt-auto pt-3 text-[10px] text-n500 leading-relaxed">
+              Sources: Climate Action Tracker, UN SDG Report, Bloomberg Intelligence ESG Outlook,
+              and SBTi tracking data.
+            </p>
           </Tile>
 
           <Tile in={gridIn} delay={180} className="col-span-3 md:col-span-2 row-span-2 bg-white">

@@ -104,7 +104,7 @@ export function NavIndustriesMegaMenu({
               <Link
                 to={item.to}
                 onClick={onClose}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-body text-n700 hover:bg-n100 hover:text-forest"
               >
                 <span
                   className="h-2 w-2 shrink-0 rounded-full"

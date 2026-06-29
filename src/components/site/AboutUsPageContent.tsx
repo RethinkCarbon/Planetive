@@ -10,7 +10,6 @@ import {
   type TeamMember,
 } from "@/lib/about-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
-import { EngagementProgramsSection } from "@/components/site/EngagementProgramsSection";
 
 export function AboutUsPageContent() {
   const leadership = TEAM.filter((m) => m.group === "leadership");
@@ -28,7 +27,6 @@ export function AboutUsPageContent() {
         members={advisors}
       />
       <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
-      <EngagementProgramsSection variant="preview" />
       <PartnersSection />
       <AboutClosingCta />
     </>

@@ -79,20 +79,18 @@ export const NAV_EXPLORE_LINKS: readonly NavLink[] = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-export const NAV_INSIGHTS_LINKS: readonly NavLink[] = [
-  { to: "/impact", label: "Impact" },
+export const NAV_PUBLICATIONS_LINKS: readonly NavLink[] = [
   { to: "/blog", label: "Blog" },
   { to: "/global-engagements", label: "Global Engagements" },
 ] as const;
 
-export type NavMenuId = "solutions" | "consulting" | "ecosystem" | "insights";
+/** @deprecated Use NAV_PUBLICATIONS_LINKS */
+export const NAV_INSIGHTS_LINKS = NAV_PUBLICATIONS_LINKS;
+
+export type NavMenuId = "solutions" | "publications";
 
 export function isConsultingNavPath(pathname: string) {
-  return (
-    pathname === "/consulting" ||
-    pathname.startsWith("/ecosystem/advisory-house") ||
-    pathname.startsWith("/ecosystem/project-development")
-  );
+  return pathname === "/consulting";
 }
 
 export function isSolutionsPath(pathname: string) {
@@ -113,6 +111,13 @@ export function isIndustriesPath(pathname: string) {
   return pathname.startsWith("/industries/");
 }
 
+export function isPublicationsPath(pathname: string) {
+  return NAV_PUBLICATIONS_LINKS.some(
+    (l) => pathname === l.to || pathname.startsWith(`${l.to}/`),
+  );
+}
+
+/** @deprecated Use isPublicationsPath */
 export function isInsightsPath(pathname: string) {
-  return NAV_INSIGHTS_LINKS.some((l) => pathname === l.to || pathname.startsWith(`${l.to}/`));
+  return isPublicationsPath(pathname);
 }

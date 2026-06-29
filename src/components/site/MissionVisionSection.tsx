@@ -20,7 +20,7 @@ function MissionVisionColumn({
   return (
     <div className={className}>
       {label && (
-        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-mint-soft/80">
+        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-mint-soft">
           {label}
         </p>
       )}
@@ -32,30 +32,33 @@ function MissionVisionColumn({
 export function HeroMissionVision() {
   return (
     <div
-      className="hero-enter w-full border-t border-white/10 pt-8 md:pt-10"
+      className="hero-enter w-full border-t border-white/20 pt-8 md:pt-10"
       style={{ animationDelay: "0.52s" }}
     >
       <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-3 md:gap-0">
         <MissionVisionColumn
           label="Mission"
-          className="md:pr-8 lg:pr-12 xl:pr-16 md:border-r md:border-white/15"
+          className="md:pr-8 lg:pr-12 xl:pr-16 md:border-r md:border-white/20"
         >
-          <p className="font-heading text-sm md:text-[0.95rem] lg:text-base font-semibold leading-snug text-white">
+          <p className="font-ui text-base md:text-[1.05rem] lg:text-[1.1rem] font-medium leading-snug text-n50">
             {MISSION}
           </p>
         </MissionVisionColumn>
 
         <MissionVisionColumn
           label="Vision"
-          className="md:px-8 lg:px-12 xl:px-16 md:border-r md:border-white/15 border-t border-white/10 pt-8 md:border-t-0 md:pt-0"
+          className="md:px-8 lg:px-12 xl:px-16 md:border-r md:border-white/20 border-t border-white/20 pt-8 md:border-t-0 md:pt-0"
         >
-          <p className="font-heading text-sm md:text-[0.95rem] lg:text-base font-semibold leading-snug text-white">
+          <p className="font-ui text-base md:text-[1.05rem] lg:text-[1.1rem] font-medium leading-snug text-n50">
             {VISION}
           </p>
         </MissionVisionColumn>
 
-        <MissionVisionColumn className="md:pl-8 lg:pl-12 xl:pl-16 border-t border-white/10 pt-8 md:border-t-0 md:pt-0">
-          <p className="font-heading text-sm md:text-[0.95rem] lg:text-base font-semibold leading-snug italic text-white/90">
+        <MissionVisionColumn
+          label="Approach"
+          className="md:pl-8 lg:pl-12 xl:pl-16 border-t border-white/20 pt-8 md:border-t-0 md:pt-0"
+        >
+          <p className="font-ui text-base md:text-[1.05rem] lg:text-[1.1rem] font-medium leading-snug text-n50">
             {CLOSING}
           </p>
         </MissionVisionColumn>

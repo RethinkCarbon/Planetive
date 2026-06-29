@@ -4,11 +4,11 @@ import { useState } from "react";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import {
   BOOKING_REP,
-  type BookingConsultant,
+  type BookingArea,
   getBookingEmbedUrl,
   getBookingPageUrl,
   isBookingConfigured,
-  resolveBookingConsultant,
+  resolveBookingArea,
 } from "@/lib/site-booking";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +19,7 @@ type BookMeetingSectionProps = {
   eyebrow?: string;
   title?: string;
   description?: string;
-  consultants?: readonly BookingConsultant[];
+  areas?: readonly BookingArea[];
 };
 
 export function BookMeetingSection({
@@ -28,21 +28,19 @@ export function BookMeetingSection({
   eyebrow = "Book a call",
   title,
   description,
-  consultants,
+  areas,
 }: BookMeetingSectionProps) {
-  const hasConsultants = consultants && consultants.length > 0;
-  const [selectedId, setSelectedId] = useState(consultants?.[0]?.id ?? "");
+  const hasAreas = areas && areas.length > 0;
+  const [selectedId, setSelectedId] = useState(areas?.[0]?.id ?? "");
 
-  const selected = hasConsultants
-    ? resolveBookingConsultant(consultants, selectedId)
-    : null;
+  const selected = hasAreas ? resolveBookingArea(areas, selectedId) : null;
 
   const embedUrl = getBookingEmbedUrl(selected?.embedUrl);
   const pageUrl = getBookingPageUrl(selected?.embedUrl);
   const configured = isBookingConfigured(selected?.embedUrl);
 
-  const displayName = selected?.name ?? BOOKING_REP.name;
-  const displayRole = selected?.role ?? BOOKING_REP.role;
+  const displayLabel = selected?.label ?? BOOKING_REP.name;
+  const displayRole = selected?.description ?? BOOKING_REP.role;
 
   const content = (
     <div
@@ -51,13 +49,13 @@ export function BookMeetingSection({
         className,
       )}
     >
-      {hasConsultants ? (
+      {hasAreas ? (
         <div className="lg:hidden border-b border-n200/80 bg-[var(--n50)]/60 px-4 py-4">
           <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500 mb-3">
-            Who would you like to meet?
+            Choose an area
           </p>
-          <ConsultantPicker
-            consultants={consultants}
+          <AreaPicker
+            areas={areas}
             selectedId={selected!.id}
             onSelect={setSelectedId}
             layout="row"
@@ -68,18 +66,18 @@ export function BookMeetingSection({
       <div
         className={cn(
           "grid grid-cols-1",
-          hasConsultants
+          hasAreas
             ? "lg:grid-cols-[12.5rem_minmax(0,1fr)_minmax(0,1.6fr)]"
             : "lg:grid-cols-12",
         )}
       >
-        {hasConsultants ? (
+        {hasAreas ? (
           <div className="hidden lg:flex lg:flex-col border-b lg:border-b-0 lg:border-r border-n200/80 bg-[var(--n50)]/80 p-4">
             <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500 mb-3 px-1">
-              Meet with
+              Book for
             </p>
-            <ConsultantPicker
-              consultants={consultants}
+            <AreaPicker
+              areas={areas}
               selectedId={selected!.id}
               onSelect={setSelectedId}
               layout="column"
@@ -90,7 +88,7 @@ export function BookMeetingSection({
         <div
           className={cn(
             "p-8 md:p-10 border-b lg:border-b-0 border-n200/80 bg-[var(--n50)]/60",
-            hasConsultants ? "" : "lg:col-span-4 lg:border-r",
+            hasAreas ? "" : "lg:col-span-4 lg:border-r",
           )}
         >
           <div className="flex items-center gap-2 text-canopy">
@@ -98,9 +96,13 @@ export function BookMeetingSection({
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase">{eyebrow}</span>
           </div>
           <h2 className="mt-4 font-display text-2xl md:text-[1.75rem] text-forest leading-tight">
-            {title ?? `Meet with ${displayName}`}
+            {title ?? `Book a ${displayLabel} consultation`}
           </h2>
-          <p className="mt-2 text-sm font-semibold text-n600">{displayRole}</p>
+          {hasAreas ? (
+            <p className="mt-2 text-sm font-semibold text-n600">{displayLabel}</p>
+          ) : (
+            <p className="mt-2 text-sm font-semibold text-n600">{displayRole}</p>
+          )}
           <p className="mt-4 text-sm text-n600 leading-relaxed">
             {description ??
               "Pick a time that works for you. You'll receive a calendar invite with a Google Meet link — no back-and-forth email needed."}
@@ -132,14 +134,14 @@ export function BookMeetingSection({
         <div
           className={cn(
             "min-h-[520px] flex flex-col",
-            hasConsultants ? "" : "lg:col-span-8",
+            hasAreas ? "" : "lg:col-span-8",
           )}
         >
           {configured && embedUrl ? (
             <>
               <iframe
                 key={selected?.id ?? "default"}
-                title={`Book a Google Meet with ${displayName}`}
+                title={`Book a Google Meet — ${displayLabel}`}
                 src={embedUrl}
                 className="w-full flex-1 min-h-[520px] border-0 bg-white"
                 loading="lazy"
@@ -150,11 +152,11 @@ export function BookMeetingSection({
                   className="inline-block mr-1.5 -mt-0.5 align-middle text-canopy"
                   aria-hidden
                 />
-                Booking with {displayName}. Times shown in your local timezone.
+                Booking for {displayLabel}. Times shown in your local timezone.
               </p>
             </>
           ) : (
-            <BookingSetupPlaceholder consultantName={displayName} />
+            <BookingSetupPlaceholder areaLabel={displayLabel} />
           )}
         </div>
       </div>
@@ -172,13 +174,13 @@ export function BookMeetingSection({
   );
 }
 
-function ConsultantPicker({
-  consultants,
+function AreaPicker({
+  areas,
   selectedId,
   onSelect,
   layout,
 }: {
-  consultants: readonly BookingConsultant[];
+  areas: readonly BookingArea[];
   selectedId: string;
   onSelect: (id: string) => void;
   layout: "column" | "row";
@@ -189,61 +191,34 @@ function ConsultantPicker({
         layout === "column" ? "flex flex-col gap-1" : "flex gap-2 overflow-x-auto pb-1",
       )}
       role="listbox"
-      aria-label="Select a consultant"
+      aria-label="Select a booking area"
     >
-      {consultants.map((consultant) => {
-        const isSelected = consultant.id === selectedId;
+      {areas.map((area) => {
+        const isSelected = area.id === selectedId;
         return (
-          <li key={consultant.id} role="option" aria-selected={isSelected}>
+          <li key={area.id} role="option" aria-selected={isSelected}>
             <button
               type="button"
-              onClick={() => onSelect(consultant.id)}
+              onClick={() => onSelect(area.id)}
               className={cn(
-                "flex items-center gap-3 rounded-2xl text-left transition-all duration-200",
-                layout === "column" ? "w-full px-2.5 py-2.5" : "shrink-0 px-3 py-2",
+                "rounded-2xl text-left transition-all duration-200 font-heading",
+                layout === "column" ? "w-full px-3 py-3" : "shrink-0 px-4 py-2.5",
                 isSelected
-                  ? "bg-white shadow-[var(--shadow-soft)] ring-1 ring-mint/50"
-                  : "hover:bg-white/70",
+                  ? "bg-white shadow-[var(--shadow-soft)] ring-1 ring-mint/50 text-forest font-semibold"
+                  : "hover:bg-white/70 text-n800 font-medium",
+                layout === "column" ? "text-sm" : "text-xs",
               )}
             >
-              <img
-                src={consultant.image}
-                alt=""
-                className={cn(
-                  "rounded-full object-cover ring-2 ring-white shadow-sm",
-                  layout === "column" ? "h-11 w-11" : "h-10 w-10",
-                )}
-                style={
-                  consultant.imagePosition
-                    ? { objectPosition: consultant.imagePosition }
-                    : undefined
-                }
-              />
-              <span className="min-w-0">
-                <span
-                  className={cn(
-                    "block font-heading leading-snug",
-                    layout === "column" ? "text-sm" : "text-xs",
-                    isSelected ? "font-semibold text-forest" : "font-medium text-n800",
-                  )}
-                >
-                  {consultant.name}
-                </span>
-                {layout === "column" ? (
-                  <span className="block text-[11px] text-n600 truncate mt-0.5">
-                    {consultant.role}
-                  </span>
-                ) : null}
-              </span>
+              {area.label}
             </button>
-            </li>
+          </li>
         );
       })}
     </ul>
   );
 }
 
-function BookingSetupPlaceholder({ consultantName }: { consultantName?: string }) {
+function BookingSetupPlaceholder({ areaLabel }: { areaLabel?: string }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center p-8 md:p-12 text-center">
       <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-mint-soft text-canopy">
@@ -251,8 +226,8 @@ function BookingSetupPlaceholder({ consultantName }: { consultantName?: string }
       </span>
       <h3 className="mt-5 font-display text-xl text-forest">Live booking coming soon</h3>
       <p className="mt-3 max-w-md text-sm text-n600 leading-relaxed">
-        {consultantName
-          ? `${consultantName}'s scheduling link is being set up. In the meantime, send us a message and we'll reply within two business days.`
+        {areaLabel
+          ? `${areaLabel} scheduling is being set up. In the meantime, send us a message and we'll reply within two business days.`
           : "Our team is setting up instant Google Meet scheduling. In the meantime, send us a message and we'll reply within two business days."}
       </p>
       <Link

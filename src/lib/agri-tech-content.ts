@@ -1,211 +1,196 @@
 export const AGRI_TECH_PAGE = {
   id: "agri-tech",
   eyebrow: "Planetive Ecosystem",
-  titleLines: ["Agri Tech", "Solutions"] as const,
-  supportingTitle: "Digital Infrastructure For Modern Agricultural Operations",
+  title: "Transforming Agriculture Across The Full Value Chain",
   description:
-    "Planetive develops digital experiences that support connected agricultural environments through intelligent workflows, operational visibility and resilient infrastructure.",
+    "Planetive operates at the intersection of technology, stakeholder empowerment and sustainable development through integrated agricultural solutions designed to modernize farming practices, strengthen food systems and improve economic resilience.",
+  pillars: ["Agri-Co", "VERT-OS", "ECO Parks", "ACEP"] as const,
   accent: "#244c42",
   accentSoft: "#A8F0D4",
 } as const;
 
-export const AGRI_TECH_OVERVIEW = {
-  title: "Connecting Agricultural Operations Through Intelligence",
-  intro:
-    "Planetive offers cloud-based digital experiences designed to unify and streamline agricultural service operations.",
-  supports: [
-    "Real-Time Visibility",
-    "Workflow Coordination",
-    "Operational Intelligence",
-    "Automation",
-    "Advanced Analytics",
-    "Decision Support",
-    "Value Chain Optimization",
+export const AGRI_TECH_VALUE_CHAIN = {
+  title: "Designed Across The Agricultural Lifecycle",
+  stages: [
+    {
+      id: "pre-production",
+      label: "Pre-Production",
+      capabilities: [
+        "Soil Testing",
+        "Seed Management",
+        "Climate Analysis",
+        "Crop Planning",
+        "Agronomic Advisory",
+      ],
+    },
+    {
+      id: "production",
+      label: "Production",
+      capabilities: [
+        "Hydroponics",
+        "Aeroponics",
+        "IoT Monitoring",
+        "Environmental Control",
+        "Nutrient Dosing",
+      ],
+    },
+    {
+      id: "post-harvest",
+      label: "Post-Harvest",
+      capabilities: ["Certification", "Food Safety", "Quality Documentation"],
+    },
+    {
+      id: "market",
+      label: "Market Linkages",
+      capabilities: [
+        "Market Intelligence",
+        "Pricing",
+        "Supply Chain",
+        "Export",
+        "Commerce",
+      ],
+    },
+    {
+      id: "finance",
+      label: "Finance & ESG",
+      capabilities: ["Carbon Credits", "ROI Analytics", "ESG Reporting"],
+    },
+    {
+      id: "community",
+      label: "Community",
+      capabilities: ["Capacity Building", "Enterprise", "Digital Support"],
+    },
   ] as const,
 };
 
-export const AGRI_TECH_TERRAFLOW = {
-  label: "Featured Experience",
-  title: "TerraFlow",
-  supportingTitle: "Connected Agriculture Across The Value Chain",
+export const AGRI_TECH_AGRI_CO = {
+  label: "Platform",
+  title: "Agri-Co Platform",
+  supportingTitle: "Cloud Platform For Agricultural Service Businesses",
   description:
-    "TerraFlow is Planetive's cloud-based agriculture platform designed to unify and streamline agricultural service operations through connected digital experiences.",
-  descriptionExtended:
-    "Built to support agricultural service businesses, TerraFlow enables operational visibility, workflow coordination and decision-making across the agricultural value chain.",
-  capabilities: [
-    "Cloud-Based SaaS",
-    "Real-Time Data",
-    "Workflow Automation",
-    "Advanced Analytics",
-    "Decision Support",
-    "Operational Efficiency",
-    "Value Chain Visibility",
-    "Profitability",
+    "A unified cloud platform enabling agricultural service businesses to coordinate operations, deliver advisory services and manage value chain workflows across field and enterprise teams.",
+  modules: [
+    "Crop Health Management",
+    "Mechanization Management",
+    "Live Market Insights",
+    "Crop Certification",
+    "Process Management",
+    "ESG Reporting",
   ] as const,
-  architecture: {
-    center: "TerraFlow",
-    modulesLabel: "Connected Modules",
-    modules: [
-      "Crop Health Management",
-      "Soil Planning & Testing",
-      "Seeds Management",
-      "Irrigation Management",
-      "Pest Prediction & Control",
-      "Weather Updates",
-      "Agricultural Advisory",
-    ] as const,
-  },
   surfaces: [
     {
       title: "Web Experience",
       for: "Corporate Operations",
-      description: "Support centralized visibility and coordination.",
+      description: "Centralized visibility and coordination across service operations.",
       visual: "web" as const,
     },
     {
-      title: "Mobile Experience",
+      title: "Field Experience",
       for: "Field Operators",
-      description: "Enable field execution and connected workflows.",
+      description: "Connected execution and workflow management in the field.",
       visual: "mobile-field" as const,
     },
     {
-      title: "Mobile Experience",
+      title: "Farmer Experience",
       for: "Farmers",
-      description: "Create accessible agricultural experiences.",
+      description: "Accessible agricultural services and market connectivity.",
       visual: "mobile-farmer" as const,
     },
   ] as const,
 };
 
-export const AGRI_TECH_VERDANT = {
-  label: "Featured Experience",
-  categoryLabel: "Controlled Agriculture Experience",
-  title: "VerdantOS",
-  supportingTitle: "Digital Infrastructure For Controlled Agriculture",
-  focusDescription:
-    "Focused on controlled agricultural environments including vertical farming, hydroponics operations and connected monitoring.",
+export const AGRI_TECH_VERT_OS = {
+  label: "Controlled Environment Agriculture",
+  title: "VERT-OS",
+  supportingTitle: "Vertical Farm Management System",
   description:
-    "VerdantOS is Planetive's digital agriculture experience designed to support controlled agricultural environments through connected monitoring, operational visibility and intelligent management.",
-  modules: [
+    "Complete monitoring, automation and business intelligence for Controlled Environment Agriculture.",
+  capabilityCards: [
     {
-      title: "Vertical Farming Systems",
-      description:
-        "Support structured controlled agricultural environments through connected operational experiences.",
+      title: "Monitoring",
+      items: ["Climate", "Water", "Mist", "Shade", "UV", "Alerts"],
     },
     {
-      title: "Hydroponics Operations Platform",
-      description:
-        "Enable operational visibility and management across hydroponic environments.",
+      title: "Automation",
+      items: [
+        "Climate Control",
+        "Irrigation",
+        "Nutrient Dosing",
+        "pH",
+        "Lighting",
+        "Remote Access",
+      ],
     },
     {
-      title: "Monitoring & Control Software",
-      description:
-        "Support connected oversight and management across agricultural environments.",
+      title: "Business Management",
+      items: ["Planning", "Certification", "Inventory", "Sales", "Economics"],
     },
     {
-      title: "IoT / Digital Agriculture",
-      description: "Create connected experiences across agricultural operations.",
-    },
-    {
-      title: "Operational Intelligence",
-      description: "Transform operational inputs into usable decision support.",
-    },
-    {
-      title: "Web Application & Management Interface",
-      description: "Enable centralized access and operational coordination.",
+      title: "Analytics & Intelligence",
+      items: [
+        "Yield Prediction",
+        "Optimization",
+        "ROI",
+        "Scenario Planning",
+        "Early Warnings",
+      ],
     },
   ] as const,
-  panel: {
-    eyebrow: "Controlled Environment Architecture",
-    layers: [
-      { title: "Environment Zones" },
-      { title: "Water Circulation" },
-      { title: "Growing Layers" },
-      { title: "Connected Monitoring" },
-      { title: "Operational Control" },
-    ] as const,
+  deployment: {
+    title: "Integrated IoT Deployment",
+    steps: ["Engineering", "Installation", "Calibration", "Training", "Support"],
+    timeline: "Rapid Deployment",
+    timelineDetail: "(4–5 Weeks)",
   },
+  closingStatement:
+    "Planetive also delivers turnkey greenhouse and vertical farming deployments.",
 };
 
-export const AGRI_TECH_CONNECTED_LAYER = {
-  title: "One Connected Operational Layer",
-  center: "VerdantOS",
-  supporting:
-    "Connected workflows support operational awareness and better decision-making across controlled agricultural environments.",
-  nodes: [
+export const AGRI_TECH_ECO_PARKS = {
+  title: "Circular Carbon Economy Infrastructure",
+  description:
+    "Integrated sustainability model combining micro-algae systems, wastewater treatment and agricultural reuse.",
+  flow: [
+    "Wastewater",
+    "Micro-Algae",
+    "Carbon Utilization",
+    "Organic Nutrients",
+    "Vertical Farming",
+    "Water Reuse",
+    "Carbon Credits",
+  ] as const,
+  outcomes: ["Organic Nutrients", "Biomass", "Water Reuse", "Carbon Credits"] as const,
+  partnerNote: "Delivered with technology partners.",
+};
+
+export const AGRI_TECH_ACEP = {
+  title: "Agri-Based Community Empowerment Program",
+  supportingTitle: "Technology-Enabled Community Agriculture",
+  description:
+    "A structured initiative designed to enable communities through modern farming systems and long-term enterprise development.",
+  pillars: [
     {
-      id: "water",
-      label: "Water",
-      description: "Circulation and flow across connected growing environments.",
-    },
-    {
-      id: "environment",
-      label: "Environment",
-      description: "Zones and conditions across controlled agricultural settings.",
-    },
-    {
-      id: "operations",
-      label: "Operations",
+      title: "Modern Agriculture",
       description:
-        "Operational visibility and management across hydroponic environments.",
+        "Deploy controlled-environment and digital agriculture systems suited to community-scale production.",
     },
     {
-      id: "monitoring",
-      label: "Monitoring",
+      title: "Capacity Building",
       description:
-        "Connected oversight and management across agricultural environments.",
+        "Structured training and operational support to build lasting agricultural enterprise capability.",
     },
     {
-      id: "control",
-      label: "Control",
-      description: "Management across connected agricultural environments.",
-    },
-    {
-      id: "insights",
-      label: "Insights",
-      description: "Operational inputs transformed into usable decision support.",
+      title: "Market Linkages",
+      description:
+        "Connect community production to markets, pricing intelligence and supply chain pathways.",
     },
   ] as const,
-};
-
-export const AGRI_TECH_PROCESS = {
-  steps: [
-    {
-      title: "Observe",
-      description: "Real-time visibility across connected agricultural environments.",
-    },
-    {
-      title: "Monitor",
-      description:
-        "Connected oversight and management across agricultural environments.",
-    },
-    {
-      title: "Control",
-      description: "Management across connected agricultural environments.",
-    },
-    {
-      title: "Coordinate",
-      description: "Workflow coordination across agricultural service operations.",
-    },
-    {
-      title: "Optimize",
-      description: "Decision support and process optimization.",
-    },
-    {
-      title: "Operate",
-      description: "Centralized access and operational coordination.",
-    },
-  ] as const,
-};
-
-export const AGRI_TECH_WHY = {
-  headline: "From Monitoring To Operational Clarity",
-  statements: [
-    "Real-Time Visibility",
-    "Connected Operations",
-    "Intelligent Decisions",
-    "Process Optimization",
-    "Operational Efficiency",
+  outcomes: ["Food Security", "Climate Resilience", "Health", "Enterprise"] as const,
+  closingStrip: [
+    "Ultra-Short Supply Chain",
+    "Less Waste",
+    "Higher Community Value",
+    "Better Traceability",
   ] as const,
 };
 

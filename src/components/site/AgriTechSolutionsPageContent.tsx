@@ -4,24 +4,21 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
-import { EditorialCapabilityPanel } from "@/components/site/ecosystem/EditorialCapabilityPanel";
 import {
-  AGRI_TECH_CONNECTED_LAYER,
+  AGRI_TECH_ACEP,
+  AGRI_TECH_AGRI_CO,
+  AGRI_TECH_ECO_PARKS,
   AGRI_TECH_ECOSYSTEM,
   AGRI_TECH_ENGAGEMENT,
-  AGRI_TECH_OVERVIEW,
   AGRI_TECH_PAGE,
-  AGRI_TECH_PROCESS,
-  AGRI_TECH_TERRAFLOW,
-  AGRI_TECH_VERDANT,
-  AGRI_TECH_WHY,
+  AGRI_TECH_VALUE_CHAIN,
+  AGRI_TECH_VERT_OS,
 } from "@/lib/agri-tech-content";
 import { ECOSYSTEM_SURFACE } from "@/lib/ecosystem-page-surfaces";
 import {
   ecosystemEase,
   ecosystemViewport,
   fadeUpChild,
-  scaleIn,
   staggerContainer,
 } from "@/lib/ecosystem-motion";
 import { cn } from "@/lib/utils";
@@ -98,12 +95,11 @@ export function AgriTechSolutionsPageContent() {
   return (
     <div className="bg-background">
       <HeroSection />
-      <OverviewSection />
-      <TerraFlowSection />
-      <VerdantSection />
-      <ConnectedLayerSection />
-      <HowItWorksSection />
-      <WhySection />
+      <ValueChainSection />
+      <AgriCoSection />
+      <VertOsSection />
+      <EcoParksSection />
+      <ACEPSection />
       <EngagementSection />
       <EcosystemSection />
     </div>
@@ -112,7 +108,7 @@ export function AgriTechSolutionsPageContent() {
 
 function HeroSection() {
   const reduced = useReducedMotion();
-  const { eyebrow, titleLines, supportingTitle, description, accentSoft } = AGRI_TECH_PAGE;
+  const { eyebrow, title, description, pillars, accentSoft } = AGRI_TECH_PAGE;
 
   return (
     <section
@@ -140,38 +136,39 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
-              {titleLines.map((line, index) => (
-                <motion.span
-                  key={line}
-                  className="block"
-                  initial={reduced ? false : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.08 + index * 0.1, ease: ecosystemEase }}
-                >
-                  {line}
-                </motion.span>
-              ))}
-            </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
-              {supportingTitle}
+            <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
+              {eyebrow}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
+            <h1 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.08] max-w-3xl">
+              {title}
+            </h1>
+            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-2xl">
               {description}
             </p>
+
+            <div className="mt-10 flex flex-wrap items-center gap-x-1 gap-y-3">
+              {pillars.map((pillar, index) => (
+                <span key={pillar} className="inline-flex items-center">
+                  <span className="font-display text-[clamp(1rem,2vw,1.35rem)] text-mint-soft/95 tracking-tight">
+                    {pillar}
+                  </span>
+                  {index < pillars.length - 1 ? (
+                    <span
+                      className="mx-3 md:mx-5 h-4 w-px bg-mint-soft/35 hidden sm:inline-block"
+                      aria-hidden
+                    />
+                  ) : null}
+                </span>
+              ))}
+            </div>
+
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
-              <a
-                href="#terraflow"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
-              >
-                Explore Platforms
-                <ArrowRight size={15} aria-hidden />
-              </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-ghost-light"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-mint"
               >
-                Discuss Implementation
+                Book a Consultation
+                <ArrowRight size={15} aria-hidden />
               </Link>
             </div>
           </motion.div>
@@ -260,79 +257,119 @@ function HeroAgriScene({ reduced }: { reduced: boolean }) {
   );
 }
 
-function OverviewSection() {
+function ValueChainSection() {
   const reduced = useReducedMotion();
-  const { title, intro, supports } = AGRI_TECH_OVERVIEW;
+  const { title, stages } = AGRI_TECH_VALUE_CHAIN;
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.first}>
       <div className={cn(PAGE, SECTION)}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          <motion.div
-            className="lg:col-span-5"
-            initial={reduced ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
-              {title}
-            </h2>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{intro}</p>
-          </motion.div>
+        <SectionHeader title={title} className="mb-12 md:mb-16 max-w-3xl" />
 
-          <div className="lg:col-span-7">
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-n500 mb-6">
-              The platform supports
-            </p>
-            <ul className="space-y-4 md:space-y-5">
-              {supports.map((item, index) => (
-                <motion.li
-                  key={item}
-                  className="font-display text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
-                  initial={reduced ? false : { opacity: 0, x: 12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: index * 0.05 }}
+        <div className="hidden lg:block">
+          <div className="relative">
+            <motion.div
+              className="absolute top-5 left-0 right-0 h-px bg-n200/80 origin-left"
+              aria-hidden
+              initial={reduced ? false : { scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={ecosystemViewport}
+              transition={{ duration: 0.8, ease: ecosystemEase }}
+            />
+            <div className="grid grid-cols-6 gap-3">
+              {stages.map((stage, index) => (
+                <motion.button
+                  key={stage.id}
+                  type="button"
+                  className={cn(
+                    "relative pt-8 text-left transition-opacity",
+                    activeIndex === index ? "opacity-100" : "opacity-55 hover:opacity-80",
+                  )}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onFocus={() => setActiveIndex(index)}
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={ecosystemViewport}
+                  transition={{ duration: 0.45, delay: 0.15 + index * 0.06, ease: ecosystemEase }}
                 >
-                  {item}
-                </motion.li>
+                  <motion.span
+                    className={cn(
+                      "absolute top-3 left-0 h-3 w-3 rounded-full border-2 bg-[var(--n50)] transition-colors",
+                      activeIndex === index ? "border-canopy bg-canopy" : "border-n300",
+                    )}
+                    aria-hidden
+                  />
+                  <span className="font-display text-sm md:text-base text-forest leading-snug block pr-2">
+                    {stage.label}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          <motion.div
+            key={stages[activeIndex].id}
+            className="mt-12 rounded-[24px] border border-n200/70 bg-white px-8 py-8 md:px-10 md:py-10 shadow-[var(--shadow-soft)]"
+            initial={reduced ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+          >
+            <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy mb-5">
+              {stages[activeIndex].label}
+            </p>
+            <ul className="flex flex-wrap gap-2.5">
+              {stages[activeIndex].capabilities.map((cap) => (
+                <li
+                  key={cap}
+                  className="rounded-full border border-n200/80 bg-[var(--n50)] px-4 py-2 text-sm font-medium text-forest"
+                >
+                  {cap}
+                </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
+        </div>
+
+        <div className="lg:hidden space-y-6">
+          {stages.map((stage, index) => (
+            <motion.div
+              key={stage.id}
+              className="rounded-[20px] border border-n200/70 bg-white px-6 py-6 shadow-[var(--shadow-soft)]"
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <div className="flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-canopy shrink-0" aria-hidden />
+                <h3 className="font-display text-lg text-forest">{stage.label}</h3>
+              </div>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {stage.capabilities.map((cap) => (
+                  <li
+                    key={cap}
+                    className="rounded-full border border-n200/80 bg-[var(--n50)] px-3 py-1.5 text-xs font-medium text-forest"
+                  >
+                    {cap}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </MotionSection>
   );
 }
 
-function terraFlowModulePositions(count: number) {
-  return Array.from({ length: count }, (_, i) => {
-    const angle = (i / count) * Math.PI * 2 - Math.PI / 2;
-    const radius = 38;
-    return { x: 50 + radius * Math.cos(angle), y: 50 + radius * Math.sin(angle) };
-  });
-}
-
-function TerraFlowSection() {
+function AgriCoSection() {
   const reduced = useReducedMotion();
-  const {
-    label,
-    title,
-    supportingTitle,
-    description,
-    descriptionExtended,
-    capabilities,
-    architecture,
-    surfaces,
-  } = AGRI_TECH_TERRAFLOW;
-  const [activeModule, setActiveModule] = useState<number | null>(null);
-  const modulePositions = terraFlowModulePositions(architecture.modules.length);
+  const { label, title, supportingTitle, description, modules, surfaces } = AGRI_TECH_AGRI_CO;
 
   return (
-    <MotionSection id="terraflow" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
+    <MotionSection id="agri-co" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
-        {/* Intro */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <motion.div
             className="lg:col-span-5"
@@ -362,9 +399,6 @@ function TerraFlowSection() {
             <motion.p className="mt-6 text-base md:text-lg text-n600 leading-relaxed" variants={fadeUpChild}>
               {description}
             </motion.p>
-            <motion.p className="mt-4 text-base md:text-lg text-n600 leading-relaxed" variants={fadeUpChild}>
-              {descriptionExtended}
-            </motion.p>
           </motion.div>
 
           <div className="lg:col-span-7">
@@ -375,10 +409,10 @@ function TerraFlowSection() {
               viewport={ecosystemViewport}
               transition={{ duration: 0.45, ease: ecosystemEase }}
             >
-              Platform Capabilities
+              Platform Modules
             </motion.p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-0">
-              {capabilities.map((item, index) => (
+              {modules.map((item, index) => (
                 <motion.li
                   key={item}
                   className="font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 py-3.5 md:py-4"
@@ -394,105 +428,6 @@ function TerraFlowSection() {
           </div>
         </div>
 
-        {/* Experience architecture */}
-        <div className="mt-20 md:mt-28 lg:mt-32 pt-16 md:pt-20 border-t border-n200/60">
-          <motion.p
-            className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy text-center mb-3"
-            initial={reduced ? false : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={ecosystemViewport}
-            transition={{ duration: 0.45, ease: ecosystemEase }}
-          >
-            Experience Architecture
-          </motion.p>
-          <motion.p
-            className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500 text-center mb-12 md:mb-16"
-            initial={reduced ? false : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={ecosystemViewport}
-            transition={{ duration: 0.45, delay: 0.05, ease: ecosystemEase }}
-          >
-            {architecture.modulesLabel}
-          </motion.p>
-
-          <div className="relative max-w-2xl mx-auto aspect-square">
-            <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden>
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="38"
-                stroke="#1A6B4A"
-                strokeOpacity="0.1"
-                fill="none"
-                initial={reduced ? false : { opacity: 0, scale: 0.92 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={ecosystemViewport}
-                transition={{ duration: 0.9, ease: ecosystemEase }}
-                style={{ transformOrigin: "50px 50px" }}
-              />
-              {architecture.modules.map((_, i) => {
-                const pos = modulePositions[i];
-                return (
-                  <motion.line
-                    key={architecture.modules[i]}
-                    x1="50"
-                    y1="50"
-                    x2={pos.x}
-                    y2={pos.y}
-                    stroke="#1A6B4A"
-                    strokeOpacity={activeModule === i ? 0.35 : 0.1}
-                    strokeWidth="0.5"
-                    initial={reduced ? false : { opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={ecosystemViewport}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.05, ease: ecosystemEase }}
-                  />
-                );
-              })}
-            </svg>
-
-            <motion.div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-              initial={reduced ? false : "hidden"}
-              whileInView="visible"
-              viewport={ecosystemViewport}
-              variants={scaleIn}
-            >
-              <div className="rounded-full border border-canopy/30 bg-white px-5 py-3 shadow-[var(--shadow-soft)]">
-                <span className="font-display text-sm md:text-base text-forest">{architecture.center}</span>
-              </div>
-            </motion.div>
-
-            {architecture.modules.map((mod, i) => {
-              const pos = modulePositions[i];
-              return (
-                <motion.button
-                  key={mod}
-                  type="button"
-                  className={cn(
-                    "absolute z-10 max-w-[7.5rem] sm:max-w-[9rem] -translate-x-1/2 -translate-y-1/2 rounded-full border px-2.5 py-2 text-[10px] sm:text-xs font-semibold leading-tight text-center transition-all duration-300",
-                    activeModule === i
-                      ? "border-canopy bg-white text-forest shadow-[var(--shadow-soft)] scale-105"
-                      : "border-n200/80 bg-white/95 text-n600 hover:border-canopy/30",
-                  )}
-                  style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-                  onMouseEnter={() => setActiveModule(i)}
-                  onFocus={() => setActiveModule(i)}
-                  onMouseLeave={() => setActiveModule(null)}
-                  onBlur={() => setActiveModule(null)}
-                  initial={reduced ? false : { opacity: 0, scale: 0.85 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={ecosystemViewport}
-                  transition={{ duration: 0.45, delay: 0.15 + i * 0.06, ease: ecosystemEase }}
-                >
-                  {mod}
-                </motion.button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Experience surfaces */}
         <div className="mt-20 md:mt-28 lg:mt-32 pt-16 md:pt-20 border-t border-n200/60 max-w-2xl mx-auto">
           <motion.p
             className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy text-center mb-14 md:mb-16"
@@ -512,7 +447,7 @@ function TerraFlowSection() {
               viewport={ecosystemViewport}
               transition={{ duration: 0.5, delay: index * 0.08, ease: ecosystemEase }}
             >
-              <TerraFlowSurfaceVisual type={surface.visual} reduced={!!reduced} />
+              <AgriCoSurfaceVisual type={surface.visual} reduced={!!reduced} />
               <p className="mt-6 font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
                 {surface.title}
               </p>
@@ -543,7 +478,7 @@ function TerraFlowSection() {
   );
 }
 
-function TerraFlowSurfaceVisual({
+function AgriCoSurfaceVisual({
   type,
   reduced,
 }: {
@@ -567,20 +502,18 @@ function TerraFlowSurfaceVisual({
       </div>
       <div className={cn("p-5 space-y-3", isWeb ? "min-h-[120px]" : "min-h-[160px]")}>
         {type === "web" ? (
-          <>
-            <div className="flex gap-3">
-              <div className="h-16 w-1/4 rounded-lg bg-mint-soft/30" />
-              <div className="flex-1 space-y-2">
-                <div className="h-2 w-3/4 rounded-full bg-n200/60" />
-                <div className="h-2 w-full rounded-full bg-n100" />
-                <motion.div
-                  className="h-8 rounded-md bg-canopy/10 mt-2"
-                  animate={reduced ? undefined : { opacity: [0.5, 0.85, 0.5] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
+          <div className="flex gap-3">
+            <div className="h-16 w-1/4 rounded-lg bg-mint-soft/30" />
+            <div className="flex-1 space-y-2">
+              <div className="h-2 w-3/4 rounded-full bg-n200/60" />
+              <div className="h-2 w-full rounded-full bg-n100" />
+              <motion.div
+                className="h-8 rounded-md bg-canopy/10 mt-2"
+                animate={reduced ? undefined : { opacity: [0.5, 0.85, 0.5] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              />
             </div>
-          </>
+          </div>
         ) : null}
         {type === "mobile-field" ? (
           <>
@@ -617,347 +550,261 @@ function TerraFlowSurfaceVisual({
   );
 }
 
-function VerdantSection() {
+function VertOsSection() {
   const reduced = useReducedMotion();
-  const { label, categoryLabel, title, supportingTitle, focusDescription, description, modules, panel } =
-    AGRI_TECH_VERDANT;
+  const { label, title, supportingTitle, description, capabilityCards, deployment, closingStatement } =
+    AGRI_TECH_VERT_OS;
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <MotionSection id="verdantos" className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}>
-      <div className={cn(PAGE, SECTION)}>
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
-          <div className="xl:col-span-5 xl:sticky xl:top-28">
-            <motion.div
-              initial={reduced ? false : "hidden"}
-              whileInView="visible"
-              viewport={ecosystemViewport}
-              variants={staggerContainer}
-            >
-              <motion.p
-                className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy"
-                variants={fadeUpChild}
-              >
-                {label}
-              </motion.p>
-              <motion.p
-                className="mt-3 font-mono text-[10px] tracking-[0.18em] uppercase text-n500"
-                variants={fadeUpChild}
-              >
-                {categoryLabel}
-              </motion.p>
-              <motion.h2
-                className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
-                variants={fadeUpChild}
-              >
-                {title}
-              </motion.h2>
-              <motion.p
-                className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug"
-                variants={fadeUpChild}
-              >
-                {supportingTitle}
-              </motion.p>
-              <motion.p
-                className="mt-5 text-base md:text-lg text-n600 leading-relaxed"
-                variants={fadeUpChild}
-              >
-                {focusDescription}
-              </motion.p>
-              <motion.p
-                className="mt-4 text-base md:text-lg text-n600 leading-relaxed"
-                variants={fadeUpChild}
-              >
-                {description}
-              </motion.p>
-            </motion.div>
-            <div className="mt-10 hidden xl:block">
-              <EditorialCapabilityPanel eyebrow={panel.eyebrow} layers={panel.layers} direction="left" />
-            </div>
-          </div>
-
-          <div className="xl:col-span-7 space-y-3 md:space-y-4">
-            <div className="xl:hidden mb-8">
-              <EditorialCapabilityPanel eyebrow={panel.eyebrow} layers={panel.layers} direction="right" />
-            </div>
-            {modules.map((mod, index) => (
-              <motion.div
-                key={mod.title}
-                className={cn(
-                  "rounded-[20px] border px-6 py-6 md:px-8 md:py-7 transition-colors duration-300 cursor-default",
-                  active === index
-                    ? "border-canopy/30 bg-white shadow-[var(--shadow-soft)]"
-                    : "border-n200/70 bg-[var(--n50)]/40 hover:border-canopy/20 hover:bg-white",
-                )}
-                onMouseEnter={() => setActive(index)}
-                onMouseLeave={() => setActive(null)}
-                onClick={() => setActive(active === index ? null : index)}
-                initial={reduced ? false : { opacity: 0, y: 20, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={ecosystemViewport}
-                transition={{ duration: 0.5, delay: index * 0.07, ease: ecosystemEase }}
-                whileHover={reduced ? undefined : { y: -2 }}
-              >
-                <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
-                  Module {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-display text-xl md:text-2xl text-forest leading-snug">
-                  {mod.title}
-                </h3>
-                <p
-                  className={cn(
-                    "text-sm md:text-base text-n600 leading-relaxed transition-all duration-300",
-                    active === index ? "mt-3 opacity-100" : "mt-0 h-0 opacity-0 overflow-hidden",
-                  )}
-                >
-                  {mod.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </MotionSection>
-  );
-}
-
-function ConnectedLayerSection() {
-  const reduced = useReducedMotion();
-  const { title, center, supporting, nodes } = AGRI_TECH_CONNECTED_LAYER;
-  const [activeNode, setActiveNode] = useState<string | null>(null);
-
-  const positions = [
-    { x: 50, y: 12 },
-    { x: 85, y: 32 },
-    { x: 92, y: 68 },
-    { x: 70, y: 88 },
-    { x: 30, y: 88 },
-    { x: 8, y: 68 },
-  ];
-
-  const active = nodes.find((n) => n.id === activeNode);
-
-  return (
-    <MotionSection className={ECOSYSTEM_SURFACE.white}>
+    <MotionSection id="vert-os" className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
         <motion.div
+          className="max-w-3xl"
           initial={reduced ? false : "hidden"}
           whileInView="visible"
           viewport={ecosystemViewport}
-          variants={fadeUpChild}
+          variants={staggerContainer}
         >
-          <SectionHeader title={title} align="center" className="mb-12 md:mb-16" />
+          <motion.p
+            className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy"
+            variants={fadeUpChild}
+          >
+            {label}
+          </motion.p>
+          <motion.h2
+            className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
+            variants={fadeUpChild}
+          >
+            {title}
+          </motion.h2>
+          <motion.p
+            className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug"
+            variants={fadeUpChild}
+          >
+            {supportingTitle}
+          </motion.p>
+          <motion.p
+            className="mt-5 text-base md:text-lg text-n600 leading-relaxed"
+            variants={fadeUpChild}
+          >
+            {description}
+          </motion.p>
         </motion.div>
 
-        <div className="relative max-w-lg mx-auto aspect-square">
-          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden>
-            <motion.circle
-              cx="50"
-              cy="50"
-              r="38"
-              stroke="#1A6B4A"
-              strokeOpacity="0.1"
-              fill="none"
-              initial={reduced ? false : { opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={ecosystemViewport}
-              transition={{ duration: 0.9, ease: ecosystemEase }}
-              style={{ transformOrigin: "50px 50px" }}
-            />
-            {nodes.map((node, i) => {
-              const pos = positions[i];
-              return (
-                <line
-                  key={node.id}
-                  x1="50"
-                  y1="50"
-                  x2={pos.x}
-                  y2={pos.y}
-                  stroke="#1A6B4A"
-                  strokeOpacity={activeNode === node.id ? 0.35 : 0.12}
-                  strokeWidth="0.5"
-                />
-              );
-            })}
-          </svg>
-
-          <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-            initial={reduced ? false : "hidden"}
-            whileInView="visible"
-            viewport={ecosystemViewport}
-            variants={scaleIn}
-          >
-            <div className="rounded-full border border-canopy/30 bg-white px-5 py-3 shadow-[var(--shadow-soft)]">
-              <span className="font-display text-sm md:text-base text-forest">{center}</span>
-            </div>
-          </motion.div>
-
-          {nodes.map((node, i) => {
-            const pos = positions[i];
-            return (
-              <motion.button
-                key={node.id}
-                type="button"
-                className={cn(
-                  "absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border px-3 py-2 text-xs font-semibold transition-all duration-300",
-                  activeNode === node.id
-                    ? "border-canopy bg-white text-forest shadow-[var(--shadow-soft)] scale-105"
-                    : "border-n200/80 bg-white/90 text-n600 hover:border-canopy/30",
-                )}
-                style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-                onMouseEnter={() => setActiveNode(node.id)}
-                onFocus={() => setActiveNode(node.id)}
-                onMouseLeave={() => setActiveNode(null)}
-                onBlur={() => setActiveNode(null)}
-                initial={reduced ? false : { opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={ecosystemViewport}
-                transition={{ duration: 0.45, delay: 0.15 + i * 0.08, ease: ecosystemEase }}
-              >
-                {node.label}
-              </motion.button>
-            );
-          })}
-        </div>
-
-        <motion.p
-          key={active?.id ?? "default"}
-          className="mt-10 md:mt-12 max-w-2xl mx-auto text-center text-base md:text-lg text-n600 leading-relaxed"
-          initial={reduced ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-        >
-          {active?.description ?? supporting}
-        </motion.p>
-      </div>
-    </MotionSection>
-  );
-}
-
-function HowItWorksSection() {
-  const reduced = useReducedMotion();
-  const steps = AGRI_TECH_PROCESS.steps;
-  const [active, setActive] = useState(0);
-
-  return (
-    <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
-      <div className={cn(PAGE, SECTION)}>
-        <motion.p
-          className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy text-center mb-12"
-          initial={reduced ? false : { opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={ecosystemViewport}
-          transition={{ duration: 0.45, ease: ecosystemEase }}
-        >
-          How It Works
-        </motion.p>
-
-        <div className="hidden lg:block relative max-w-5xl mx-auto">
-          <motion.div
-            className="absolute top-5 left-0 right-0 h-px bg-n200/80 origin-left"
-            aria-hidden
-            initial={reduced ? false : { scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={ecosystemViewport}
-            transition={{ duration: 0.8, ease: ecosystemEase }}
-          />
-          <div className="flex justify-between gap-2">
-            {steps.map((step, index) => (
-              <motion.button
-                key={step.title}
-                type="button"
-                className={cn(
-                  "relative flex-1 text-center pt-8 transition-opacity",
-                  active === index ? "opacity-100" : "opacity-50 hover:opacity-75",
-                )}
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-                initial={reduced ? false : { opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={ecosystemViewport}
-                transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: ecosystemEase }}
-              >
-                <motion.span
-                  className={cn(
-                    "absolute top-3 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full border-2 bg-[var(--n100)] transition-colors",
-                    active === index ? "border-canopy bg-canopy" : "border-n300",
-                  )}
-                  aria-hidden
-                  initial={reduced ? false : { scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={ecosystemViewport}
-                  transition={{ duration: 0.35, delay: 0.25 + index * 0.08, ease: ecosystemEase }}
-                />
-                <span className="font-display text-sm md:text-base text-forest">{step.title}</span>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:hidden flex flex-wrap gap-2 justify-center mb-8">
-          {steps.map((step, index) => (
-            <button
-              key={step.title}
-              type="button"
+        <div className="mt-14 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          {capabilityCards.map((card, index) => (
+            <motion.div
+              key={card.title}
               className={cn(
-                "rounded-full px-4 py-2 text-sm font-semibold border transition-colors",
+                "rounded-[20px] border px-6 py-6 md:px-8 md:py-7 transition-colors duration-300",
                 active === index
-                  ? "border-canopy bg-mint-soft/30 text-forest"
-                  : "border-n200 text-n600",
+                  ? "border-canopy/30 bg-white shadow-[var(--shadow-soft)]"
+                  : "border-n200/70 bg-[var(--n50)]/40 hover:border-canopy/20 hover:bg-white",
               )}
-              onClick={() => setActive(index)}
+              onMouseEnter={() => setActive(index)}
+              onMouseLeave={() => setActive(null)}
+              initial={reduced ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={ecosystemViewport}
+              transition={{ duration: 0.5, delay: index * 0.07, ease: ecosystemEase }}
             >
-              {step.title}
-            </button>
+              <h3 className="font-display text-xl md:text-2xl text-forest leading-snug">
+                {card.title}
+              </h3>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {card.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-full border border-n200/80 bg-white/80 px-3 py-1.5 text-xs font-medium text-forest"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           ))}
         </div>
 
         <motion.div
-          key={active}
-          className="max-w-xl mx-auto text-center mt-10"
-          initial={reduced ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-        >
-          <p className="font-display text-xl text-forest">{steps[active].title}</p>
-          <p className="mt-3 text-base text-n600 leading-relaxed">{steps[active].description}</p>
-        </motion.div>
-      </div>
-    </MotionSection>
-  );
-}
-
-function WhySection() {
-  const reduced = useReducedMotion();
-  const { headline, statements } = AGRI_TECH_WHY;
-
-  return (
-    <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
-      <div className={cn(PAGE, SECTION)}>
-        <motion.h2
-          className="font-display text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
+          className="mt-14 md:mt-16 rounded-[24px] border border-canopy/20 bg-white px-6 py-8 md:px-10 md:py-10 shadow-[var(--shadow-soft)]"
           initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={ecosystemViewport}
           transition={{ duration: 0.5, ease: ecosystemEase }}
         >
-          {headline}
-        </motion.h2>
-        <ul className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8 max-w-5xl mx-auto">
-          {statements.map((item, index) => (
-            <motion.li
-              key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
-              initial={reduced ? false : { opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
+          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">
+            {deployment.title}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+            {deployment.steps.map((step, index) => (
+              <span key={step} className="inline-flex items-center">
+                <span className="text-sm md:text-base font-medium text-forest">{step}</span>
+                {index < deployment.steps.length - 1 ? (
+                  <span className="mx-3 text-n400" aria-hidden>
+                    →
+                  </span>
+                ) : null}
+              </span>
+            ))}
+          </div>
+          <div className="mt-8 pt-6 border-t border-n200/70 flex flex-wrap items-baseline gap-3">
+            <span className="font-display text-xl md:text-2xl text-forest">
+              {deployment.timeline}
+            </span>
+            <span className="text-sm text-n600">{deployment.timelineDetail}</span>
+          </div>
+        </motion.div>
+
+        <motion.p
+          className="mt-10 text-base md:text-lg text-n600 leading-relaxed max-w-3xl"
+          initial={reduced ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.45, delay: 0.1 }}
+        >
+          {closingStatement}
+        </motion.p>
+      </div>
+    </MotionSection>
+  );
+}
+
+function EcoParksSection() {
+  const reduced = useReducedMotion();
+  const { title, description, flow, outcomes, partnerNote } = AGRI_TECH_ECO_PARKS;
+
+  return (
+    <MotionSection id="eco-parks" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
+      <div className={cn(PAGE, SECTION)}>
+        <SectionHeader title={title} description={description} className="mb-12 md:mb-16 max-w-3xl" />
+
+        <motion.div
+          className="overflow-x-auto pb-2"
+          initial={reduced ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="flex items-center gap-2 md:gap-3 min-w-max mx-auto justify-center px-2">
+            {flow.map((step, index) => (
+              <span key={step} className="inline-flex items-center gap-2 md:gap-3">
+                <span className="rounded-full border border-canopy/25 bg-mint-soft/30 px-4 py-2.5 text-sm font-semibold text-forest whitespace-nowrap">
+                  {step}
+                </span>
+                {index < flow.length - 1 ? (
+                  <span className="text-canopy/60 text-lg" aria-hidden>
+                    ↓
+                  </span>
+                ) : null}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="mt-12 md:mt-14 flex flex-wrap justify-center gap-3"
+          initial={reduced ? false : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.45, delay: 0.1 }}
+        >
+          {outcomes.map((outcome) => (
+            <span
+              key={outcome}
+              className="rounded-full border border-n200/80 bg-[var(--n50)] px-5 py-2.5 font-display text-sm md:text-base text-forest"
             >
-              {item}
-            </motion.li>
+              {outcome}
+            </span>
           ))}
-        </ul>
+        </motion.div>
+
+        <motion.p
+          className="mt-10 text-center text-sm text-n600"
+          initial={reduced ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.4, delay: 0.15 }}
+        >
+          {partnerNote}
+        </motion.p>
+      </div>
+    </MotionSection>
+  );
+}
+
+function ACEPSection() {
+  const reduced = useReducedMotion();
+  const { title, supportingTitle, description, pillars, outcomes, closingStrip } = AGRI_TECH_ACEP;
+
+  return (
+    <MotionSection id="acep" className={cn(ECOSYSTEM_SURFACE.sheet, "scroll-mt-24")}>
+      <div className={cn(PAGE, SECTION)}>
+        <SectionHeader
+          eyebrow={supportingTitle}
+          title={title}
+          description={description}
+          className="mb-12 md:mb-16 max-w-3xl"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          {pillars.map((pillar, index) => (
+            <motion.article
+              key={pillar.title}
+              className="rounded-[20px] border border-n200/70 bg-white px-6 py-7 md:px-8 md:py-8 shadow-[var(--shadow-soft)]"
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={ecosystemViewport}
+              transition={{ duration: 0.45, delay: index * 0.08, ease: ecosystemEase }}
+            >
+              <h3 className="font-display text-xl md:text-2xl text-forest leading-snug">
+                {pillar.title}
+              </h3>
+              <p className="mt-4 text-sm md:text-base text-n600 leading-relaxed">
+                {pillar.description}
+              </p>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-12 md:mt-14"
+          initial={reduced ? false : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.45 }}
+        >
+          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy mb-5">Outcomes</p>
+          <ul className="flex flex-wrap gap-3">
+            {outcomes.map((outcome) => (
+              <li
+                key={outcome}
+                className="font-display text-[clamp(1.1rem,2vw,1.4rem)] text-forest border-b border-n200/60 pb-3 pr-6"
+              >
+                {outcome}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div
+          className="mt-14 md:mt-16 rounded-[20px] border border-canopy/20 bg-mint-soft/25 px-6 py-6 md:px-10 md:py-8"
+          initial={reduced ? false : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={ecosystemViewport}
+          transition={{ duration: 0.45, delay: 0.1 }}
+        >
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {closingStrip.map((item) => (
+              <li
+                key={item}
+                className="font-display text-base md:text-lg text-forest leading-snug text-center sm:text-left"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </MotionSection>
   );

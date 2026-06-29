@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
-import { BOOKING_CONSULTANTS } from "@/lib/site-booking";
+import { BOOKING_AREAS } from "@/lib/site-booking";
 import {
   CONSULTING_PAGE,
   CONSULTING_PROCESS,
@@ -26,7 +26,7 @@ export function ConsultingPageContent() {
           eyebrow={CONSULTING_PAGE.bookEyebrow}
           title={CONSULTING_PAGE.bookTitle}
           description={CONSULTING_PAGE.bookDescription}
-          consultants={BOOKING_CONSULTANTS}
+          areas={BOOKING_AREAS}
         />
       </div>
     </>
