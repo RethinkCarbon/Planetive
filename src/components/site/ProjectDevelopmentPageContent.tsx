@@ -368,6 +368,23 @@ function ProjectEditorial({
           <p className="mt-4 text-sm md:text-base text-n600 leading-relaxed">{project.additional}</p>
         ) : null}
 
+        {"supportingCopy" in project && project.supportingCopy ? (
+          <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{project.supportingCopy}</p>
+        ) : null}
+
+        {"highlights" in project && project.highlights ? (
+          <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            {project.highlights.map((item) => (
+              <li
+                key={item}
+                className="border-t border-n200/70 pt-4 font-display text-[clamp(1rem,1.8vw,1.2rem)] text-forest leading-snug"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
         {"portfolio" in project && project.portfolio ? (
           <ul className="mt-6 space-y-2">
             {project.portfolio.map((item) => (
@@ -380,6 +397,38 @@ function ProjectEditorial({
             ))}
           </ul>
         ) : null}
+
+        {"collaborations" in project && project.collaborations
+          ? project.collaborations.map((collaboration) => (
+              <div
+                key={collaboration.title}
+                className="mt-10 pt-8 border-t border-n200/60"
+              >
+                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
+                  Collaboration Reference
+                </p>
+                <h4 className="mt-3 font-display text-[clamp(1.15rem,2vw,1.5rem)] text-forest leading-snug">
+                  {collaboration.title}
+                </h4>
+                <p className="mt-4 text-base text-n600 leading-relaxed">
+                  {collaboration.description}
+                </p>
+                <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                  {collaboration.highlights.map((item) => (
+                    <li
+                      key={item}
+                      className="border-t border-n200/60 pt-3 font-display text-[clamp(0.95rem,1.6vw,1.1rem)] text-forest leading-snug"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-sm text-n600 leading-relaxed">
+                  {collaboration.supportingCopy}
+                </p>
+              </div>
+            ))
+          : null}
 
         <div className="mt-8 pt-8 border-t border-n200/60">
           <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500 mb-4">Scope</p>
@@ -404,7 +453,7 @@ function ProjectVisual({
   type,
   reduced,
 }: {
-  type: "pathway" | "expansion" | "ecosystem";
+  type: "pathway" | "expansion" | "ecosystem" | "infrastructure";
   reduced: boolean;
 }) {
   return (
@@ -415,6 +464,7 @@ function ProjectVisual({
       {type === "pathway" ? <PathwayVisual reduced={reduced} /> : null}
       {type === "expansion" ? <ExpansionVisual reduced={reduced} /> : null}
       {type === "ecosystem" ? <EcosystemMapVisual reduced={reduced} /> : null}
+      {type === "infrastructure" ? <InfrastructureVisual reduced={reduced} /> : null}
     </div>
   );
 }
@@ -549,6 +599,103 @@ function EcosystemMapVisual({ reduced }: { reduced: boolean }) {
         </motion.g>
       ))}
       <circle cx="160" cy="140" r="6" fill="#1A6B4A" fillOpacity="0.5" />
+    </svg>
+  );
+}
+
+function InfrastructureVisual({ reduced }: { reduced: boolean }) {
+  return (
+    <svg viewBox="0 0 320 280" className="w-full h-auto" fill="none">
+      <defs>
+        <linearGradient id="pd-hydro-flow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#1A6B4A" stopOpacity="0.08" />
+          <stop offset="50%" stopColor="#2ECC8A" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#1A6B4A" stopOpacity="0.08" />
+        </linearGradient>
+      </defs>
+
+      <motion.path
+        d="M40 200 Q120 180 160 195 T280 185"
+        stroke="url(#pd-hydro-flow)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        animate={reduced ? undefined : { d: ["M40 200 Q120 180 160 195 T280 185", "M40 202 Q120 178 160 197 T280 183", "M40 200 Q120 180 160 195 T280 185"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.path
+        d="M50 215 Q140 200 180 210 T290 205"
+        stroke="#2ECC8A"
+        strokeOpacity="0.18"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        animate={reduced ? undefined : { opacity: [0.12, 0.28, 0.12] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.path
+        d="M60 228 Q150 218 190 225 T300 220"
+        stroke="#1A6B4A"
+        strokeOpacity="0.12"
+        strokeWidth="1"
+        strokeLinecap="round"
+        animate={reduced ? undefined : { opacity: [0.1, 0.22, 0.1] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
+
+      <motion.rect
+        x="100"
+        y="72"
+        width="120"
+        height="14"
+        rx="2"
+        stroke="#1A6B4A"
+        strokeOpacity="0.2"
+        fill="#1A6B4A"
+        fillOpacity="0.06"
+        animate={reduced ? undefined : { opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {[0, 1, 2, 3].map((i) => (
+        <motion.line
+          key={i}
+          x1={115 + i * 28}
+          y1="86"
+          x2={115 + i * 28}
+          y2={110 + i * 8}
+          stroke="#2ECC8A"
+          strokeOpacity="0.2"
+          strokeWidth="1"
+          animate={reduced ? undefined : { y2: [110 + i * 8, 118 + i * 8, 110 + i * 8] }}
+          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+        />
+      ))}
+
+      <motion.path
+        d="M80 140 L240 140"
+        stroke="#A8F0D4"
+        strokeOpacity="0.25"
+        strokeWidth="1"
+        strokeLinecap="round"
+        animate={reduced ? undefined : { pathLength: [0.4, 1, 0.4] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {[
+        { x: 80, y: 140 },
+        { x: 160, y: 140 },
+        { x: 240, y: 140 },
+      ].map((node, i) => (
+        <motion.circle
+          key={i}
+          cx={node.x}
+          cy={node.y}
+          r="3"
+          fill="#2ECC8A"
+          fillOpacity="0.35"
+          animate={reduced ? undefined : { opacity: [0.25, 0.6, 0.25] }}
+          transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+        />
+      ))}
     </svg>
   );
 }

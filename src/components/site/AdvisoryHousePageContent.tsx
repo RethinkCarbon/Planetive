@@ -6,9 +6,11 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   ADVISORY_HOUSE_AREAS,
+  ADVISORY_HOUSE_BANKABILITY_STUDY,
   ADVISORY_HOUSE_CTA,
   ADVISORY_HOUSE_ECOSYSTEM,
   ADVISORY_HOUSE_ENGAGEMENT,
+  ADVISORY_HOUSE_ONGOING_PROGRAM,
   ADVISORY_HOUSE_PAGE,
   ADVISORY_HOUSE_PROCESS,
   ADVISORY_HOUSE_WHAT_WE_DO,
@@ -93,6 +95,8 @@ export function AdvisoryHousePageContent() {
       <WhatWeDoSection />
       <SelectedEngagementSection />
       <ExecutiveWorkshopsSection />
+      <BankabilityStudySection />
+      <OngoingProgramSection />
       <HowWeEngageSection />
       <EngagementAreasSection />
       <WhySection />
@@ -535,6 +539,398 @@ function WorkshopAbstractVisual({ reduced }: { reduced: boolean }) {
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-transparent" />
+    </div>
+  );
+}
+
+function BankabilityStudySection() {
+  const reduced = useReducedMotion();
+  const {
+    sectionLabel,
+    label,
+    title,
+    supportingTitle,
+    description,
+    scopeNote,
+    studyObjective,
+    assessmentScope,
+    frameworkHighlights,
+    decisionConfidence,
+    whoInsightsSupport,
+  } = ADVISORY_HOUSE_BANKABILITY_STUDY;
+
+  return (
+    <>
+      <MotionSection id="bankability-study" className={cn(ECOSYSTEM_SURFACE.sheet, "scroll-mt-24")}>
+        <div className={cn(PAGE, SECTION)}>
+          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy mb-12 md:mb-16">
+            {sectionLabel}
+          </p>
+
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
+            <motion.div
+              className="xl:col-span-5"
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease }}
+            >
+              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
+              <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+                {title}
+              </h2>
+              <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+                {supportingTitle}
+              </p>
+              <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
+              <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{scopeNote}</p>
+            </motion.div>
+
+            <div className="xl:col-span-7">
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12"
+                initial={reduced ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, ease }}
+              >
+                <div className="border-t border-n200/70 pt-8">
+                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
+                    {studyObjective.title}
+                  </p>
+                  <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">
+                    {studyObjective.body}
+                  </p>
+                </div>
+                <div className="border-t border-n200/70 pt-8">
+                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
+                    {assessmentScope.title}
+                  </p>
+                  <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">
+                    {assessmentScope.body}
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          <motion.div
+            className="mt-14 md:mt-20 pt-12 border-t border-n200/60"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.05, ease }}
+          >
+            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
+              {frameworkHighlights.title}
+            </p>
+            <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {frameworkHighlights.items.map((item, index) => (
+                <motion.li
+                  key={item}
+                  className="border-t border-n200/70 pt-6 font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug"
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.06, ease }}
+                >
+                  {item}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </MotionSection>
+
+      <MotionSection className={ECOSYSTEM_SURFACE.white}>
+        <div className={cn(PAGE, SECTION)}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <motion.div
+              className="lg:col-span-5"
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease }}
+            >
+              <h2 className="font-display text-[clamp(1.85rem,3.2vw,2.5rem)] text-forest leading-tight">
+                {decisionConfidence.title}
+              </h2>
+              <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed max-w-md">
+                {decisionConfidence.supportingCopy}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="lg:col-span-7"
+              initial={reduced ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease }}
+            >
+              <BankabilityFrameworkVisual
+                steps={decisionConfidence.steps}
+                reduced={!!reduced}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </MotionSection>
+
+      <MotionSection className={ECOSYSTEM_SURFACE.mint}>
+        <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
+          <SectionHeader
+            title={whoInsightsSupport.title}
+            align="center"
+            className="mb-12 md:mb-14"
+          />
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 max-w-5xl mx-auto">
+            {whoInsightsSupport.audiences.map((audience, index) => (
+              <motion.li
+                key={audience}
+                className="border-t border-n200/70 pt-6 text-center"
+                initial={reduced ? false : { opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.06, ease }}
+              >
+                <span className="font-display text-[clamp(1.1rem,2vw,1.4rem)] text-forest leading-snug">
+                  {audience}
+                </span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      </MotionSection>
+    </>
+  );
+}
+
+function BankabilityFrameworkVisual({
+  steps,
+  reduced,
+}: {
+  steps: readonly string[];
+  reduced: boolean;
+}) {
+  return (
+    <div
+      className="relative max-w-md lg:max-w-none lg:ml-auto"
+      aria-label="Assessment flow from variables to decision"
+    >
+      <ol className="space-y-0">
+        {steps.map((step, index) => (
+          <li key={step} className="relative">
+            <motion.div
+              className="flex items-center gap-4 py-3 md:py-3.5"
+              initial={reduced ? false : { opacity: 0, x: 12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05, ease }}
+            >
+              <span
+                className="shrink-0 h-2 w-2 rounded-full bg-canopy"
+                aria-hidden
+              />
+              <span className="font-display text-[clamp(1.15rem,2.2vw,1.55rem)] text-forest leading-snug">
+                {step}
+              </span>
+            </motion.div>
+            {index < steps.length - 1 ? (
+              <div className="ml-[3px] flex flex-col items-start pl-[5px]" aria-hidden>
+                <span className="h-5 w-px bg-canopy/35" />
+                <span className="text-canopy/50 text-xs leading-none -mt-0.5">↓</span>
+              </div>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function OngoingProgramSection() {
+  const reduced = useReducedMotion();
+  const {
+    label,
+    title,
+    supportingTitle,
+    description,
+    capabilityAreas,
+    programDuration,
+  } = ADVISORY_HOUSE_ONGOING_PROGRAM;
+
+  return (
+    <MotionSection id="ongoing-program" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
+      <div className={cn(PAGE, SECTION)}>
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
+          <motion.div
+            className="xl:col-span-5"
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease }}
+          >
+            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
+            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+              {title}
+            </h2>
+            <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+              {supportingTitle}
+            </p>
+            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
+
+            <dl className="mt-10 space-y-5 border-t border-n200/60 pt-8">
+              <div>
+                <dt className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
+                  {programDuration.label}
+                </dt>
+                <dd className="mt-2 font-display text-base md:text-lg text-forest leading-snug">
+                  {programDuration.value}
+                </dd>
+                <dd className="mt-1 text-sm text-n600">{programDuration.note}</dd>
+              </div>
+            </dl>
+          </motion.div>
+
+          <div className="xl:col-span-7 space-y-10 md:space-y-12">
+            <motion.div
+              initial={reduced ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease }}
+            >
+              <OngoingProgramSystemsVisual reduced={!!reduced} />
+            </motion.div>
+
+            <motion.div
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.05, ease }}
+            >
+              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
+                {capabilityAreas.title}
+              </p>
+              <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                {capabilityAreas.items.map((item, index) => (
+                  <motion.li
+                    key={item}
+                    className="border-t border-n200/70 pt-4 font-display text-[clamp(1.05rem,1.8vw,1.3rem)] text-forest leading-snug"
+                    initial={reduced ? false : { opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.08 + index * 0.05, ease }}
+                  >
+                    {item}
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </MotionSection>
+  );
+}
+
+function OngoingProgramSystemsVisual({ reduced }: { reduced: boolean }) {
+  return (
+    <div
+      className="relative aspect-[16/10] overflow-hidden rounded-[20px] border border-n200/60 bg-[var(--n50)] p-6 md:p-8"
+      aria-hidden
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-forest/6 via-transparent to-mint-soft/20" />
+      <svg viewBox="0 0 320 200" className="relative h-full w-full" fill="none">
+        {[0, 1, 2, 3].map((layer) => (
+          <motion.rect
+            key={layer}
+            x={32}
+            y={24 + layer * 22}
+            width={256}
+            height={14}
+            rx="2"
+            stroke="#1A6B4A"
+            strokeOpacity="0.12"
+            fill="#1A6B4A"
+            fillOpacity="0.05"
+            animate={reduced ? undefined : { opacity: [0.4, 0.75, 0.4] }}
+            transition={{ duration: 5 + layer, repeat: Infinity, ease: "easeInOut", delay: layer * 0.3 }}
+          />
+        ))}
+
+        <motion.path
+          d="M32 72 L160 72 L160 118 M160 72 L288 72"
+          stroke="#1A6B4A"
+          strokeOpacity="0.22"
+          strokeWidth="1"
+          strokeLinecap="round"
+          animate={reduced ? undefined : { pathLength: [0.3, 1, 0.3] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {[
+          { x: 72, y: 158 },
+          { x: 160, y: 158 },
+          { x: 248, y: 158 },
+        ].map((node, i) => (
+          <motion.g
+            key={i}
+            animate={reduced ? undefined : { opacity: [0.45, 0.85, 0.45] }}
+            transition={{ duration: 4.5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.35 }}
+          >
+            <line
+              x1={node.x}
+              y1={node.y}
+              x2={node.x}
+              y2={node.y - 26}
+              stroke="#2ECC8A"
+              strokeOpacity="0.28"
+              strokeWidth="1"
+            />
+            <rect
+              x={node.x - 12}
+              y={node.y - 6}
+              width="24"
+              height="14"
+              rx="2"
+              fill="#1A6B4A"
+              fillOpacity="0.1"
+              stroke="#1A6B4A"
+              strokeOpacity="0.18"
+            />
+          </motion.g>
+        ))}
+
+        <motion.line
+          x1="72"
+          y1="178"
+          x2="248"
+          y2="178"
+          stroke="#A8F0D4"
+          strokeOpacity="0.35"
+          strokeWidth="1"
+          animate={reduced ? undefined : { opacity: [0.2, 0.45, 0.2] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {[
+          { x: 72, y: 178 },
+          { x: 160, y: 178 },
+          { x: 248, y: 178 },
+        ].map((node, i) => (
+          <motion.circle
+            key={`node-${i}`}
+            cx={node.x}
+            cy={node.y}
+            r="3"
+            fill="#2ECC8A"
+            fillOpacity="0.45"
+            animate={reduced ? undefined : { scale: [1, 1.2, 1] }}
+            transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+          />
+        ))}
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent" />
     </div>
   );
 }

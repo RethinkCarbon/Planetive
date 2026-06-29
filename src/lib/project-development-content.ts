@@ -79,8 +79,41 @@ export const PROJECT_DEVELOPMENT_EXPERIENCE = {
         "Industrial Projects",
         "EV Transportation",
       ] as const,
+      collaborations: [
+        {
+          title: "Forest Conservation Collaboration",
+          description:
+            "Planetive collaborates with international carbon development partners with experience across large-scale forest conservation initiatives.",
+          highlights: [
+            "Forest Conservation",
+            "Community Programs",
+            "Biodiversity Support",
+            "Carbon Markets",
+          ] as const,
+          supportingCopy:
+            "Representative collaborations demonstrate exposure to nature-based carbon development approaches.",
+        },
+      ] as const,
       scope: ["Feasibility", "Structuring", "Registration", "Carbon Sales"] as const,
       visual: "ecosystem" as const,
+    },
+    {
+      id: "hydropower",
+      label: "Project 04",
+      title: "Hydropower Carbon Validation Experience",
+      sector: "Power — Hydro",
+      description:
+        "Planetive's team has experience supporting validation and monitoring activities for hydropower carbon credit registration initiatives.",
+      supportingCopy:
+        "The engagement included validation support and continued involvement through monitoring activities following successful registration.",
+      highlights: [
+        "84 MW Capacity",
+        "Validated — 2015",
+        "Operational Monitoring",
+        "Carbon Registration",
+      ] as const,
+      scope: ["Validation Support", "Operational Monitoring", "Carbon Registration"] as const,
+      visual: "infrastructure" as const,
     },
   ] as const,
 };

@@ -86,6 +86,79 @@ export const ADVISORY_HOUSE_WORKSHOPS = {
   closing: "Supporting leaders through changing sustainability environments.",
 };
 
+export const ADVISORY_HOUSE_BANKABILITY_STUDY = {
+  sectionLabel: "Selected Engagement",
+  label: "Selected Study",
+  title: "Bankability Study For Clean Power Development",
+  supportingTitle: "Supporting Investment Readiness Across Emerging Markets",
+  description:
+    "Planetive contributed to an international study focused on developing a structured approach to assess and compare factors affecting the bankability of clean power projects across emerging and developing economies.",
+  scopeNote:
+    "Planetive's contribution focused on the Pakistan assessment scope.",
+  studyObjective: {
+    title: "Study Objective",
+    body: "Develop a structured methodology to identify variables, dimensions and indicators that influence the bankability of clean power initiatives.",
+  },
+  assessmentScope: {
+    title: "Assessment Scope",
+    body: "Planetive supported localized assessment activities within Pakistan as part of the broader international study.",
+  },
+  frameworkHighlights: {
+    title: "Framework Highlights",
+    items: [
+      "Indicators Framework",
+      "Structured Assessment",
+      "Investment Readiness",
+      "Comparative Evaluation",
+    ] as const,
+  },
+  decisionConfidence: {
+    title: "Built Around Decision Confidence",
+    steps: [
+      "Variables",
+      "Indicators",
+      "Assessment",
+      "Insights",
+      "Bankability",
+      "Decision",
+    ] as const,
+    supportingCopy:
+      "Structured assessment approaches support stronger planning and investment readiness environments.",
+  },
+  whoInsightsSupport: {
+    title: "Who Insights Support",
+    audiences: [
+      "Governments",
+      "Project Developers",
+      "Financial Institutions",
+      "Development Organizations",
+    ] as const,
+  },
+} as const;
+
+export const ADVISORY_HOUSE_ONGOING_PROGRAM = {
+  label: "Ongoing Program",
+  title: "Energy Transition Assistance For National Renewable Energy Programs",
+  supportingTitle: "Supporting Transition Planning And Program Design",
+  description:
+    "Planetive, together with an international non-profit organization, supports initiatives focused on strengthening renewable energy planning and implementation approaches.",
+  capabilityAreas: {
+    title: "Capability Areas",
+    items: [
+      "Energy Assessment",
+      "Risk Evaluation",
+      "Program Design",
+      "Auction Support",
+      "Industrial Capacity Planning",
+    ] as const,
+  },
+  programDuration: {
+    label: "Program Duration",
+    value: "2–5 Years",
+    note: "Ongoing Support",
+  },
+} as const;
+
 export const ADVISORY_HOUSE_PROCESS = {
   title: "From Opportunity To Execution",
   steps: [
