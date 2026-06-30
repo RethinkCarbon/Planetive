@@ -243,7 +243,7 @@ function PathwayGapCard({ animate }: { animate: boolean }) {
   return (
     <>
       <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
-        Global target &amp; current position
+        Global target & current position
       </div>
 
       <div className="mt-4 flex items-end justify-between gap-4">

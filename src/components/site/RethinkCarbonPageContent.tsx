@@ -365,7 +365,7 @@ function EcosystemSection() {
 
 function FinalCtaSection() {
   const reduced = useReducedMotion();
-  const { headline, primary, secondary } = RETHINK_CARBON_CTA;
+  const { headline, primary } = RETHINK_CARBON_CTA;
 
   return (
     <section className="pb-16 md:pb-20">
@@ -397,12 +397,6 @@ function FinalCtaSection() {
               >
                 {primary}
                 <ArrowRight size={16} aria-hidden />
-              </Link>
-              <Link
-                to="/work-with-us"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-white/25 text-white hover:bg-white/10 transition-colors"
-              >
-                {secondary}
               </Link>
             </div>
           </div>

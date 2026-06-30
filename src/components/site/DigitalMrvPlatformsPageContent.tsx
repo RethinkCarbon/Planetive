@@ -501,7 +501,7 @@ function DeliverySection() {
 
 function LookingAheadSection() {
   const reduced = useReducedMotion();
-  const { headline, body, primary, secondary } = DIGITAL_MRV_LOOKING_AHEAD;
+  const { headline, body, primary } = DIGITAL_MRV_LOOKING_AHEAD;
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
@@ -525,12 +525,6 @@ function LookingAheadSection() {
               {primary}
               <ArrowRight size={16} aria-hidden />
             </Link>
-            <a
-              href="#ecosystem"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-forest/20 text-forest hover:bg-mint-soft/30 transition-colors"
-            >
-              {secondary}
-            </a>
           </div>
         </motion.div>
       </div>

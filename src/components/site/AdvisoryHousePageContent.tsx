@@ -1093,7 +1093,7 @@ function WhySection() {
 
 function CtaSection() {
   const reduced = useReducedMotion();
-  const { headline, body, primary, secondary } = ADVISORY_HOUSE_CTA;
+  const { headline, body, primary } = ADVISORY_HOUSE_CTA;
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
@@ -1117,12 +1117,6 @@ function CtaSection() {
               {primary}
               <ArrowRight size={16} aria-hidden />
             </Link>
-            <a
-              href="#ecosystem"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-forest/20 text-forest hover:bg-mint-soft/30 transition-colors"
-            >
-              {secondary}
-            </a>
           </div>
         </motion.div>
       </div>

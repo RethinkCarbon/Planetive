@@ -641,7 +641,7 @@ function FutureReadinessSection() {
 
 function EngagementSection() {
   const reduced = useReducedMotion();
-  const { title, body, primary, secondary } = ENERGY_WORKFORCE_ENGAGEMENT;
+  const { title, body, primary } = ENERGY_WORKFORCE_ENGAGEMENT;
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
@@ -665,12 +665,6 @@ function EngagementSection() {
               {primary}
               <ArrowRight size={16} aria-hidden />
             </Link>
-            <a
-              href="#ecosystem"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold border border-forest/20 text-forest hover:bg-mint-soft/30 transition-colors"
-            >
-              {secondary}
-            </a>
           </div>
         </motion.div>
       </div>
