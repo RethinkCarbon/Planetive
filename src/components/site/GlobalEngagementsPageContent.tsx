@@ -437,7 +437,7 @@ function TeamHighlight({
                     src={section.image}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover"
-                    style={{ filter: "none" }}
+                    style={{ filter: "grayscale(100%)" }}
                     loading="lazy"
                     decoding="async"
                   />
@@ -485,7 +485,7 @@ function EngagementCard({
             src={engagement.image}
             alt=""
             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-            style={{ filter: "none" }}
+            style={{ filter: "grayscale(100%)" }}
             loading="lazy"
             decoding="async"
           />

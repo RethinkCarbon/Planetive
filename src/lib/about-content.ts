@@ -103,16 +103,6 @@ export const TEAM: TeamMember[] = [
     ],
   },
   {
-    id: "hira",
-    name: "Hira Mumtaz",
-    role: "Consultant",
-    group: "team",
-    image: teamImg("hira-mumtaz.jpg"),
-    bio: [
-      "Hira Mumtaz is an energy and climate consultant. She works on energy policy, renewables, climate finance, and carbon markets.",
-    ],
-  },
-  {
     id: "kamal",
     name: "Kamal Rahim",
     role: "Head of Strategy & Growth",
@@ -120,16 +110,6 @@ export const TEAM: TeamMember[] = [
     image: teamImg("kamal-rahim.jpg"),
     bio: [
       "Kamal Rahim leads strategy and growth at Planetive. He has experience across energy, industrial digitization, and infrastructure sectors.",
-    ],
-  },
-  {
-    id: "maha",
-    name: "Maha Kamal",
-    role: "Consultant",
-    group: "team",
-    /* CDN asset fdf9f09 is Rija Zahid’s photo, not Maha — omit until a verified portrait is available */
-    bio: [
-      "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
     ],
   },
   {
@@ -161,6 +141,44 @@ export const TEAM: TeamMember[] = [
     imagePosition: "52% center",
     bio: [
       "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
+    ],
+  },
+  {
+    id: "farhan",
+    name: "Farhan Hassan Rizvi",
+    role: "Product Engineer",
+    group: "team",
+    bio: [
+      "Farhan Hassan Rizvi is a product engineer focused on building practical climate-tech solutions. He works across product development, implementation, and continuous improvement.",
+    ],
+  },
+  {
+    id: "haram",
+    name: "Haram Saad",
+    role: "Business Analyst",
+    group: "team",
+    bio: [
+      "Haram Saad is a business analyst supporting sustainability-focused initiatives. She contributes to research, data analysis, and project planning.",
+    ],
+  },
+  {
+    id: "hira",
+    name: "Hira Mumtaz",
+    role: "Consultant",
+    group: "team",
+    image: teamImg("hira-mumtaz.jpg"),
+    bio: [
+      "Hira Mumtaz is an energy and climate consultant. She works on energy policy, renewables, climate finance, and carbon markets.",
+    ],
+  },
+  {
+    id: "maha",
+    name: "Maha Kamal",
+    role: "Consultant",
+    group: "team",
+    /* CDN asset fdf9f09 is Rija Zahid’s photo, not Maha — omit until a verified portrait is available */
+    bio: [
+      "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
     ],
   },
 ];
