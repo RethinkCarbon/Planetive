@@ -50,7 +50,7 @@ function Index() {
   useHomeHeroScrollSnap();
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background home-page">
       <Navbar />
       <Hero />
       <HomeEcosystemWheelSection />
@@ -72,27 +72,29 @@ function HomeEcosystemWheelSection() {
   return (
     <section
       id="ecosystem"
-      className="relative z-10 border-t border-n200/40 bg-background pt-24 pb-12 md:pt-28 md:pb-16 scroll-mt-24"
+      className="relative z-10 border-t border-n200/40 bg-background pt-24 pb-8 md:pt-28 md:pb-12 scroll-mt-24"
     >
       <div className="container-x">
-        <ScrollReveal className="mb-8 md:mb-10 max-w-3xl">
-          <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight">
-            <TypewriterText text={heading} speedMs={30} />
-          </h2>
-          <p className="mt-4 max-w-2xl text-n600 leading-relaxed">
-            <TypewriterText
-              text={supporting}
-              speedMs={16}
-              startDelayMs={headingDuration}
-            />
-          </p>
-        </ScrollReveal>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(36rem,1.3fr)] lg:gap-10">
+          <ScrollReveal className="max-w-none">
+            <h2 className="font-ui font-semibold text-[clamp(1.75rem,3vw,2.4rem)] text-forest leading-tight lg:whitespace-nowrap">
+              <TypewriterText text={heading} speedMs={30} />
+            </h2>
+            <p className="mt-4 text-n600 leading-relaxed lg:whitespace-nowrap">
+              <TypewriterText
+                text={supporting}
+                speedMs={16}
+                startDelayMs={headingDuration}
+              />
+            </p>
+          </ScrollReveal>
 
-        <ScrollReveal variant="fade-up">
-          <div className="flex justify-center py-2 md:py-4">
-            <EcosystemExplorer />
-          </div>
-        </ScrollReveal>
+          <ScrollReveal variant="fade-up">
+            <div className="flex justify-center lg:justify-end py-1 md:py-3">
+              <EcosystemExplorer className="lg:max-w-[44rem] xl:max-w-[48rem]" />
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

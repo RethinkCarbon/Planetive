@@ -112,7 +112,7 @@ export function EcosystemDonutExplorer({ panelVariant = "dark" }: EcosystemDonut
                   className="pointer-events-none select-none fill-white font-semibold"
                   style={{
                     fontSize: flip ? 11 : 12,
-                    fontFamily: "var(--font-heading)",
+                    fontFamily: "var(--font-body)",
                   }}
                 >
                   {pillar.shortLabel.split(" ").map((word, wi, arr) => (
@@ -130,7 +130,7 @@ export function EcosystemDonutExplorer({ panelVariant = "dark" }: EcosystemDonut
             x={CX}
             y={CY - 10}
             textAnchor="middle"
-            className="fill-forest font-display font-bold"
+            className="fill-forest font-ui font-semibold"
             style={{ fontSize: 22 }}
           >
             Planetive
@@ -140,7 +140,7 @@ export function EcosystemDonutExplorer({ panelVariant = "dark" }: EcosystemDonut
             y={CY + 14}
             textAnchor="middle"
             className="fill-n400 uppercase tracking-[0.2em]"
-            style={{ fontSize: 9, fontFamily: "var(--font-h2)" }}
+            style={{ fontSize: 9, fontFamily: "var(--font-body)" }}
           >
             Ecosystem
           </text>

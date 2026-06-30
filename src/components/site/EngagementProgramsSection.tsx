@@ -31,7 +31,7 @@ export function EngagementProgramsSection({
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {ENGAGEMENT_PROGRAM_SECTION.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-[clamp(1.75rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.75rem)] text-forest leading-tight">
             {ENGAGEMENT_PROGRAM_SECTION.title}
           </h2>
           <p className="mt-4 text-n600 text-sm md:text-base leading-relaxed">
@@ -48,7 +48,7 @@ export function EngagementProgramsSection({
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-mint-soft text-canopy">
                     <Icon size={22} strokeWidth={2.25} aria-hidden />
                   </span>
-                  <h3 className="mt-5 font-display text-xl md:text-2xl text-forest">
+                  <h3 className="mt-5 font-ui font-semibold text-xl md:text-2xl text-forest">
                     {program.title}
                   </h3>
                   <p className="mt-3 flex-1 text-sm text-n600 leading-relaxed">

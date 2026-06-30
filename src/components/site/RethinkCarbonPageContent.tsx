@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   RETHINK_CARBON_AUDIENCES,
@@ -51,48 +52,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function RethinkCarbonPageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <PlatformSection />
       <JourneyWhyBand />
@@ -127,10 +89,10 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease }}
         >
-          <h1 className="font-display text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.02]">
+          <h1 className="font-ui font-semibold text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.02]">
             {title}
           </h1>
-          <p className="mt-5 font-display text-[clamp(1.2rem,2.5vw,2rem)] text-mint-soft/95 leading-snug">
+          <p className="mt-5 font-ui font-semibold text-[clamp(1.2rem,2.5vw,2rem)] text-mint-soft/95 leading-snug">
             {supportingTitle}
           </p>
           <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed">
@@ -196,7 +158,7 @@ function PlatformSection() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="mt-4 block h-px w-10 bg-canopy/35" aria-hidden />
-                    <h3 className="mt-4 font-display text-lg md:text-xl text-forest leading-snug">
+                    <h3 className="mt-4 font-ui font-semibold text-lg md:text-xl text-forest leading-snug">
                       {cap.title}
                     </h3>
                     <p className="mt-3 text-sm text-n600 leading-relaxed">{cap.description}</p>
@@ -248,7 +210,7 @@ function JourneyWhyBand() {
                   <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">
                     {stage.title}
                   </p>
-                  <p className="mt-2 font-display text-xl md:text-2xl text-forest leading-snug">
+                  <p className="mt-2 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                     {stage.description}
                   </p>
                 </motion.li>
@@ -270,7 +232,7 @@ function JourneyWhyBand() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: index * 0.06 }}
                 >
-                  <h3 className="font-display text-xl md:text-[1.35rem] text-forest leading-snug">
+                  <h3 className="font-ui font-semibold text-xl md:text-[1.35rem] text-forest leading-snug">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-sm md:text-base text-n600 leading-relaxed">
@@ -303,7 +265,7 @@ function DesignedForSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-[clamp(1.85rem,3vw,2.5rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3vw,2.5rem)] text-forest leading-tight">
               {title}
             </h2>
           </motion.div>
@@ -314,7 +276,7 @@ function DesignedForSection() {
                 <motion.li
                   key={item}
                   className={cn(
-                    "font-display text-[clamp(1.25rem,2vw,1.65rem)] text-forest leading-snug",
+                    "font-ui font-semibold text-[clamp(1.25rem,2vw,1.65rem)] text-forest leading-snug",
                     index > 0 &&
                       "md:pl-6 lg:pl-8 md:border-l md:border-n200/80 pt-5 md:pt-0 border-t md:border-t-0 border-n200/60",
                   )}
@@ -387,7 +349,7 @@ function FinalCtaSection() {
             }}
           />
           <div className="relative max-w-2xl mx-auto">
-            <h2 className="font-display text-[clamp(1.85rem,4vw,3rem)] text-white leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,4vw,3rem)] text-white leading-tight">
               {headline}
             </h2>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:gap-4">

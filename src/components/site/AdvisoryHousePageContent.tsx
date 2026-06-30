@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   ADVISORY_HOUSE_AREAS,
@@ -49,48 +50,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function AdvisoryHousePageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <WhatWeDoSection />
       <SelectedEngagementSection />
@@ -136,14 +98,14 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
@@ -277,7 +239,7 @@ function WhatWeDoSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -288,7 +250,7 @@ function WhatWeDoSection() {
               {capabilities.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-display text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -320,12 +282,12 @@ function SelectedEngagementSection() {
             <p className="mt-3 font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
               {label}
             </p>
-            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
             <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{detail}</p>
-            <p className="mt-10 pt-8 border-t border-n200/70 font-display text-[clamp(1.1rem,2vw,1.45rem)] text-forest leading-snug max-w-md">
+            <p className="mt-10 pt-8 border-t border-n200/70 font-ui font-semibold text-[clamp(1.1rem,2vw,1.45rem)] text-forest leading-snug max-w-md">
               {highlight}
             </p>
           </div>
@@ -395,10 +357,10 @@ function ExecutiveWorkshopsSection() {
             transition={{ duration: 0.5, ease }}
           >
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+            <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
@@ -409,7 +371,7 @@ function ExecutiveWorkshopsSection() {
                   <dt className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
                     {item.label}
                   </dt>
-                  <dd className="mt-2 font-display text-base md:text-lg text-forest leading-snug">
+                  <dd className="mt-2 font-ui font-semibold text-base md:text-lg text-forest leading-snug">
                     {item.value}
                   </dd>
                 </div>
@@ -441,7 +403,7 @@ function ExecutiveWorkshopsSection() {
                   {focusAreas.items.map((item, index) => (
                     <motion.li
                       key={item}
-                      className="font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 pb-3 md:pb-4 last:border-0"
+                      className="font-ui font-semibold text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 pb-3 md:pb-4 last:border-0"
                       initial={reduced ? false : { opacity: 0, x: 10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -466,7 +428,7 @@ function ExecutiveWorkshopsSection() {
                   {outcomes.items.map((item, index) => (
                     <motion.li
                       key={item}
-                      className="font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 pb-3 md:pb-4 last:border-0"
+                      className="font-ui font-semibold text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 pb-3 md:pb-4 last:border-0"
                       initial={reduced ? false : { opacity: 0, x: 10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -482,7 +444,7 @@ function ExecutiveWorkshopsSection() {
         </div>
 
         <motion.p
-          className="mt-14 md:mt-20 pt-10 border-t border-n200/60 max-w-2xl font-display text-[clamp(1.15rem,2vw,1.5rem)] text-forest leading-snug"
+          className="mt-14 md:mt-20 pt-10 border-t border-n200/60 max-w-2xl font-ui font-semibold text-[clamp(1.15rem,2vw,1.5rem)] text-forest leading-snug"
           initial={reduced ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -570,10 +532,10 @@ function BankabilityStudySection() {
               transition={{ duration: 0.5, ease }}
             >
               <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-              <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+              <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
                 {title}
               </h2>
-              <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+              <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
                 {supportingTitle}
               </p>
               <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
@@ -622,7 +584,7 @@ function BankabilityStudySection() {
               {frameworkHighlights.items.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="border-t border-n200/70 pt-6 font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug"
+                  className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug"
                   initial={reduced ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -646,7 +608,7 @@ function BankabilityStudySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease }}
             >
-              <h2 className="font-display text-[clamp(1.85rem,3.2vw,2.5rem)] text-forest leading-tight">
+              <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.5rem)] text-forest leading-tight">
                 {decisionConfidence.title}
               </h2>
               <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed max-w-md">
@@ -687,7 +649,7 @@ function BankabilityStudySection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.06, ease }}
               >
-                <span className="font-display text-[clamp(1.1rem,2vw,1.4rem)] text-forest leading-snug">
+                <span className="font-ui font-semibold text-[clamp(1.1rem,2vw,1.4rem)] text-forest leading-snug">
                   {audience}
                 </span>
               </motion.li>
@@ -725,7 +687,7 @@ function BankabilityFrameworkVisual({
                 className="shrink-0 h-2 w-2 rounded-full bg-canopy"
                 aria-hidden
               />
-              <span className="font-display text-[clamp(1.15rem,2.2vw,1.55rem)] text-forest leading-snug">
+              <span className="font-ui font-semibold text-[clamp(1.15rem,2.2vw,1.55rem)] text-forest leading-snug">
                 {step}
               </span>
             </motion.div>
@@ -765,10 +727,10 @@ function OngoingProgramSection() {
             transition={{ duration: 0.5, ease }}
           >
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+            <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
@@ -778,7 +740,7 @@ function OngoingProgramSection() {
                 <dt className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
                   {programDuration.label}
                 </dt>
-                <dd className="mt-2 font-display text-base md:text-lg text-forest leading-snug">
+                <dd className="mt-2 font-ui font-semibold text-base md:text-lg text-forest leading-snug">
                   {programDuration.value}
                 </dd>
                 <dd className="mt-1 text-sm text-n600">{programDuration.note}</dd>
@@ -809,7 +771,7 @@ function OngoingProgramSection() {
                 {capabilityAreas.items.map((item, index) => (
                   <motion.li
                     key={item}
-                    className="border-t border-n200/70 pt-4 font-display text-[clamp(1.05rem,1.8vw,1.3rem)] text-forest leading-snug"
+                    className="border-t border-n200/70 pt-4 font-ui font-semibold text-[clamp(1.05rem,1.8vw,1.3rem)] text-forest leading-snug"
                     initial={reduced ? false : { opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -960,7 +922,7 @@ function HowWeEngageSection() {
                   )}
                   aria-hidden
                 />
-                <span className="font-display text-sm md:text-base text-forest">{step.title}</span>
+                <span className="font-ui font-semibold text-sm md:text-base text-forest">{step.title}</span>
               </button>
             ))}
           </div>
@@ -991,7 +953,7 @@ function HowWeEngageSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
         >
-          <p className="font-display text-xl text-forest">{steps[active].title}</p>
+          <p className="font-ui font-semibold text-xl text-forest">{steps[active].title}</p>
           <p className="mt-3 text-base text-n600 leading-relaxed">{steps[active].description}</p>
         </motion.div>
       </div>
@@ -1026,7 +988,7 @@ function EngagementAreasSection() {
                   aria-expanded={isOpen}
                   onClick={() => setExpanded(isOpen ? null : index)}
                 >
-                  <span className="font-display text-[clamp(1.25rem,2.2vw,1.75rem)] text-forest leading-snug group-hover:text-canopy transition-colors">
+                  <span className="font-ui font-semibold text-[clamp(1.25rem,2.2vw,1.75rem)] text-forest leading-snug group-hover:text-canopy transition-colors">
                     {item.title}
                   </span>
                   <ChevronDown
@@ -1067,7 +1029,7 @@ function WhySection() {
     <MotionSection className={ECOSYSTEM_SURFACE.mint}>
       <div className={cn(PAGE, SECTION)}>
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest leading-tight">
             {headline}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -1076,7 +1038,7 @@ function WhySection() {
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug text-center sm:text-left"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug text-center sm:text-left"
               initial={reduced ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1105,7 +1067,7 @@ function CtaSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {headline}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>

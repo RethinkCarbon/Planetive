@@ -115,7 +115,7 @@ export function SharedResponsibilitySection() {
             <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
               — A note from Planetive
             </div>
-            <h2 className="mt-5 font-display text-[clamp(2rem,4.2vw,3.5rem)] text-forest leading-[1.02]">
+            <h2 className="mt-5 font-ui font-semibold text-[clamp(2rem,4.2vw,3.5rem)] text-forest leading-[1.02]">
               Our planet's well-being is a{" "}
               <em className="not-italic text-canopy">shared</em> responsibility.
             </h2>
@@ -126,7 +126,7 @@ export function SharedResponsibilitySection() {
             delay={120}
             className="lg:col-span-7 lg:pt-3"
           >
-            <p className="text-n800 text-lg md:text-xl leading-relaxed font-display">
+            <p className="text-n800 text-lg md:text-xl leading-relaxed font-ui font-semibold">
               The last decades have cost us biodiversity, raised our seas, and thickened
               our air. We don't think sustainability is a department — it's the
               conversation underneath every other one.
@@ -155,7 +155,7 @@ export function SharedResponsibilitySection() {
             <Quote size={28} className="text-mint-soft/70" />
             <p
               className={cn(
-                "mt-4 font-display text-[clamp(1.4rem,2.4vw,2.1rem)] leading-snug text-white/95 transition-opacity duration-300",
+                "mt-4 font-ui font-semibold text-[clamp(1.4rem,2.4vw,2.1rem)] leading-snug text-white/95 transition-opacity duration-300",
                 quoteVisible ? "opacity-100" : "opacity-0",
               )}
             >
@@ -225,7 +225,7 @@ export function SharedResponsibilitySection() {
               Our horizon
             </div>
             <div className="mt-auto">
-              <div className="font-display text-[clamp(2.6rem,5vw,4rem)] leading-none text-mint-soft">
+              <div className="font-ui font-semibold text-[clamp(2.6rem,5vw,4rem)] leading-none text-mint-soft">
                 {Math.round(years)}
               </div>
               <div className="mt-3 text-sm text-n200 max-w-[14rem]">
@@ -248,7 +248,7 @@ function PathwayGapCard({ animate }: { animate: boolean }) {
 
       <div className="mt-4 flex items-end justify-between gap-4">
         <div>
-          <p className="font-display text-[clamp(1.75rem,3vw,2.25rem)] leading-none text-[#9A4E32]">
+          <p className="font-ui font-semibold text-[clamp(1.75rem,3vw,2.25rem)] leading-none text-[#9A4E32]">
             {EMISSIONS_GAP}
           </p>
           <p className="mt-1.5 text-[11px] font-mono uppercase tracking-[0.14em] text-n500">

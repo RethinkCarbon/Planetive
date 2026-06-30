@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   ENERGY_INTELLIGENCE_APPLIES,
@@ -48,48 +49,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function EnergySectorIntelligencePageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <WhatWeDoSection />
       <EngagementSection />
@@ -134,14 +96,14 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
@@ -288,7 +250,7 @@ function WhatWeDoSection() {
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-3 font-display text-xl text-forest leading-snug">{cap.title}</h3>
+              <h3 className="mt-3 font-ui font-semibold text-xl text-forest leading-snug">{cap.title}</h3>
               <p
                 className={cn(
                   "mt-3 text-sm text-n600 leading-relaxed transition-all duration-300",
@@ -315,7 +277,7 @@ function EngagementSection() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16">
           <div className="xl:col-span-5">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -366,10 +328,10 @@ function GridLensSection() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <div className="xl:col-span-5 xl:sticky xl:top-28">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]">
               {title}
             </h2>
-            <p className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug">
+            <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
@@ -402,7 +364,7 @@ function GridLensSection() {
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
                   Capability {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-display text-xl md:text-2xl text-forest leading-snug">
+                <h3 className="mt-3 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                   {cap.title}
                 </h3>
                 <p
@@ -504,7 +466,7 @@ function HowWeEngageSection() {
                 onFocus={() => setActiveStep(index)}
               >
                 <span className="font-mono text-[10px] text-n400">0{index + 1}</span>
-                <p className="mt-2 font-display text-lg text-forest leading-snug">{step.title}</p>
+                <p className="mt-2 font-ui font-semibold text-lg text-forest leading-snug">{step.title}</p>
               </button>
               {index < steps.length - 1 ? (
                 <ArrowRight size={14} className="shrink-0 mx-2 mt-6 text-canopy/30" aria-hidden />
@@ -526,7 +488,7 @@ function HowWeEngageSection() {
               )}
               onClick={() => setActiveStep(index)}
             >
-              <p className="font-display text-lg text-forest">{step.title}</p>
+              <p className="font-ui font-semibold text-lg text-forest">{step.title}</p>
             </button>
           ))}
         </div>
@@ -538,7 +500,7 @@ function HowWeEngageSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <p className="font-display text-xl md:text-2xl text-forest">
+          <p className="font-ui font-semibold text-xl md:text-2xl text-forest">
             {steps[activeStep].title}
           </p>
           <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">
@@ -584,7 +546,7 @@ function WhereAppliesSection() {
                   aria-expanded={isOpen}
                   onClick={() => setExpanded(isOpen ? null : index)}
                 >
-                  <span className="font-display text-xl md:text-2xl text-forest leading-snug">
+                  <span className="font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                     {item.title}
                   </span>
                   <ChevronDown
@@ -644,7 +606,7 @@ function IntelligenceFlowSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: 0.1 + index * 0.06 }}
               />
-              <p className="font-display text-sm md:text-base text-forest leading-snug">{step}</p>
+              <p className="font-ui font-semibold text-sm md:text-base text-forest leading-snug">{step}</p>
             </motion.div>
           ))}
         </div>
@@ -658,7 +620,7 @@ function IntelligenceFlowSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <p className="py-4 text-center font-display text-lg text-forest">{step}</p>
+              <p className="py-4 text-center font-ui font-semibold text-lg text-forest">{step}</p>
               {index < steps.length - 1 ? (
                 <div className="flex justify-center" aria-hidden>
                   <motion.span
@@ -704,7 +666,7 @@ function OutcomeFrameworkSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {title}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -720,7 +682,7 @@ function OutcomeFrameworkSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
             >
-              <p className="font-display text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
+              <p className="font-ui font-semibold text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
                 {block.title}
               </p>
             </motion.div>
@@ -744,7 +706,7 @@ function OutcomeFrameworkSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h3 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] text-forest leading-tight">
+          <h3 className="font-ui font-semibold text-[clamp(1.5rem,3vw,2.25rem)] text-forest leading-tight">
             {headline}
           </h3>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">

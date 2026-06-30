@@ -23,7 +23,7 @@ export function PageHeader({
         <circle cx="100" cy="100" r="40" stroke="currentColor" strokeWidth="0.5" />
       </svg>
       <div className="container-x relative">
-        <h1 className="font-display text-[clamp(2.4rem,5vw,4.5rem)] text-forest max-w-3xl">
+        <h1 className="font-ui font-semibold text-[clamp(2.4rem,5vw,4.5rem)] text-forest max-w-3xl">
           {title}
         </h1>
         {description && (

@@ -17,7 +17,7 @@ export function AboutUsPageContent() {
   const team = TEAM.filter((m) => m.group === "team");
 
   return (
-    <>
+    <div className="about-us-page">
       <AboutHero />
       <AboutIntro />
       <TeamSection title="Leadership" members={leadership} featured />
@@ -29,7 +29,7 @@ export function AboutUsPageContent() {
       <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
       <PartnersSection />
       <AboutClosingCta />
-    </>
+    </div>
   );
 }
 
@@ -49,7 +49,7 @@ function AboutHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <h1 className="font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
+          <h1 className="font-ui font-semibold text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
             {ABOUT_INTRO.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
@@ -143,7 +143,7 @@ function TeamSection({
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {subtitle ?? "People"}
           </span>
-          <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest">
             {title}
           </h2>
         </ScrollReveal>
@@ -197,7 +197,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
             />
           ) : (
             <div
-              className="absolute inset-0 flex items-center justify-center text-4xl font-display text-mint-soft"
+              className="absolute inset-0 flex items-center justify-center text-4xl font-ui font-semibold text-mint-soft"
               style={{ background: "var(--gradient-hero)" }}
             >
               {member.name
@@ -213,7 +213,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
           <span className="text-xs font-mono tracking-wider uppercase text-canopy">
             {member.role}
           </span>
-          <h3 className="mt-2 font-display text-3xl md:text-4xl text-forest">{member.name}</h3>
+          <h3 className="mt-2 font-ui font-semibold text-3xl md:text-4xl text-forest">{member.name}</h3>
           <BioText
             paragraphs={member.bio}
             className={cn(
@@ -287,7 +287,7 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
             />
           ) : (
             <div
-              className="flex h-full items-center justify-center text-3xl font-display text-white"
+              className="flex h-full items-center justify-center text-3xl font-ui font-semibold text-white"
               style={{ background: "var(--gradient-hero)" }}
             >
               {member.name
@@ -302,7 +302,7 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
           <span className="text-[10px] font-mono tracking-wider uppercase text-canopy">
             {member.role}
           </span>
-          <h3 className="mt-2 font-display text-xl text-forest leading-tight">{member.name}</h3>
+          <h3 className="mt-2 font-ui font-semibold text-xl text-forest leading-tight">{member.name}</h3>
           <BioText
             paragraphs={member.bio}
             className="mt-3 flex-1"
@@ -318,7 +318,7 @@ function PartnersSection() {
     <section className="py-16 md:py-24 bg-[var(--n100)] border-t border-n200/60">
       <div className="container-x">
         <ScrollReveal className="text-center max-w-xl mx-auto mb-12">
-          <h2 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
+          <h2 className="font-ui font-semibold text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
             Our Partners
           </h2>
           <p className="mt-3 text-n600 text-sm leading-relaxed">
@@ -355,7 +355,7 @@ function AboutClosingCta() {
       <div className="container-x">
         <ScrollReveal>
           <div className="rounded-[28px] border border-n200 bg-white px-8 py-10 md:px-12 text-center shadow-[var(--shadow-soft)]">
-            <h2 className="font-display text-2xl md:text-3xl text-forest">
+            <h2 className="font-ui font-semibold text-2xl md:text-3xl text-forest">
               Work with Planetive
             </h2>
             <p className="mt-3 text-n600 max-w-lg mx-auto">

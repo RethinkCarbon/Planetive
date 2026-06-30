@@ -27,13 +27,10 @@ export function WorkWithUsPageContent() {
   const selectInterest = (id: EngagementProgramId) => {
     setInterest(id);
     form.reset();
-    const url = new URL(window.location.href);
-    url.searchParams.set("interest", id);
-    window.history.replaceState(null, "", url);
   };
 
   return (
-    <>
+    <div className="work-with-us-page">
       <WorkWithUsHero />
       <BookMeetingSection />
       <EngagementProgramsSection
@@ -48,7 +45,7 @@ export function WorkWithUsPageContent() {
         form={form}
         onSelectInterest={selectInterest}
       />
-    </>
+    </div>
   );
 }
 
@@ -71,7 +68,7 @@ function WorkWithUsHero() {
           <p className="text-sm font-semibold text-mint-soft/95">
             {WORK_WITH_US_HERO.subtitle}
           </p>
-          <h1 className="mt-2 font-display text-[clamp(2.75rem,6.5vw,4.25rem)] leading-[1.02]">
+          <h1 className="mt-2 font-ui font-semibold text-[clamp(2.75rem,6.5vw,4.25rem)] leading-[1.02]">
             {WORK_WITH_US_HERO.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
@@ -107,7 +104,7 @@ function ApplicationSection({
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             Explore limitless opportunities
           </span>
-          <h2 className="mt-3 font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
             Apply now and elevate change
           </h2>
         </ScrollReveal>
@@ -135,7 +132,7 @@ function ApplicationSection({
 
           <ScrollReveal variant="fade-up" delay={80} className="lg:col-span-8">
             <div className="rounded-[32px] bg-white border border-n200 p-8 md:p-10 shadow-[var(--shadow-soft)]">
-              <h3 className="font-display text-2xl text-forest">
+              <h3 className="font-ui font-semibold text-2xl text-forest">
                 Apply — {PROGRAM_LABELS[interest]}
               </h3>
 

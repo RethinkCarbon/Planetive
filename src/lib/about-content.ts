@@ -17,7 +17,7 @@ export const ABOUT_INTRO = {
   focusAreas: [
     { label: "Clean Energy", icon: Sun },
     { label: "Climate Change", icon: Leaf },
-    { label: "Clean Water", icon: Droplets },
+    { label: "Decarbonization", icon: Droplets },
     { label: "Sustainable Finance", icon: Banknote },
   ] as { label: string; icon: LucideIcon }[],
 };

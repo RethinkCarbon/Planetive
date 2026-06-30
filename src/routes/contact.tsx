@@ -30,7 +30,7 @@ function ContactPage() {
   const { submit, isSubmitting, isSuccess, error } = useSiteForm();
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background contact-page">
       <Navbar variant="solid" />
       <PageHeader
         eyebrow="Contact"
@@ -46,7 +46,7 @@ function ContactPage() {
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
               Or send a message
             </span>
-            <h2 className="mt-3 font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
+            <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.5rem)] text-forest">
               We&apos;ll get back to you
             </h2>
             <p className="mt-3 text-sm md:text-base text-n600 leading-relaxed">
@@ -163,7 +163,7 @@ function ContactPage() {
               className="rounded-[32px] p-8 md:p-10 text-white"
               style={{ background: "var(--gradient-hero)" }}
             >
-              <h3 className="font-display text-3xl">Talk to Planetive</h3>
+              <h3 className="font-ui font-semibold text-3xl">Talk to Planetive</h3>
               <p className="mt-3 text-n200 text-sm leading-relaxed">
                 Whether you're scoping a net-zero strategy, financing a clean energy
                 project, or building a carbon program — start here.
@@ -185,7 +185,7 @@ function ContactPage() {
             </div>
 
             <div className="rounded-[32px] bg-mint-soft p-8">
-              <p className="font-display text-2xl text-forest leading-tight">
+              <p className="font-ui font-semibold text-2xl text-forest leading-tight">
                 "The Earth is a fine place and worth fighting for."
               </p>
               <p className="mt-3 text-sm text-n600">— Ernest Hemingway</p>

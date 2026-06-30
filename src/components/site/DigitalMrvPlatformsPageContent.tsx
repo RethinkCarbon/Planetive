@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   DIGITAL_MRV_APPLICATIONS,
@@ -19,6 +20,7 @@ import { cn } from "@/lib/utils";
 
 const PAGE = "container-x max-w-[90rem]";
 const SECTION = "py-14 md:py-20 lg:py-28";
+const SECTION_COMPACT = "py-10 md:py-14 lg:py-16";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function MotionSection({
@@ -46,48 +48,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function DigitalMrvPlatformsPageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <DefinitionSection />
       <ApplicationsSection />
@@ -130,14 +93,14 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
@@ -243,40 +206,32 @@ function DefinitionSection() {
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.first}>
-      <div className={cn(PAGE, SECTION)}>
-        <SectionHeader title={title} align="center" className="mb-14 md:mb-20" />
+      <div className={cn(PAGE, SECTION_COMPACT)}>
+        <SectionHeader title={title} align="center" className="mb-8 md:mb-10" />
 
-        <div className="max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 max-w-5xl mx-auto">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}
-              className="relative"
-              initial={reduced ? false : { opacity: 0, y: 20 }}
+              className={cn(
+                "text-center md:px-6 lg:px-8",
+                index > 0 && "md:border-l md:border-n200/70",
+                index > 0 && "pt-6 md:pt-0 border-t md:border-t-0 border-n200/70",
+              )}
+              initial={reduced ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <div className="py-8 md:py-10 border-t border-n200/70 first:border-t-0 first:pt-0 text-center">
-                <h3 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] text-forest leading-tight uppercase tracking-wide">
-                  {pillar.title}
-                </h3>
-                <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed max-w-md mx-auto">
-                  {pillar.description}
-                </p>
-              </div>
-
-              {index < pillars.length - 1 ? (
-                <div className="flex justify-center py-2" aria-hidden>
-                  <motion.span
-                    className="block w-px h-8 bg-gradient-to-b from-canopy/40 to-transparent"
-                    initial={reduced ? false : { scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
-                    style={{ transformOrigin: "top" }}
-                  />
-                </div>
-              ) : null}
+              <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="mt-2 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug uppercase tracking-wide">
+                {pillar.title}
+              </h3>
+              <p className="mt-2 text-sm md:text-[15px] text-n600 leading-relaxed max-w-xs mx-auto md:max-w-none">
+                {pillar.description}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -316,10 +271,7 @@ function ApplicationsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.05 }}
             >
-              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
-                Application {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3 font-display text-xl md:text-2xl text-forest leading-snug">
+              <h3 className="font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                 {item.title}
               </h3>
               <p
@@ -341,83 +293,90 @@ function ApplicationsSection() {
 function DigitalLayerSection() {
   const reduced = useReducedMotion();
   const { title, steps } = DIGITAL_MRV_LAYER;
+  const rows = [steps.slice(0, 3), steps.slice(3, 6)] as const;
 
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
-      <div className={cn(PAGE, SECTION)}>
-        <SectionHeader title={title} align="center" className="mb-14 md:mb-20" />
+      <div className={cn(PAGE, SECTION_COMPACT)}>
+        <SectionHeader title={title} align="center" className="mb-8 md:mb-10" />
 
-        <div className="max-w-2xl mx-auto">
+        <div className="hidden lg:flex items-start justify-between gap-1 max-w-5xl mx-auto relative">
+          <div
+            className="absolute top-[5px] left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-canopy/30 to-transparent"
+            aria-hidden
+          />
           {steps.map((step, index) => (
             <motion.div
               key={step}
-              className="relative flex flex-col items-center"
-              initial={reduced ? false : { opacity: 0, y: 16 }}
+              className="relative flex-1 min-w-0 text-center px-1 bg-[var(--n100)]"
+              initial={reduced ? false : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.06 }}
             >
-              <div className="w-full py-5 md:py-6 text-center">
-                <p className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] text-forest leading-snug">
-                  {step}
-                </p>
-              </div>
-
-              {index < steps.length - 1 ? (
-                <motion.div
-                  className="w-px h-10 md:h-14 bg-gradient-to-b from-canopy/35 to-canopy/10"
-                  aria-hidden
-                  initial={reduced ? false : { scaleY: 0 }}
-                  whileInView={{ scaleY: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.08 + index * 0.05 }}
-                  style={{ transformOrigin: "top" }}
-                />
-              ) : null}
+              <motion.span
+                className="block mx-auto mb-3 h-2.5 w-2.5 rounded-full bg-canopy ring-4 ring-[var(--n100)]"
+                initial={reduced ? false : { scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: 0.08 + index * 0.05 }}
+                aria-hidden
+              />
+              <p className="font-ui font-semibold text-sm xl:text-[15px] text-forest leading-snug">{step}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-12 md:mt-16 max-w-xl mx-auto hidden md:block" aria-hidden>
-          <LayerArchitectureVisual reduced={!!reduced} />
+        <div className="hidden md:block lg:hidden max-w-2xl mx-auto space-y-5">
+          {rows.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex items-center gap-2">
+              {row.map((step, index) => (
+                <div key={step} className="contents">
+                  <motion.div
+                    className="flex-1 min-w-0 rounded-xl border border-n200/60 bg-white/60 px-3 py-3.5 text-center"
+                    initial={reduced ? false : { opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: (rowIndex * 3 + index) * 0.05 }}
+                  >
+                    <p className="font-ui font-semibold text-sm text-forest leading-snug">{step}</p>
+                  </motion.div>
+                  {index < row.length - 1 ? (
+                    <ArrowRight size={14} className="shrink-0 text-canopy/35" aria-hidden />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="md:hidden max-w-xs mx-auto">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step}
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.04 }}
+            >
+              <p className="py-3 text-center font-ui font-semibold text-base text-forest leading-snug">{step}</p>
+              {index < steps.length - 1 ? (
+                <div className="flex justify-center" aria-hidden>
+                  <motion.span
+                    className="block w-px h-5 bg-gradient-to-b from-canopy/35 to-transparent"
+                    initial={reduced ? false : { scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.35, delay: 0.06 + index * 0.04 }}
+                    style={{ transformOrigin: "top" }}
+                  />
+                </div>
+              ) : null}
+            </motion.div>
+          ))}
         </div>
       </div>
     </MotionSection>
-  );
-}
-
-function LayerArchitectureVisual({ reduced }: { reduced: boolean }) {
-  const nodes = [40, 100, 160, 220, 280, 340];
-
-  return (
-    <svg viewBox="0 0 380 80" className="w-full h-auto" fill="none">
-      {nodes.slice(0, -1).map((x, i) => (
-        <motion.line
-          key={i}
-          x1={x + 20}
-          y1="40"
-          x2={nodes[i + 1]}
-          y2="40"
-          stroke="#1A6B4A"
-          strokeOpacity="0.2"
-          strokeWidth="1"
-          animate={reduced ? undefined : { pathLength: [0.3, 1, 0.3] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-        />
-      ))}
-      {nodes.map((x, i) => (
-        <motion.circle
-          key={i}
-          cx={x + 10}
-          cy="40"
-          r="4"
-          fill="#2ECC8A"
-          fillOpacity="0.4"
-          animate={reduced ? undefined : { opacity: [0.35, 0.8, 0.35] }}
-          transition={{ duration: 4 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
-    </svg>
   );
 }
 
@@ -428,14 +387,14 @@ function OutcomesSection() {
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
       <div className={cn(PAGE, SECTION)}>
-        <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
+        <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
           {title}
         </h2>
         <ul className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8 max-w-5xl mx-auto">
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -468,7 +427,7 @@ function DeliverySection() {
             <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">
               How Planetive Supports Delivery
             </p>
-            <h2 className="mt-4 font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -482,7 +441,7 @@ function DeliverySection() {
               {capabilities.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-display text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -513,7 +472,7 @@ function LookingAheadSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {headline}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>

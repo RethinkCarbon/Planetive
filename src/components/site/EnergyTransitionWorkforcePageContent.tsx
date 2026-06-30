@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   ENERGY_WORKFORCE_AUDIENCES,
@@ -47,48 +48,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function EnergyTransitionWorkforcePageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <OverviewSection />
       <ProgramDesignSection />
@@ -132,14 +94,14 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
@@ -267,7 +229,7 @@ function OverviewSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{intro}</p>
@@ -281,7 +243,7 @@ function OverviewSection() {
               {pillars.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-display text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -325,7 +287,7 @@ function ProgramDesignSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease }}
           >
-            <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             {body.map((paragraph) => (
@@ -346,7 +308,7 @@ function ProgramDesignSection() {
                   transition={{ duration: 0.45, delay: dimIndex * 0.08, ease }}
                 >
                   <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">{dim.label}</p>
-                  <h3 className="mt-2 font-display text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
+                  <h3 className="mt-2 font-ui font-semibold text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
                     {dim.title}
                   </h3>
 
@@ -374,7 +336,7 @@ function ProgramDesignSection() {
                           )}
                           onClick={() => selectOption(dimIndex, optionIndex)}
                         >
-                          <span className="font-display text-base md:text-lg leading-snug block">
+                          <span className="font-ui font-semibold text-base md:text-lg leading-snug block">
                             {option.label}
                           </span>
                           {"detail" in option && option.detail ? (
@@ -424,7 +386,7 @@ function ProgramDesignSection() {
                       transition={{ duration: 0.35, ease }}
                     >
                       <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-n500">{dim.title}</p>
-                      <p className="font-display text-lg md:text-xl text-forest leading-snug">
+                      <p className="font-ui font-semibold text-lg md:text-xl text-forest leading-snug">
                         {option.label}
                         {"detail" in option && option.detail ? (
                           <span className="ml-2 font-mono text-[10px] tracking-[0.12em] uppercase text-n500">
@@ -452,7 +414,7 @@ function TalentConnectionSection() {
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
       <div className={cn(PAGE, SECTION)}>
         <motion.h2
-          className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
+          className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
           initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -465,7 +427,7 @@ function TalentConnectionSection() {
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug text-center lg:text-left"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug text-center lg:text-left"
               initial={reduced ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -511,7 +473,7 @@ function JourneySection() {
             >
               <div className="py-8 md:py-10 border-t border-n200/70 first:border-t-0 first:pt-0">
                 <motion.h3
-                  className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight"
+                  className="font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight"
                   initial={reduced ? false : { clipPath: "inset(0 100% 0 0)" }}
                   whileInView={{ clipPath: "inset(0 0% 0 0)" }}
                   viewport={{ once: true }}
@@ -577,7 +539,7 @@ function WhoItServesSection() {
                   aria-expanded={isOpen}
                   onClick={() => setExpanded(isOpen ? null : index)}
                 >
-                  <span className="font-display text-[clamp(1.25rem,2.2vw,1.75rem)] text-forest leading-snug group-hover:text-canopy transition-colors">
+                  <span className="font-ui font-semibold text-[clamp(1.25rem,2.2vw,1.75rem)] text-forest leading-snug group-hover:text-canopy transition-colors">
                     {item.title}
                   </span>
                   <ChevronDown
@@ -617,14 +579,14 @@ function FutureReadinessSection() {
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
       <div className={cn(PAGE, SECTION)}>
-        <h2 className="font-display text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
+        <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
           {title}
         </h2>
         <ul className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10 max-w-4xl mx-auto">
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -653,7 +615,7 @@ function EngagementSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {title}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>

@@ -9,7 +9,7 @@ type BlogPageContentProps = {
 
 export function BlogPageContent({ posts }: BlogPageContentProps) {
   return (
-    <>
+    <div className="blog-page">
       <section
         className="relative isolate overflow-hidden text-white"
         style={{ background: "var(--gradient-hero)" }}
@@ -24,7 +24,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
         />
         <div className="container-x relative z-10 pt-40 md:pt-48 pb-20 md:pb-28">
           <ScrollReveal variant="fade-up" className="max-w-3xl">
-            <h1 className="font-display text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
+            <h1 className="font-ui font-semibold text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
               Blog
             </h1>
             <p className="mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
@@ -58,7 +58,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -90,7 +90,7 @@ function BlogPostCard({ post }: { post: BlogPostSummary }) {
               </>
             )}
           </p>
-          <h2 className="mt-3 font-display text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
+          <h2 className="mt-3 font-ui font-semibold text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
             {post.title}
           </h2>
           <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-3">{post.summary}</p>

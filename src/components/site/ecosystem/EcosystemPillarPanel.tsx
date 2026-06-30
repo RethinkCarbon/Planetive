@@ -51,7 +51,7 @@ export function EcosystemPillarPanel({
           </p>
           <h3
             className={cn(
-              "mt-2 font-display text-2xl md:text-[1.65rem] leading-tight",
+              "mt-2 font-ui font-semibold text-2xl md:text-[1.65rem] leading-tight",
               isDark ? "text-white" : "text-forest",
             )}
           >
@@ -81,7 +81,7 @@ export function EcosystemPillarPanel({
           >
             <p
               className={cn(
-                "font-display text-lg leading-none",
+                "font-ui font-semibold text-lg leading-none",
                 isDark ? "text-white" : "text-forest",
               )}
             >

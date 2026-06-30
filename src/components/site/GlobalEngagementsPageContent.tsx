@@ -155,7 +155,7 @@ export function GlobalEngagementsPageContent() {
   ).length;
 
   return (
-    <>
+    <div className="global-engagements-page">
       <GlobalEngagementsHero count={engagementCount} />
       <GlobalPartnersMapSection />
       <FilterBar
@@ -187,7 +187,7 @@ export function GlobalEngagementsPageContent() {
           <SectionBlock key={section.id} section={section} index={i} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -217,7 +217,7 @@ function GlobalEngagementsHero({ count }: { count: number }) {
 
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <h1 className="font-display text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.04]">
+          <h1 className="font-ui font-semibold text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.04]">
             {GLOBAL_ENGAGEMENTS_HERO.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
@@ -398,7 +398,7 @@ function SectionBlock({
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {section.subtitle ?? "Engagements"}
           </span>
-          <h2 className="mt-3 font-display text-[clamp(2rem,4vw,2.75rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(2rem,4vw,2.75rem)] text-forest">
             {section.title}
           </h2>
         </ScrollReveal>
@@ -453,7 +453,7 @@ function TeamHighlight({
                   <Users size={14} />
                   Planetive team
                 </span>
-                <h2 className="mt-4 font-display text-xl md:text-2xl lg:text-[1.65rem] text-forest leading-snug">
+                <h2 className="mt-4 font-ui font-semibold text-xl md:text-2xl lg:text-[1.65rem] text-forest leading-snug">
                   {section.title}
                 </h2>
               </div>
@@ -495,7 +495,7 @@ function EngagementCard({
           <p className="text-[10px] font-mono tracking-wider uppercase text-canopy leading-normal line-clamp-3 break-words">
             {engagement.event}
           </p>
-          <h3 className="mt-3 font-h3 text-[1.05rem] md:text-lg text-forest leading-snug text-balance">
+          <h3 className="mt-3 font-ui font-semibold text-[1.05rem] md:text-lg text-forest leading-snug text-balance">
             {engagement.headline}
           </h3>
 

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
-import { BOOKING_AREAS } from "@/lib/site-booking";
 import {
   CONSULTING_PAGE,
   CONSULTING_PROCESS,
@@ -17,7 +16,7 @@ export function ConsultingPageContent() {
   }, []);
 
   return (
-    <>
+    <div className="consulting-page">
       <ConsultingHero />
       <ConsultingServicesSection />
       <ConsultingProcessSection />
@@ -26,10 +25,9 @@ export function ConsultingPageContent() {
           eyebrow={CONSULTING_PAGE.bookEyebrow}
           title={CONSULTING_PAGE.bookTitle}
           description={CONSULTING_PAGE.bookDescription}
-          areas={BOOKING_AREAS}
         />
       </div>
-    </>
+    </div>
   );
 }
 
@@ -49,7 +47,7 @@ function ConsultingHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <h1 className="font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+          <h1 className="font-ui font-semibold text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
             {CONSULTING_PAGE.title}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
@@ -57,7 +55,7 @@ function ConsultingHero() {
           </p>
           <a
             href="#book"
-            className="mt-8 inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold font-heading btn-mint"
+            className="mt-8 inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold font-ui btn-mint"
           >
             Book a consultation
           </a>
@@ -79,7 +77,7 @@ function ConsultingServicesSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             What we deliver
           </span>
-          <h2 className="mt-3 font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest leading-tight">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.5rem)] text-forest leading-tight">
             Consulting across strategy, capital, and delivery
           </h2>
         </ScrollReveal>
@@ -95,7 +93,7 @@ function ConsultingServicesSection() {
               to={service.to}
               className="group flex flex-col rounded-[24px] border border-n200/80 bg-white p-6 md:p-8 shadow-[var(--shadow-soft)] hover:border-canopy/30 hover:shadow-[var(--shadow-elevated)] transition-all duration-300"
             >
-              <h3 className="font-display text-xl text-forest group-hover:text-canopy transition-colors">
+              <h3 className="font-ui font-semibold text-xl text-forest group-hover:text-canopy transition-colors">
                 {service.title}
               </h3>
               <p className="mt-3 flex-1 text-sm text-n600 leading-relaxed">
@@ -125,7 +123,7 @@ function ConsultingProcessSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             How we work
           </span>
-          <h2 className="mt-3 font-display text-[clamp(1.75rem,3vw,2.25rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.25rem)] text-forest">
             From mandate to measurable outcomes
           </h2>
         </ScrollReveal>
@@ -140,7 +138,7 @@ function ConsultingProcessSection() {
               <span className="font-mono text-[11px] tracking-[0.18em] text-canopy">
                 {step.step}
               </span>
-              <h3 className="mt-3 font-display text-lg text-forest">{step.title}</h3>
+              <h3 className="mt-3 font-ui font-semibold text-lg text-forest">{step.title}</h3>
               <p className="mt-2 text-sm text-n600 leading-relaxed">{step.description}</p>
             </article>
           ))}

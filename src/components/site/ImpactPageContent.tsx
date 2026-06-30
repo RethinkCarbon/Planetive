@@ -1,4 +1,5 @@
 import { Quote, Sun, ExternalLink, ArrowRight } from "lucide-react";
+import { formatDisplayText } from "@/lib/format-display-text";
 import { cn } from "@/lib/utils";
 import {
   ENERGY_TRANSITION,
@@ -115,7 +116,7 @@ function EnergyTransitionFeature() {
             </div>
             <div className="lg:col-span-2 flex flex-col justify-center p-8 md:p-10 lg:p-12 border-t lg:border-t-0 lg:border-l border-n200/60">
               <h2 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-forest leading-tight">
-                {ENERGY_TRANSITION.title}
+                {formatDisplayText(ENERGY_TRANSITION.title)}
               </h2>
               {ENERGY_TRANSITION.paragraphs.map((p) => (
                 <p key={p.slice(0, 24)} className="mt-4 text-sm md:text-base text-n600 leading-relaxed">
@@ -209,7 +210,7 @@ function ImpactTopicBlock({ topic, index }: { topic: ImpactTopic; index: number 
             />
             <div className="min-w-0 flex-1">
               <h3 className="font-display text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-tight">
-                {topic.title}
+                {formatDisplayText(topic.title)}
               </h3>
 
               {topic.highlight && (

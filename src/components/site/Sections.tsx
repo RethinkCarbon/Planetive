@@ -1,3 +1,4 @@
+import { formatDisplayText } from "@/lib/format-display-text";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -75,7 +76,7 @@ export function ProcessSection() {
                 </div>
                 <span className="text-xs font-mono tracking-wider text-n400">{tag}</span>
               </div>
-              <h3 className="mt-6 font-display text-2xl text-forest">{title}</h3>
+              <h3 className="mt-6 font-ui font-semibold text-2xl text-forest">{formatDisplayText(title)}</h3>
               <p className="mt-3 text-sm leading-relaxed text-n600">{body}</p>
 
               {i < items.length - 1 && (
@@ -134,7 +135,7 @@ export function EcosystemSection() {
               >
                 <Icon size={20} />
               </div>
-              <h3 className="mt-5 font-display text-xl text-forest">{name}</h3>
+              <h3 className="mt-5 font-ui font-semibold text-xl text-forest">{name}</h3>
               <p className="mt-2 text-sm leading-relaxed text-n600">{desc}</p>
               <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-canopy group-hover:text-mint transition-colors">
                 Learn more <ArrowUpRight size={14} />
@@ -214,7 +215,7 @@ export function WhatWeDoSection() {
                   0{i + 1}
                 </span>
                 <div>
-                  <h3 className="font-display text-3xl text-forest">{p.title}</h3>
+                  <h3 className="font-ui font-semibold text-3xl text-forest">{formatDisplayText(p.title)}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-n600 max-w-md">
                     {p.body}
                   </p>
@@ -266,7 +267,7 @@ export function ImpactSection() {
                 <Icon size={28} className="text-canopy group-hover:text-mint transition-colors" />
                 <Leaf size={16} className="text-n200" />
               </div>
-              <h3 className="mt-6 font-display text-xl text-forest">{title}</h3>
+              <h3 className="mt-6 font-ui font-semibold text-xl text-forest">{formatDisplayText(title)}</h3>
               <p className="mt-2 text-sm text-n600 leading-relaxed">{desc}</p>
             </article>
           ))}
@@ -298,7 +299,7 @@ export function RethinkCarbonSection() {
               <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white/10 border border-white/20">
                 Featured Venture
               </span>
-              <h2 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.75rem)]">
+              <h2 className="mt-5 font-ui font-semibold text-[clamp(2rem,4.5vw,3.75rem)]">
                 <span className="text-mint-soft">Measure.</span> Plan. Decarbonize.
               </h2>
               <p className="mt-5 max-w-lg text-n200 leading-relaxed">
@@ -320,7 +321,7 @@ export function RethinkCarbonSection() {
                     <div className="text-mint-soft font-mono text-xs">
                       {String(i + 1).padStart(2, "0")}
                     </div>
-                    <div className="mt-2 font-display text-lg">{k}</div>
+                    <div className="mt-2 font-ui font-semibold text-lg">{k}</div>
                     <div className="text-xs text-n200 mt-1">{v}</div>
                   </div>
                 ))}
@@ -342,7 +343,7 @@ export function RethinkCarbonSection() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-xs text-n400">Enterprise · Q3 2025</div>
-                    <div className="font-display text-2xl text-forest mt-0.5">
+                    <div className="font-ui font-semibold text-2xl text-forest mt-0.5">
                       Emissions Overview
                     </div>
                   </div>
@@ -359,7 +360,7 @@ export function RethinkCarbonSection() {
                   ].map(([s, v, u, d]) => (
                     <div key={s} className="rounded-xl bg-n50 p-3">
                       <div className="text-[10px] text-n400 uppercase tracking-wider">{s}</div>
-                      <div className="mt-1 font-display text-xl text-forest">{v}</div>
+                      <div className="mt-1 font-ui font-semibold text-xl text-forest">{v}</div>
                       <div className="text-[10px] text-n400">{u}</div>
                       <div className="mt-2 inline-flex items-center text-[10px] font-semibold text-canopy">
                         {d} YoY
@@ -401,11 +402,11 @@ export function RethinkCarbonSection() {
                 <div className="mt-6 grid grid-cols-2 gap-3 text-xs">
                   <div className="rounded-xl border border-n200 p-3">
                     <div className="text-n400">Reduction target</div>
-                    <div className="font-display text-lg text-forest mt-1">-42% by 2030</div>
+                    <div className="font-ui font-semibold text-lg text-forest mt-1">-42% by 2030</div>
                   </div>
                   <div className="rounded-xl border border-n200 p-3">
                     <div className="text-n400">Initiatives active</div>
-                    <div className="font-display text-lg text-forest mt-1">27 / 34</div>
+                    <div className="font-ui font-semibold text-lg text-forest mt-1">27 / 34</div>
                   </div>
                 </div>
               </div>
@@ -468,7 +469,7 @@ export function GlobalSection() {
               <div className="mt-5 text-xs font-mono tracking-wider text-n400">
                 {r.tag}
               </div>
-              <h3 className="mt-2 font-display text-2xl text-forest">{r.name}</h3>
+              <h3 className="mt-2 font-ui font-semibold text-2xl text-forest">{r.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-n600">{r.body}</p>
 
               <svg
@@ -554,7 +555,7 @@ export function InsightsSection({
                     year: "numeric",
                   })}
                 </div>
-                <h3 className="mt-2 font-display text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
+                <h3 className="mt-2 font-ui font-semibold text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
                   {p.title}
                 </h3>
                 <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-3">{p.summary}</p>
@@ -601,7 +602,7 @@ export function FinalCTASection() {
           </svg>
 
           <div className="relative max-w-3xl mx-auto">
-            <h2 className="font-display text-white text-[clamp(2rem,5vw,4rem)]">
+            <h2 className="font-ui font-semibold text-white text-[clamp(2rem,5vw,4rem)]">
               Ready to build your climate transition roadmap?
             </h2>
             <p className="mt-5 text-n200 text-base md:text-lg max-w-xl mx-auto">
@@ -637,8 +638,8 @@ export function SectionHeader({
     <ScrollReveal
       className={align === "center" ? "max-w-2xl mx-auto text-center" : "max-w-2xl"}
     >
-      <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-forest">
-        {title}
+      <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3.25rem)] text-forest">
+        {formatDisplayText(title)}
       </h2>
       {description && (
         <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">

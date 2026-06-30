@@ -20,7 +20,7 @@ function BlogSubscribeCard() {
 
   return (
     <div className="rounded-[20px] border border-n200/80 bg-white p-6 shadow-[var(--shadow-soft)]">
-      <h2 className="font-display text-xl text-forest leading-snug">
+      <h2 className="font-ui font-semibold text-xl text-forest leading-snug">
         Sign up for blog updates!
       </h2>
       <p className="mt-2 text-sm text-n600 leading-relaxed">
@@ -80,7 +80,7 @@ function BlogSubscribeCard() {
 function BlogRecentPosts({ posts }: { posts: BlogPostSummary[] }) {
   return (
     <div>
-      <h2 className="font-display text-xl text-forest leading-snug">Recent posts</h2>
+      <h2 className="font-ui font-semibold text-xl text-forest leading-snug">Recent posts</h2>
       <ul className="mt-5 space-y-5">
         {posts.map((post) => (
           <li key={post.slug}>
@@ -102,7 +102,7 @@ function BlogRecentPosts({ posts }: { posts: BlogPostSummary[] }) {
                 )}
               </div>
               <div className="min-w-0 pt-0.5">
-                <p className="font-display text-[15px] leading-snug text-forest group-hover:text-canopy transition-colors line-clamp-2">
+                <p className="font-ui font-semibold text-[15px] leading-snug text-forest group-hover:text-canopy transition-colors line-clamp-2">
                   {post.title}
                 </p>
                 <time className="mt-1 block text-xs text-n500" dateTime={post.publishedAt}>

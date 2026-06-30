@@ -26,7 +26,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
   }, [pathname]);
 
   return (
-    <>
+    <div className="blog-page">
       <header className="pt-32 md:pt-40 pb-8 md:pb-10 bg-[var(--n50)] border-b border-n200/70">
         <div className="container-x">
           <div className="mx-auto max-w-6xl">
@@ -38,7 +38,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
               All posts
             </Link>
 
-            <h1 className="mt-6 font-display text-[clamp(1.875rem,4.5vw,2.75rem)] leading-[1.12] text-forest">
+            <h1 className="mt-6 font-ui font-semibold text-[clamp(1.875rem,4.5vw,2.75rem)] leading-[1.12] text-forest">
               {post.title}
             </h1>
 
@@ -75,7 +75,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
           </div>
         </div>
       </article>
-    </>
+    </div>
   );
 }
 

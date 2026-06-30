@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import {
   AGRI_TECH_ACEP,
@@ -52,48 +53,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function AgriTechSolutionsPageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <ValueChainSection />
       <AgriCoSection />
@@ -139,7 +101,7 @@ function HeroSection() {
             <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/90">
               {eyebrow}
             </p>
-            <h1 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.08] max-w-3xl">
+            <h1 className="mt-4 font-ui font-semibold text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.08] max-w-3xl">
               {title}
             </h1>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-2xl">
@@ -149,7 +111,7 @@ function HeroSection() {
             <div className="mt-10 flex flex-wrap items-center gap-x-1 gap-y-3">
               {pillars.map((pillar, index) => (
                 <span key={pillar} className="inline-flex items-center">
-                  <span className="font-display text-[clamp(1rem,2vw,1.35rem)] text-mint-soft/95 tracking-tight">
+                  <span className="font-ui font-semibold text-[clamp(1rem,2vw,1.35rem)] text-mint-soft/95 tracking-tight">
                     {pillar}
                   </span>
                   {index < pillars.length - 1 ? (
@@ -300,7 +262,7 @@ function ValueChainSection() {
                     )}
                     aria-hidden
                   />
-                  <span className="font-display text-sm md:text-base text-forest leading-snug block pr-2">
+                  <span className="font-ui font-semibold text-sm md:text-base text-forest leading-snug block pr-2">
                     {stage.label}
                   </span>
                 </motion.button>
@@ -343,7 +305,7 @@ function ValueChainSection() {
             >
               <div className="flex items-center gap-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-canopy shrink-0" aria-hidden />
-                <h3 className="font-display text-lg text-forest">{stage.label}</h3>
+                <h3 className="font-ui font-semibold text-lg text-forest">{stage.label}</h3>
               </div>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {stage.capabilities.map((cap) => (
@@ -385,13 +347,13 @@ function AgriCoSection() {
               {label}
             </motion.p>
             <motion.h2
-              className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
+              className="mt-4 font-ui font-semibold text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
               variants={fadeUpChild}
             >
               {title}
             </motion.h2>
             <motion.p
-              className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug"
+              className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug"
               variants={fadeUpChild}
             >
               {supportingTitle}
@@ -415,7 +377,7 @@ function AgriCoSection() {
               {modules.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-display text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 py-3.5 md:py-4"
+                  className="font-ui font-semibold text-[clamp(1.05rem,1.8vw,1.35rem)] text-forest leading-snug border-b border-n200/60 py-3.5 md:py-4"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={ecosystemViewport}
@@ -454,7 +416,7 @@ function AgriCoSection() {
               <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-n500">
                 For: {surface.for}
               </p>
-              <p className="mt-3 font-display text-xl md:text-2xl text-forest leading-snug">
+              <p className="mt-3 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                 {surface.description}
               </p>
 
@@ -573,13 +535,13 @@ function VertOsSection() {
             {label}
           </motion.p>
           <motion.h2
-            className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
+            className="mt-4 font-ui font-semibold text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]"
             variants={fadeUpChild}
           >
             {title}
           </motion.h2>
           <motion.p
-            className="mt-4 font-display text-xl md:text-2xl text-n800 leading-snug"
+            className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug"
             variants={fadeUpChild}
           >
             {supportingTitle}
@@ -609,7 +571,7 @@ function VertOsSection() {
               viewport={ecosystemViewport}
               transition={{ duration: 0.5, delay: index * 0.07, ease: ecosystemEase }}
             >
-              <h3 className="font-display text-xl md:text-2xl text-forest leading-snug">
+              <h3 className="font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                 {card.title}
               </h3>
               <ul className="mt-4 flex flex-wrap gap-2">
@@ -649,7 +611,7 @@ function VertOsSection() {
             ))}
           </div>
           <div className="mt-8 pt-6 border-t border-n200/70 flex flex-wrap items-baseline gap-3">
-            <span className="font-display text-xl md:text-2xl text-forest">
+            <span className="font-ui font-semibold text-xl md:text-2xl text-forest">
               {deployment.timeline}
             </span>
             <span className="text-sm text-n600">{deployment.timelineDetail}</span>
@@ -712,7 +674,7 @@ function EcoParksSection() {
           {outcomes.map((outcome) => (
             <span
               key={outcome}
-              className="rounded-full border border-n200/80 bg-[var(--n50)] px-5 py-2.5 font-display text-sm md:text-base text-forest"
+              className="rounded-full border border-n200/80 bg-[var(--n50)] px-5 py-2.5 font-ui font-semibold text-sm md:text-base text-forest"
             >
               {outcome}
             </span>
@@ -757,7 +719,7 @@ function ACEPSection() {
               viewport={ecosystemViewport}
               transition={{ duration: 0.45, delay: index * 0.08, ease: ecosystemEase }}
             >
-              <h3 className="font-display text-xl md:text-2xl text-forest leading-snug">
+              <h3 className="font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
                 {pillar.title}
               </h3>
               <p className="mt-4 text-sm md:text-base text-n600 leading-relaxed">
@@ -779,7 +741,7 @@ function ACEPSection() {
             {outcomes.map((outcome) => (
               <li
                 key={outcome}
-                className="font-display text-[clamp(1.1rem,2vw,1.4rem)] text-forest border-b border-n200/60 pb-3 pr-6"
+                className="font-ui font-semibold text-[clamp(1.1rem,2vw,1.4rem)] text-forest border-b border-n200/60 pb-3 pr-6"
               >
                 {outcome}
               </li>
@@ -798,7 +760,7 @@ function ACEPSection() {
             {closingStrip.map((item) => (
               <li
                 key={item}
-                className="font-display text-base md:text-lg text-forest leading-snug text-center sm:text-left"
+                className="font-ui font-semibold text-base md:text-lg text-forest leading-snug text-center sm:text-left"
               >
                 {item}
               </li>
@@ -824,7 +786,7 @@ function EngagementSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {title}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>

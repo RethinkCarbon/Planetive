@@ -95,7 +95,7 @@ export function BookMeetingSection({
             <Video size={16} aria-hidden />
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase">{eyebrow}</span>
           </div>
-          <h2 className="mt-4 font-display text-2xl md:text-[1.75rem] text-forest leading-tight">
+          <h2 className="mt-4 font-ui font-semibold text-2xl md:text-[1.75rem] text-forest leading-tight">
             {title ?? `Book a ${displayLabel} consultation`}
           </h2>
           {hasAreas ? (
@@ -201,7 +201,7 @@ function AreaPicker({
               type="button"
               onClick={() => onSelect(area.id)}
               className={cn(
-                "rounded-2xl text-left transition-all duration-200 font-heading",
+                "rounded-2xl text-left transition-all duration-200 font-ui",
                 layout === "column" ? "w-full px-3 py-3" : "shrink-0 px-4 py-2.5",
                 isSelected
                   ? "bg-white shadow-[var(--shadow-soft)] ring-1 ring-mint/50 text-forest font-semibold"
@@ -224,7 +224,7 @@ function BookingSetupPlaceholder({ areaLabel }: { areaLabel?: string }) {
       <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-mint-soft text-canopy">
         <CalendarDays size={24} aria-hidden />
       </span>
-      <h3 className="mt-5 font-display text-xl text-forest">Live booking coming soon</h3>
+      <h3 className="mt-5 font-ui font-semibold text-xl text-forest">Live booking coming soon</h3>
       <p className="mt-3 max-w-md text-sm text-n600 leading-relaxed">
         {areaLabel
           ? `${areaLabel} scheduling is being set up. In the meantime, send us a message and we'll reply within two business days.`

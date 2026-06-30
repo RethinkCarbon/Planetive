@@ -66,7 +66,7 @@ export function EditorialCapabilityPanel({
               variants={lineGrow}
               aria-hidden
             />
-            <p className="font-display text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug">
+            <p className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug">
               {layer.title}
             </p>
           </motion.li>

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { EcosystemSectionHeader as SectionHeader } from "@/components/site/EcosystemSectionHeader";
 import { EcosystemExplorer } from "@/components/site/EcosystemExplorer";
 import { EditorialCapabilityPanel } from "@/components/site/ecosystem/EditorialCapabilityPanel";
 import {
@@ -55,48 +56,9 @@ function MotionSection({
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-  description,
-  className,
-  align = "left",
-}: {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  className?: string;
-  align?: "left" | "center";
-}) {
-  return (
-    <div
-      className={cn(
-        align === "center" && "text-center mx-auto max-w-3xl",
-        align === "left" && "max-w-xl",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">{eyebrow}</p>
-      ) : null}
-      <h2
-        className={cn(
-          "font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
-          eyebrow && "mt-3",
-        )}
-      >
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
-      ) : null}
-    </div>
-  );
-}
-
 export function InHouseAgentsPageContent() {
   return (
-    <div className="bg-background">
+    <div className="bg-background ecosystem-segment-page">
       <HeroSection />
       <OverviewSection />
       <SystemsSection />
@@ -138,7 +100,7 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-display text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
               {titleLines.map((line, index) => (
                 <motion.span
                   key={line}
@@ -151,7 +113,7 @@ function HeroSection() {
                 </motion.span>
               ))}
             </h1>
-            <p className="mt-5 font-display text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
             <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
@@ -251,7 +213,7 @@ function OverviewSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
               {title}
             </h2>
             <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
@@ -262,7 +224,7 @@ function OverviewSection() {
               {statements.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-display text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -342,7 +304,7 @@ function SystemEditorial({
           {system.label}
         </motion.p>
         <motion.h3
-          className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] text-forest leading-[1.02]"
+          className="mt-4 font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest leading-[1.02]"
           variants={fadeUpChild}
         >
           {system.title}
@@ -354,7 +316,7 @@ function SystemEditorial({
           {system.category}
         </motion.p>
         <motion.p
-          className="mt-5 font-display text-xl md:text-2xl text-n800 leading-snug"
+          className="mt-5 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug"
           variants={fadeUpChild}
         >
           {system.tagline}
@@ -437,7 +399,7 @@ function ConnectedLayerSection() {
               viewport={ecosystemViewport}
               variants={scaleIn}
             >
-              <p className="font-display text-lg md:text-xl text-forest leading-snug">{center}</p>
+              <p className="font-ui font-semibold text-lg md:text-xl text-forest leading-snug">{center}</p>
             </motion.div>
           </div>
 
@@ -463,7 +425,7 @@ function ConnectedLayerSection() {
                   onBlur={() => setActive(null)}
                   onClick={() => setActive(active === name ? null : name)}
                 >
-                  <span className="font-display text-[clamp(1.35rem,2.5vw,1.85rem)] leading-snug">
+                  <span className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,1.85rem)] leading-snug">
                     {name}
                   </span>
                 </button>
@@ -497,7 +459,7 @@ function EnablesSection() {
     <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
       <div className={cn(PAGE, SECTION)}>
         <motion.h2
-          className="font-display text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
+          className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
           initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={ecosystemViewport}
@@ -509,7 +471,7 @@ function EnablesSection() {
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-display text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -538,7 +500,7 @@ function LookingForwardSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-display text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
             {headline}
           </h2>
           <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>

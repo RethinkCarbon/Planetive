@@ -320,8 +320,10 @@ function StaticCenter() {
 
 export function PlanetiveEcosystemWheel({
   highlightSegmentId,
+  className,
 }: {
   highlightSegmentId?: string;
+  className?: string;
 } = {}) {
   const navigate = useNavigate();
   const reducedMotion = usePrefersReducedMotion();
@@ -415,7 +417,10 @@ export function PlanetiveEcosystemWheel({
   return (
     <div
       ref={containerRef}
-      className="relative mx-auto w-full max-w-[min(100%,30rem)] sm:max-w-[34rem] lg:max-w-[40rem] xl:max-w-[44rem]"
+      className={cn(
+        "relative mx-auto w-full max-w-[min(100%,30rem)] sm:max-w-[34rem] lg:max-w-[40rem] xl:max-w-[44rem]",
+        className,
+      )}
       onMouseLeave={handleWheelLeave}
       role="group"
       aria-label="Planetive ecosystem — nine ventures in a rotating wheel"

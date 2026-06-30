@@ -47,14 +47,14 @@
   --color-n100: var(--n100);
   --color-n50: var(--n50);
 
-  /* Brand typography — Playfair Display (headlines) + Public Sans (body/UI) */
-  --font-heading: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-h2: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-h3: "Playfair Display", Georgia, "Times New Roman", serif;
+  /* Brand typography — Public Sans sitewide */
+  --font-heading: "Public Sans", Inter, "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-h2: var(--font-heading);
+  --font-h3: var(--font-heading);
   --font-body: "Public Sans", Inter, "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-body);
-  --font-serif: var(--font-heading);
-  --font-display: var(--font-heading);
+  --font-serif: var(--font-body);
+  --font-display: var(--font-body);
   --font-mono: var(--font-body);
 }
 
@@ -112,19 +112,22 @@
     text-rendering: optimizeLegibility;
   }
   h1 {
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
     line-height: 1.05;
   }
   h2 {
-    font-family: var(--font-h2);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
     line-height: 1.1;
   }
   h3,
   h4 {
-    font-family: var(--font-h3);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
     line-height: 1.15;
   }
   p,
@@ -154,11 +157,22 @@
 }
 
 @layer utilities {
-  /* Display / hero titles — Playfair Display */
+  /* Display / UI titles — Public Sans */
   .font-heading,
-  .font-logo {
-    font-family: var(--font-heading);
-    font-weight: 700;
+  .font-logo,
+  .font-display,
+  .font-h2,
+  .font-h3,
+  h1.font-display,
+  h2.font-display,
+  h3.font-display,
+  h4.font-display,
+  div.font-display,
+  dt.font-display,
+  span.font-display {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
   .font-body {
     font-family: var(--font-body);
@@ -168,45 +182,26 @@
     font-family: var(--font-body);
     letter-spacing: 0.01em;
   }
-  .font-h2 {
-    font-family: var(--font-h2);
-    font-weight: 700;
-  }
-  .font-h3 {
-    font-family: var(--font-h3);
-    font-weight: 700;
-  }
-  .font-display {
-    font-family: var(--font-heading);
-    font-weight: 700;
-  }
-  h1.font-display {
-    font-family: var(--font-heading);
-    font-weight: 700;
-  }
-  h2.font-display {
-    font-family: var(--font-h2);
-    font-weight: 700;
-  }
-  h3.font-display,
-  h4.font-display {
-    font-family: var(--font-h3);
-    font-weight: 700;
-  }
   p.font-display {
     font-family: var(--font-body);
-    font-weight: 400;
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
-  div.font-display,
-  dt.font-display,
-  span.font-display {
-    font-family: var(--font-h2);
-    font-weight: 700;
-  }
+  header .font-display,
+  header .font-heading,
   nav .font-display,
-  footer .font-display {
-    font-family: var(--font-heading);
-    font-weight: 700;
+  nav .font-heading,
+  footer .font-display,
+  footer .font-heading {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  /* Ampersands inside display headings — Public Sans, matching home hero */
+  .display-amp {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
   /* Eyebrows / labels — Public Sans uppercase tracking */
   .font-mono {
@@ -262,8 +257,8 @@
   .blog-prose h2,
   .blog-prose h3 {
     margin-top: 1.75em;
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
     color: var(--forest);
     line-height: 1.2;
   }

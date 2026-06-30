@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ExternalLink } from "lucide-react";
+import { formatDisplayText } from "@/lib/format-display-text";
 import { cn } from "@/lib/utils";
 import {
   INDUSTRIES,
@@ -66,7 +67,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
         <div className="container-x relative z-10 pt-40 md:pt-48 pb-20 md:pb-28">
           <ScrollReveal variant="fade-up" className="max-w-3xl flex flex-col items-start">
             <h1 className="font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
-              {industry.title}
+              {formatDisplayText(industry.title)}
             </h1>
             <p className="mt-3 text-lg md:text-xl text-mint-soft/95">{industry.tagline}</p>
             <p className="mt-4 text-base md:text-lg text-n200/90 leading-relaxed max-w-2xl">
@@ -130,7 +131,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                 <ul className="mt-5 divide-y divide-n200 border-y border-n200">
                   {industry.useCases.map((uc) => (
                     <li key={uc.title} className="py-5 first:pt-0 last:pb-0">
-                      <h3 className="font-display text-lg text-forest">{uc.title}</h3>
+                      <h3 className="font-display text-lg text-forest">{formatDisplayText(uc.title)}</h3>
                       <p className="mt-2 text-sm text-n600 leading-relaxed">{uc.description}</p>
                     </li>
                   ))}
@@ -275,7 +276,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                     <span className="font-mono text-[11px] tracking-wider text-n400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-3 font-display text-lg text-forest leading-snug">{b.title}</h3>
+                    <h3 className="mt-3 font-display text-lg text-forest leading-snug">{formatDisplayText(b.title)}</h3>
                     <p className="mt-2 text-sm text-n600 leading-relaxed">{b.description}</p>
                   </li>
                 ))}

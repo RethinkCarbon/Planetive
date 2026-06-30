@@ -58,7 +58,7 @@ export function GlobalPartnersMapSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {GLOBAL_PARTNERS_MAP_COPY.eyebrow}
           </span>
-          <h2 className="mt-3 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest">
             {GLOBAL_PARTNERS_MAP_COPY.title}
           </h2>
           <p className="mt-4 text-n600 text-sm md:text-base leading-relaxed">
@@ -202,7 +202,7 @@ function ActivePartnerBanner({
         )}
         <div>
           <p className="text-sm text-n500">Showing footprint for</p>
-          <p className="font-display text-lg text-forest">{partner.name}</p>
+          <p className="font-ui font-semibold text-lg text-forest">{partner.name}</p>
           <p className="text-xs text-n400 mt-0.5">
             {partner.region}
             {partner.countries.length > 1 && ` · ${countries}`}

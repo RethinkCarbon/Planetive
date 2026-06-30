@@ -35,7 +35,7 @@ export function NavIndustriesMenu({
   }, [variant]);
 
   const triggerClass = cn(
-    "inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium font-heading transition-colors",
+    "inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium font-ui transition-colors",
     isSolid
       ? isActive
         ? "bg-n100 text-forest"
@@ -52,7 +52,7 @@ export function NavIndustriesMenu({
 
   const itemClass = (active: boolean, index: number, total: number) =>
     cn(
-      "flex items-center gap-2.5 px-4 py-2.5 text-sm font-heading transition-colors",
+      "flex items-center gap-2.5 px-4 py-2.5 text-sm font-ui transition-colors",
       index === 0 && "rounded-t-xl",
       index === total - 1 && "rounded-b-xl",
       isSolid
@@ -106,7 +106,7 @@ export function NavIndustriesMenu({
               <Link
                 to={item.to}
                 onClick={close}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-heading text-n700 hover:bg-n100 hover:text-forest"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-ui text-n700 hover:bg-n100 hover:text-forest"
               >
                 <span
                   className="h-2 w-2 shrink-0 rounded-full"
