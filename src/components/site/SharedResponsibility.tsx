@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Droplets,
-  Zap,
-  Building2,
-  Banknote,
-  Quote,
-} from "lucide-react";
+import { Quote } from "lucide-react";
 import { useInView } from "@/hooks/use-in-view";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { cn } from "@/lib/utils";
@@ -45,6 +39,20 @@ const HOW_WE_WORK_QUOTES = [
     ),
   },
 ] as const;
+
+const ENERGY_FOCUS = [
+  "Affordable & clean energy",
+  "Financial inclusion",
+  "Clean water & conservation",
+  "Physical & digital infrastructure",
+] as const;
+
+/** 1.5°C pathway vs current global emissions (GtCO₂e). */
+const PATHWAY_TARGET_GT = 25;
+const CURRENT_EMISSIONS = { min: 54, max: 57, label: "54–57 GtCO₂e" } as const;
+const EMISSIONS_GAP = "29–32 GtCO₂e";
+const PATHWAY_TARGET_PCT =
+  (PATHWAY_TARGET_GT / CURRENT_EMISSIONS.max) * 100;
 
 function useCountUp(target: number, durationMs: number, start: boolean) {
   const [v, setV] = useState(0);
@@ -163,44 +171,20 @@ export function SharedResponsibilitySection() {
             delay={100}
             className="col-span-6 md:col-span-2 row-span-2 bg-white"
           >
-            <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
-              Global target &amp; current position
-            </div>
-            <div className="mt-4 space-y-4">
-              <GapRow
-                label="Global target"
-                valueLabel="~25 GtCO₂e"
-                weight={44}
-                animate={gridIn}
-                barClassName="bg-canopy"
-              />
-              <GapRow
-                label="Current position"
-                valueLabel="54–57 GtCO₂e"
-                weight={100}
-                animate={gridIn}
-                delay={120}
-              />
-            </div>
-            <p className="mt-auto pt-3 text-[11px] text-n500 leading-snug">
-              1.5°C pathway vs. current emissions — bars scaled to today&apos;s level.
-            </p>
+            <PathwayGapCard animate={gridIn} />
           </Tile>
 
           <Tile in={gridIn} delay={180} className="col-span-3 md:col-span-2 row-span-2 bg-white">
             <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
               Where we put our energy
             </div>
-            <ul className="mt-4 space-y-2.5">
-              {[
-                { icon: Zap, label: "Affordable & clean energy" },
-                { icon: Banknote, label: "Financial inclusion" },
-                { icon: Droplets, label: "Clean water & conservation" },
-                { icon: Building2, label: "Physical & digital infrastructure" },
-              ].map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-start gap-2.5 text-sm text-n800">
-                  <Icon size={15} className="text-canopy mt-0.5 shrink-0" />
-                  <span>{label}</span>
+            <ul className="mt-5 md:mt-6">
+              {ENERGY_FOCUS.map((label) => (
+                <li
+                  key={label}
+                  className="font-ui text-[15px] md:text-[1.05rem] font-medium text-forest leading-snug border-b border-n200/60 py-3.5 md:py-4 last:border-b-0"
+                >
+                  {label}
                 </li>
               ))}
             </ul>
@@ -252,6 +236,81 @@ export function SharedResponsibilitySection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function PathwayGapCard({ animate }: { animate: boolean }) {
+  return (
+    <>
+      <div className="text-[11px] font-mono tracking-wider text-n400 uppercase">
+        Global target &amp; current position
+      </div>
+
+      <div className="mt-4 flex items-end justify-between gap-4">
+        <div>
+          <p className="font-display text-[clamp(1.75rem,3vw,2.25rem)] leading-none text-[#9A4E32]">
+            {EMISSIONS_GAP}
+          </p>
+          <p className="mt-1.5 text-[11px] font-mono uppercase tracking-[0.14em] text-n500">
+            Gap to 1.5°C pathway
+          </p>
+        </div>
+        <p className="text-right font-mono text-[10px] uppercase tracking-[0.12em] text-[#9A4E32]/90 leading-snug max-w-[7rem]">
+          Off track
+        </p>
+      </div>
+
+      <div className="mt-5">
+        <div className="relative h-3.5 rounded-full bg-n200/80 overflow-hidden">
+          <div
+            className={cn(
+              "absolute inset-y-0 left-0 rounded-l-full bg-mint-soft/90",
+              animate && "animate-[barGrow_1s_ease-out_forwards]",
+            )}
+            style={{ width: animate ? `${PATHWAY_TARGET_PCT}%` : "0%" }}
+            aria-hidden
+          />
+          <div
+            className={cn(
+              "absolute inset-y-0 rounded-r-full bg-[#9A4E32]/75",
+              animate && "animate-[barGrow_1.1s_ease-out_forwards]",
+            )}
+            style={{
+              left: animate ? `${PATHWAY_TARGET_PCT}%` : `${PATHWAY_TARGET_PCT}%`,
+              width: animate ? `${100 - PATHWAY_TARGET_PCT}%` : "0%",
+              animationDelay: animate ? "180ms" : undefined,
+            }}
+            aria-hidden
+          />
+          <div
+            className="absolute top-0 bottom-0 w-0.5 -translate-x-1/2 bg-forest shadow-[0_0_0_1px_white]"
+            style={{ left: `${PATHWAY_TARGET_PCT}%` }}
+            aria-hidden
+          />
+        </div>
+
+        <div className="mt-3 grid grid-cols-2 gap-3 text-[10px] font-mono uppercase tracking-wide">
+          <div>
+            <span className="inline-block h-2 w-2 rounded-full bg-mint-soft mr-1.5 align-middle" aria-hidden />
+            <span className="text-n600">Pathway ceiling</span>
+            <p className="mt-0.5 text-forest font-semibold normal-case tracking-normal text-xs">
+              ~{PATHWAY_TARGET_GT} GtCO₂e
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="inline-block h-2 w-2 rounded-full bg-[#9A4E32]/75 mr-1.5 align-middle" aria-hidden />
+            <span className="text-n600">Current emissions</span>
+            <p className="mt-0.5 text-[#9A4E32] font-semibold normal-case tracking-normal text-xs">
+              {CURRENT_EMISSIONS.label}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p className="mt-auto pt-3 text-[11px] text-n600 leading-snug">
+        Global emissions sit more than double the 1.5°C pathway — the gap is widening, not closing.
+      </p>
+    </>
   );
 }
 
