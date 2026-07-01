@@ -29,6 +29,8 @@ export type TeamMember = {
   image?: string;
   /** CSS object-position for portrait framing (e.g. "70% center") */
   imagePosition?: string;
+  /** Zoom factor for full-body or wide shots (container clips overflow) */
+  imageScale?: number;
   bio: string[];
   link?: { href: string; label: string };
 };
@@ -127,6 +129,7 @@ export const TEAM: TeamMember[] = [
     role: "Business Analyst",
     group: "team",
     image: teamImg("zainab-ahmed.jpg"),
+    imagePosition: "50% 58%",
     bio: [
       "Zainab Ahmed is a business analyst focused on finance and sustainability projects. She supports research, analysis, and strategy development.",
     ],
@@ -137,7 +140,8 @@ export const TEAM: TeamMember[] = [
     role: "Carbon Credit and Sustainable Agriculture Specialist",
     group: "team",
     image: teamImg("shahid-jamal.jpeg"),
-    imagePosition: "52% center",
+    imagePosition: "50% 28%",
+    imageScale: 1.55,
     bio: [
       "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
     ],

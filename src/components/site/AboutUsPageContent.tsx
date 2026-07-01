@@ -163,7 +163,13 @@ function teamImageClassName(member: TeamMember, extra?: string) {
 }
 
 function teamImageStyle(member: TeamMember): CSSProperties | undefined {
-  return member.imagePosition ? { objectPosition: member.imagePosition } : undefined;
+  const style: CSSProperties = {};
+  if (member.imagePosition) style.objectPosition = member.imagePosition;
+  if (member.imageScale) {
+    style.transform = `scale(${member.imageScale})`;
+    style.transformOrigin = member.imagePosition ?? "50% 30%";
+  }
+  return Object.keys(style).length ? style : undefined;
 }
 
 function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: number }) {
@@ -261,7 +267,8 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
               alt={member.name}
               className={teamImageClassName(
                 member,
-                "transition-transform duration-500 group-hover:scale-[1.02]",
+                !member.imageScale &&
+                  "transition-transform duration-500 group-hover:scale-[1.02]",
               )}
               style={teamImageStyle(member)}
               loading="lazy"
