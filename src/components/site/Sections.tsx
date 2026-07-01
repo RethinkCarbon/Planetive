@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
+import { RotatingWords } from "@/components/site/RotatingWords";
 import { RETHINK_CARBON } from "@/lib/industries-content";
 
 /* ------------------------------- Process -------------------------------- */
@@ -675,8 +676,16 @@ export function FinalCTASection() {
             </svg>
 
             <div className="relative max-w-3xl mx-auto">
-              <h2 className="font-ui font-semibold text-white text-[clamp(2rem,5vw,4rem)]">
-                Ready to build your climate transition roadmap?
+              <h2 className="font-ui font-semibold text-white text-[clamp(2rem,5vw,4rem)] leading-[1.12]">
+                <span className="block">
+                  Ready to build your{" "}
+                  <RotatingWords
+                    words={["climate", "decarbonization", "ESG", "sustainability"]}
+                    intervalMs={3000}
+                    reserveLongest
+                  />
+                </span>
+                <span className="block">transition roadmap?</span>
               </h2>
               <p className="mt-5 text-n200 text-base md:text-lg max-w-xl mx-auto">
                 Tell us where you are. We'll show you what comes next — diagnosis, implementation,

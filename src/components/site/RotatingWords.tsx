@@ -6,12 +6,22 @@ type RotatingWordsProps = {
   words: readonly string[];
   intervalMs?: number;
   className?: string;
+  /** Keep slot width at the longest word so surrounding copy does not reflow */
+  reserveLongest?: boolean;
 };
 
-export function RotatingWords({ words, intervalMs = 2000, className }: RotatingWordsProps) {
+export function RotatingWords({
+  words,
+  intervalMs = 2000,
+  className,
+  reserveLongest = false,
+}: RotatingWordsProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const reserveText = reserveLongest
+    ? words.reduce((longest, word) => (word.length > longest.length ? word : longest), words[0])
+    : words[index];
 
   useEffect(() => {
     if (reducedMotion || words.length <= 1) return;
@@ -28,9 +38,16 @@ export function RotatingWords({ words, intervalMs = 2000, className }: RotatingW
   }, [intervalMs, reducedMotion, words]);
 
   return (
-    <span className={cn("inline-grid align-baseline text-mint-soft", className)} aria-live="polite">
+    <span
+      className={cn(
+        "inline-grid align-baseline text-mint-soft",
+        reserveLongest && "text-center",
+        className,
+      )}
+      aria-live="polite"
+    >
       <span className="invisible col-start-1 row-start-1 whitespace-nowrap" aria-hidden>
-        {words[index]}
+        {reserveText}
       </span>
       <span
         className={cn(
