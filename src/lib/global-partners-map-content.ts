@@ -65,11 +65,11 @@ export const GLOBAL_MAP_PARTNERS: GlobalMapPartner[] = [
     color: "#6BB896",
   },
   {
-    id: "spurt",
-    name: "Spurt",
-    logoSrc: PARTNER_LOGOS.find((p) => p.name === "Spurt")?.src ?? "",
-    region: "United States",
-    countries: ["us"],
+    id: "pref",
+    name: "Pakistan Regional Economic Forum",
+    logoSrc: PARTNER_LOGOS.find((p) => p.name === "Pakistan Regional Economic Forum")?.src ?? "",
+    region: "Pakistan",
+    countries: ["pk"],
     color: "#A8F0D4",
   },
 ];
@@ -137,9 +137,7 @@ export function getHighlightedCountryLabels(): { code: string; name: string }[] 
 
 export function getPartnersForCountry(countryCode: string): GlobalMapPartner[] {
   const code = countryCode.toLowerCase();
-  return ALL_MAP_LOCATIONS.filter((p) =>
-    p.countries.some((c) => c.toLowerCase() === code),
-  );
+  return ALL_MAP_LOCATIONS.filter((p) => p.countries.some((c) => c.toLowerCase() === code));
 }
 
 export function getLogoPartnersForCountry(countryCode: string): GlobalMapPartner[] {
@@ -163,9 +161,7 @@ export function getPartnerForCountry(
   const logoPartners = getLogoPartnersForCountry(countryCode);
   if (logoPartners.length > 0) return logoPartners[0];
 
-  return GLOBAL_MAP_HUBS.find((p) =>
-    p.countries.some((c) => c.toLowerCase() === code),
-  );
+  return GLOBAL_MAP_HUBS.find((p) => p.countries.some((c) => c.toLowerCase() === code));
 }
 
 export function buildMapCountryData() {

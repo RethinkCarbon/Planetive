@@ -26,14 +26,14 @@ export function EcosystemSectionHeader({
       ) : null}
       <h2
         className={cn(
-          "font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight",
+          "font-ui font-semibold text-type-h2 text-forest leading-tight",
           eyebrow && "mt-3",
         )}
       >
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
+        <p className="mt-4 text-type-body-lg text-n600 leading-relaxed">{description}</p>
       ) : null}
     </div>
   );

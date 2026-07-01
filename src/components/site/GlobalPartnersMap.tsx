@@ -58,7 +58,7 @@ export function GlobalPartnersMapSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {GLOBAL_PARTNERS_MAP_COPY.eyebrow}
           </span>
-          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-type-h2 text-forest">
             {GLOBAL_PARTNERS_MAP_COPY.title}
           </h2>
           <p className="mt-4 text-n600 text-sm md:text-base leading-relaxed">
@@ -83,20 +83,20 @@ export function GlobalPartnersMapSection() {
                 <div className="partner-map-zoom w-full">
                   <div ref={mapRootRef} className="partner-map-world relative">
                     <WorldMap
-                    data={MAP_DATA}
-                    size="responsive"
-                    frame={false}
-                    backgroundColor="transparent"
-                    borderColor="#8fa89c"
-                    color="#A8F0D4"
-                    strokeOpacity={0.45}
-                    richInteraction={false}
-                    tooltipBgColor="transparent"
-                    tooltipTextColor="transparent"
-                    containerClassName="partner-map-world__map"
-                    styleFunction={styleFunction}
-                    onClickFunction={({ countryCode }) => handleCountryClick(countryCode)}
-                    tooltipTextFunction={({ countryName }) => countryName}
+                      data={MAP_DATA}
+                      size="responsive"
+                      frame={false}
+                      backgroundColor="transparent"
+                      borderColor="#8fa89c"
+                      color="#A8F0D4"
+                      strokeOpacity={0.45}
+                      richInteraction={false}
+                      tooltipBgColor="transparent"
+                      tooltipTextColor="transparent"
+                      containerClassName="partner-map-world__map"
+                      styleFunction={styleFunction}
+                      onClickFunction={({ countryCode }) => handleCountryClick(countryCode)}
+                      tooltipTextFunction={({ countryName }) => countryName}
                     />
                     <MapCountryLabels mapRootRef={mapRootRef} focusId={activeId} />
                   </div>
@@ -138,19 +138,13 @@ function styleCountry(ctx: CountryContext<number>, focusId: string | null) {
     };
   }
 
-  const focusPartner = focusId
-    ? ALL_MAP_LOCATIONS.find((p) => p.id === focusId)
-    : null;
+  const focusPartner = focusId ? ALL_MAP_LOCATIONS.find((p) => p.id === focusId) : null;
 
-  const isInFocus =
-    focusPartner?.countries.some((c) => c.toLowerCase() === code) ?? false;
+  const isInFocus = focusPartner?.countries.some((c) => c.toLowerCase() === code) ?? false;
 
-  const logoPartners = partners.filter((p) =>
-    GLOBAL_MAP_PARTNERS.some((lp) => lp.id === p.id),
-  );
-  const displayPartner = focusPartner && isInFocus
-    ? focusPartner
-    : logoPartners[0] ?? partners[0];
+  const logoPartners = partners.filter((p) => GLOBAL_MAP_PARTNERS.some((lp) => lp.id === p.id));
+  const displayPartner =
+    focusPartner && isInFocus ? focusPartner : (logoPartners[0] ?? partners[0]);
 
   if (focusId) {
     if (isInFocus) {
@@ -191,10 +185,10 @@ function ActivePartnerBanner({
 
   return (
     <div
-      className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-n200/80 bg-white px-5 py-4 shadow-[var(--shadow-soft)]"
+      className="mt-6 flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-4 rounded-2xl border border-n200/80 bg-white px-4 py-4 sm:px-5 shadow-[var(--shadow-soft)]"
       role="status"
     >
-      <div className="flex items-center gap-4 min-w-0">
+      <div className="flex items-start sm:items-center gap-4 min-w-0">
         {partner.logoSrc && (
           <div className="h-12 w-20 shrink-0 flex items-center justify-center rounded-xl bg-[var(--n50)] border border-n200/60 px-2">
             <img src={partner.logoSrc} alt="" className="max-h-9 max-w-full object-contain" />
@@ -202,22 +196,20 @@ function ActivePartnerBanner({
         )}
         <div>
           <p className="text-sm text-n500">Showing footprint for</p>
-          <p className="font-ui font-semibold text-lg text-forest">{partner.name}</p>
+          <p className="font-ui font-semibold text-base sm:text-lg text-forest">{partner.name}</p>
           <p className="text-xs text-n400 mt-0.5">
             {partner.region}
-            {partner.countries.length > 1 && ` · ${countries}`}
+            {partner.countries.length > 1 && ` Â· ${countries}`}
           </p>
           {partner.description && (
-            <p className="mt-2 text-xs text-n600 leading-relaxed max-w-xl">
-              {partner.description}
-            </p>
+            <p className="mt-2 text-xs text-n600 leading-relaxed max-w-xl">{partner.description}</p>
           )}
         </div>
       </div>
       <button
         type="button"
         onClick={onClear}
-        className="shrink-0 rounded-full px-4 py-2 text-xs font-semibold border border-n200 text-n600 hover:border-canopy hover:text-forest transition-colors"
+        className="shrink-0 self-start sm:self-center rounded-full px-4 py-2 text-xs font-semibold border border-n200 text-n600 hover:border-canopy hover:text-forest transition-colors"
       >
         Clear selection
       </button>

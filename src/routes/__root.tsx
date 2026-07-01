@@ -102,14 +102,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+/** Known browser-extension roots that inject siblings into <body> and break hydration. */
+const HYDRATION_EXTENSION_ROOT_IDS = ["scrnli_recorder_root"] as const;
+
+const HYDRATION_EXTENSION_CLEANUP_SCRIPT = `
+(function () {
+  var ids = ${JSON.stringify(HYDRATION_EXTENSION_ROOT_IDS)};
+  function cleanup() {
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      if (el) el.remove();
+    }
+  }
+  cleanup();
+  var attempts = 0;
+  var timer = setInterval(function () {
+    cleanup();
+    if (++attempts > 120) clearInterval(timer);
+  }, 5);
+  document.addEventListener("DOMContentLoaded", cleanup);
+})();
+`;
+
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: HYDRATION_EXTENSION_CLEANUP_SCRIPT }}
+        />
         <Scripts />
       </body>
     </html>

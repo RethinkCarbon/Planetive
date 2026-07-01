@@ -47,7 +47,7 @@ export function PillarFooter({ pillar }: { pillar: EcosystemPillar }) {
         Also in what we do:{" "}
         {otherPillars.map((p, i) => (
           <span key={p.id}>
-            {i > 0 && " · "}
+            {i > 0 && " Â· "}
             <Link
               to={whatWeDoServicePath(p.id)}
               className="text-canopy hover:text-forest hover:underline underline-offset-4"
@@ -83,7 +83,7 @@ export function PillarCapabilities({
         <h2 className="font-display text-xl text-forest">What we cover</h2>
         <ol className="mt-6 space-y-4">
           {pillar.capabilities.map((cap, i) => (
-            <li key={cap} className="flex gap-4 text-[15px] md:text-base text-n700 leading-relaxed">
+            <li key={cap} className="flex gap-4 text-sm md:text-base text-n700 leading-relaxed">
               <span className="font-mono text-sm text-canopy shrink-0">{i + 1}.</span>
               {cap}
             </li>
@@ -99,7 +99,7 @@ export function PillarCapabilities({
         <h2 className="font-display text-xl text-forest">What we cover</h2>
         <ul className="mt-5 space-y-3 text-n700 leading-relaxed">
           {pillar.capabilities.map((cap) => (
-            <li key={cap} className="text-[15px] md:text-base">
+            <li key={cap} className="text-sm md:text-base">
               {cap}
             </li>
           ))}
@@ -113,7 +113,7 @@ export function PillarCapabilities({
       <h2 className="font-display text-xl text-forest">What we cover</h2>
       <ul className="mt-5 space-y-3 text-n700 leading-relaxed">
         {pillar.capabilities.map((cap) => (
-          <li key={cap} className="text-[15px] md:text-base">
+          <li key={cap} className="text-sm md:text-base">
             {cap}
           </li>
         ))}

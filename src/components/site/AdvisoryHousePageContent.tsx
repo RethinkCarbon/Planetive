@@ -184,7 +184,12 @@ function HeroAdvisoryScene({ reduced }: { reduced: boolean }) {
           <motion.g
             key={i}
             animate={reduced ? undefined : { opacity: [0.35, 0.85, 0.35] }}
-            transition={{ duration: 4.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 }}
+            transition={{
+              duration: 4.5 + i * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.25,
+            }}
           >
             <line
               x1="210"
@@ -226,10 +231,7 @@ function WhatWeDoSection() {
   const { title, body, capabilities } = ADVISORY_HOUSE_WHAT_WE_DO;
 
   return (
-    <MotionSection
-      id="capabilities"
-      className={cn(ECOSYSTEM_SURFACE.first, "scroll-mt-24")}
-    >
+    <MotionSection id="capabilities" className={cn(ECOSYSTEM_SURFACE.first, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <motion.div
@@ -482,7 +484,12 @@ function WorkshopAbstractVisual({ reduced }: { reduced: boolean }) {
             key={i}
             className="block w-6 md:w-8 h-10 md:h-12 rounded-t-full bg-forest/12 border border-forest/10"
             animate={reduced ? undefined : { opacity: [0.35, 0.65, 0.35], y: [0, -2, 0] }}
-            transition={{ duration: 5 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+            transition={{
+              duration: 5 + i * 0.4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.2,
+            }}
           />
         ))}
       </div>
@@ -531,7 +538,9 @@ function BankabilityStudySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease }}
             >
-              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
+              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">
+                {label}
+              </p>
               <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
                 {title}
               </h2>
@@ -623,10 +632,7 @@ function BankabilityStudySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.55, ease }}
             >
-              <BankabilityFrameworkVisual
-                steps={decisionConfidence.steps}
-                reduced={!!reduced}
-              />
+              <BankabilityFrameworkVisual steps={decisionConfidence.steps} reduced={!!reduced} />
             </motion.div>
           </div>
         </div>
@@ -683,10 +689,7 @@ function BankabilityFrameworkVisual({
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05, ease }}
             >
-              <span
-                className="shrink-0 h-2 w-2 rounded-full bg-canopy"
-                aria-hidden
-              />
+              <span className="shrink-0 h-2 w-2 rounded-full bg-canopy" aria-hidden />
               <span className="font-ui font-semibold text-[clamp(1.15rem,2.2vw,1.55rem)] text-forest leading-snug">
                 {step}
               </span>
@@ -706,14 +709,8 @@ function BankabilityFrameworkVisual({
 
 function OngoingProgramSection() {
   const reduced = useReducedMotion();
-  const {
-    label,
-    title,
-    supportingTitle,
-    description,
-    capabilityAreas,
-    programDuration,
-  } = ADVISORY_HOUSE_ONGOING_PROGRAM;
+  const { label, title, supportingTitle, description, capabilityAreas, programDuration } =
+    ADVISORY_HOUSE_ONGOING_PROGRAM;
 
   return (
     <MotionSection id="ongoing-program" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
@@ -810,7 +807,12 @@ function OngoingProgramSystemsVisual({ reduced }: { reduced: boolean }) {
             fill="#1A6B4A"
             fillOpacity="0.05"
             animate={reduced ? undefined : { opacity: [0.4, 0.75, 0.4] }}
-            transition={{ duration: 5 + layer, repeat: Infinity, ease: "easeInOut", delay: layer * 0.3 }}
+            transition={{
+              duration: 5 + layer,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: layer * 0.3,
+            }}
           />
         ))}
 
@@ -922,7 +924,9 @@ function HowWeEngageSection() {
                   )}
                   aria-hidden
                 />
-                <span className="font-ui font-semibold text-sm md:text-base text-forest">{step.title}</span>
+                <span className="font-ui font-semibold text-sm md:text-base text-forest">
+                  {step.title}
+                </span>
               </button>
             ))}
           </div>
@@ -1090,7 +1094,10 @@ function EcosystemSection() {
   const { title, description } = ADVISORY_HOUSE_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-5">

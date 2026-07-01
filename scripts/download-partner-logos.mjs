@@ -6,14 +6,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const BASE =
-  "https://img1.wsimg.com/isteam/ip/51b0b378-19bd-4fd6-835c-58f6b3bbd48a";
+const BASE = "https://img1.wsimg.com/isteam/ip/51b0b378-19bd-4fd6-835c-58f6b3bbd48a";
 
 /** Remote path → local filename */
 const PARTNERS = [
   { remote: "the-do-logo.png", local: "the-do-logo.png", hiRes: "/:/rs=w:800" },
   { remote: "LUMS%20logo-100a276.png", local: "lums-logo.png", hiRes: "/:/rs=w:800" },
-  { remote: "Spurt%20logo.png", local: "spurt-logo.png", hiRes: "/:/rs=w:800" },
+  { remote: "PREF.jpg", local: "PREF.jpg", hiRes: "/:/rs=w:800" },
   { remote: "mezzan_logo-c7cca42.jpeg", local: "mezzan-logo.jpeg", hiRes: "/:/rs=w:800" },
   { remote: "hawkamah-logo.png", local: "hawkamah-logo.png", hiRes: "/:/rs=w:800" },
   { remote: "relp%20logo.png", local: "relp-logo.png", hiRes: "/:/rs=w:800" },

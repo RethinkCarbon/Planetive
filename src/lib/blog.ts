@@ -85,9 +85,7 @@ export function getBlogPostBySlug(slug: string): BlogPostDetail | undefined {
   const decoded = normalizeSlugParam(slug);
   const post = BLOG_POSTS.find(
     (post) =>
-      post.slug === decoded ||
-      post.slug === slug ||
-      post.slug.normalize("NFKD") === decoded,
+      post.slug === decoded || post.slug === slug || post.slug.normalize("NFKD") === decoded,
   );
   if (!post) return undefined;
 

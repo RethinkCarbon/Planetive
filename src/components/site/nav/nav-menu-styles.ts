@@ -2,10 +2,8 @@ import { cn } from "@/lib/utils";
 
 export function navTriggerClass(isSolid: boolean, isActive: boolean, isOpen: boolean) {
   return cn(
-    "inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[15px] md:text-base transition-colors duration-200 cursor-default select-none font-body font-medium",
-    isActive || isOpen
-      ? "bg-n100 text-forest"
-      : "text-n800 hover:bg-n100",
+    "inline-flex items-center gap-1 px-2 py-2 rounded-full text-sm lg:text-[15px] xl:text-base transition-colors duration-200 cursor-default select-none font-body font-medium min-h-[2.5rem]",
+    isActive || isOpen ? "bg-n100 text-forest" : "text-n800 hover:bg-n100",
   );
 }
 

@@ -42,13 +42,7 @@ export const AGRI_TECH_VALUE_CHAIN = {
     {
       id: "market",
       label: "Market Linkages",
-      capabilities: [
-        "Market Intelligence",
-        "Pricing",
-        "Supply Chain",
-        "Export",
-        "Commerce",
-      ],
+      capabilities: ["Market Intelligence", "Pricing", "Supply Chain", "Export", "Commerce"],
     },
     {
       id: "finance",
@@ -127,13 +121,7 @@ export const AGRI_TECH_VERT_OS = {
     },
     {
       title: "Analytics & Intelligence",
-      items: [
-        "Yield Prediction",
-        "Optimization",
-        "ROI",
-        "Scenario Planning",
-        "Early Warnings",
-      ],
+      items: ["Yield Prediction", "Optimization", "ROI", "Scenario Planning", "Early Warnings"],
     },
   ] as const,
   deployment: {
@@ -142,8 +130,7 @@ export const AGRI_TECH_VERT_OS = {
     timeline: "Rapid Deployment",
     timelineDetail: "(4–5 Weeks)",
   },
-  closingStatement:
-    "Planetive also delivers turnkey greenhouse and vertical farming deployments.",
+  closingStatement: "Planetive also delivers turnkey greenhouse and vertical farming deployments.",
 };
 
 export const AGRI_TECH_ECO_PARKS = {

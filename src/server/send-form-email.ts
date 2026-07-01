@@ -1,7 +1,4 @@
-import {
-  PLANETIVE_INBOX_EMAIL,
-  type SiteFormPayload,
-} from "@/lib/site-form-payload";
+import { PLANETIVE_INBOX_EMAIL, type SiteFormPayload } from "@/lib/site-form-payload";
 
 function escapeHtml(value: string) {
   return value
@@ -85,8 +82,7 @@ export async function sendFormEmail(payload: SiteFormPayload) {
   }
 
   const inbox = process.env.PLANETIVE_CONTACT_EMAIL ?? PLANETIVE_INBOX_EMAIL;
-  const from =
-    process.env.PLANETIVE_EMAIL_FROM ?? "Planetive Website <onboarding@resend.dev>";
+  const from = process.env.PLANETIVE_EMAIL_FROM ?? "Planetive Website <onboarding@resend.dev>";
   const { subject, replyTo, text, html } = formatPayload(payload);
 
   const response = await fetch("https://api.resend.com/emails", {

@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type ElementType,
-} from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ElementType } from "react";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
@@ -95,11 +89,7 @@ export function TypewriterText({
   const visibleText = text.slice(0, length);
 
   return (
-    <Tag
-      ref={ref}
-      className={cn("grid w-full min-w-0 align-top", className)}
-      aria-label={text}
-    >
+    <Tag ref={ref} className={cn("grid w-full min-w-0 align-top", className)} aria-label={text}>
       <span className="invisible col-start-1 row-start-1 whitespace-normal break-words" aria-hidden>
         {text}
       </span>

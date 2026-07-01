@@ -75,8 +75,8 @@ function classifyEngagement(engagement: GlobalEngagement): CategoryFilterId {
   const curatedCategory = ENGAGEMENT_CATEGORY_BY_ID[engagement.id];
   if (curatedCategory) return curatedCategory;
 
-  const text = `${engagement.event} ${engagement.headline} ${engagement.body.join(" ")}`
-    .toLowerCase();
+  const text =
+    `${engagement.event} ${engagement.headline} ${engagement.body.join(" ")}`.toLowerCase();
 
   if (/(workshop|team hosted|team conducted|planetive team)/.test(text)) {
     return "team-milestones";
@@ -262,8 +262,7 @@ function FilterBar({
   onEventChange: (id: string) => void;
   yearEvents: Array<{ id: string; label: string }>;
 }) {
-  const activeYearLabel =
-    YEAR_FILTERS.find((item) => item.id === activeYear)?.label ?? "All";
+  const activeYearLabel = YEAR_FILTERS.find((item) => item.id === activeYear)?.label ?? "All";
 
   return (
     <section className="sticky top-[4.5rem] z-30 border-b border-n200/80 bg-[var(--n50)]/95 backdrop-blur-md">
@@ -374,13 +373,7 @@ function FilterBar({
   );
 }
 
-function SectionBlock({
-  section,
-  index,
-}: {
-  section: GlobalEngagementSection;
-  index: number;
-}) {
+function SectionBlock({ section, index }: { section: GlobalEngagementSection; index: number }) {
   if (section.kind === "highlight") {
     return <TeamHighlight section={section} index={index} />;
   }
@@ -391,7 +384,10 @@ function SectionBlock({
   return (
     <section
       id={section.id}
-      className={cn("scroll-mt-32 py-12 md:py-16", index % 2 === 0 ? "bg-white" : "bg-[var(--n50)]")}
+      className={cn(
+        "scroll-mt-32 py-12 md:py-16",
+        index % 2 === 0 ? "bg-white" : "bg-[var(--n50)]",
+      )}
     >
       <div className="container-x">
         <ScrollReveal className="mb-10 md:mb-12">
@@ -413,19 +409,10 @@ function SectionBlock({
   );
 }
 
-function TeamHighlight({
-  section,
-  index,
-}: {
-  section: GlobalEngagementSection;
-  index: number;
-}) {
+function TeamHighlight({ section, index }: { section: GlobalEngagementSection; index: number }) {
   return (
     <section
-      className={cn(
-        "py-10 md:py-14",
-        index % 2 === 0 ? "bg-[var(--n100)]" : "bg-[var(--n50)]",
-      )}
+      className={cn("py-10 md:py-14", index % 2 === 0 ? "bg-[var(--n100)]" : "bg-[var(--n50)]")}
     >
       <div className="container-x">
         <ScrollReveal variant="scale-up">
@@ -465,17 +452,10 @@ function TeamHighlight({
   );
 }
 
-function EngagementCard({
-  engagement,
-  delay,
-}: {
-  engagement: GlobalEngagement;
-  delay: number;
-}) {
+function EngagementCard({ engagement, delay }: { engagement: GlobalEngagement; delay: number }) {
   const [expanded, setExpanded] = useState(false);
   const previewText = engagement.body.join(" ");
-  const long =
-    engagement.body.length > 1 || previewText.length > 240;
+  const long = engagement.body.length > 1 || previewText.length > 240;
 
   return (
     <ScrollReveal variant="fade-up" delay={delay} className="h-full">

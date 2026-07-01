@@ -1,12 +1,11 @@
 import { useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, ExternalLink, Globe2, Users } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   ABOUT_INTRO,
   PARTNER_LOGOS,
   TEAM,
-  partnerLogo,
   type TeamMember,
 } from "@/lib/about-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
@@ -21,11 +20,7 @@ export function AboutUsPageContent() {
       <AboutHero />
       <AboutIntro />
       <TeamSection title="Leadership" members={leadership} featured />
-      <TeamSection
-        title="Team & Advisors"
-        subtitle="Global advisors"
-        members={advisors}
-      />
+      <TeamSection title="Team & Advisors" subtitle="Global advisors" members={advisors} />
       <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
       <PartnersSection />
       <AboutClosingCta />
@@ -71,49 +66,42 @@ function AboutIntro() {
       <div className="container-x">
         <ScrollReveal variant="scale-up" duration={900}>
           <article className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[32px] md:rounded-[40px] border border-n200/80 bg-white shadow-[var(--shadow-elevated)]">
-            <div className="relative lg:col-span-5 min-h-[280px] sm:min-h-[320px] lg:min-h-[420px]">
+            <div className="relative lg:col-span-5 min-h-[280px] sm:min-h-[320px] lg:min-h-[420px] overflow-hidden bg-[#eef2f5]">
               <img
-                src={ABOUT_INTRO.heroImage}
-                alt="Planetive leadership at a global sustainability forum"
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: ABOUT_INTRO.heroImagePosition }}
+                src={ABOUT_INTRO.missionMapImage}
+                alt="Planetive locations — Dubai, UAE and Islamabad, Pakistan"
+                className="absolute inset-0 h-full w-full scale-[1.08] object-contain object-center"
                 loading="eager"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-forest/75 via-forest/15 to-transparent lg:bg-gradient-to-r lg:from-forest/65 lg:via-forest/10 lg:to-transparent" />
-              <div className="absolute top-5 left-5 font-mono text-[11px] tracking-widest text-white/90 uppercase">
-                Our mission
-              </div>
-              <div className="absolute bottom-5 left-5 right-5">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-sm font-semibold text-forest shadow-lg">
-                  <Globe2 size={16} className="text-canopy shrink-0" />
-                  Middle East &amp; Pakistan · Global reach
-                </span>
-              </div>
             </div>
 
             <div className="lg:col-span-7 flex flex-col justify-center p-8 md:p-10 lg:p-12 border-t lg:border-t-0 lg:border-l border-n200/60">
-              <div className="inline-flex items-center gap-2 rounded-full bg-mint-soft px-3 py-1 text-xs font-semibold text-forest w-fit">
-                <Users size={14} aria-hidden />
-                Advisory &amp; impact
-              </div>
-              <p className="mt-5 text-[15px] md:text-base text-n600 leading-relaxed">
+              <p className="text-[15px] md:text-base text-n600 leading-relaxed">
                 {ABOUT_INTRO.body}
               </p>
-              <div className="mt-8 grid grid-cols-2 gap-3">
-                {ABOUT_INTRO.focusAreas.map(({ label, icon: Icon }) => (
-                  <div
-                    key={label}
-                    className="group flex items-start gap-3 rounded-2xl border border-n200/70 bg-[var(--n50)] px-4 py-4 transition-colors hover:border-canopy/30 hover:bg-mint-soft/30"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-mint-soft text-canopy transition-colors group-hover:bg-mint group-hover:text-forest">
-                      <Icon size={18} strokeWidth={2.25} aria-hidden />
-                    </span>
-                    <p className="pt-2 text-sm font-semibold text-forest leading-snug">
-                      {label}
-                    </p>
-                  </div>
-                ))}
+              <div className="mt-8 border-t border-n200/70 pt-6">
+                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
+                  Core focus
+                </p>
+                <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8">
+                  {ABOUT_INTRO.focusAreas.map(({ label, icon: Icon }) => (
+                    <li
+                      key={label}
+                      className="flex items-baseline gap-2.5 border-b border-n200/50 py-3 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0"
+                    >
+                      <Icon
+                        size={15}
+                        strokeWidth={2}
+                        className="relative top-0.5 shrink-0 text-canopy"
+                        aria-hidden
+                      />
+                      <span className="text-[15px] font-medium text-forest leading-snug">
+                        {label}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </article>
@@ -213,13 +201,12 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
           <span className="text-xs font-mono tracking-wider uppercase text-canopy">
             {member.role}
           </span>
-          <h3 className="mt-2 font-ui font-semibold text-3xl md:text-4xl text-forest">{member.name}</h3>
+          <h3 className="mt-2 font-ui font-semibold text-3xl md:text-4xl text-forest">
+            {member.name}
+          </h3>
           <BioText
             paragraphs={member.bio}
-            className={cn(
-              "mt-5",
-              isAyla && !expanded && "max-h-[9.5rem] overflow-hidden",
-            )}
+            className={cn("mt-5", isAyla && !expanded && "max-h-[9.5rem] overflow-hidden")}
           />
           {member.link && (
             <a
@@ -251,13 +238,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
   );
 }
 
-function BioText({
-  paragraphs,
-  className,
-}: {
-  paragraphs: string[];
-  className?: string;
-}) {
+function BioText({ paragraphs, className }: { paragraphs: string[]; className?: string }) {
   return (
     <div className={cn("space-y-3 text-n600 leading-relaxed", className)}>
       {paragraphs.map((p) => (
@@ -302,11 +283,10 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
           <span className="text-[10px] font-mono tracking-wider uppercase text-canopy">
             {member.role}
           </span>
-          <h3 className="mt-2 font-ui font-semibold text-xl text-forest leading-tight">{member.name}</h3>
-          <BioText
-            paragraphs={member.bio}
-            className="mt-3 flex-1"
-          />
+          <h3 className="mt-2 font-ui font-semibold text-xl text-forest leading-tight">
+            {member.name}
+          </h3>
+          <BioText paragraphs={member.bio} className="mt-3 flex-1" />
         </div>
       </article>
     </ScrollReveal>
@@ -332,7 +312,7 @@ function PartnersSection() {
             {PARTNER_LOGOS.map((p) => (
               <div
                 key={p.name}
-                className="flex h-20 w-36 md:h-24 md:w-44 items-center justify-center rounded-2xl bg-white border border-n200/80 px-4 py-3 shadow-[var(--shadow-soft)]"
+                className="group relative flex h-20 w-36 md:h-24 md:w-44 items-center justify-center rounded-2xl bg-white border border-n200/80 px-4 py-3 shadow-[var(--shadow-soft)]"
               >
                 <img
                   src={p.src}
@@ -340,6 +320,10 @@ function PartnersSection() {
                   className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
                   loading="lazy"
                 />
+                <div className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 w-52 -translate-x-1/2 rounded-xl border border-n200/80 bg-white px-3 py-2 text-left text-xs text-n600 shadow-[var(--shadow-elevated)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  <p className="font-semibold text-forest">{p.name}</p>
+                  <p className="mt-1 leading-relaxed">{p.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -359,8 +343,8 @@ function AboutClosingCta() {
               Work with Planetive
             </h2>
             <p className="mt-3 text-n600 max-w-lg mx-auto">
-              Connect with our team to explore advisory, project development, and climate
-              finance partnerships.
+              Connect with our team to explore advisory, project development, and climate finance
+              partnerships.
             </p>
             <Link
               to="/work-with-us"

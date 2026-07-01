@@ -51,8 +51,7 @@ const ENERGY_FOCUS = [
 const PATHWAY_TARGET_GT = 25;
 const CURRENT_EMISSIONS = { min: 54, max: 57, label: "54–57 GtCO₂e" } as const;
 const EMISSIONS_GAP = "29–32 GtCO₂e";
-const PATHWAY_TARGET_PCT =
-  (PATHWAY_TARGET_GT / CURRENT_EMISSIONS.max) * 100;
+const PATHWAY_TARGET_PCT = (PATHWAY_TARGET_GT / CURRENT_EMISSIONS.max) * 100;
 
 function useCountUp(target: number, durationMs: number, start: boolean) {
   const [v, setV] = useState(0);
@@ -116,28 +115,23 @@ export function SharedResponsibilitySection() {
               — A note from Planetive
             </div>
             <h2 className="mt-5 font-ui font-semibold text-[clamp(2rem,4.2vw,3.5rem)] text-forest leading-[1.02]">
-              Our planet's well-being is a{" "}
-              <em className="not-italic text-canopy">shared</em> responsibility.
+              Our planet's well-being is a <em className="not-italic text-canopy">shared</em>{" "}
+              responsibility.
             </h2>
           </ScrollReveal>
-          <ScrollReveal
-            as="div"
-            variant="fade-left"
-            delay={120}
-            className="lg:col-span-7 lg:pt-3"
-          >
+          <ScrollReveal as="div" variant="fade-left" delay={120} className="lg:col-span-7 lg:pt-3">
             <p className="text-n800 text-lg md:text-xl leading-relaxed font-ui font-semibold">
-              The last decades have cost us biodiversity, raised our seas, and thickened
-              our air. We don't think sustainability is a department — it's the
-              conversation underneath every other one.
+              The last decades have cost us biodiversity, raised our seas, and thickened our air. We
+              don't think sustainability is a department — it's the conversation underneath every
+              other one.
             </p>
             <p className="mt-5 text-n600 leading-relaxed">
-              So we sit at every table that will have us: governance, finance, operators,
-              builders. Planetive helps close two stubborn gaps — the{" "}
+              So we sit at every table that will have us: governance, finance, operators, builders.
+              Planetive helps close two stubborn gaps — the{" "}
               <span className="text-forest font-semibold">information gap</span> and the{" "}
-              <span className="text-forest font-semibold">capital gap</span> — and then
-              gets out of the way so partnerships in clean energy, financial inclusion,
-              water, and infrastructure can actually ship.
+              <span className="text-forest font-semibold">capital gap</span> — and then gets out of
+              the way so partnerships in clean energy, financial inclusion, water, and
+              infrastructure can actually ship.
             </p>
           </ScrollReveal>
         </div>
@@ -166,11 +160,7 @@ export function SharedResponsibilitySection() {
             </div>
           </Tile>
 
-          <Tile
-            in={gridIn}
-            delay={100}
-            className="col-span-6 md:col-span-2 row-span-2 bg-white"
-          >
+          <Tile in={gridIn} delay={100} className="col-span-6 md:col-span-2 row-span-2 bg-white">
             <PathwayGapCard animate={gridIn} />
           </Tile>
 
@@ -215,12 +205,15 @@ export function SharedResponsibilitySection() {
               />
             </div>
             <div className="mt-auto pt-4 text-xs text-n800/80 leading-snug">
-              We bridge with knowledge sharing, project evaluation, and structured
-              finance.
+              We bridge with knowledge sharing, project evaluation, and structured finance.
             </div>
           </Tile>
 
-          <Tile in={gridIn} delay={340} className="col-span-3 md:col-span-2 row-span-2 bg-forest text-white">
+          <Tile
+            in={gridIn}
+            delay={340}
+            className="col-span-3 md:col-span-2 row-span-2 bg-forest text-white"
+          >
             <div className="text-[11px] font-mono tracking-wider text-mint-soft/80 uppercase">
               Our horizon
             </div>
@@ -291,14 +284,20 @@ function PathwayGapCard({ animate }: { animate: boolean }) {
 
         <div className="mt-3 grid grid-cols-2 gap-3 text-[10px] font-mono uppercase tracking-wide">
           <div>
-            <span className="inline-block h-2 w-2 rounded-full bg-mint-soft mr-1.5 align-middle" aria-hidden />
+            <span
+              className="inline-block h-2 w-2 rounded-full bg-mint-soft mr-1.5 align-middle"
+              aria-hidden
+            />
             <span className="text-n600">Pathway ceiling</span>
             <p className="mt-0.5 text-forest font-semibold normal-case tracking-normal text-xs">
               ~{PATHWAY_TARGET_GT} GtCO₂e
             </p>
           </div>
           <div className="text-right">
-            <span className="inline-block h-2 w-2 rounded-full bg-[#9A4E32]/75 mr-1.5 align-middle" aria-hidden />
+            <span
+              className="inline-block h-2 w-2 rounded-full bg-[#9A4E32]/75 mr-1.5 align-middle"
+              aria-hidden
+            />
             <span className="text-n600">Current emissions</span>
             <p className="mt-0.5 text-[#9A4E32] font-semibold normal-case tracking-normal text-xs">
               {CURRENT_EMISSIONS.label}
@@ -336,9 +335,7 @@ function GapRow({
     <div>
       <div className="flex items-center justify-between gap-3 text-xs">
         <span className="font-semibold text-forest">{label}</span>
-        <span className="font-mono text-n800/70 shrink-0">
-          {valueLabel ?? `${weight}%`}
-        </span>
+        <span className="font-mono text-n800/70 shrink-0">{valueLabel ?? `${weight}%`}</span>
       </div>
       <div className={cn("mt-1.5 h-1.5 rounded-full overflow-hidden", trackClassName)}>
         <div

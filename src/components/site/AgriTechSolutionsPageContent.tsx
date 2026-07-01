@@ -162,7 +162,12 @@ function HeroAgriScene({ reduced }: { reduced: boolean }) {
           <motion.g
             key={layer}
             animate={reduced ? undefined : { y: [0, -3 - layer, 0] }}
-            transition={{ duration: 5 + layer, repeat: Infinity, ease: "easeInOut", delay: layer * 0.4 }}
+            transition={{
+              duration: 5 + layer,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: layer * 0.4,
+            }}
           >
             <rect
               x={80 + layer * 12}
@@ -358,7 +363,10 @@ function AgriCoSection() {
             >
               {supportingTitle}
             </motion.p>
-            <motion.p className="mt-6 text-base md:text-lg text-n600 leading-relaxed" variants={fadeUpChild}>
+            <motion.p
+              className="mt-6 text-base md:text-lg text-n600 leading-relaxed"
+              variants={fadeUpChild}
+            >
               {description}
             </motion.p>
           </motion.div>
@@ -484,7 +492,12 @@ function AgriCoSurfaceVisual({
                 key={row}
                 className="flex items-center gap-2"
                 animate={reduced ? undefined : { opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 4 + row, repeat: Infinity, ease: "easeInOut", delay: row * 0.3 }}
+                transition={{
+                  duration: 4 + row,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: row * 0.3,
+                }}
               >
                 <span className="h-2 w-2 rounded-full bg-canopy/40 shrink-0" />
                 <div className="h-2 flex-1 rounded-full bg-n200/50" />
@@ -514,8 +527,15 @@ function AgriCoSurfaceVisual({
 
 function VertOsSection() {
   const reduced = useReducedMotion();
-  const { label, title, supportingTitle, description, capabilityCards, deployment, closingStatement } =
-    AGRI_TECH_VERT_OS;
+  const {
+    label,
+    title,
+    supportingTitle,
+    description,
+    capabilityCards,
+    deployment,
+    closingStatement,
+  } = AGRI_TECH_VERT_OS;
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -639,7 +659,11 @@ function EcoParksSection() {
   return (
     <MotionSection id="eco-parks" className={cn(ECOSYSTEM_SURFACE.white, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
-        <SectionHeader title={title} description={description} className="mb-12 md:mb-16 max-w-3xl" />
+        <SectionHeader
+          title={title}
+          description={description}
+          className="mb-12 md:mb-16 max-w-3xl"
+        />
 
         <motion.div
           className="overflow-x-auto pb-2"
@@ -736,7 +760,9 @@ function ACEPSection() {
           viewport={ecosystemViewport}
           transition={{ duration: 0.45 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy mb-5">Outcomes</p>
+          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy mb-5">
+            Outcomes
+          </p>
           <ul className="flex flex-wrap gap-3">
             {outcomes.map((outcome) => (
               <li
@@ -810,7 +836,10 @@ function EcosystemSection() {
   const { title, description } = AGRI_TECH_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <motion.div

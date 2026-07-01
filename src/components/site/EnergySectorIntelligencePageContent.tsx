@@ -96,17 +96,17 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-ui font-semibold text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-type-h1 leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-type-lead text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
+            <p className="mt-6 text-type-body-lg text-n200/90 leading-relaxed max-w-xl">
               {description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
@@ -219,12 +219,13 @@ function WhatWeDoSection() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <MotionSection
-      id="capabilities"
-      className={cn(ECOSYSTEM_SURFACE.first, "scroll-mt-24")}
-    >
+    <MotionSection id="capabilities" className={cn(ECOSYSTEM_SURFACE.first, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
-        <SectionHeader title={title} description={description} className="max-w-3xl mb-12 md:mb-16" />
+        <SectionHeader
+          title={title}
+          description={description}
+          className="max-w-3xl mb-12 md:mb-16"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {capabilities.map((cap, index) => (
@@ -250,11 +251,15 @@ function WhatWeDoSection() {
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-3 font-ui font-semibold text-xl text-forest leading-snug">{cap.title}</h3>
+              <h3 className="mt-3 font-ui font-semibold text-xl text-forest leading-snug">
+                {cap.title}
+              </h3>
               <p
                 className={cn(
                   "mt-3 text-sm text-n600 leading-relaxed transition-all duration-300",
-                  active === index ? "opacity-100 max-h-24" : "opacity-0 max-h-0 overflow-hidden md:opacity-70 md:max-h-24",
+                  active === index
+                    ? "opacity-100 max-h-24"
+                    : "opacity-0 max-h-0 overflow-hidden md:opacity-70 md:max-h-24",
                 )}
               >
                 {cap.description}
@@ -277,10 +282,10 @@ function EngagementSection() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16">
           <div className="xl:col-span-5">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-ui font-semibold text-[clamp(1.85rem,3.2vw,2.75rem)] text-forest leading-tight">
+            <h2 className="mt-4 font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
             <p className="mt-6 text-sm font-mono uppercase tracking-wider text-n500">
               Program Duration: {duration}
             </p>
@@ -304,7 +309,7 @@ function EngagementSection() {
                   <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-canopy">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-base md:text-lg text-n700 leading-relaxed">
+                  <p className="mt-2 text-type-body-lg text-n700 leading-relaxed">
                     {item.description}
                   </p>
                 </motion.li>
@@ -328,13 +333,13 @@ function GridLensSection() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <div className="xl:col-span-5 xl:sticky xl:top-28">
             <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-ui font-semibold text-[clamp(2.25rem,4.5vw,3.5rem)] text-forest leading-[1.02]">
+            <h2 className="mt-4 font-ui font-semibold text-type-h2 text-forest leading-[1.02]">
               {title}
             </h2>
             <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
               {supportingTitle}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
+            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{description}</p>
             <div className="mt-10 hidden xl:block">
               <GridLensVisual reduced={!!reduced} />
             </div>
@@ -386,10 +391,7 @@ function GridLensSection() {
 
 function GridLensVisual({ reduced }: { reduced: boolean }) {
   return (
-    <div
-      className="rounded-[24px] border border-n200/60 bg-white p-8 md:p-10"
-      aria-hidden
-    >
+    <div className="rounded-[24px] border border-n200/60 bg-white p-8 md:p-10" aria-hidden>
       <svg viewBox="0 0 300 300" className="w-full h-auto" fill="none">
         <defs>
           <linearGradient id="gridlens-flow" x1="0%" y1="50%" x2="100%" y2="50%">
@@ -420,7 +422,12 @@ function GridLensVisual({ reduced }: { reduced: boolean }) {
           <motion.g
             key={i}
             animate={reduced ? undefined : { opacity: [0.35, 0.85, 0.35] }}
-            transition={{ duration: 4.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 }}
+            transition={{
+              duration: 4.5 + i * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.25,
+            }}
           >
             <line x1="150" y1="150" x2={node.x} y2={node.y} stroke="#1A6B4A" strokeOpacity="0.12" />
             <circle cx={node.x} cy={node.y} r="4" fill="#2ECC8A" fillOpacity="0.4" />
@@ -466,7 +473,9 @@ function HowWeEngageSection() {
                 onFocus={() => setActiveStep(index)}
               >
                 <span className="font-mono text-[10px] text-n400">0{index + 1}</span>
-                <p className="mt-2 font-ui font-semibold text-lg text-forest leading-snug">{step.title}</p>
+                <p className="mt-2 font-ui font-semibold text-lg text-forest leading-snug">
+                  {step.title}
+                </p>
               </button>
               {index < steps.length - 1 ? (
                 <ArrowRight size={14} className="shrink-0 mx-2 mt-6 text-canopy/30" aria-hidden />
@@ -482,9 +491,7 @@ function HowWeEngageSection() {
               type="button"
               className={cn(
                 "w-full text-left rounded-[20px] border px-5 py-5 transition-colors",
-                activeStep === index
-                  ? "border-canopy/30 bg-white"
-                  : "border-n200/70 bg-white/70",
+                activeStep === index ? "border-canopy/30 bg-white" : "border-n200/70 bg-white/70",
               )}
               onClick={() => setActiveStep(index)}
             >
@@ -503,7 +510,7 @@ function HowWeEngageSection() {
           <p className="font-ui font-semibold text-xl md:text-2xl text-forest">
             {steps[activeStep].title}
           </p>
-          <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">
+          <p className="mt-4 text-type-body-lg text-n600 leading-relaxed">
             {steps[activeStep].description}
           </p>
         </motion.div>
@@ -533,7 +540,9 @@ function WhereAppliesSection() {
                   isOpen
                     ? "border-canopy/25 bg-white shadow-[var(--shadow-soft)]"
                     : "border-n200/70 bg-[var(--n50)]/50",
-                  index === items.length - 1 && items.length % 2 === 1 && "md:col-span-2 md:max-w-xl",
+                  index === items.length - 1 &&
+                    items.length % 2 === 1 &&
+                    "md:col-span-2 md:max-w-xl",
                 )}
                 initial={reduced ? false : { opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -589,7 +598,10 @@ function IntelligenceFlowSection() {
         <SectionHeader title={title} align="center" className="mb-12 md:mb-16" />
 
         <div className="hidden md:flex items-center justify-between gap-2 max-w-4xl mx-auto relative">
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-n200/80 -translate-y-1/2" aria-hidden />
+          <div
+            className="absolute top-1/2 left-0 right-0 h-px bg-n200/80 -translate-y-1/2"
+            aria-hidden
+          />
           {steps.map((step, index) => (
             <motion.div
               key={step}
@@ -606,7 +618,9 @@ function IntelligenceFlowSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: 0.1 + index * 0.06 }}
               />
-              <p className="font-ui font-semibold text-sm md:text-base text-forest leading-snug">{step}</p>
+              <p className="font-ui font-semibold text-sm md:text-base text-forest leading-snug">
+                {step}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -638,7 +652,7 @@ function IntelligenceFlowSection() {
         </div>
 
         <motion.p
-          className="mt-12 md:mt-14 max-w-2xl mx-auto text-center text-base md:text-lg text-n600 leading-relaxed"
+          className="mt-12 md:mt-14 max-w-2xl mx-auto text-center text-type-body-lg text-n600 leading-relaxed"
           initial={reduced ? false : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -666,10 +680,8 @@ function OutcomeFrameworkSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
-            {title}
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+          <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">{title}</h2>
+          <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
         </motion.div>
 
         <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
@@ -682,7 +694,7 @@ function OutcomeFrameworkSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: index * 0.08 }}
             >
-              <p className="font-ui font-semibold text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
+              <p className="font-ui font-semibold text-type-h3 text-forest leading-snug">
                 {block.title}
               </p>
             </motion.div>
@@ -706,7 +718,7 @@ function OutcomeFrameworkSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h3 className="font-ui font-semibold text-[clamp(1.5rem,3vw,2.25rem)] text-forest leading-tight">
+          <h3 className="font-ui font-semibold text-type-h3 text-forest leading-tight">
             {headline}
           </h3>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
@@ -728,7 +740,10 @@ function EcosystemSection() {
   const { title, description } = ENERGY_INTELLIGENCE_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-5">

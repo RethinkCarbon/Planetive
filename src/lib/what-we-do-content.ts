@@ -208,8 +208,7 @@ export const WHAT_WE_DO_SERVICES: WhatWeDoService[] = [
   {
     id: "carbon",
     title: "Carbon Credit Projects",
-    summary:
-      "Develop, assess, and scale carbon credit and offset projects toward net-zero goals.",
+    summary: "Develop, assess, and scale carbon credit and offset projects toward net-zero goals.",
     icon: Leaf,
     image: whatWeDoLocalImage("carbon.jpg"),
     paragraphs: [

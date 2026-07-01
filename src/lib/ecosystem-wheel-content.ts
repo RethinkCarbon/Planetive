@@ -65,7 +65,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
   {
     id: "green-supply-chain",
     name: "Green Supply Chain",
-    lines: ["Green Supply", "Chain"],
+    lines: ["Green", "Supply Chain"],
     description: "Marketplace for decarbonized supply chains.",
     shape: "ring",
     color: "#3d8b63",

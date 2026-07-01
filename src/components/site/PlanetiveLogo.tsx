@@ -3,10 +3,7 @@ import { PLANETIVE_LOGO_SRC } from "@/lib/site-brand";
 
 type ZoomSize = "nav" | "footer" | "wheel";
 
-const ZOOM_SLOTS: Record<
-  ZoomSize,
-  { container: string; image: string; scale: string }
-> = {
+const ZOOM_SLOTS: Record<ZoomSize, { container: string; image: string; scale: string }> = {
   nav: {
     container: "h-9 w-[8.75rem] md:h-10 md:w-[9.25rem]",
     image: "h-14 md:h-16",
@@ -41,11 +38,7 @@ export function PlanetiveLogo({ className, onDark = false, zoom = false }: Plane
 
     return (
       <span
-        className={cn(
-          "relative inline-flex shrink-0 overflow-hidden",
-          slot.container,
-          className,
-        )}
+        className={cn("relative inline-flex shrink-0 overflow-hidden", slot.container, className)}
       >
         <img
           src={PLANETIVE_LOGO_SRC}

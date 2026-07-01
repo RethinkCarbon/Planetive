@@ -11,9 +11,8 @@ export const ABOUT_INTRO = {
   summary:
     "Planetive is an advisory firm that provides consultancy in areas of Clean Energy, Climate Change, Clean Water, Sustainable Finance and Business Sustainability, to stakeholders from around the globe with key focus on the Middle East and Pakistan.",
   body: "At Planetive we contribute towards the global ESG/SDG goals by supporting companies to reach their net-zero targets and bridging the capital gap of sustainability projects as well as project assessment and evaluations. Planetive team is determined to make a positive global change by working on the shared goal of a sustainable and greener world, economy and society with support of our advisors from different parts of the world.",
-  /** Global engagement photo — color, on-stage advisory context */
-  heroImage: "/images/global-engagements/ICCI--DUBAI.jpg",
-  heroImagePosition: "50% 35%",
+  /** Mission map — Dubai & Islamabad locations */
+  missionMapImage: "/images/about/partners/Location%20.png",
   focusAreas: [
     { label: "Clean Energy", icon: Sun },
     { label: "Climate Change", icon: Leaf },
@@ -184,11 +183,40 @@ export const TEAM: TeamMember[] = [
 ];
 
 export const PARTNER_LOGOS = [
-  { name: "The DO", src: partnerImg("the-do-logo.png") },
-  { name: "LUMS", src: partnerImg("lums-logo.png") },
-  { name: "Spurt", src: partnerImg("spurt-logo.png") },
-  { name: "Mezzan", src: partnerImg("mezzan-logo.jpeg") },
-  { name: "Hawkamah", src: partnerImg("hawkamah-logo.png") },
-  { name: "RELP", src: partnerImg("relp-logo.png") },
-  { name: "IEF", src: partnerImg("ief-logo.png") },
+  {
+    name: "The DO",
+    src: partnerImg("the-do-logo.png"),
+    description: "A global platform for purpose-driven leadership and systems change.",
+  },
+  {
+    name: "LUMS",
+    src: partnerImg("lums-logo.png"),
+    description: "A leading university advancing research, policy dialogue, and innovation.",
+  },
+  {
+    name: "Pakistan Regional Economic Forum",
+    src: partnerImg("PREF.jpg"),
+    description: "A regional forum promoting economic cooperation and strategic policy exchange.",
+  },
+  {
+    name: "Mezzan",
+    src: partnerImg("mezzan-logo.jpeg"),
+    description: "A financial services partner supporting investment and sustainable growth.",
+  },
+  {
+    name: "Hawkamah",
+    src: partnerImg("hawkamah-logo.png"),
+    description: "A regional institute focused on governance, risk, and board effectiveness.",
+  },
+  {
+    name: "RELP",
+    src: partnerImg("relp-logo.png"),
+    description: "A clean energy initiative enabling policy, risk, and project readiness.",
+  },
+  {
+    name: "IEF",
+    src: partnerImg("ief-logo.png"),
+    description:
+      "An international platform connecting energy producers and consumers for dialogue.",
+  },
 ] as const;

@@ -1,7 +1,6 @@
 /** Local copies in public/images/global-engagements/ (from planetive.org, no fx-gs grayscale) */
 const IMG_VERSION = "2";
-const img = (file: string) =>
-  `/images/global-engagements/${file}?v=${IMG_VERSION}`;
+const img = (file: string) => `/images/global-engagements/${file}?v=${IMG_VERSION}`;
 
 export type GlobalEngagement = {
   id: string;
@@ -285,7 +284,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
           "How local banking can champion decarbonization in emerging markets — By Ayla Majid",
         body: [
           "Planetive's Founder & CEO Ayla Majid attended the Annual Meeting of the Global Future Councils and explored solutions for global challenges in areas like growth, AI, and climate change. The discussions highlighted the need for collaboration across sectors and countries to achieve a sustainable future.",
-          "Specific topics included the responsible use of AI, ensuring a just transition to a green economy, and leveraging technology to combat climate change and improve public health. The meeting also addressed the need for clear definitions and regulations around concepts like \"sustainable finance\" and \"cybersecurity\" to ensure responsible practices.",
+          'Specific topics included the responsible use of AI, ensuring a just transition to a green economy, and leveraging technology to combat climate change and improve public health. The meeting also addressed the need for clear definitions and regulations around concepts like "sustainable finance" and "cybersecurity" to ensure responsible practices.',
         ],
       },
       {
@@ -327,7 +326,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         headline: "CPEC — The Road to Prosperity",
         image: img("blob-1f4d510.png"),
         body: [
-          "Ayla Majid emphasized the following points to pivot Gwadar as a green fuel hub, during the seminar on \"Energy Sector Cooperation under CPEC\" hosted by the National Institute of Maritime Affairs (NIMA) and Bahria University Islamabad, Pakistan.",
+          'Ayla Majid emphasized the following points to pivot Gwadar as a green fuel hub, during the seminar on "Energy Sector Cooperation under CPEC" hosted by the National Institute of Maritime Affairs (NIMA) and Bahria University Islamabad, Pakistan.',
         ],
       },
       {
@@ -365,7 +364,8 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         event: "LEAP 2023 — Riyadh, Saudi Arabia",
         headline: "The Promise of Green Hydrogen",
         image: img("blob-5ab1bdd.png"),
-        relatedArticle: "The Fuel of the Future: Hydrogen & the Middle East Advantage — By Ayla Majid",
+        relatedArticle:
+          "The Fuel of the Future: Hydrogen & the Middle East Advantage — By Ayla Majid",
         body: [
           "As the Middle East has clearly emerged as a key region to lead the production of hydrogen given its unique position and availability of resources, most countries in the region have announced their strategies for hydrogen production.",
           "In February 2023, Planetive’s CEO moderated a key session on: \"The Promise of Green Hydrogen\". Session participants were: Vatche Kourkejan from Roland Berger, addressed MENA project developments, government MOUs, and identified critical gaps in hydrogen development. Theiry Leperq Founder & President Hydeal, emphasized global hydrogen's future as a decarbonization cluster. Eng. Mohammed Al Taani, Jordanian Renewable Energy Society, discussed the pivotal role of hydrogen renewables in the region's energy transition. Ahmed Al Bawai, VP Saudi Industrial Development Fund, detailed large-scale hydrogen projects, significant investments, and SIDF's role in supporting the hydrogen supply chain and value.",
@@ -385,7 +385,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         headline: "Stakeholders for a Cohesive and Sustainable World",
         image: img("blob-2e9d162.png"),
         body: [
-          "On December 14, 2021, the Climate Investment Funds (CIF) hosted the virtual workshop \"Keeping the Power On: Financing Energy Storage Solutions.\" This workshop brought together multilateral development banks, country officials, companies, and organizations investing in energy storage and other elements of clean energy to explore the unique aspects of energy storage finance and the relationship between private capital and concessional financing.",
+          'On December 14, 2021, the Climate Investment Funds (CIF) hosted the virtual workshop "Keeping the Power On: Financing Energy Storage Solutions." This workshop brought together multilateral development banks, country officials, companies, and organizations investing in energy storage and other elements of clean energy to explore the unique aspects of energy storage finance and the relationship between private capital and concessional financing.',
         ],
       },
       {
@@ -394,7 +394,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         headline: "Stakeholders for a Cohesive and Sustainable World",
         image: img("blob-42bf298.png"),
         body: [
-          "Our Founder Ayla Majid participated in the annual meeting of the World Economic Forum in January 2020 in Davos. She moderated the session on Global Risk Report 2020 titled: \"What are Global Risks?\" Panelists included Ann Linde (Minister for Foreign Affairs of Sweden), Peter Brabeck-Letmathe (Vice Chairman, WEF), Eric Parado (Chief Economist Inter American Development Bank), Alison Martin (Group Chief Risk Officer Zurich), and WEF Change Maker Salvador Gomez.",
+          'Our Founder Ayla Majid participated in the annual meeting of the World Economic Forum in January 2020 in Davos. She moderated the session on Global Risk Report 2020 titled: "What are Global Risks?" Panelists included Ann Linde (Minister for Foreign Affairs of Sweden), Peter Brabeck-Letmathe (Vice Chairman, WEF), Eric Parado (Chief Economist Inter American Development Bank), Alison Martin (Group Chief Risk Officer Zurich), and WEF Change Maker Salvador Gomez.',
           "During the session, urgent environmental, economic and social risks were discussed.",
         ],
       },
@@ -422,7 +422,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         headline: "Executive Educational Module on Smart Cities",
         image: img("blob-72f153d.png"),
         body: [
-          "In October 2019, Ayla attended \"Smart Cities Education Module\" at the Nanyang Technology University Singapore, along with fellow Young Global Leaders of the World Economic Forum. The module was focused on applying technologies to urban development for smarter, healthier sustainable cities and infrastructure.",
+          'In October 2019, Ayla attended "Smart Cities Education Module" at the Nanyang Technology University Singapore, along with fellow Young Global Leaders of the World Economic Forum. The module was focused on applying technologies to urban development for smarter, healthier sustainable cities and infrastructure.',
         ],
       },
     ],

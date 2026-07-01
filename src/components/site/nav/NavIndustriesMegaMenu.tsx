@@ -48,10 +48,7 @@ export function IndustriesMegaPanel({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className={cn(
-        navMegaPanelClass(),
-        "w-[28rem] max-w-[calc(100vw-2rem)] p-6 md:p-8",
-      )}
+      className={cn(navMegaPanelClass(), "w-[28rem] max-w-[calc(100vw-2rem)] p-6 md:p-8")}
       role="menu"
       onClick={(e) => e.stopPropagation()}
     >

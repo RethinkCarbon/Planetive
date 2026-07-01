@@ -2,11 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { NAV_ECOSYSTEM_LINKS } from "@/lib/site-nav-content";
 import { cn } from "@/lib/utils";
-import {
-  navMegaLinkClass,
-  navMegaPanelClass,
-  navTriggerClass,
-} from "./nav-menu-styles";
+import { navMegaLinkClass, navMegaPanelClass, navTriggerClass } from "./nav-menu-styles";
 
 type NavEcosystemMenuProps = {
   isSolid: boolean;

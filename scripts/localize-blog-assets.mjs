@@ -10,9 +10,7 @@ const urlToLocal = new Map();
 
 /** GoDaddy CDN grayscale transform — strip so we store full-color assets */
 function stripGrayscaleTransform(url) {
-  return url
-    .replace(/\/:\/fx-gs[^/]*\//i, "/:/")
-    .replace(/\/fx-gs(?=\/|,|$)/i, "");
+  return url.replace(/\/:\/fx-gs[^/]*\//i, "/:/").replace(/\/fx-gs(?=\/|,|$)/i, "");
 }
 
 function colorDownloadUrl(url) {
@@ -43,7 +41,9 @@ async function localizeUrl(url) {
     const hash = createHash("md5").update(normalized).digest("hex").slice(0, 8);
     const ext = path.extname(decodeURIComponent(base)) || ".jpg";
     const safe =
-      decodeURIComponent(base).replace(/[^a-zA-Z0-9._-]+/g, "-").slice(0, 60) || "image";
+      decodeURIComponent(base)
+        .replace(/[^a-zA-Z0-9._-]+/g, "-")
+        .slice(0, 60) || "image";
     filename = `${safe.replace(ext, "")}-${hash}${ext}`;
   } catch {
     filename = `${createHash("md5").update(normalized).digest("hex").slice(0, 12)}.jpg`;

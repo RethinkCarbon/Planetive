@@ -32,8 +32,7 @@ export const DIGITAL_MRV_APPLICATIONS = {
   items: [
     {
       title: "Carbon Projects",
-      description:
-        "Support structured monitoring and reporting across carbon initiatives.",
+      description: "Support structured monitoring and reporting across carbon initiatives.",
     },
     {
       title: "Solar Energy",
@@ -62,12 +61,12 @@ export const DIGITAL_MRV_APPLICATIONS = {
 export const DIGITAL_MRV_LAYER = {
   title: "One Connected Monitoring Experience",
   steps: [
-  "Data Sources",
-  "Collection",
-  "Processing",
-  "Visibility",
-  "Reporting",
-  "Verification",
+    "Data Sources",
+    "Collection",
+    "Processing",
+    "Visibility",
+    "Reporting",
+    "Verification",
   ] as const,
 };
 

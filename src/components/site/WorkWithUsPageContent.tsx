@@ -15,9 +15,7 @@ import { Route } from "@/routes/work-with-us";
 
 export function WorkWithUsPageContent() {
   const { interest: interestFromUrl } = Route.useSearch();
-  const [interest, setInterest] = useState<EngagementProgramId>(
-    interestFromUrl ?? "fellows",
-  );
+  const [interest, setInterest] = useState<EngagementProgramId>(interestFromUrl ?? "fellows");
   const form = useSiteForm();
 
   useEffect(() => {
@@ -40,11 +38,7 @@ export function WorkWithUsPageContent() {
           document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
         }}
       />
-      <ApplicationSection
-        interest={interest}
-        form={form}
-        onSelectInterest={selectInterest}
-      />
+      <ApplicationSection interest={interest} form={form} onSelectInterest={selectInterest} />
     </div>
   );
 }
@@ -65,9 +59,7 @@ function WorkWithUsHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <p className="text-sm font-semibold text-mint-soft/95">
-            {WORK_WITH_US_HERO.subtitle}
-          </p>
+          <p className="text-sm font-semibold text-mint-soft/95">{WORK_WITH_US_HERO.subtitle}</p>
           <h1 className="mt-2 font-ui font-semibold text-[clamp(2.75rem,6.5vw,4.25rem)] leading-[1.02]">
             {WORK_WITH_US_HERO.title}
           </h1>
@@ -95,10 +87,7 @@ function ApplicationSection({
 }) {
   const { submit, isSubmitting, isSuccess, error } = form;
   return (
-    <section
-      id="apply"
-      className="py-16 md:py-24 bg-white border-t border-n200/60 scroll-mt-28"
-    >
+    <section id="apply" className="py-16 md:py-24 bg-white border-t border-n200/60 scroll-mt-28">
       <div className="container-x">
         <ScrollReveal className="text-center max-w-xl mx-auto mb-10 md:mb-12">
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
@@ -123,9 +112,7 @@ function ApplicationSection({
                     : "border-n200 bg-[var(--n50)] hover:border-canopy/40",
                 )}
               >
-                <span className="text-sm font-semibold text-forest">
-                  {PROGRAM_LABELS[id]}
-                </span>
+                <span className="text-sm font-semibold text-forest">{PROGRAM_LABELS[id]}</span>
               </button>
             ))}
           </div>
@@ -210,8 +197,8 @@ function ApplicationSection({
                 </button>
                 {isSuccess && (
                   <p className="text-sm text-canopy" role="status">
-                    Thanks — we&apos;ll review your application and respond within a few
-                    business days.
+                    Thanks — we&apos;ll review your application and respond within a few business
+                    days.
                   </p>
                 )}
                 {error && (

@@ -78,7 +78,9 @@ export function WhatWeDoPillarPageContent({ pillar }: WhatWeDoPillarPageContentP
                   src={pillar.image}
                   alt=""
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={pillar.imagePosition ? { objectPosition: pillar.imagePosition } : undefined}
+                  style={
+                    pillar.imagePosition ? { objectPosition: pillar.imagePosition } : undefined
+                  }
                 />
               </div>
             </ScrollReveal>

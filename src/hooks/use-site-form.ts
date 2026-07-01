@@ -19,9 +19,7 @@ export function useSiteForm() {
       return true;
     } catch {
       setStatus("error");
-      setError(
-        `Something went wrong. Please try again or email us at ${PLANETIVE_INBOX_EMAIL}.`,
-      );
+      setError(`Something went wrong. Please try again or email us at ${PLANETIVE_INBOX_EMAIL}.`);
       return false;
     }
   }

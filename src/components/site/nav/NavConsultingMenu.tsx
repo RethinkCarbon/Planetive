@@ -1,12 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, ChevronDown } from "lucide-react";
-import { isConsultingNavPath, NAV_CONSULTING_BOOK, NAV_CONSULTING_LINKS } from "@/lib/site-nav-content";
-import { cn } from "@/lib/utils";
 import {
-  navMegaLinkClass,
-  navMegaPanelClass,
-  navTriggerClass,
-} from "./nav-menu-styles";
+  isConsultingNavPath,
+  NAV_CONSULTING_BOOK,
+  NAV_CONSULTING_LINKS,
+} from "@/lib/site-nav-content";
+import { cn } from "@/lib/utils";
+import { navMegaLinkClass, navMegaPanelClass, navTriggerClass } from "./nav-menu-styles";
 
 type NavConsultingMenuProps = {
   isSolid: boolean;

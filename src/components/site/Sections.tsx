@@ -66,8 +66,7 @@ export function ProcessSection() {
               <div
                 className="absolute -top-px right-8 h-px w-24"
                 style={{
-                  background:
-                    "linear-gradient(90deg, transparent, var(--mint), transparent)",
+                  background: "linear-gradient(90deg, transparent, var(--mint), transparent)",
                 }}
               />
               <div className="flex items-center justify-between">
@@ -76,7 +75,9 @@ export function ProcessSection() {
                 </div>
                 <span className="text-xs font-mono tracking-wider text-n400">{tag}</span>
               </div>
-              <h3 className="mt-6 font-ui font-semibold text-2xl text-forest">{formatDisplayText(title)}</h3>
+              <h3 className="mt-6 font-ui font-semibold text-2xl text-forest">
+                {formatDisplayText(title)}
+              </h3>
               <p className="mt-3 text-sm leading-relaxed text-n600">{body}</p>
 
               {i < items.length - 1 && (
@@ -95,15 +96,60 @@ export function ProcessSection() {
 
 /* ------------------------------- Ecosystem ------------------------------ */
 const ecosystem: { name: string; desc: string; icon: LucideIcon; tone: "forest" | "mint" }[] = [
-  { name: "Rethink Carbon", desc: "Carbon measurement, planning, and decarbonization SaaS.", icon: BarChart3, tone: "forest" },
-  { name: "ETW", desc: "Energy Transition Workbench for clean power deployment.", icon: Sun, tone: "mint" },
-  { name: "AgriTech", desc: "Climate-smart agriculture data and advisory.", icon: Wheat, tone: "forest" },
-  { name: "CCUS DMRV", desc: "Digital MRV for carbon capture, utilisation & storage.", icon: Factory, tone: "mint" },
-  { name: "Green Supply Chain", desc: "Scope-3 traceability and supplier engagement.", icon: Truck, tone: "forest" },
-  { name: "FM Suite", desc: "Financial modeling tools for sustainable projects.", icon: LineChart, tone: "mint" },
-  { name: "Advisory House", desc: "ESG, climate strategy & transition advisory.", icon: Compass, tone: "forest" },
-  { name: "Project Development", desc: "End-to-end origination, structuring, and delivery.", icon: Hammer, tone: "mint" },
-  { name: "In-house AI Agents", desc: "Domain-trained agents for climate intelligence.", icon: Cpu, tone: "forest" },
+  {
+    name: "Rethink Carbon",
+    desc: "Carbon measurement, planning, and decarbonization SaaS.",
+    icon: BarChart3,
+    tone: "forest",
+  },
+  {
+    name: "ETW",
+    desc: "Energy Transition Workbench for clean power deployment.",
+    icon: Sun,
+    tone: "mint",
+  },
+  {
+    name: "AgriTech",
+    desc: "Climate-smart agriculture data and advisory.",
+    icon: Wheat,
+    tone: "forest",
+  },
+  {
+    name: "CCUS DMRV",
+    desc: "Digital MRV for carbon capture, utilisation & storage.",
+    icon: Factory,
+    tone: "mint",
+  },
+  {
+    name: "Green Supply Chain",
+    desc: "Scope-3 traceability and supplier engagement.",
+    icon: Truck,
+    tone: "forest",
+  },
+  {
+    name: "FM Suite",
+    desc: "Financial modeling tools for sustainable projects.",
+    icon: LineChart,
+    tone: "mint",
+  },
+  {
+    name: "Advisory House",
+    desc: "ESG, climate strategy & transition advisory.",
+    icon: Compass,
+    tone: "forest",
+  },
+  {
+    name: "Project Development",
+    desc: "End-to-end origination, structuring, and delivery.",
+    icon: Hammer,
+    tone: "mint",
+  },
+  {
+    name: "In-house AI Agents",
+    desc: "Domain-trained agents for climate intelligence.",
+    icon: Cpu,
+    tone: "forest",
+  },
 ];
 
 export function EcosystemSection() {
@@ -204,21 +250,15 @@ export function WhatWeDoSection() {
             <article
               key={p.title}
               className="relative rounded-[28px] overflow-hidden border border-n200 bg-white p-8 md:p-10"
-              style={
-                i % 2 === 0
-                  ? undefined
-                  : { background: "var(--gradient-mint)" }
-              }
+              style={i % 2 === 0 ? undefined : { background: "var(--gradient-mint)" }}
             >
               <div className="flex items-start gap-4">
-                <span className="font-mono text-xs tracking-wider text-n400 mt-2">
-                  0{i + 1}
-                </span>
+                <span className="font-mono text-xs tracking-wider text-n400 mt-2">0{i + 1}</span>
                 <div>
-                  <h3 className="font-ui font-semibold text-3xl text-forest">{formatDisplayText(p.title)}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-n600 max-w-md">
-                    {p.body}
-                  </p>
+                  <h3 className="font-ui font-semibold text-3xl text-forest">
+                    {formatDisplayText(p.title)}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-n600 max-w-md">{p.body}</p>
                   <ul className="mt-6 space-y-2">
                     {p.points.map((pt) => (
                       <li key={pt} className="flex items-center gap-2 text-sm text-n800">
@@ -240,12 +280,36 @@ export function WhatWeDoSection() {
 /* ------------------------------ Impact Areas ---------------------------- */
 export function ImpactSection() {
   const areas: { title: string; icon: LucideIcon; desc: string }[] = [
-    { title: "Clean Energy", icon: Sun, desc: "Solar, wind, storage & grid modernisation projects." },
-    { title: "Climate-Smart Agriculture", icon: Wheat, desc: "Resilient farming systems and food security." },
-    { title: "Carbon Accounting", icon: BarChart3, desc: "Scope 1/2/3 measurement, MRV, and disclosure." },
-    { title: "Green Supply Chains", icon: Truck, desc: "Traceability, scope-3, and supplier transition." },
-    { title: "Financial Ecosystem", icon: Banknote, desc: "Blended finance, green bonds, sustainable capital." },
-    { title: "Sustainable Infrastructure", icon: Building2, desc: "Cities, water, mobility — built for the next century." },
+    {
+      title: "Clean Energy",
+      icon: Sun,
+      desc: "Solar, wind, storage & grid modernisation projects.",
+    },
+    {
+      title: "Climate-Smart Agriculture",
+      icon: Wheat,
+      desc: "Resilient farming systems and food security.",
+    },
+    {
+      title: "Carbon Accounting",
+      icon: BarChart3,
+      desc: "Scope 1/2/3 measurement, MRV, and disclosure.",
+    },
+    {
+      title: "Green Supply Chains",
+      icon: Truck,
+      desc: "Traceability, scope-3, and supplier transition.",
+    },
+    {
+      title: "Financial Ecosystem",
+      icon: Banknote,
+      desc: "Blended finance, green bonds, sustainable capital.",
+    },
+    {
+      title: "Sustainable Infrastructure",
+      icon: Building2,
+      desc: "Cities, water, mobility — built for the next century.",
+    },
   ];
 
   return (
@@ -267,7 +331,9 @@ export function ImpactSection() {
                 <Icon size={28} className="text-canopy group-hover:text-mint transition-colors" />
                 <Leaf size={16} className="text-n200" />
               </div>
-              <h3 className="mt-6 font-ui font-semibold text-xl text-forest">{formatDisplayText(title)}</h3>
+              <h3 className="mt-6 font-ui font-semibold text-xl text-forest">
+                {formatDisplayText(title)}
+              </h3>
               <p className="mt-2 text-sm text-n600 leading-relaxed">{desc}</p>
             </article>
           ))}
@@ -288,9 +354,21 @@ export function RethinkCarbonSection() {
         >
           <div className="absolute inset-0 opacity-20" aria-hidden>
             <svg viewBox="0 0 800 400" className="h-full w-full text-mint-soft">
-              <circle cx="650" cy="80" r="120" stroke="currentColor" strokeWidth="0.5" fill="none" />
+              <circle
+                cx="650"
+                cy="80"
+                r="120"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                fill="none"
+              />
               <circle cx="650" cy="80" r="80" stroke="currentColor" strokeWidth="0.5" fill="none" />
-              <path d="M0 350 Q 200 250, 400 320 T 800 280" stroke="currentColor" strokeWidth="0.5" fill="none" />
+              <path
+                d="M0 350 Q 200 250, 400 320 T 800 280"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                fill="none"
+              />
             </svg>
           </div>
 
@@ -303,9 +381,8 @@ export function RethinkCarbonSection() {
                 <span className="text-mint-soft">Measure.</span> Plan. Decarbonize.
               </h2>
               <p className="mt-5 max-w-lg text-n200 leading-relaxed">
-                Rethink Carbon is Planetive's flagship platform for enterprise
-                decarbonization — from baseline to net-zero, with audit-grade data and
-                AI-assisted reduction pathways.
+                Rethink Carbon is Planetive's flagship platform for enterprise decarbonization —
+                from baseline to net-zero, with audit-grade data and AI-assisted reduction pathways.
               </p>
 
               <div className="mt-8 grid grid-cols-3 gap-3">
@@ -314,10 +391,7 @@ export function RethinkCarbonSection() {
                   ["Plan", "Reduction pathways"],
                   ["Decarbonize", "Operational change"],
                 ].map(([k, v], i) => (
-                  <div
-                    key={k}
-                    className="rounded-2xl bg-white/10 border border-white/15 p-4"
-                  >
+                  <div key={k} className="rounded-2xl bg-white/10 border border-white/15 p-4">
                     <div className="text-mint-soft font-mono text-xs">
                       {String(i + 1).padStart(2, "0")}
                     </div>
@@ -402,7 +476,9 @@ export function RethinkCarbonSection() {
                 <div className="mt-6 grid grid-cols-2 gap-3 text-xs">
                   <div className="rounded-xl border border-n200 p-3">
                     <div className="text-n400">Reduction target</div>
-                    <div className="font-ui font-semibold text-lg text-forest mt-1">-42% by 2030</div>
+                    <div className="font-ui font-semibold text-lg text-forest mt-1">
+                      -42% by 2030
+                    </div>
                   </div>
                   <div className="rounded-xl border border-n200 p-3">
                     <div className="text-n400">Initiatives active</div>
@@ -466,9 +542,7 @@ export function GlobalSection() {
               className="relative overflow-hidden rounded-[28px] border border-n200 bg-white p-8 hover:shadow-[var(--shadow-elevated)] transition-all"
             >
               <Globe2 size={28} className="text-canopy" />
-              <div className="mt-5 text-xs font-mono tracking-wider text-n400">
-                {r.tag}
-              </div>
+              <div className="mt-5 text-xs font-mono tracking-wider text-n400">{r.tag}</div>
               <h3 className="mt-2 font-ui font-semibold text-2xl text-forest">{r.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-n600">{r.body}</p>
 
@@ -504,7 +578,6 @@ export function InsightsSection({
     categories?: string[];
   }>;
 }) {
-
   return (
     <section className="py-24 md:py-32 bg-[var(--n100)]">
       <div className="container-x">
@@ -581,42 +654,42 @@ export function FinalCTASection() {
             className="relative overflow-hidden rounded-[36px] p-10 md:p-16 text-center"
             style={{ background: "var(--gradient-hero)" }}
           >
-          <svg
-            aria-hidden
-            className="absolute -left-10 -bottom-10 h-64 w-64 text-mint-soft/30"
-            viewBox="0 0 100 100"
-            fill="none"
-          >
-            <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.5" />
-            <circle cx="50" cy="50" r="36" stroke="currentColor" strokeWidth="0.5" />
-            <circle cx="50" cy="50" r="24" stroke="currentColor" strokeWidth="0.5" />
-          </svg>
-          <svg
-            aria-hidden
-            className="absolute -right-10 -top-10 h-64 w-64 text-mint-soft/30"
-            viewBox="0 0 100 100"
-            fill="none"
-          >
-            <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="currentColor" strokeWidth="0.5" />
-            <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="currentColor" strokeWidth="0.5" />
-          </svg>
-
-          <div className="relative max-w-3xl mx-auto">
-            <h2 className="font-ui font-semibold text-white text-[clamp(2rem,5vw,4rem)]">
-              Ready to build your climate transition roadmap?
-            </h2>
-            <p className="mt-5 text-n200 text-base md:text-lg max-w-xl mx-auto">
-              Tell us where you are. We'll show you what comes next — diagnosis,
-              implementation, and the systems to sustain it.
-            </p>
-            <Link
-              to="/work-with-us"
-              className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold btn-mint"
+            <svg
+              aria-hidden
+              className="absolute -left-10 -bottom-10 h-64 w-64 text-mint-soft/30"
+              viewBox="0 0 100 100"
+              fill="none"
             >
-              Start a Conversation <ArrowRight size={16} />
-            </Link>
+              <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.5" />
+              <circle cx="50" cy="50" r="36" stroke="currentColor" strokeWidth="0.5" />
+              <circle cx="50" cy="50" r="24" stroke="currentColor" strokeWidth="0.5" />
+            </svg>
+            <svg
+              aria-hidden
+              className="absolute -right-10 -top-10 h-64 w-64 text-mint-soft/30"
+              viewBox="0 0 100 100"
+              fill="none"
+            >
+              <path d="M50 5 L95 50 L50 95 L5 50 Z" stroke="currentColor" strokeWidth="0.5" />
+              <path d="M50 20 L80 50 L50 80 L20 50 Z" stroke="currentColor" strokeWidth="0.5" />
+            </svg>
+
+            <div className="relative max-w-3xl mx-auto">
+              <h2 className="font-ui font-semibold text-white text-[clamp(2rem,5vw,4rem)]">
+                Ready to build your climate transition roadmap?
+              </h2>
+              <p className="mt-5 text-n200 text-base md:text-lg max-w-xl mx-auto">
+                Tell us where you are. We'll show you what comes next — diagnosis, implementation,
+                and the systems to sustain it.
+              </p>
+              <Link
+                to="/work-with-us"
+                className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold btn-mint"
+              >
+                Start a Conversation <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
-        </div>
         </ScrollReveal>
       </div>
     </section>
@@ -635,16 +708,12 @@ export function SectionHeader({
   align?: "center" | "left";
 }) {
   return (
-    <ScrollReveal
-      className={align === "center" ? "max-w-2xl mx-auto text-center" : "max-w-2xl"}
-    >
+    <ScrollReveal className={align === "center" ? "max-w-2xl mx-auto text-center" : "max-w-2xl"}>
       <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3.25rem)] text-forest">
         {formatDisplayText(title)}
       </h2>
       {description && (
-        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">
-          {description}
-        </p>
+        <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{description}</p>
       )}
     </ScrollReveal>
   );

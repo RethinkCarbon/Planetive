@@ -24,12 +24,10 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
         />
         <div className="container-x relative z-10 pt-40 md:pt-48 pb-20 md:pb-28">
           <ScrollReveal variant="fade-up" className="max-w-3xl">
-            <h1 className="font-ui font-semibold text-[clamp(2.75rem,6.5vw,4.5rem)] leading-[1.02]">
-              Blog
-            </h1>
-            <p className="mt-5 text-base md:text-lg text-white/80 max-w-2xl leading-relaxed">
-              Insights on climate finance, energy transition, and sustainability leadership from
-              the Planetive team.
+            <h1 className="font-ui font-semibold text-type-hero leading-[1.02]">Blog</h1>
+            <p className="mt-5 text-type-body-lg text-white/80 max-w-2xl leading-relaxed">
+              Insights on climate finance, energy transition, and sustainability leadership from the
+              Planetive team.
             </p>
           </ScrollReveal>
         </div>
@@ -64,7 +62,7 @@ export function BlogPageContent({ posts }: BlogPageContentProps) {
 
 function BlogPostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-[28px] overflow-hidden bg-white border border-n200 hover:shadow-[var(--shadow-elevated)] transition-all duration-300">
+    <article className="group flex h-full flex-col rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white border border-n200 hover:shadow-[var(--shadow-elevated)] transition-all duration-300 min-w-0">
       <Link to="/blog/$slug" params={{ slug: post.slug }} className="flex flex-col h-full">
         <div className="relative h-44 overflow-hidden bg-mint-soft">
           {post.imageUrl ? (
@@ -78,7 +76,7 @@ function BlogPostCard({ post }: { post: BlogPostSummary }) {
             <div className="h-full w-full" style={{ background: "var(--gradient-mint)" }} />
           )}
         </div>
-        <div className="flex flex-1 flex-col p-6">
+        <div className="flex flex-1 flex-col p-5 sm:p-6 min-w-0">
           <p className="text-xs text-n500 leading-relaxed">
             <time dateTime={post.publishedAt}>{formatBlogPostDate(post.publishedAt)}</time>
             {post.categories.length > 0 && (
@@ -90,7 +88,7 @@ function BlogPostCard({ post }: { post: BlogPostSummary }) {
               </>
             )}
           </p>
-          <h2 className="mt-3 font-ui font-semibold text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
+          <h2 className="mt-3 font-ui font-semibold text-lg sm:text-xl text-forest leading-tight group-hover:text-canopy transition-colors">
             {post.title}
           </h2>
           <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-3">{post.summary}</p>

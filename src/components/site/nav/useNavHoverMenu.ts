@@ -50,4 +50,4 @@ export function useNavHoverMenu() {
   useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
 
   return { openMenu, open, scheduleClose, close, hoverHandlers };
-};
+}

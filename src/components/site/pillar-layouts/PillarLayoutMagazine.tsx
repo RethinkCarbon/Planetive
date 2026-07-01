@@ -52,9 +52,7 @@ export function PillarLayoutMagazine({ pillar }: { pillar: EcosystemPillar }) {
                   i % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                <div
-                  className={`md:col-span-7 ${i % 2 === 1 ? "md:col-start-6" : ""}`}
-                >
+                <div className={`md:col-span-7 ${i % 2 === 1 ? "md:col-start-6" : ""}`}>
                   <p className="text-[15px] md:text-base text-n700 leading-[1.8]">{paragraph}</p>
                 </div>
                 <div

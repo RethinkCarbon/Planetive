@@ -18,8 +18,8 @@ export function Footer() {
             <PlanetiveLogo onDark zoom="footer" />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-n400">
               Building climate intelligence for a sustainable future. Connecting strategy,
-              technology, capital, and implementation for enterprises and financial
-              institutions worldwide.
+              technology, capital, and implementation for enterprises and financial institutions
+              worldwide.
             </p>
             <div className="mt-6 flex items-center gap-3">
               {[
@@ -42,9 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
-              Explore
-            </h4>
+            <h4 className="text-sm font-semibold text-white tracking-wide uppercase">Explore</h4>
             <ul className="mt-4 space-y-2 text-sm">
               {[
                 ["/consulting", "Consulting"],
@@ -65,9 +63,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
-              Newsletter
-            </h4>
+            <h4 className="text-sm font-semibold text-white tracking-wide uppercase">Newsletter</h4>
             <p className="mt-4 text-sm text-n400">
               Monthly sustainability insights, delivered to your inbox.
             </p>

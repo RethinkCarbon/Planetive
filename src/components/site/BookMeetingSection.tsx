@@ -45,7 +45,7 @@ export function BookMeetingSection({
   const content = (
     <div
       className={cn(
-        "rounded-[32px] border border-n200 bg-white shadow-[var(--shadow-soft)] overflow-hidden",
+        "rounded-[24px] md:rounded-[32px] border border-n200 bg-white shadow-[var(--shadow-soft)] overflow-hidden",
         className,
       )}
     >
@@ -66,9 +66,7 @@ export function BookMeetingSection({
       <div
         className={cn(
           "grid grid-cols-1",
-          hasAreas
-            ? "lg:grid-cols-[12.5rem_minmax(0,1fr)_minmax(0,1.6fr)]"
-            : "lg:grid-cols-12",
+          hasAreas ? "lg:grid-cols-[12.5rem_minmax(0,1fr)_minmax(0,1.6fr)]" : "lg:grid-cols-12",
         )}
       >
         {hasAreas ? (
@@ -87,7 +85,7 @@ export function BookMeetingSection({
 
         <div
           className={cn(
-            "p-8 md:p-10 border-b lg:border-b-0 border-n200/80 bg-[var(--n50)]/60",
+            "p-6 sm:p-8 md:p-10 border-b lg:border-b-0 border-n200/80 bg-[var(--n50)]/60",
             hasAreas ? "" : "lg:col-span-4 lg:border-r",
           )}
         >
@@ -95,7 +93,7 @@ export function BookMeetingSection({
             <Video size={16} aria-hidden />
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase">{eyebrow}</span>
           </div>
-          <h2 className="mt-4 font-ui font-semibold text-2xl md:text-[1.75rem] text-forest leading-tight">
+          <h2 className="mt-4 font-ui font-semibold text-xl sm:text-2xl md:text-[1.75rem] text-forest leading-tight">
             {title ?? `Book a ${displayLabel} consultation`}
           </h2>
           {hasAreas ? (
@@ -133,7 +131,7 @@ export function BookMeetingSection({
 
         <div
           className={cn(
-            "min-h-[520px] flex flex-col",
+            "min-h-[min(380px,58vh)] md:min-h-[440px] lg:min-h-[520px] flex flex-col",
             hasAreas ? "" : "lg:col-span-8",
           )}
         >
@@ -143,7 +141,7 @@ export function BookMeetingSection({
                 key={selected?.id ?? "default"}
                 title={`Book a Google Meet — ${displayLabel}`}
                 src={embedUrl}
-                className="w-full flex-1 min-h-[520px] border-0 bg-white"
+                className="w-full flex-1 min-h-[min(380px,58vh)] md:min-h-[440px] lg:min-h-[520px] border-0 bg-white"
                 loading="lazy"
               />
               <p className="px-6 py-3 text-xs text-n600 border-t border-n200/80 bg-[var(--n50)]/40">

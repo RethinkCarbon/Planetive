@@ -98,9 +98,7 @@ export function isSolutionsPath(pathname: string) {
 }
 
 export function isEcosystemNavPath(pathname: string) {
-  return NAV_ECOSYSTEM_LINKS.some(
-    (l) => pathname === l.to || pathname.startsWith(`${l.to}/`),
-  );
+  return NAV_ECOSYSTEM_LINKS.some((l) => pathname === l.to || pathname.startsWith(`${l.to}/`));
 }
 
 export function isEcosystemPath(pathname: string) {
@@ -112,9 +110,7 @@ export function isIndustriesPath(pathname: string) {
 }
 
 export function isPublicationsPath(pathname: string) {
-  return NAV_PUBLICATIONS_LINKS.some(
-    (l) => pathname === l.to || pathname.startsWith(`${l.to}/`),
-  );
+  return NAV_PUBLICATIONS_LINKS.some((l) => pathname === l.to || pathname.startsWith(`${l.to}/`));
 }
 
 /** @deprecated Use isPublicationsPath */

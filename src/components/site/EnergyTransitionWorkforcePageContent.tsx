@@ -94,17 +94,17 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-type-h1 leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-type-lead text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
+            <p className="mt-6 text-type-body-lg text-n200/90 leading-relaxed max-w-xl">
               {description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
@@ -156,7 +156,12 @@ function HeroWorkforceScene({ reduced }: { reduced: boolean }) {
             strokeOpacity={0.1 + layer * 0.06}
             strokeWidth="1"
             animate={reduced ? undefined : { opacity: [0.25, 0.55, 0.25] }}
-            transition={{ duration: 5 + layer, repeat: Infinity, ease: "easeInOut", delay: layer * 0.35 }}
+            transition={{
+              duration: 5 + layer,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: layer * 0.35,
+            }}
           />
         ))}
 
@@ -183,7 +188,12 @@ function HeroWorkforceScene({ reduced }: { reduced: boolean }) {
           <motion.g
             key={i}
             animate={reduced ? undefined : { opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 4.5 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 }}
+            transition={{
+              duration: 4.5 + i * 0.4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.25,
+            }}
           >
             {i < 5 ? (
               <line
@@ -196,7 +206,13 @@ function HeroWorkforceScene({ reduced }: { reduced: boolean }) {
                 strokeWidth="1"
               />
             ) : null}
-            <circle cx={node.x} cy={node.y} r={i === 5 ? 5 : 4} fill="#A8F0D4" fillOpacity={i === 5 ? 0.6 : 0.4} />
+            <circle
+              cx={node.x}
+              cy={node.y}
+              r={i === 5 ? 5 : 4}
+              fill="#A8F0D4"
+              fillOpacity={i === 5 ? 0.6 : 0.4}
+            />
           </motion.g>
         ))}
 
@@ -229,10 +245,10 @@ function OverviewSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{intro}</p>
+            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{intro}</p>
           </motion.div>
 
           <div className="lg:col-span-7">
@@ -243,7 +259,7 @@ function OverviewSection() {
               {pillars.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-type-h3 text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -274,10 +290,7 @@ function ProgramDesignSection() {
   };
 
   return (
-    <MotionSection
-      id="program-design"
-      className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}
-    >
+    <MotionSection id="program-design" className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
           <motion.div
@@ -287,11 +300,14 @@ function ProgramDesignSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease }}
           >
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
             {body.map((paragraph) => (
-              <p key={paragraph.slice(0, 32)} className="mt-6 text-base md:text-lg text-n600 leading-relaxed">
+              <p
+                key={paragraph.slice(0, 32)}
+                className="mt-6 text-type-body-lg text-n600 leading-relaxed"
+              >
                 {paragraph}
               </p>
             ))}
@@ -307,15 +323,19 @@ function ProgramDesignSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: dimIndex * 0.08, ease }}
                 >
-                  <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">{dim.label}</p>
-                  <h3 className="mt-2 font-ui font-semibold text-[clamp(1.35rem,2.2vw,1.75rem)] text-forest leading-snug">
+                  <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
+                    {dim.label}
+                  </p>
+                  <h3 className="mt-2 font-ui font-semibold text-type-h3 text-forest leading-snug">
                     {dim.title}
                   </h3>
 
                   <div
                     className={cn(
                       "mt-5 grid gap-2 md:gap-3",
-                      dim.options.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3",
+                      dim.options.length === 2
+                        ? "grid-cols-1 sm:grid-cols-2"
+                        : "grid-cols-1 sm:grid-cols-3",
                     )}
                     role="listbox"
                     aria-label={dim.title}
@@ -336,7 +356,7 @@ function ProgramDesignSection() {
                           )}
                           onClick={() => selectOption(dimIndex, optionIndex)}
                         >
-                          <span className="font-ui font-semibold text-base md:text-lg leading-snug block">
+                          <span className="font-ui font-semibold text-type-body-lg leading-snug block">
                             {option.label}
                           </span>
                           {"detail" in option && option.detail ? (
@@ -373,7 +393,9 @@ function ProgramDesignSection() {
               transition={{ duration: 0.5, delay: 0.15, ease }}
             >
               <div className="px-6 py-4 md:px-8 border-b border-n200/60 bg-[var(--n50)]/60">
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">Pathway Matrix</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">
+                  Pathway Matrix
+                </p>
               </div>
               <div className="divide-y divide-n200/60">
                 {dimensions.map((dim, dimIndex) => {
@@ -385,8 +407,10 @@ function ProgramDesignSection() {
                       layout={!reduced}
                       transition={{ duration: 0.35, ease }}
                     >
-                      <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-n500">{dim.title}</p>
-                      <p className="font-ui font-semibold text-lg md:text-xl text-forest leading-snug">
+                      <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-n500">
+                        {dim.title}
+                      </p>
+                      <p className="font-ui font-semibold text-type-lead text-forest leading-snug">
                         {option.label}
                         {"detail" in option && option.detail ? (
                           <span className="ml-2 font-mono text-[10px] tracking-[0.12em] uppercase text-n500">
@@ -414,7 +438,7 @@ function TalentConnectionSection() {
     <MotionSection className={ECOSYSTEM_SURFACE.white}>
       <div className={cn(PAGE, SECTION)}>
         <motion.h2
-          className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
+          className="font-ui font-semibold text-type-h2 text-forest text-center leading-tight max-w-3xl mx-auto"
           initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -427,7 +451,7 @@ function TalentConnectionSection() {
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug text-center lg:text-left"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-type-h3 text-forest leading-snug text-center lg:text-left"
               initial={reduced ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -439,7 +463,7 @@ function TalentConnectionSection() {
         </ul>
 
         <motion.p
-          className="mt-14 md:mt-16 max-w-2xl mx-auto text-center text-base md:text-lg text-n600 leading-relaxed"
+          className="mt-14 md:mt-16 max-w-2xl mx-auto text-center text-type-body-lg text-n600 leading-relaxed"
           initial={reduced ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -473,7 +497,7 @@ function JourneySection() {
             >
               <div className="py-8 md:py-10 border-t border-n200/70 first:border-t-0 first:pt-0">
                 <motion.h3
-                  className="font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.5rem)] text-forest leading-tight"
+                  className="font-ui font-semibold text-type-h2 text-forest leading-tight"
                   initial={reduced ? false : { clipPath: "inset(0 100% 0 0)" }}
                   whileInView={{ clipPath: "inset(0 0% 0 0)" }}
                   viewport={{ once: true }}
@@ -482,7 +506,7 @@ function JourneySection() {
                   {stage.title}
                 </motion.h3>
                 <motion.p
-                  className="mt-4 text-base md:text-lg text-n600 leading-relaxed max-w-md"
+                  className="mt-4 text-type-body-lg text-n600 leading-relaxed max-w-md"
                   initial={reduced ? false : { opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -539,7 +563,7 @@ function WhoItServesSection() {
                   aria-expanded={isOpen}
                   onClick={() => setExpanded(isOpen ? null : index)}
                 >
-                  <span className="font-ui font-semibold text-[clamp(1.25rem,2.2vw,1.75rem)] text-forest leading-snug group-hover:text-canopy transition-colors">
+                  <span className="font-ui font-semibold text-type-h3 text-forest leading-snug group-hover:text-canopy transition-colors">
                     {item.title}
                   </span>
                   <ChevronDown
@@ -579,14 +603,14 @@ function FutureReadinessSection() {
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
       <div className={cn(PAGE, SECTION)}>
-        <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
+        <h2 className="font-ui font-semibold text-type-h2 text-forest text-center leading-tight max-w-3xl mx-auto">
           {title}
         </h2>
         <ul className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10 max-w-4xl mx-auto">
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-type-h3 text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -615,10 +639,8 @@ function EngagementSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
-            {title}
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+          <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">{title}</h2>
+          <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <Link
               to="/contact"
@@ -638,7 +660,10 @@ function EcosystemSection() {
   const { title, description } = ENERGY_WORKFORCE_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.white, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.white, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-5">

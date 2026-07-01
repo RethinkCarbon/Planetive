@@ -50,9 +50,6 @@ export function isBookingConfigured(embedUrl?: string): boolean {
   return getBookingEmbedUrl(embedUrl).length > 0;
 }
 
-export function resolveBookingArea(
-  areas: readonly BookingArea[],
-  selectedId: string,
-): BookingArea {
+export function resolveBookingArea(areas: readonly BookingArea[], selectedId: string): BookingArea {
   return areas.find((area) => area.id === selectedId) ?? areas[0];
 }

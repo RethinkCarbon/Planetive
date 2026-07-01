@@ -38,7 +38,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
               All posts
             </Link>
 
-            <h1 className="mt-6 font-ui font-semibold text-[clamp(1.875rem,4.5vw,2.75rem)] leading-[1.12] text-forest">
+            <h1 className="mt-6 font-ui font-semibold text-type-h2 leading-[1.12] text-forest">
               {post.title}
             </h1>
 
@@ -63,7 +63,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
                 )}
 
                 <div
-                  className="blog-prose text-n700 leading-relaxed rounded-[28px] border border-n200/80 bg-white px-6 py-10 md:px-12 md:py-12 shadow-[var(--shadow-elevated)] lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none"
+                  className="blog-prose text-n700 leading-relaxed rounded-[24px] sm:rounded-[28px] border border-n200/80 bg-white px-5 py-8 sm:px-6 sm:py-10 md:px-12 md:py-12 shadow-[var(--shadow-elevated)] lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:py-0 lg:shadow-none min-w-0"
                   dangerouslySetInnerHTML={{ __html: post.bodyHtml }}
                 />
               </div>
@@ -79,13 +79,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
   );
 }
 
-function BlogPostMeta({
-  publishedAt,
-  categories,
-}: {
-  publishedAt: string;
-  categories: string[];
-}) {
+function BlogPostMeta({ publishedAt, categories }: { publishedAt: string; categories: string[] }) {
   const hasCategories = categories.length > 0;
 
   return (

@@ -1,13 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  Building2,
-  Factory,
-  Flame,
-  Mountain,
-  Truck,
-  Wheat,
-  Zap,
-} from "lucide-react";
+import { Building2, Factory, Flame, Mountain, Truck, Wheat, Zap } from "lucide-react";
 
 /** Shared platform copy from rethinkcarbon.io */
 export const RETHINK_CARBON = {
@@ -22,14 +14,12 @@ export const RETHINK_CARBON = {
     {
       step: "01",
       title: "Discover",
-      description:
-        "Access a global repository of decarbonisation and energy transition insights.",
+      description: "Access a global repository of decarbonisation and energy transition insights.",
     },
     {
       step: "02",
       title: "Evaluate",
-      description:
-        "Unlock precise decarbonization potential with AI-driven insights in minutes.",
+      description: "Unlock precise decarbonization potential with AI-driven insights in minutes.",
     },
     {
       step: "03",
@@ -40,8 +30,7 @@ export const RETHINK_CARBON = {
     {
       step: "04",
       title: "Monitor",
-      description:
-        "Track progress and compliance with dynamic, data-rich performance dashboards.",
+      description: "Track progress and compliance with dynamic, data-rich performance dashboards.",
     },
   ],
   benefits: [
@@ -279,13 +268,11 @@ export const INDUSTRIES: IndustryPage[] = [
       },
       {
         title: "Sustainable sourcing",
-        description:
-          "Equip food and commodity buyers with supplier-level climate intelligence.",
+        description: "Equip food and commodity buyers with supplier-level climate intelligence.",
       },
       {
         title: "Program monitoring",
-        description:
-          "Track outcomes, leakage, and permanence with structured reporting workflows.",
+        description: "Track outcomes, leakage, and permanence with structured reporting workflows.",
       },
     ],
     outcomes: [
@@ -328,8 +315,7 @@ export const INDUSTRIES: IndustryPage[] = [
       },
       {
         title: "Utility ESG & disclosures",
-        description:
-          "Align reporting with evolving standards and financed transition narratives.",
+        description: "Align reporting with evolving standards and financed transition narratives.",
       },
       {
         title: "Distributed energy programs",
@@ -382,8 +368,7 @@ export const INDUSTRIES: IndustryPage[] = [
       },
       {
         title: "ESG & permitting",
-        description:
-          "Strengthen climate narratives for lenders, regulators, and host communities.",
+        description: "Strengthen climate narratives for lenders, regulators, and host communities.",
       },
     ],
     outcomes: [

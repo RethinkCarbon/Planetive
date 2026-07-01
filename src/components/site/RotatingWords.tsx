@@ -8,11 +8,7 @@ type RotatingWordsProps = {
   className?: string;
 };
 
-export function RotatingWords({
-  words,
-  intervalMs = 2000,
-  className,
-}: RotatingWordsProps) {
+export function RotatingWords({ words, intervalMs = 2000, className }: RotatingWordsProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -32,10 +28,7 @@ export function RotatingWords({
   }, [intervalMs, reducedMotion, words]);
 
   return (
-    <span
-      className={cn("inline-grid align-baseline text-mint-soft", className)}
-      aria-live="polite"
-    >
+    <span className={cn("inline-grid align-baseline text-mint-soft", className)} aria-live="polite">
       <span className="invisible col-start-1 row-start-1 whitespace-nowrap" aria-hidden>
         {words[index]}
       </span>

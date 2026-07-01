@@ -57,12 +57,7 @@ export function EcosystemPillarPanel({
           >
             {pillar.title}
           </h3>
-          <p
-            className={cn(
-              "mt-3 text-[15px] leading-relaxed",
-              isDark ? "text-n200/95" : "text-n600",
-            )}
-          >
+          <p className={cn("mt-3 text-sm leading-relaxed", isDark ? "text-n200/95" : "text-n600")}>
             {pillar.description}
           </p>
         </div>
@@ -100,18 +95,12 @@ export function EcosystemPillarPanel({
       </ul>
 
       <ul
-        className={cn(
-          "mt-6 space-y-2.5 border-l pl-4",
-          isDark ? "border-white/20" : "border-n300",
-        )}
+        className={cn("mt-6 space-y-2.5 border-l pl-4", isDark ? "border-white/20" : "border-n300")}
       >
         {pillar.capabilities.slice(0, 3).map((item) => (
           <li
             key={item}
-            className={cn(
-              "text-sm leading-relaxed",
-              isDark ? "text-n200/90" : "text-n700",
-            )}
+            className={cn("text-sm leading-relaxed", isDark ? "text-n200/90" : "text-n700")}
           >
             {item}
           </li>

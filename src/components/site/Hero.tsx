@@ -29,10 +29,7 @@ export function Hero() {
   return (
     <section id="home-hero" className="relative isolate min-h-[100svh] w-full overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <div
-          className="absolute inset-0"
-          style={{ background: "var(--gradient-hero)" }}
-        />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         {!reducedMotion && (
           <video
             ref={videoRef}
@@ -64,27 +61,27 @@ export function Hero() {
       <div className="relative z-10 flex min-h-[100svh] w-full flex-col">
         <div className="container-x flex w-full flex-1 items-center justify-start pt-40 md:pt-44 pb-8 md:pb-10">
           <div className="max-w-4xl text-left">
-            <h1 className="hero-enter font-ui font-semibold text-white text-[clamp(1.9rem,5vw,3.75rem)] leading-[1.15]">
+            <h1 className="hero-enter font-ui font-semibold text-white text-type-h1 leading-[1.15]">
               <span className="block">
                 Where AI, <RotatingWords words={HERO_FOCUS_WORDS} />
               </span>
               <span className="block">and Climate Finance meet.</span>
             </h1>
 
-            <p className="hero-enter hero-enter-d1 mt-6 max-w-2xl font-ui text-[1.05rem] md:text-lg font-semibold leading-relaxed text-n50 [text-shadow:0_1px_18px_rgba(10,61,46,0.5)]">
-              Operating across Pakistan, the Middle East, and South Asia, Planetive combines
-              three decades of leadership with cutting-edge tech to deliver scalable impact
-              in decarbonization, energy transition, and ESG.
+            <p className="hero-enter hero-enter-d1 mt-4 sm:mt-6 max-w-2xl font-ui text-sm md:text-lg font-medium md:font-semibold leading-relaxed text-n50/95 md:text-n50 [text-shadow:0_1px_18px_rgba(10,61,46,0.5)]">
+              Operating across Pakistan, the Middle East, and South Asia, Planetive combines three
+              decades of leadership with cutting-edge tech to deliver scalable impact in
+              decarbonization, energy transition, and ESG.
             </p>
 
-            <div className="hero-enter hero-enter-d2 mt-9 flex flex-wrap items-center gap-4">
+            <div className="hero-enter hero-enter-d2 mt-6 sm:mt-9 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 to="/work-with-us"
                 search={{}}
-                className="inline-flex items-center gap-2 rounded-md px-6 py-3.5 text-sm font-semibold btn-mint"
+                className="inline-flex items-center gap-1 rounded-md px-3.5 py-2 text-[11px] font-semibold btn-mint md:gap-2 md:px-6 md:py-3.5 md:text-sm"
               >
                 Book a Consultation
-                <ArrowRight size={16} />
+                <ArrowRight className="h-3 w-3 md:h-4 md:w-4" aria-hidden />
               </Link>
             </div>
           </div>

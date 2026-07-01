@@ -93,17 +93,17 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-type-h1 leading-[1.05]">
               {titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-type-lead text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
+            <p className="mt-6 text-type-body-lg text-n200/90 leading-relaxed max-w-xl">
               {description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
@@ -153,7 +153,12 @@ function HeroDevelopmentScene({ reduced }: { reduced: boolean }) {
             fill="#A8F0D4"
             fillOpacity={0.03}
             animate={reduced ? undefined : { y: [0, -2 - layer, 0] }}
-            transition={{ duration: 5 + layer, repeat: Infinity, ease: "easeInOut", delay: layer * 0.3 }}
+            transition={{
+              duration: 5 + layer,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: layer * 0.3,
+            }}
           />
         ))}
 
@@ -203,10 +208,10 @@ function MeaningSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
           </motion.div>
 
           <div className="lg:col-span-7">
@@ -214,7 +219,7 @@ function MeaningSection() {
               {capabilities.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-ui font-semibold text-[clamp(1.2rem,2.2vw,1.65rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-type-h3 text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -236,10 +241,7 @@ function ExperienceSection() {
   const { sectionTitle, projects } = PROJECT_DEVELOPMENT_EXPERIENCE;
 
   return (
-    <MotionSection
-      id="experience"
-      className={cn(ECOSYSTEM_SURFACE.whiteDivider, "scroll-mt-24")}
-    >
+    <MotionSection id="experience" className={cn(ECOSYSTEM_SURFACE.whiteDivider, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
         <SectionHeader
           eyebrow="Selected Development Experience"
@@ -288,7 +290,7 @@ function ProjectEditorial({
         <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy">
           {project.label}
         </p>
-        <h3 className="mt-4 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-tight">
+        <h3 className="mt-4 font-ui font-semibold text-type-h3 text-forest leading-tight">
           {project.title}
         </h3>
 
@@ -302,10 +304,12 @@ function ProjectEditorial({
           <p className="mt-2 text-sm font-semibold text-n600">Sector: {project.sector}</p>
         ) : null}
 
-        <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{project.description}</p>
+        <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{project.description}</p>
 
         {"scale" in project && project.scale ? (
-          <p className="mt-6 font-ui font-semibold text-lg text-forest leading-snug">{project.scale}</p>
+          <p className="mt-6 font-ui font-semibold text-lg text-forest leading-snug">
+            {project.scale}
+          </p>
         ) : null}
 
         {"target" in project && project.target ? (
@@ -321,11 +325,15 @@ function ProjectEditorial({
         ) : null}
 
         {"additional" in project && project.additional ? (
-          <p className="mt-4 text-sm md:text-base text-n600 leading-relaxed">{project.additional}</p>
+          <p className="mt-4 text-sm md:text-base text-n600 leading-relaxed">
+            {project.additional}
+          </p>
         ) : null}
 
         {"supportingCopy" in project && project.supportingCopy ? (
-          <p className="mt-4 text-base md:text-lg text-n600 leading-relaxed">{project.supportingCopy}</p>
+          <p className="mt-4 text-type-body-lg text-n600 leading-relaxed">
+            {project.supportingCopy}
+          </p>
         ) : null}
 
         {"highlights" in project && project.highlights ? (
@@ -333,7 +341,7 @@ function ProjectEditorial({
             {project.highlights.map((item) => (
               <li
                 key={item}
-                className="border-t border-n200/70 pt-4 font-ui font-semibold text-[clamp(1rem,1.8vw,1.2rem)] text-forest leading-snug"
+                className="border-t border-n200/70 pt-4 font-ui font-semibold text-base text-forest leading-snug"
               >
                 {item}
               </li>
@@ -346,7 +354,7 @@ function ProjectEditorial({
             {project.portfolio.map((item) => (
               <li
                 key={item}
-                className="font-ui font-semibold text-[clamp(1rem,1.8vw,1.25rem)] text-forest leading-snug border-b border-n200/50 pb-2 last:border-0"
+                className="font-ui font-semibold text-base text-forest leading-snug border-b border-n200/50 pb-2 last:border-0"
               >
                 {item}
               </li>
@@ -356,14 +364,11 @@ function ProjectEditorial({
 
         {"collaborations" in project && project.collaborations
           ? project.collaborations.map((collaboration) => (
-              <div
-                key={collaboration.title}
-                className="mt-10 pt-8 border-t border-n200/60"
-              >
+              <div key={collaboration.title} className="mt-10 pt-8 border-t border-n200/60">
                 <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500">
                   Collaboration Reference
                 </p>
-                <h4 className="mt-3 font-ui font-semibold text-[clamp(1.15rem,2vw,1.5rem)] text-forest leading-snug">
+                <h4 className="mt-3 font-ui font-semibold text-type-h3 text-forest leading-snug">
                   {collaboration.title}
                 </h4>
                 <p className="mt-4 text-base text-n600 leading-relaxed">
@@ -373,7 +378,7 @@ function ProjectEditorial({
                   {collaboration.highlights.map((item) => (
                     <li
                       key={item}
-                      className="border-t border-n200/60 pt-3 font-ui font-semibold text-[clamp(0.95rem,1.6vw,1.1rem)] text-forest leading-snug"
+                      className="border-t border-n200/60 pt-3 font-ui font-semibold text-sm text-forest leading-snug"
                     >
                       {item}
                     </li>
@@ -498,7 +503,12 @@ function ExpansionVisual({ reduced }: { reduced: boolean }) {
           fill="#2ECC8A"
           fillOpacity={i === 0 ? 0.5 : 0.35}
           animate={reduced ? undefined : { scale: [1, 1.2, 1] }}
-          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+          transition={{
+            duration: 4 + i * 0.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.2,
+          }}
         />
       ))}
       <motion.circle
@@ -575,7 +585,17 @@ function InfrastructureVisual({ reduced }: { reduced: boolean }) {
         stroke="url(#pd-hydro-flow)"
         strokeWidth="3"
         strokeLinecap="round"
-        animate={reduced ? undefined : { d: ["M40 200 Q120 180 160 195 T280 185", "M40 202 Q120 178 160 197 T280 183", "M40 200 Q120 180 160 195 T280 185"] }}
+        animate={
+          reduced
+            ? undefined
+            : {
+                d: [
+                  "M40 200 Q120 180 160 195 T280 185",
+                  "M40 202 Q120 178 160 197 T280 183",
+                  "M40 200 Q120 180 160 195 T280 185",
+                ],
+              }
+        }
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.path
@@ -622,7 +642,12 @@ function InfrastructureVisual({ reduced }: { reduced: boolean }) {
           strokeOpacity="0.2"
           strokeWidth="1"
           animate={reduced ? undefined : { y2: [110 + i * 8, 118 + i * 8, 110 + i * 8] }}
-          transition={{ duration: 4 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+          transition={{
+            duration: 4 + i * 0.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.3,
+          }}
         />
       ))}
 
@@ -688,7 +713,9 @@ function HowItWorksSection() {
                   )}
                   aria-hidden
                 />
-                <span className="font-ui font-semibold text-sm md:text-base text-forest">{step.title}</span>
+                <span className="font-ui font-semibold text-sm md:text-base text-forest">
+                  {step.title}
+                </span>
               </button>
             ))}
           </div>
@@ -734,14 +761,14 @@ function LongTermSection() {
   return (
     <MotionSection className={ECOSYSTEM_SURFACE.mint}>
       <div className={cn(PAGE, SECTION)}>
-        <h2 className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto">
+        <h2 className="font-ui font-semibold text-type-h2 text-forest text-center leading-tight max-w-3xl mx-auto">
           {title}
         </h2>
         <ul className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10 max-w-4xl mx-auto">
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.5rem,2.8vw,2.25rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-type-h3 text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -770,10 +797,8 @@ function EngagementSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
-            {title}
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+          <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">{title}</h2>
+          <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <Link
               to="/contact"
@@ -793,7 +818,10 @@ function EcosystemSection() {
   const { title, description } = PROJECT_DEVELOPMENT_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-5">

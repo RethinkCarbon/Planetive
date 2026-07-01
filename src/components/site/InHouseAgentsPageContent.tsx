@@ -100,7 +100,7 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease }}
           >
-            <h1 className="font-ui font-semibold text-[clamp(2.5rem,5.5vw,4rem)] leading-[1.05]">
+            <h1 className="font-ui font-semibold text-type-h1 leading-[1.05]">
               {titleLines.map((line, index) => (
                 <motion.span
                   key={line}
@@ -113,10 +113,10 @@ function HeroSection() {
                 </motion.span>
               ))}
             </h1>
-            <p className="mt-5 font-ui font-semibold text-[clamp(1.15rem,2.4vw,1.85rem)] text-mint-soft/95 leading-snug max-w-xl">
+            <p className="mt-5 font-ui font-semibold text-type-lead text-mint-soft/95 leading-snug max-w-xl">
               {supportingTitle}
             </p>
-            <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed max-w-xl">
+            <p className="mt-6 text-type-body-lg text-n200/90 leading-relaxed max-w-xl">
               {description}
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
@@ -177,7 +177,12 @@ function HeroIntelligenceScene({ reduced }: { reduced: boolean }) {
           <motion.g
             key={i}
             animate={reduced ? undefined : { opacity: [0.35, 0.85, 0.35] }}
-            transition={{ duration: 4.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 }}
+            transition={{
+              duration: 4.5 + i * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.25,
+            }}
           >
             <line x1="210" y1="210" x2={node.x} y2={node.y} stroke="#A8F0D4" strokeOpacity="0.12" />
             <circle cx={node.x} cy={node.y} r="4" fill="#A8F0D4" fillOpacity="0.45" />
@@ -213,10 +218,10 @@ function OverviewSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
-            <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
           </motion.div>
 
           <div className="lg:col-span-7">
@@ -224,7 +229,7 @@ function OverviewSection() {
               {statements.map((item, index) => (
                 <motion.li
                   key={item}
-                  className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,2rem)] text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
+                  className="font-ui font-semibold text-type-h3 text-forest leading-snug border-b border-n200/60 pb-4 md:pb-5 last:border-0"
                   initial={reduced ? false : { opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -246,10 +251,7 @@ function SystemsSection() {
   const { sectionLabel, systems } = IN_HOUSE_AGENTS_SYSTEMS;
 
   return (
-    <MotionSection
-      id="systems"
-      className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}
-    >
+    <MotionSection id="systems" className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
         <motion.p
           className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy mb-16 md:mb-24"
@@ -300,11 +302,14 @@ function SystemEditorial({
         viewport={ecosystemViewport}
         variants={staggerContainer}
       >
-        <motion.p className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy" variants={fadeUpChild}>
+        <motion.p
+          className="font-mono text-[10px] tracking-[0.2em] uppercase text-canopy"
+          variants={fadeUpChild}
+        >
           {system.label}
         </motion.p>
         <motion.h3
-          className="mt-4 font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest leading-[1.02]"
+          className="mt-4 font-ui font-semibold text-type-h2 text-forest leading-[1.02]"
           variants={fadeUpChild}
         >
           {system.title}
@@ -322,7 +327,7 @@ function SystemEditorial({
           {system.tagline}
         </motion.p>
         <motion.p
-          className="mt-6 text-base md:text-lg text-n600 leading-relaxed"
+          className="mt-6 text-type-body-lg text-n600 leading-relaxed"
           variants={fadeUpChild}
         >
           {system.description}
@@ -399,7 +404,9 @@ function ConnectedLayerSection() {
               viewport={ecosystemViewport}
               variants={scaleIn}
             >
-              <p className="font-ui font-semibold text-lg md:text-xl text-forest leading-snug">{center}</p>
+              <p className="font-ui font-semibold text-type-lead text-forest leading-snug">
+                {center}
+              </p>
             </motion.div>
           </div>
 
@@ -425,9 +432,7 @@ function ConnectedLayerSection() {
                   onBlur={() => setActive(null)}
                   onClick={() => setActive(active === name ? null : name)}
                 >
-                  <span className="font-ui font-semibold text-[clamp(1.35rem,2.5vw,1.85rem)] leading-snug">
-                    {name}
-                  </span>
+                  <span className="font-ui font-semibold text-type-h3 leading-snug">{name}</span>
                 </button>
 
                 {index < systems.length - 1 ? (
@@ -459,7 +464,7 @@ function EnablesSection() {
     <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
       <div className={cn(PAGE, SECTION)}>
         <motion.h2
-          className="font-ui font-semibold text-[clamp(2rem,4vw,3rem)] text-forest text-center leading-tight max-w-3xl mx-auto"
+          className="font-ui font-semibold text-type-h2 text-forest text-center leading-tight max-w-3xl mx-auto"
           initial={reduced ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={ecosystemViewport}
@@ -471,7 +476,7 @@ function EnablesSection() {
           {statements.map((item, index) => (
             <motion.li
               key={item}
-              className="border-t border-n200/70 pt-6 font-ui font-semibold text-[clamp(1.25rem,2vw,1.5rem)] text-forest leading-snug"
+              className="border-t border-n200/70 pt-6 font-ui font-semibold text-type-h3 text-forest leading-snug"
               initial={reduced ? false : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -500,10 +505,10 @@ function LookingForwardSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
         >
-          <h2 className="font-ui font-semibold text-[clamp(1.85rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
             {headline}
           </h2>
-          <p className="mt-6 text-base md:text-lg text-n600 leading-relaxed">{body}</p>
+          <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{body}</p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <Link
               to="/contact"
@@ -524,7 +529,10 @@ function EcosystemSection() {
   const { title, description } = IN_HOUSE_AGENTS_ECOSYSTEM;
 
   return (
-    <MotionSection id="ecosystem" className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}>
+    <MotionSection
+      id="ecosystem"
+      className={cn(ECOSYSTEM_SURFACE.sheet, "border-t border-n200/40 scroll-mt-24")}
+    >
       <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <motion.div

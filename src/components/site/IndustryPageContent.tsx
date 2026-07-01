@@ -2,11 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ExternalLink } from "lucide-react";
 import { formatDisplayText } from "@/lib/format-display-text";
 import { cn } from "@/lib/utils";
-import {
-  INDUSTRIES,
-  RETHINK_CARBON,
-  type IndustryPage,
-} from "@/lib/industries-content";
+import { INDUSTRIES, RETHINK_CARBON, type IndustryPage } from "@/lib/industries-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
 type IndustryPageContentProps = {
@@ -28,9 +24,7 @@ function MethodologyFlowArrow({ accent }: { accent: string }) {
             background: `linear-gradient(90deg, transparent, ${accent}55)`,
           }}
         />
-        <span
-          className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white bg-white shadow-[0_4px_16px_-4px_rgba(10,61,46,0.18)] ring-1 ring-n200/60"
-        >
+        <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white bg-white shadow-[0_4px_16px_-4px_rgba(10,61,46,0.18)] ring-1 ring-n200/60">
           <span
             className="absolute inset-0 rounded-full opacity-30 blur-[3px]"
             style={{ background: accent }}
@@ -66,11 +60,11 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
         />
         <div className="container-x relative z-10 pt-40 md:pt-48 pb-20 md:pb-28">
           <ScrollReveal variant="fade-up" className="max-w-3xl flex flex-col items-start">
-            <h1 className="font-display text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+            <h1 className="font-display text-type-h1 leading-[1.05]">
               {formatDisplayText(industry.title)}
             </h1>
-            <p className="mt-3 text-lg md:text-xl text-mint-soft/95">{industry.tagline}</p>
-            <p className="mt-4 text-base md:text-lg text-n200/90 leading-relaxed max-w-2xl">
+            <p className="mt-3 text-type-lead text-mint-soft/95">{industry.tagline}</p>
+            <p className="mt-4 text-type-body-lg text-n200/90 leading-relaxed max-w-2xl">
               {industry.description}
             </p>
           </ScrollReveal>
@@ -116,7 +110,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                       key={p.slice(0, 48)}
                       className={cn(
                         "leading-relaxed text-n600",
-                        i === 0 ? "text-[15px] md:text-base text-n800" : "text-sm md:text-[15px]",
+                        i === 0 ? "text-sm md:text-base text-n800" : "text-sm md:text-sm",
                       )}
                     >
                       {p}
@@ -131,7 +125,9 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                 <ul className="mt-5 divide-y divide-n200 border-y border-n200">
                   {industry.useCases.map((uc) => (
                     <li key={uc.title} className="py-5 first:pt-0 last:pb-0">
-                      <h3 className="font-display text-lg text-forest">{formatDisplayText(uc.title)}</h3>
+                      <h3 className="font-display text-lg text-forest">
+                        {formatDisplayText(uc.title)}
+                      </h3>
                       <p className="mt-2 text-sm text-n600 leading-relaxed">{uc.description}</p>
                     </li>
                   ))}
@@ -176,7 +172,10 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                   </h3>
                   <ul className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                     {industry.rethinkFocus.map((item) => (
-                      <li key={item} className="text-sm text-n200/90 leading-relaxed pl-4 border-l border-white/20">
+                      <li
+                        key={item}
+                        className="text-sm text-n200/90 leading-relaxed pl-4 border-l border-white/20"
+                      >
                         {item}
                       </li>
                     ))}
@@ -215,8 +214,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                       aria-hidden
                       className="absolute -top-px right-8 h-px w-16 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
-                        background:
-                          "linear-gradient(90deg, transparent, var(--mint), transparent)",
+                        background: "linear-gradient(90deg, transparent, var(--mint), transparent)",
                       }}
                     />
                     <span
@@ -276,7 +274,9 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                     <span className="font-mono text-[11px] tracking-wider text-n400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-3 font-display text-lg text-forest leading-snug">{formatDisplayText(b.title)}</h3>
+                    <h3 className="mt-3 font-display text-lg text-forest leading-snug">
+                      {formatDisplayText(b.title)}
+                    </h3>
                     <p className="mt-2 text-sm text-n600 leading-relaxed">{b.description}</p>
                   </li>
                 ))}
@@ -294,8 +294,8 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                   Partner with Planetive on {industry.title.toLowerCase()}
                 </h2>
                 <p className="mt-3 text-sm md:text-base text-n200/90 leading-relaxed max-w-lg">
-                  Combine sector advisory with {RETHINK_CARBON.name} intelligence for execution
-                  that is faster, compliant, and investor-ready.
+                  Combine sector advisory with {RETHINK_CARBON.name} intelligence for execution that
+                  is faster, compliant, and investor-ready.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4">
                   <Link

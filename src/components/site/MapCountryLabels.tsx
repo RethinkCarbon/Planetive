@@ -5,9 +5,7 @@ import {
   getPartnersForCountry,
 } from "@/lib/global-partners-map-content";
 
-const CODE_TO_NAME = Object.fromEntries(
-  regions.map((r) => [r.code.toLowerCase(), r.name]),
-);
+const CODE_TO_NAME = Object.fromEntries(regions.map((r) => [r.code.toLowerCase(), r.name]));
 
 type LabelPoint = {
   code: string;
@@ -41,9 +39,7 @@ function computeLabels(svg: SVGSVGElement): LabelPoint[] {
     const countryName = CODE_TO_NAME[code];
     if (!countryName) continue;
 
-    const path = svg.querySelector<SVGPathElement>(
-      `path[aria-label="${countryName}"]`,
-    );
+    const path = svg.querySelector<SVGPathElement>(`path[aria-label="${countryName}"]`);
     if (!path) continue;
 
     const { x: cx, y: cy } = centroidOfPath(path);
@@ -105,8 +101,7 @@ export function MapCountryLabels({ mapRootRef, focusId }: MapCountryLabelsProps)
     >
       {labels.map((label) => {
         const isActiveCountry =
-          !focusId ||
-          getPartnersForCountry(label.code).some((p) => p.id === focusId);
+          !focusId || getPartnersForCountry(label.code).some((p) => p.id === focusId);
 
         return (
           <text

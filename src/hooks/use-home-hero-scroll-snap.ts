@@ -15,9 +15,7 @@ function easeOutQuart(t: number) {
 function isEditableTarget(target: EventTarget | null) {
   const el = target as HTMLElement | null;
   if (!el) return false;
-  return Boolean(
-    el.closest("input, textarea, select, [contenteditable='true']"),
-  );
+  return Boolean(el.closest("input, textarea, select, [contenteditable='true']"));
 }
 
 export function useHomeHeroScrollSnap() {
@@ -37,12 +35,8 @@ export function useHomeHeroScrollSnap() {
       const heroEl = hero();
       const ecosystemEl = ecosystem();
       positionsRef.current = {
-        heroY: heroEl
-          ? heroEl.getBoundingClientRect().top + window.scrollY
-          : 0,
-        ecosystemY: ecosystemEl
-          ? ecosystemEl.getBoundingClientRect().top + window.scrollY
-          : 0,
+        heroY: heroEl ? heroEl.getBoundingClientRect().top + window.scrollY : 0,
+        ecosystemY: ecosystemEl ? ecosystemEl.getBoundingClientRect().top + window.scrollY : 0,
       };
     };
 
@@ -130,10 +124,9 @@ export function useHomeHeroScrollSnap() {
 
       wheelDeltaRef.current += event.deltaY;
       const threshold = scrollingDown ? WHEEL_THRESHOLD : -WHEEL_THRESHOLD;
-      const passed =
-        scrollingDown
-          ? wheelDeltaRef.current >= threshold
-          : wheelDeltaRef.current <= threshold;
+      const passed = scrollingDown
+        ? wheelDeltaRef.current >= threshold
+        : wheelDeltaRef.current <= threshold;
 
       if (!passed) return;
 
@@ -167,9 +160,7 @@ export function useHomeHeroScrollSnap() {
       if (snappingRef.current || isEditableTarget(event.target)) return;
 
       if (
-        (event.key === "ArrowDown" ||
-          event.key === "PageDown" ||
-          event.key === " ") &&
+        (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") &&
         isHeroActive()
       ) {
         event.preventDefault();
@@ -177,10 +168,7 @@ export function useHomeHeroScrollSnap() {
         return;
       }
 
-      if (
-        (event.key === "ArrowUp" || event.key === "PageUp") &&
-        isEcosystemAtEntry()
-      ) {
+      if ((event.key === "ArrowUp" || event.key === "PageUp") && isEcosystemAtEntry()) {
         event.preventDefault();
         snapUpToHero();
       }

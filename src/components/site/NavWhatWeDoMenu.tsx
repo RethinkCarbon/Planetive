@@ -20,8 +20,7 @@ export function NavWhatWeDoMenu({
   const rootRef = useRef<HTMLDivElement>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isActive =
-    pathname === "/what-we-do" ||
-    WHAT_WE_DO_NAV.some((item) => pathname === item.to);
+    pathname === "/what-we-do" || WHAT_WE_DO_NAV.some((item) => pathname === item.to);
 
   useEffect(() => {
     setOpen(false);
@@ -49,9 +48,7 @@ export function NavWhatWeDoMenu({
 
   const menuPanelClass = cn(
     "rounded-xl overflow-hidden shadow-[var(--shadow-elevated)] backdrop-blur-md border",
-    isSolid
-      ? "bg-white/95 border-n200/90"
-      : "bg-[#0A3D2E]/94 border-white/20",
+    isSolid ? "bg-white/95 border-n200/90" : "bg-[#0A3D2E]/94 border-white/20",
   );
 
   const itemClass = (active: boolean, index: number, total: number) =>
@@ -148,10 +145,7 @@ export function NavWhatWeDoMenu({
         <div
           id={menuId}
           role="menu"
-          className={cn(
-            "absolute left-0 top-full z-50 mt-2 min-w-[12.5rem]",
-            menuPanelClass,
-          )}
+          className={cn("absolute left-0 top-full z-50 mt-2 min-w-[12.5rem]", menuPanelClass)}
         >
           {navLinks}
         </div>

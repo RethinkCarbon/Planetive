@@ -21,8 +21,7 @@ export const ENERGY_INTELLIGENCE_WHAT_WE_DO = {
     },
     {
       title: "Renewable Transition Planning",
-      description:
-        "Design, evaluation and implementation of energy transition initiatives.",
+      description: "Design, evaluation and implementation of energy transition initiatives.",
     },
     {
       title: "Program Design Support",
@@ -30,13 +29,11 @@ export const ENERGY_INTELLIGENCE_WHAT_WE_DO = {
     },
     {
       title: "Implementation Advisory",
-      description:
-        "Implementation support across renewable energy ecosystems.",
+      description: "Implementation support across renewable energy ecosystems.",
     },
     {
       title: "Capacity Development",
-      description:
-        "Strategy development for future renewable demand and targets.",
+      description: "Strategy development for future renewable demand and targets.",
     },
   ] as const,
 };
@@ -71,8 +68,7 @@ export const ENERGY_INTELLIGENCE_PROCESS = {
   steps: [
     {
       title: "Understand Context",
-      description:
-        "Assessment including previously available studies and assessments.",
+      description: "Assessment including previously available studies and assessments.",
     },
     {
       title: "Evaluate Readiness",
@@ -84,8 +80,7 @@ export const ENERGY_INTELLIGENCE_PROCESS = {
     },
     {
       title: "Enable Implementation",
-      description:
-        "Implementation support across renewable energy ecosystems.",
+      description: "Implementation support across renewable energy ecosystems.",
     },
     {
       title: "Support Scale",
@@ -131,12 +126,8 @@ export const ENERGY_INTELLIGENCE_FLOW = {
 export const ENERGY_INTELLIGENCE_OUTCOME = {
   title: "Outcome Framework",
   body: "Planetive combines strategic advisory with intelligence experiences to support stronger planning foundations, implementation structures and future transition readiness.",
-  blocks: [
-    { title: "Strategic Planning" },
-    { title: "Connected Intelligence" },
-  ] as const,
-  gridlensNote:
-    "Including internally developed intelligence experiences such as GridLens.",
+  blocks: [{ title: "Strategic Planning" }, { title: "Connected Intelligence" }] as const,
+  gridlensNote: "Including internally developed intelligence experiences such as GridLens.",
 };
 
 export const ENERGY_INTELLIGENCE_APPLIES = {
@@ -163,8 +154,7 @@ export const ENERGY_INTELLIGENCE_APPLIES = {
     },
     {
       title: "Infrastructure Planning",
-      description:
-        "Energy sector assessment and planning across renewable energy ecosystems.",
+      description: "Energy sector assessment and planning across renewable energy ecosystems.",
     },
   ] as const,
 };

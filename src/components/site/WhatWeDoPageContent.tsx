@@ -115,7 +115,10 @@ function WhatWeDoPillarsStrip() {
           </p>
         </ScrollReveal>
 
-        <ScrollRevealGroup className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" stagger={80}>
+        <ScrollRevealGroup
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+          stagger={80}
+        >
           {ECOSYSTEM_PILLARS.map((pillar) => (
             <PillarCard key={pillar.id} pillar={pillar} />
           ))}
@@ -140,11 +143,15 @@ function PillarCard({ pillar }: { pillar: EcosystemPillar }) {
         />
       </div>
       <div className="flex flex-1 flex-col border-t border-n200/80 p-5">
-        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-n500">{pillar.shortLabel}</p>
+        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-n500">
+          {pillar.shortLabel}
+        </p>
         <h3 className="mt-2 font-display text-lg text-forest group-hover:text-canopy transition-colors leading-snug">
           {pillar.title}
         </h3>
-        <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-2 flex-1">{pillar.tagline}</p>
+        <p className="mt-2 text-sm text-n600 leading-relaxed line-clamp-2 flex-1">
+          {pillar.tagline}
+        </p>
         <span className="mt-4 text-xs font-semibold text-canopy group-hover:underline underline-offset-4">
           Read more
         </span>
@@ -170,7 +177,10 @@ function WhatWeDoServicesSection() {
           </p>
         </ScrollReveal>
 
-        <ScrollRevealGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" stagger={70}>
+        <ScrollRevealGroup
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"
+          stagger={70}
+        >
           {WHAT_WE_DO_SERVICES.filter((s) => !ECOSYSTEM_PILLARS.some((p) => p.id === s.id)).map(
             (service) => (
               <ServiceCard key={service.id} service={service} />

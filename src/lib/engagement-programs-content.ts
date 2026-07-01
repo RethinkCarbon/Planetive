@@ -60,20 +60,10 @@ export const PROGRAM_LABELS: Record<EngagementProgramId, string> = {
   partner: "Partner with us",
 };
 
-export const ENGAGEMENT_PROGRAM_IDS: EngagementProgramId[] = [
-  "fellows",
-  "champions",
-  "partner",
-];
+export const ENGAGEMENT_PROGRAM_IDS: EngagementProgramId[] = ["fellows", "champions", "partner"];
 
-export function parseInterestParam(
-  value: unknown,
-): EngagementProgramId | undefined {
-  if (
-    value === "fellows" ||
-    value === "champions" ||
-    value === "partner"
-  ) {
+export function parseInterestParam(value: unknown): EngagementProgramId | undefined {
+  if (value === "fellows" || value === "champions" || value === "partner") {
     return value;
   }
   return undefined;

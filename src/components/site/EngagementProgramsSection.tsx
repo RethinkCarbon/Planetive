@@ -1,10 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  ENGAGEMENT_PROGRAM_SECTION,
-  ENGAGEMENT_PROGRAMS,
-} from "@/lib/engagement-programs-content";
+import { ENGAGEMENT_PROGRAM_SECTION, ENGAGEMENT_PROGRAMS } from "@/lib/engagement-programs-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
 type EngagementProgramsSectionProps = {
@@ -31,7 +28,7 @@ export function EngagementProgramsSection({
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             {ENGAGEMENT_PROGRAM_SECTION.eyebrow}
           </span>
-          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3.5vw,2.75rem)] text-forest leading-tight">
+          <h2 className="mt-3 font-ui font-semibold text-type-h2 text-forest leading-tight">
             {ENGAGEMENT_PROGRAM_SECTION.title}
           </h2>
           <p className="mt-4 text-n600 text-sm md:text-base leading-relaxed">
@@ -44,7 +41,7 @@ export function EngagementProgramsSection({
             const Icon = program.icon;
             return (
               <ScrollReveal key={program.id} variant="fade-up" delay={i * 60}>
-                <article className="flex h-full flex-col rounded-[28px] border border-n200/80 bg-white p-7 md:p-8 shadow-[var(--shadow-soft)] transition-shadow hover:shadow-[var(--shadow-elevated)]">
+                <article className="flex h-full flex-col rounded-[24px] sm:rounded-[28px] border border-n200/80 bg-white p-6 sm:p-7 md:p-8 shadow-[var(--shadow-soft)] transition-shadow hover:shadow-[var(--shadow-elevated)]">
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-mint-soft text-canopy">
                     <Icon size={22} strokeWidth={2.25} aria-hidden />
                   </span>

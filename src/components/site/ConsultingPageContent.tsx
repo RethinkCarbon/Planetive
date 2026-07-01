@@ -3,11 +3,7 @@ import { useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
-import {
-  CONSULTING_PAGE,
-  CONSULTING_PROCESS,
-  CONSULTING_SERVICES,
-} from "@/lib/consulting-content";
+import { CONSULTING_PAGE, CONSULTING_PROCESS, CONSULTING_SERVICES } from "@/lib/consulting-content";
 
 export function ConsultingPageContent() {
   useEffect(() => {
@@ -47,10 +43,10 @@ function ConsultingHero() {
       />
       <div className="container-x relative z-10 pt-40 md:pt-48 pb-24 md:pb-32">
         <ScrollReveal variant="fade-up" className="max-w-3xl">
-          <h1 className="font-ui font-semibold text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.05]">
+          <h1 className="font-ui font-semibold text-type-h1 leading-[1.05]">
             {CONSULTING_PAGE.title}
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-n200/95 leading-relaxed max-w-2xl">
+          <p className="mt-6 text-type-lead text-n200/95 leading-relaxed max-w-2xl">
             {CONSULTING_PAGE.description}
           </p>
           <a
@@ -77,7 +73,7 @@ function ConsultingServicesSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             What we deliver
           </span>
-          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.5rem)] text-forest leading-tight">
+          <h2 className="mt-3 font-ui font-semibold text-type-h2 text-forest leading-tight">
             Consulting across strategy, capital, and delivery
           </h2>
         </ScrollReveal>
@@ -96,9 +92,7 @@ function ConsultingServicesSection() {
               <h3 className="font-ui font-semibold text-xl text-forest group-hover:text-canopy transition-colors">
                 {service.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm text-n600 leading-relaxed">
-                {service.description}
-              </p>
+              <p className="mt-3 flex-1 text-sm text-n600 leading-relaxed">{service.description}</p>
               <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-canopy">
                 Learn more
                 <ArrowUpRight
@@ -123,7 +117,7 @@ function ConsultingProcessSection() {
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
             How we work
           </span>
-          <h2 className="mt-3 font-ui font-semibold text-[clamp(1.75rem,3vw,2.25rem)] text-forest">
+          <h2 className="mt-3 font-ui font-semibold text-type-h3 text-forest">
             From mandate to measurable outcomes
           </h2>
         </ScrollReveal>

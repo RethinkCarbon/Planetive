@@ -38,10 +38,7 @@ export const ENERGY_WORKFORCE_PROGRAM = {
       id: "skill-type",
       label: "Dimension 02",
       title: "Skill Type",
-      options: [
-        { label: "Digital Skills" },
-        { label: "Hands-On Skills" },
-      ] as const,
+      options: [{ label: "Digital Skills" }, { label: "Hands-On Skills" }] as const,
     },
     {
       id: "sector-focus",
@@ -72,28 +69,23 @@ export const ENERGY_WORKFORCE_JOURNEY = {
     },
     {
       title: "Learn",
-      description:
-        "Engage with structured learning aligned with future transition requirements.",
+      description: "Engage with structured learning aligned with future transition requirements.",
     },
     {
       title: "Develop",
-      description:
-        "Build practical skills across evolving stages of capability development.",
+      description: "Build practical skills across evolving stages of capability development.",
     },
     {
       title: "Apply",
-      description:
-        "Put developed skills into meaningful operational and institutional contexts.",
+      description: "Put developed skills into meaningful operational and institutional contexts.",
     },
     {
       title: "Connect",
-      description:
-        "Engage with networks, pathways and alignment across the transition landscape.",
+      description: "Engage with networks, pathways and alignment across the transition landscape.",
     },
     {
       title: "Advance",
-      description:
-        "Move toward long-term future readiness within the transition economy.",
+      description: "Move toward long-term future readiness within the transition economy.",
     },
   ] as const,
 };

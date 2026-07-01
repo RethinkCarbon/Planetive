@@ -138,8 +138,7 @@ export const PROJECT_DEVELOPMENT_PROCESS = {
     },
     {
       title: "Develop",
-      description:
-        "Advance planning, strategy and execution pathways across project phases.",
+      description: "Advance planning, strategy and execution pathways across project phases.",
     },
     {
       title: "Validate",
@@ -148,8 +147,7 @@ export const PROJECT_DEVELOPMENT_PROCESS = {
     },
     {
       title: "Scale",
-      description:
-        "Enable long-term delivery and expansion across portfolios and initiatives.",
+      description: "Enable long-term delivery and expansion across portfolios and initiatives.",
     },
   ] as const,
 };

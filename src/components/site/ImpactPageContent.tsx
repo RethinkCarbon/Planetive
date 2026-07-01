@@ -54,9 +54,8 @@ function ImpactHero() {
               <em className="not-italic text-mint-soft">Sustainable</em> Future
             </h1>
             <p className="mt-6 max-w-xl text-base md:text-lg text-n200/95 leading-relaxed">
-              From energy transition and sustainable finance to circular economy and
-              impact investing — building measurable change across Pakistan and global
-              markets.
+              From energy transition and sustainable finance to circular economy and impact
+              investing — building measurable change across Pakistan and global markets.
             </p>
           </ScrollReveal>
 
@@ -119,7 +118,10 @@ function EnergyTransitionFeature() {
                 {formatDisplayText(ENERGY_TRANSITION.title)}
               </h2>
               {ENERGY_TRANSITION.paragraphs.map((p) => (
-                <p key={p.slice(0, 24)} className="mt-4 text-sm md:text-base text-n600 leading-relaxed">
+                <p
+                  key={p.slice(0, 24)}
+                  className="mt-4 text-sm md:text-base text-n600 leading-relaxed"
+                >
                   {p}
                 </p>
               ))}
@@ -149,8 +151,8 @@ function ImpactAreasSection() {
             Impact across every layer of sustainability
           </h2>
           <p className="mt-4 text-n600 leading-relaxed">
-            Eleven interconnected areas where Planetive advocates, advises, and partners
-            to close the gap between intent and measurable outcomes.
+            Eleven interconnected areas where Planetive advocates, advises, and partners to close
+            the gap between intent and measurable outcomes.
           </p>
         </ScrollReveal>
 
@@ -286,8 +288,8 @@ function ImpactMarketBanner() {
               </p>
               <p className="mt-2 text-lg text-mint-soft font-medium">USD</p>
               <p className="mt-8 text-sm text-n200 max-w-md mx-auto">
-                Global capital moving toward investments that deliver financial returns
-                alongside social and environmental impact.
+                Global capital moving toward investments that deliver financial returns alongside
+                social and environmental impact.
               </p>
               <a
                 href="https://thegiin.org/"
@@ -305,8 +307,7 @@ function ImpactMarketBanner() {
         <ScrollReveal variant="fade-in" delay={120} className="mt-10">
           <p className="text-center text-sm text-n400 max-w-2xl mx-auto leading-relaxed">
             Planetive works with stakeholders across Pakistan and global markets to advance
-            SDG-aligned policy, transparent impact measurement, and sustainable value
-            creation.
+            SDG-aligned policy, transparent impact measurement, and sustainable value creation.
           </p>
         </ScrollReveal>
       </div>

@@ -28,6 +28,16 @@ const POP_PX = 10;
 const POP_PCT = (POP_PX / 400) * 100;
 const RESUME_DELAY_MS = 500;
 const ARC_STEPS = 32;
+const PCT_PRECISION = 4;
+
+function roundPct(value: number): number {
+  const factor = 10 ** PCT_PRECISION;
+  return Math.round(value * factor) / factor;
+}
+
+function pct(value: number): string {
+  return `${roundPct(value)}%`;
+}
 
 function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
@@ -44,14 +54,13 @@ function segmentShapeCornerPercent(index: number) {
   const endAngle = ROTATION_OFFSET + (index + 1) * SEGMENT_ANGLE;
   const startRad = ((startAngle - 90) * Math.PI) / 180;
   const endRad = ((endAngle - 90) * Math.PI) / 180;
-  const upperCornerAngle =
-    Math.sin(startRad) <= Math.sin(endRad) ? startAngle : endAngle;
+  const upperCornerAngle = Math.sin(startRad) <= Math.sin(endRad) ? startAngle : endAngle;
   const midAngle = segmentMidAngle(index);
   const angle = upperCornerAngle + (midAngle - upperCornerAngle) * 0.28;
   const rad = ((angle - 90) * Math.PI) / 180;
   return {
-    x: 50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.cos(rad),
-    y: 50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.sin(rad),
+    x: roundPct(50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.cos(rad)),
+    y: roundPct(50 + SHAPE_CORNER_RADIUS_FRAC * 50 * Math.sin(rad)),
   };
 }
 
@@ -59,7 +68,7 @@ function pointToPercent(angleDeg: number, radiusFrac: number) {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
   const x = 50 + radiusFrac * 50 * Math.cos(rad);
   const y = 50 + radiusFrac * 50 * Math.sin(rad);
-  return `${x}% ${y}%`;
+  return `${pct(x)} ${pct(y)}`;
 }
 
 function annularWedgeClipPath(index: number) {
@@ -82,8 +91,8 @@ function annularWedgeClipPath(index: number) {
 function popTranslatePercent(midDeg: number) {
   const rad = ((midDeg - 90) * Math.PI) / 180;
   return {
-    x: Math.cos(rad) * POP_PCT,
-    y: Math.sin(rad) * POP_PCT,
+    x: roundPct(Math.cos(rad) * POP_PCT),
+    y: roundPct(Math.sin(rad) * POP_PCT),
   };
 }
 
@@ -91,17 +100,15 @@ function SegmentShape({ shape }: { shape: EcosystemWheelShape }) {
   return (
     <svg
       viewBox="0 0 16 16"
-      className="h-[18px] w-[18px] shrink-0 text-white sm:h-5 sm:w-5"
+      className="h-3 w-3 shrink-0 text-white sm:h-[18px] sm:w-[18px] md:h-5 md:w-5"
       aria-hidden
     >
       {shape === "circle" && <circle cx="8" cy="8" r="3.75" fill="currentColor" />}
-      {shape === "square" && <rect x="4.25" y="4.25" width="7.5" height="7.5" fill="currentColor" />}
-      {shape === "diamond" && (
-        <polygon points="8,2.5 13.5,8 8,13.5 2.5,8" fill="currentColor" />
+      {shape === "square" && (
+        <rect x="4.25" y="4.25" width="7.5" height="7.5" fill="currentColor" />
       )}
-      {shape === "triangle" && (
-        <polygon points="8,3 13.5,13 2.5,13" fill="currentColor" />
-      )}
+      {shape === "diamond" && <polygon points="8,2.5 13.5,8 8,13.5 2.5,8" fill="currentColor" />}
+      {shape === "triangle" && <polygon points="8,3 13.5,13 2.5,13" fill="currentColor" />}
       {shape === "house" && (
         <polygon points="8,2.5 13.5,7.5 13.5,13.5 2.5,13.5 2.5,7.5" fill="currentColor" />
       )}
@@ -123,14 +130,7 @@ function SegmentShape({ shape }: { shape: EcosystemWheelShape }) {
       )}
       {shape === "ring" && (
         <>
-          <circle
-            cx="8"
-            cy="8"
-            r="4.25"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
+          <circle cx="8" cy="8" r="4.25" fill="none" stroke="currentColor" strokeWidth="2" />
           <circle cx="8" cy="8" r="1.1" fill="currentColor" />
         </>
       )}
@@ -170,13 +170,16 @@ function SegmentWedge({
   const pop = isHovered ? popTranslatePercent(mid) : { x: 0, y: 0 };
   const labelOffset = segmentMidAngle(index);
   const labelRad = ((labelOffset - 90) * Math.PI) / 180;
-  const labelX = 50 + Math.cos(labelRad) * LABEL_RADIUS_PCT;
-  const labelY = 50 + Math.sin(labelRad) * LABEL_RADIUS_PCT;
+  const labelX = roundPct(50 + Math.cos(labelRad) * LABEL_RADIUS_PCT);
+  const labelY = roundPct(50 + Math.sin(labelRad) * LABEL_RADIUS_PCT);
   const shapeCorner = segmentShapeCornerPercent(index);
 
   const isInteractive = Boolean(segment.route || segment.url);
-  const ariaNavigate =
-    segment.route ? `${segment.name} (opens page)` : segment.url ? `${segment.name} (opens in new tab)` : segment.name;
+  const ariaNavigate = segment.route
+    ? `${segment.name} (opens page)`
+    : segment.url
+      ? `${segment.name} (opens in new tab)`
+      : segment.name;
 
   return (
     <div
@@ -226,7 +229,7 @@ function SegmentWedge({
             <SegmentShape shape={segment.shape} />
           </div>
           <div
-            className="absolute flex flex-col items-center gap-0.5 px-2"
+            className="absolute flex flex-col items-center gap-0 px-1 sm:gap-0.5 sm:px-2"
             style={{
               left: `${labelX}%`,
               top: `${labelY}%`,
@@ -236,7 +239,7 @@ function SegmentWedge({
             {segment.lines.map((line) => (
               <span
                 key={line}
-                className="block text-[0.8rem] font-semibold leading-tight text-white sm:text-[0.9rem]"
+                className="block whitespace-nowrap text-[0.6rem] font-semibold leading-tight text-white sm:text-[0.7rem] md:text-[0.8rem]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {line}
@@ -255,7 +258,7 @@ function SegmentWedge({
             }}
           >
             <p
-              className="w-[9rem] text-center text-[0.72rem] leading-snug text-white sm:w-[10rem] sm:text-[0.8rem]"
+              className="max-w-[6.5rem] text-center text-[0.6rem] leading-snug text-white sm:max-w-[8rem] sm:text-[0.7rem] md:max-w-[10rem] md:text-[0.8rem]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               {segment.description}
@@ -308,7 +311,7 @@ function StaticCenter() {
       >
         <PlanetiveLogo zoom="wheel" />
         <p
-          className="mt-1 text-[0.62rem] tracking-[0.24em] uppercase sm:text-[0.68rem]"
+          className="mt-1 text-[0.55rem] tracking-[0.22em] uppercase sm:text-[0.62rem] md:text-[0.68rem]"
           style={{ color: WHEEL_COLORS.centerText, fontFamily: "var(--font-body)", opacity: 0.72 }}
         >
           Ecosystem
@@ -418,7 +421,7 @@ export function PlanetiveEcosystemWheel({
     <div
       ref={containerRef}
       className={cn(
-        "relative mx-auto w-full max-w-[min(100%,30rem)] sm:max-w-[34rem] lg:max-w-[40rem] xl:max-w-[44rem]",
+        "relative mx-auto w-full max-w-[min(100%,22rem)] sm:max-w-[28rem] md:max-w-[32rem] lg:max-w-[36rem] xl:max-w-[44rem]",
         className,
       )}
       onMouseLeave={handleWheelLeave}
@@ -428,10 +431,7 @@ export function PlanetiveEcosystemWheel({
       <div className="relative aspect-square">
         <StaticCenter />
 
-        <div
-          className="absolute inset-0"
-          style={{ transform: `rotate(${wheelDeg}deg)` }}
-        >
+        <div className="absolute inset-0" style={{ transform: `rotate(${wheelDeg}deg)` }}>
           <div className="absolute inset-0">
             {ECOSYSTEM_WHEEL_SEGMENTS.map((segment, index) => (
               <SegmentWedge

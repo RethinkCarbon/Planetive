@@ -93,8 +93,7 @@ export const ADVISORY_HOUSE_BANKABILITY_STUDY = {
   supportingTitle: "Supporting Investment Readiness Across Emerging Markets",
   description:
     "Planetive contributed to an international study focused on developing a structured approach to assess and compare factors affecting the bankability of clean power projects across emerging and developing economies.",
-  scopeNote:
-    "Planetive's contribution focused on the Pakistan assessment scope.",
+  scopeNote: "Planetive's contribution focused on the Pakistan assessment scope.",
   studyObjective: {
     title: "Study Objective",
     body: "Develop a structured methodology to identify variables, dimensions and indicators that influence the bankability of clean power initiatives.",
@@ -169,28 +168,23 @@ export const ADVISORY_HOUSE_PROCESS = {
     },
     {
       title: "Evaluate",
-      description:
-        "Assess opportunities, constraints and pathways toward investable outcomes.",
+      description: "Assess opportunities, constraints and pathways toward investable outcomes.",
     },
     {
       title: "Structure",
-      description:
-        "Design frameworks for programs, projects and capital alignment.",
+      description: "Design frameworks for programs, projects and capital alignment.",
     },
     {
       title: "Enable",
-      description:
-        "Support financial readiness and capital enablement across initiatives.",
+      description: "Support financial readiness and capital enablement across initiatives.",
     },
     {
       title: "Deliver",
-      description:
-        "Advance structured advisory into actionable implementation pathways.",
+      description: "Advance structured advisory into actionable implementation pathways.",
     },
     {
       title: "Support",
-      description:
-        "Ongoing advisory across planning, structuring and long-term development.",
+      description: "Ongoing advisory across planning, structuring and long-term development.",
     },
   ] as const,
 };

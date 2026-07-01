@@ -2,9 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { regions } from "react-svg-worldmap";
 import { getLogoPartnersForCountry } from "@/lib/global-partners-map-content";
 
-const NAME_TO_CODE = new Map(
-  regions.map((r) => [r.name, r.code.toLowerCase()]),
-);
+const NAME_TO_CODE = new Map(regions.map((r) => [r.name, r.code.toLowerCase()]));
 
 type MapCountryHintProps = {
   mapRootRef: React.RefObject<HTMLDivElement | null>;

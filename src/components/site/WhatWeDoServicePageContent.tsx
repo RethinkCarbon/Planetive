@@ -27,7 +27,7 @@ export function WhatWeDoServicePageContent({ service }: WhatWeDoServicePageConte
                 <ArrowLeft size={16} aria-hidden />
                 What we do
               </Link>
-              <h1 className="mt-6 font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.1] text-forest">
+              <h1 className="mt-6 font-display text-type-h2 leading-[1.1] text-forest">
                 {service.title}
               </h1>
               {service.highlight && (
@@ -51,7 +51,7 @@ export function WhatWeDoServicePageContent({ service }: WhatWeDoServicePageConte
                 />
               </figure>
 
-              <div className="mt-10 md:mt-12 space-y-6 text-[15px] md:text-base text-n700 leading-[1.75]">
+              <div className="mt-10 md:mt-12 space-y-6 text-sm md:text-base text-n700 leading-[1.75]">
                 {service.paragraphs.map((p) => (
                   <p key={p.slice(0, 40)}>{p}</p>
                 ))}
@@ -62,7 +62,7 @@ export function WhatWeDoServicePageContent({ service }: WhatWeDoServicePageConte
                   Other services:{" "}
                   {otherServices.slice(0, 4).map((s, i) => (
                     <span key={s.id}>
-                      {i > 0 && " · "}
+                      {i > 0 && " Ã‚Â· "}
                       <Link
                         to={whatWeDoServicePath(s.id)}
                         className="text-canopy hover:text-forest hover:underline underline-offset-4"

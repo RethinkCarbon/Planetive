@@ -59,8 +59,7 @@ export function RethinkCarbonPageContent() {
       <PlatformSection />
       <JourneyWhyBand />
       <DesignedForSection />
-      <EcosystemSection />
-      <FinalCtaSection />
+      <EcosystemClosingSection />
     </div>
   );
 }
@@ -89,15 +88,11 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease }}
         >
-          <h1 className="font-ui font-semibold text-[clamp(2.5rem,6vw,4.25rem)] leading-[1.02]">
-            {title}
-          </h1>
-          <p className="mt-5 font-ui font-semibold text-[clamp(1.2rem,2.5vw,2rem)] text-mint-soft/95 leading-snug">
+          <h1 className="font-ui font-semibold text-type-h1 leading-[1.02]">{title}</h1>
+          <p className="mt-5 font-ui font-semibold text-type-h3 text-mint-soft/95 leading-snug">
             {supportingTitle}
           </p>
-          <p className="mt-6 text-base md:text-lg text-n200/90 leading-relaxed">
-            {description}
-          </p>
+          <p className="mt-6 text-type-body-lg text-n200/90 leading-relaxed">{description}</p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3 md:gap-4">
             <Link
@@ -124,10 +119,7 @@ function PlatformSection() {
   const { title, description, capabilities } = RETHINK_CARBON_PLATFORM;
 
   return (
-    <MotionSection
-      id="platform"
-      className={ECOSYSTEM_SURFACE.first}
-    >
+    <MotionSection id="platform" className={ECOSYSTEM_SURFACE.first}>
       <div className={cn(PAGE, SECTION, "pb-10 md:pb-14")}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-4 xl:col-span-4 lg:sticky lg:top-28">
@@ -158,7 +150,7 @@ function PlatformSection() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="mt-4 block h-px w-10 bg-canopy/35" aria-hidden />
-                    <h3 className="mt-4 font-ui font-semibold text-lg md:text-xl text-forest leading-snug">
+                    <h3 className="mt-4 font-ui font-semibold text-type-lead text-forest leading-snug">
                       {cap.title}
                     </h3>
                     <p className="mt-3 text-sm text-n600 leading-relaxed">{cap.description}</p>
@@ -265,7 +257,7 @@ function DesignedForSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,3vw,2.5rem)] text-forest leading-tight">
+            <h2 className="font-ui font-semibold text-type-h2 text-forest leading-tight">
               {title}
             </h2>
           </motion.div>
@@ -276,7 +268,7 @@ function DesignedForSection() {
                 <motion.li
                   key={item}
                   className={cn(
-                    "font-ui font-semibold text-[clamp(1.25rem,2vw,1.65rem)] text-forest leading-snug",
+                    "font-ui font-semibold text-type-h3 text-forest leading-snug",
                     index > 0 &&
                       "md:pl-6 lg:pl-8 md:border-l md:border-n200/80 pt-5 md:pt-0 border-t md:border-t-0 border-n200/60",
                   )}
@@ -291,7 +283,7 @@ function DesignedForSection() {
             </ul>
 
             <motion.p
-              className="text-base md:text-lg text-n600 leading-relaxed max-w-2xl border-t border-n200/70 pt-8"
+              className="text-type-body-lg text-n600 leading-relaxed max-w-2xl border-t border-n200/70 pt-8"
               initial={reduced ? false : { opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -306,34 +298,34 @@ function DesignedForSection() {
   );
 }
 
-function EcosystemSection() {
-  const { title, description } = RETHINK_CARBON_ECOSYSTEM;
-
-  return (
-    <MotionSection className={ECOSYSTEM_SURFACE.sheet}>
-      <div className={cn(PAGE, "py-14 md:py-20 lg:py-24")}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-5">
-            <SectionHeader eyebrow="Planetive" title={title} description={description} />
-          </div>
-          <div className="lg:col-span-7 flex justify-center lg:justify-end">
-            <EcosystemExplorer highlightSegmentId="rethink-carbon" />
-          </div>
-        </div>
-      </div>
-    </MotionSection>
-  );
-}
-
-function FinalCtaSection() {
+function EcosystemClosingSection() {
   const reduced = useReducedMotion();
+  const { title, description } = RETHINK_CARBON_ECOSYSTEM;
   const { headline, primary } = RETHINK_CARBON_CTA;
 
   return (
-    <section className="pb-16 md:pb-20">
-      <div className={PAGE}>
+    <MotionSection className={cn(ECOSYSTEM_SURFACE.sheet, "overflow-visible")}>
+      <div className={cn(PAGE, "pt-12 pb-6 md:py-20 lg:py-24")}>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-14 lg:items-center">
+          <div className="mx-auto max-w-xl text-center lg:col-span-5 lg:mx-0 lg:text-left">
+            <SectionHeader eyebrow="Planetive" title={title} description={description} />
+            <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-n500 lg:hidden">
+              Tap a segment to explore
+            </p>
+          </div>
+
+          <div className="flex justify-center overflow-visible py-2 lg:col-span-7 lg:justify-end lg:py-0">
+            <EcosystemExplorer
+              highlightSegmentId="rethink-carbon"
+              className="max-w-[min(88vw,19rem)] sm:max-w-[22rem]"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={cn(PAGE, "pb-10 md:pb-16")}>
         <motion.div
-          className="relative overflow-hidden rounded-[32px] px-8 py-14 md:px-14 md:py-16 text-center"
+          className="relative overflow-hidden rounded-2xl px-5 py-10 text-center sm:rounded-[28px] sm:px-8 sm:py-12 md:rounded-[32px] md:px-14 md:py-16"
           style={{ background: "var(--gradient-hero)" }}
           initial={reduced ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -348,22 +340,22 @@ function FinalCtaSection() {
                 "radial-gradient(ellipse 50% 80% at 50% 120%, rgba(168,240,212,0.35), transparent)",
             }}
           />
-          <div className="relative max-w-2xl mx-auto">
-            <h2 className="font-ui font-semibold text-[clamp(1.85rem,4vw,3rem)] text-white leading-tight">
+          <div className="relative mx-auto max-w-2xl">
+            <h2 className="font-ui font-semibold text-[1.65rem] leading-[1.15] text-white sm:text-3xl md:text-type-h2 md:leading-tight">
               {headline}
             </h2>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:mt-8 md:gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold btn-mint"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-xs font-semibold btn-mint sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm"
               >
                 {primary}
-                <ArrowRight size={16} aria-hidden />
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden />
               </Link>
             </div>
           </div>
         </motion.div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
