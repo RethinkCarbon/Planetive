@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { Mail, MapPin, Send } from "lucide-react";
 import { useSiteForm } from "@/hooks/use-site-form";
+import { PLANETIVE_INBOX_EMAIL } from "@/lib/site-form-payload";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -173,7 +174,12 @@ function ContactPage() {
                     <span className="h-10 w-10 rounded-xl bg-white/10 inline-flex items-center justify-center">
                       <Mail size={16} />
                     </span>
-                    <span>hello@planetive.org</span>
+                    <a
+                      href={`mailto:${PLANETIVE_INBOX_EMAIL}`}
+                      className="hover:text-mint-soft transition-colors"
+                    >
+                      {PLANETIVE_INBOX_EMAIL}
+                    </a>
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="h-10 w-10 rounded-xl bg-white/10 inline-flex items-center justify-center">

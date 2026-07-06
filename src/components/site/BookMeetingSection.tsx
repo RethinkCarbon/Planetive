@@ -11,6 +11,7 @@ import {
   resolveBookingArea,
 } from "@/lib/site-booking";
 import { cn } from "@/lib/utils";
+import { PLANETIVE_INBOX_EMAIL } from "@/lib/site-form-payload";
 
 type BookMeetingSectionProps = {
   className?: string;
@@ -120,10 +121,10 @@ export function BookMeetingSection({
             <p className="mt-6 text-sm text-n600 leading-relaxed">
               Prefer email?{" "}
               <a
-                href="mailto:hello@planetive.org"
+                href={`mailto:${PLANETIVE_INBOX_EMAIL}`}
                 className="font-semibold text-canopy hover:text-forest transition-colors"
               >
-                hello@planetive.org
+                {PLANETIVE_INBOX_EMAIL}
               </a>
             </p>
           )}
