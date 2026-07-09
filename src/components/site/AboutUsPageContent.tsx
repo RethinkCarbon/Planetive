@@ -10,10 +10,13 @@ import {
 } from "@/lib/about-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
+type TeamCardLayout = "portrait" | "landscape";
+
 export function AboutUsPageContent() {
   const leadership = TEAM.filter((m) => m.group === "leadership");
   const advisors = TEAM.filter((m) => m.group === "advisors");
   const team = TEAM.filter((m) => m.group === "team");
+  const consultants = TEAM.filter((m) => m.group === "consultants");
 
   return (
     <div className="about-us-page">
@@ -22,6 +25,12 @@ export function AboutUsPageContent() {
       <TeamSection title="Leadership" members={leadership} featured />
       <TeamSection title="Team & Advisors" subtitle="Global advisors" members={advisors} />
       <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
+      <TeamSection
+        title="Consultants"
+        subtitle="Specialist expertise"
+        members={consultants}
+        layout="landscape"
+      />
       <PartnersSection />
       <AboutClosingCta />
     </div>
@@ -116,16 +125,23 @@ function TeamSection({
   subtitle,
   members,
   featured = false,
+  layout = "portrait",
 }: {
   title: string;
   subtitle?: string;
   members: TeamMember[];
   featured?: boolean;
+  layout?: TeamCardLayout;
 }) {
   if (members.length === 0) return null;
 
   return (
-    <section className={cn("py-12 md:py-16", featured ? "bg-[var(--n50)]" : "bg-white")}>
+    <section
+      className={cn(
+        "py-12 md:py-16",
+        featured || layout === "landscape" ? "bg-[var(--n50)]" : "bg-white",
+      )}
+    >
       <div className="container-x">
         <ScrollReveal className="mb-10 md:mb-14">
           <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-canopy">
@@ -143,15 +159,26 @@ function TeamSection({
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7">
+          <div
+            className={cn(
+              "grid gap-6 md:gap-7",
+              layout === "landscape" && members.length <= 2
+                ? "grid-cols-1 md:grid-cols-2 max-w-4xl"
+                : "grid-cols-1 md:grid-cols-2 xl:grid-cols-3",
+            )}
+          >
             {members.map((m, i) => (
-              <MemberCard key={m.id} member={m} delay={i * 40} />
+              <MemberCard key={m.id} member={m} delay={i * 40} layout={layout} />
             ))}
           </div>
         )}
       </div>
     </section>
   );
+}
+
+function getTeamImageScale(member: TeamMember) {
+  return member.imageScale;
 }
 
 function isZoomedOut(member: TeamMember) {
@@ -176,16 +203,17 @@ function teamImageStyle(member: TeamMember): CSSProperties | undefined {
 
   if (member.imagePosition) style.objectPosition = member.imagePosition;
 
-  if (member.imageScale) {
-    if (member.imageScale < 1) {
-      const size = 100 / member.imageScale;
+  const scale = getTeamImageScale(member);
+  if (scale !== undefined) {
+    if (scale < 1) {
+      const size = 100 / scale;
       style.width = `${size}%`;
       style.height = `${size}%`;
       style.left = x;
       style.top = y;
       style.transform = "translate(-50%, -50%)";
-    } else {
-      style.transform = `scale(${member.imageScale})`;
+    } else if (scale > 1) {
+      style.transform = `scale(${scale})`;
       style.transformOrigin = position;
     }
   }
@@ -201,7 +229,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
   return (
     <ScrollReveal variant="fade-up" delay={delay}>
       <article className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[28px] md:rounded-[32px] border border-n200 bg-white shadow-[var(--shadow-soft)]">
-        <div className="lg:col-span-4 relative min-h-[320px] lg:min-h-0">
+        <div className="lg:col-span-4 relative aspect-[3/4] min-h-[360px] sm:min-h-[400px] lg:min-h-[480px]">
           {member.image ? (
             <img
               src={member.image}
@@ -281,11 +309,26 @@ function BioText({ paragraphs, className }: { paragraphs: string[]; className?: 
   );
 }
 
-function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+function MemberCard({
+  member,
+  delay,
+  layout = "portrait",
+}: {
+  member: TeamMember;
+  delay: number;
+  layout?: TeamCardLayout;
+}) {
   return (
     <ScrollReveal variant="fade-up" delay={delay}>
       <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-n200/80 bg-[var(--n50)] hover:shadow-[var(--shadow-elevated)] transition-shadow duration-300">
-        <div className="relative aspect-[4/3] overflow-hidden bg-n100">
+        <div
+          className={cn(
+            "relative overflow-hidden bg-n100",
+            layout === "landscape"
+              ? "aspect-[4/3]"
+              : "aspect-[3/4] min-h-[320px] sm:min-h-[360px]",
+          )}
+        >
           {member.image ? (
             <img
               src={member.image}
@@ -293,8 +336,7 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
               className={cn(
                 teamImageClassName(
                   member,
-                  !isZoomedOut(member) &&
-                    !member.imageScale &&
+                  member.imageScale === undefined &&
                     "transition-transform duration-500 group-hover:scale-[1.02]",
                 ),
                 isZoomedOut(member) && "absolute",

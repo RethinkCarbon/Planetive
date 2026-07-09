@@ -25,7 +25,7 @@ export type TeamMember = {
   id: string;
   name: string;
   role: string;
-  group: "leadership" | "advisors" | "team";
+  group: "leadership" | "advisors" | "team" | "consultants";
   image?: string;
   /** CSS object-position for portrait framing (e.g. "70% center") */
   imagePosition?: string;
@@ -151,6 +151,7 @@ export const TEAM: TeamMember[] = [
     name: "Farhan Hassan Rizvi",
     role: "Product Engineer",
     group: "team",
+    image: teamImg("farhan-hassan-rizvi.jpeg"),
     bio: [
       "Farhan Hassan Rizvi is a product engineer focused on building practical climate-tech solutions. He works across product development, implementation, and continuous improvement.",
     ],
@@ -160,6 +161,7 @@ export const TEAM: TeamMember[] = [
     name: "Haram Saad",
     role: "Business Analyst",
     group: "team",
+    image: teamImg("haram-saad.jpeg"),
     bio: [
       "Haram Saad is a business analyst supporting sustainability-focused initiatives. She contributes to research, data analysis, and project planning.",
     ],
@@ -178,7 +180,7 @@ export const TEAM: TeamMember[] = [
     id: "hira",
     name: "Hira Mumtaz",
     role: "Consultant",
-    group: "team",
+    group: "consultants",
     image: teamImg("hira-mumtaz.jpg"),
     bio: [
       "Hira Mumtaz is an energy and climate consultant. She works on energy policy, renewables, climate finance, and carbon markets.",
@@ -188,7 +190,7 @@ export const TEAM: TeamMember[] = [
     id: "maha",
     name: "Maha Kamal",
     role: "Consultant",
-    group: "team",
+    group: "consultants",
     image: teamImg("maha-kamal.jpg"),
     bio: [
       "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
