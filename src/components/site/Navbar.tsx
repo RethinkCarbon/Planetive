@@ -160,7 +160,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
 
           <div className="flex items-center justify-end gap-2 justify-self-end">
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="hidden md:inline-flex items-center rounded-full px-3 py-2 lg:px-4 lg:py-2.5 text-sm lg:text-sm font-semibold font-body btn-mint whitespace-normal text-center leading-tight"
             >
               Work With Us

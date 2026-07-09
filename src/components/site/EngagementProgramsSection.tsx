@@ -53,7 +53,9 @@ export function EngagementProgramsSection({
                   </p>
                   {isPreview ? (
                     <Link
-                      to="/contact"
+                      to="/work-with-us"
+                      search={{ interest: program.id }}
+                      hash="apply"
                       className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-canopy hover:text-forest"
                     >
                       {program.cta}
@@ -77,7 +79,7 @@ export function EngagementProgramsSection({
         {isPreview && (
           <ScrollReveal className="mt-10 text-center">
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold btn-primary"
             >
               Work with Planetive

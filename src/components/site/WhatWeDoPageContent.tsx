@@ -235,7 +235,7 @@ function WhatWeDoClosingBanner() {
               programs to your timeline.
             </p>
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="mt-7 inline-flex items-center gap-2 rounded-full bg-white text-forest px-6 py-3 text-sm font-semibold hover:bg-mint-soft transition-colors"
             >
               Work with us

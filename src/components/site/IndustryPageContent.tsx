@@ -299,7 +299,7 @@ export function IndustryPageContent({ industry }: IndustryPageContentProps) {
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4">
                   <Link
-                    to="/contact"
+                    to="/work-with-us"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-mint-soft hover:text-white underline underline-offset-4 transition-colors"
                   >
                     Work with us

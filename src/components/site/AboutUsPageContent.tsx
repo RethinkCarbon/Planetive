@@ -383,7 +383,7 @@ function AboutClosingCta() {
               partnerships.
             </p>
             <Link
-              to="/contact"
+              to="/work-with-us"
               className="mt-8 inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold btn-mint"
             >
               Work with us
