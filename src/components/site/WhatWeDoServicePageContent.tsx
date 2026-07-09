@@ -74,7 +74,7 @@ export function WhatWeDoServicePageContent({ service }: WhatWeDoServicePageConte
                 </p>
                 <p className="mt-8 text-n600">
                   <Link
-                    to="/work-with-us"
+                    to="/contact"
                     className="font-semibold text-forest hover:text-canopy underline underline-offset-4"
                   >
                     Contact us

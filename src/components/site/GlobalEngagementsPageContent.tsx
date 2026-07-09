@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, type CSSProperties } from "react";
 import { CalendarDays, ChevronDown, Globe2, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -9,6 +9,7 @@ import {
 } from "@/lib/global-engagements-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { GlobalPartnersMapSection } from "@/components/site/GlobalPartnersMap";
+import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
 const CATEGORY_FILTERS = [
   { id: "all", label: "All categories" },
@@ -409,7 +410,62 @@ function SectionBlock({ section, index }: { section: GlobalEngagementSection; in
   );
 }
 
+function EngagementImageSlideshow({
+  images,
+  intervalMs = 4500,
+}: {
+  images: string[];
+  intervalMs?: number;
+}) {
+  const reducedMotion = usePrefersReducedMotion();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reducedMotion || images.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % images.length);
+    }, intervalMs);
+
+    return () => window.clearInterval(timer);
+  }, [images, intervalMs, reducedMotion]);
+
+  return (
+    <div className="absolute inset-0">
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out",
+            i === index ? "opacity-100" : "opacity-0",
+          )}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+        />
+      ))}
+      {images.length > 1 && (
+        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+          {images.map((src, i) => (
+            <span
+              key={`${src}-dot`}
+              className={cn(
+                "h-1.5 w-1.5 rounded-full transition-colors",
+                i === index ? "bg-white" : "bg-white/45",
+              )}
+              aria-hidden
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function TeamHighlight({ section, index }: { section: GlobalEngagementSection; index: number }) {
+  const gallery = section.images?.length ? section.images : section.image ? [section.image] : [];
+
   return (
     <section
       className={cn("py-10 md:py-14", index % 2 === 0 ? "bg-[var(--n100)]" : "bg-[var(--n50)]")}
@@ -418,22 +474,25 @@ function TeamHighlight({ section, index }: { section: GlobalEngagementSection; i
         <ScrollReveal variant="scale-up">
           <article className="overflow-hidden rounded-[28px] md:rounded-[32px] border border-n200/80 bg-white shadow-[var(--shadow-elevated)]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-              {section.image && (
+              {gallery.length > 0 && (
                 <div className="lg:col-span-5 relative min-h-[240px] lg:min-h-0 aspect-[16/10] lg:aspect-auto">
-                  <img
-                    src={section.image}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
-                    style={{ filter: "grayscale(100%)" }}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {gallery.length > 1 ? (
+                    <EngagementImageSlideshow images={gallery} />
+                  ) : (
+                    <img
+                      src={gallery[0]}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </div>
               )}
               <div
                 className={cn(
                   "flex flex-col justify-center p-8 md:p-10 lg:p-12",
-                  section.image ? "lg:col-span-7" : "lg:col-span-12",
+                  gallery.length > 0 ? "lg:col-span-7" : "lg:col-span-12",
                 )}
               >
                 <span className="inline-flex items-center gap-2 text-xs font-mono tracking-wider uppercase text-canopy">
@@ -452,6 +511,20 @@ function TeamHighlight({ section, index }: { section: GlobalEngagementSection; i
   );
 }
 
+function engagementImageStyle(engagement: GlobalEngagement): CSSProperties | undefined {
+  const position = engagement.imagePosition ?? "50% 50%";
+  const style: CSSProperties = {};
+
+  if (engagement.imagePosition) style.objectPosition = engagement.imagePosition;
+
+  if (engagement.imageScale) {
+    style.transform = `scale(${engagement.imageScale})`;
+    style.transformOrigin = position;
+  }
+
+  return Object.keys(style).length ? style : undefined;
+}
+
 function EngagementCard({ engagement, delay }: { engagement: GlobalEngagement; delay: number }) {
   const [expanded, setExpanded] = useState(false);
   const previewText = engagement.body.join(" ");
@@ -465,7 +538,7 @@ function EngagementCard({ engagement, delay }: { engagement: GlobalEngagement; d
             src={engagement.image}
             alt=""
             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-            style={{ filter: "grayscale(100%)" }}
+            style={engagementImageStyle(engagement)}
             loading="lazy"
             decoding="async"
           />

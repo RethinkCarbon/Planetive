@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
-import { GraduationCap, Handshake, Trophy } from "lucide-react";
+import { Briefcase, GraduationCap, Handshake, Trophy } from "lucide-react";
 
-export type EngagementProgramId = "fellows" | "champions" | "partner";
+export type EngagementProgramId = "fellows" | "champions" | "senior" | "partner";
 
 export type EngagementProgram = {
   id: EngagementProgramId;
@@ -30,6 +30,14 @@ export const ENGAGEMENT_PROGRAMS: EngagementProgram[] = [
     cta: "Join as a Champion",
   },
   {
+    id: "senior",
+    title: "Planetive Professionals",
+    description:
+      "For experienced specialists and senior leaders in sustainability, energy, finance, and ESG who want to contribute their expertise — through advisory work, project leadership, mentoring, and shaping Planetive's impact across regions.",
+    icon: Briefcase,
+    cta: "Join as a Professional",
+  },
+  {
     id: "partner",
     title: "Partner With Us",
     description:
@@ -44,27 +52,49 @@ export const WORK_WITH_US_HERO = {
   title: "Shape the Future with Us",
   subtitle: "Join our vision",
   description:
-    "Whether you're a recent graduate, a student on break, or an institution seeking collaboration — explore how you can grow with Planetive.",
+    "Whether you're a recent graduate, a student on break, an experienced professional, or an institution seeking collaboration — explore how you can grow with Planetive.",
 };
 
 export const ENGAGEMENT_PROGRAM_SECTION = {
   eyebrow: "Community & collaboration",
-  title: "Planetive Fellows, Champions & Partners",
+  title: "Planetive Fellows, Champions, Professionals & Partners",
   description:
-    "We invest in emerging talent and long-term partnerships that advance sustainability across regions and sectors.",
+    "We invest in emerging talent, experienced professionals, and long-term partnerships that advance sustainability across regions and sectors.",
 };
 
 export const PROGRAM_LABELS: Record<EngagementProgramId, string> = {
   fellows: "Planetive Fellows",
   champions: "Planetive Champions",
+  senior: "Planetive Professionals",
   partner: "Partner with us",
 };
 
-export const ENGAGEMENT_PROGRAM_IDS: EngagementProgramId[] = ["fellows", "champions", "partner"];
+export const ENGAGEMENT_PROGRAM_IDS: EngagementProgramId[] = [
+  "fellows",
+  "champions",
+  "senior",
+  "partner",
+];
 
 export function parseInterestParam(value: unknown): EngagementProgramId | undefined {
-  if (value === "fellows" || value === "champions" || value === "partner") {
+  if (
+    value === "fellows" ||
+    value === "champions" ||
+    value === "senior" ||
+    value === "partner"
+  ) {
     return value;
   }
   return undefined;
+}
+
+export function applicationMessagePlaceholder(interest: EngagementProgramId): string {
+  switch (interest) {
+    case "partner":
+      return "Organization, collaboration goals, and timeline…";
+    case "senior":
+      return "Your background, areas of expertise, and how you'd like to contribute…";
+    default:
+      return "Why sustainability, and what you hope to learn…";
+  }
 }

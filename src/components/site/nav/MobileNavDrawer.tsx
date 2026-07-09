@@ -303,7 +303,7 @@ export function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
                 }}
               >
                 <Link
-                  to="/work-with-us"
+                  to="/contact"
                   onClick={onClose}
                   className="flex w-full items-center justify-center rounded-full px-4 py-3.5 text-sm font-semibold font-body btn-primary shadow-[var(--shadow-soft)] transition-transform duration-200 active:scale-[0.98]"
                 >

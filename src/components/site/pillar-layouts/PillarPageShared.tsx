@@ -59,7 +59,7 @@ export function PillarFooter({ pillar }: { pillar: EcosystemPillar }) {
       </p>
       <p className="mt-8 text-n600">
         <Link
-          to="/work-with-us"
+          to="/contact"
           className="font-semibold text-forest hover:text-canopy underline underline-offset-4"
         >
           Get in touch

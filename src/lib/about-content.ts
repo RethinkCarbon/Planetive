@@ -98,7 +98,7 @@ export const TEAM: TeamMember[] = [
     name: "Malak Al Akiely",
     role: "Advisor",
     group: "advisors",
-    image: teamImg("malak-al-akiely.png"),
+    image: teamImg("malak-al-akiely.jpeg"),
     bio: [
       "Malak Al Akiely focuses on food security, commodities, and sustainable agriculture in MENA. She advises on energy and renewables markets.",
     ],
@@ -165,6 +165,16 @@ export const TEAM: TeamMember[] = [
     ],
   },
   {
+    id: "sanam",
+    name: "Sanam Gul",
+    role: "Business Support and Communication Lead",
+    group: "team",
+    image: teamImg("sanam-gul.png"),
+    bio: [
+      "Sanam Gul leads business support and communications at Planetive. She coordinates stakeholder engagement, internal operations, and external messaging to ensure clarity and consistency across the firm's advisory and project work.",
+    ],
+  },
+  {
     id: "hira",
     name: "Hira Mumtaz",
     role: "Consultant",
@@ -179,7 +189,7 @@ export const TEAM: TeamMember[] = [
     name: "Maha Kamal",
     role: "Consultant",
     group: "team",
-    /* CDN asset fdf9f09 is Rija Zahid’s photo, not Maha — omit until a verified portrait is available */
+    image: teamImg("maha-kamal.jpg"),
     bio: [
       "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
     ],

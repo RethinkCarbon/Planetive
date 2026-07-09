@@ -1,5 +1,5 @@
 /** Local copies in public/images/global-engagements/ (from planetive.org, no fx-gs grayscale) */
-const IMG_VERSION = "2";
+const IMG_VERSION = "11";
 const img = (file: string) => `/images/global-engagements/${file}?v=${IMG_VERSION}`;
 
 export type GlobalEngagement = {
@@ -8,6 +8,10 @@ export type GlobalEngagement = {
   headline: string;
   body: string[];
   image: string;
+  /** CSS object-position for card image framing */
+  imagePosition?: string;
+  /** Zoom factor to crop letterboxing (container clips overflow) */
+  imageScale?: number;
   relatedArticle?: string;
 };
 
@@ -20,6 +24,8 @@ export type GlobalEngagementSection = {
   year?: number;
   /** Team milestone banner image */
   image?: string;
+  /** Optional rotating gallery for team milestone banners */
+  images?: string[];
   items?: GlobalEngagement[];
 };
 
@@ -42,7 +48,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "pcc-2025",
         event: "Launch of 3rd PCC (Pakistan Climate Conference) Report, 2025",
         headline: "Shaping Pakistan’s Climate Future with Private Sector Leadership",
-        image: img("blob-8af915e.png"),
+        image: img("shaping-pakistan-climate-future-private-sector-leadership.png"),
         body: [
           "At the launch of the 3rd Pakistan Climate Conference Report by OICCI and SDPI, Ayla Majid, Founder & CEO of Planetive emphasized the urgent role of the private sector in achieving Pakistan’s NDC 3.0 targets ahead of COP 30. She highlighted the need for ESG transparency, innovative green finance, and collaboration to bridge the US$200 billion climate finance gap by 2030. Her focus was on strengthening supply chains, promoting a circular economy, and fostering a resilient ecosystem to drive Pakistan’s climate future forward.",
           "Under her leadership, Planetive is advancing ESG frameworks, green finance solutions, and capacity building to drive a resilient, low-carbon future.",
@@ -52,7 +58,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "ief-paris-2025",
         event: "International Energy Forum, Industry Advisory Council Meeting, Paris 2025",
         headline: "Exploring Market Driven Pathways for Global Decarbonization",
-        image: img("blob-8734ca6.png"),
+        image: img("exploring-market-driven-pathways-global-decarbonization.png"),
         body: [
           "Planetive’s Founder & CEO, Ayla Majid, was invited to speak at the International Energy Forum (IEF) Industry Advisory Council Meeting 2025 in Paris, where she joined global leaders to discuss market-driven pathways for decarbonization. Speaking on the theme “Matching Carbon Management with Market Solutions for Affordable Decarbonization,” Ayla emphasized the need for scalable, inclusive carbon management systems backed by strong policy and investment signals.",
           "Key insights included the growth of carbon markets, the evolving global CCUS landscape, and innovative models like Storage-as-a-Service. Ayla underscored the importance of aligning carbon pricing with investment certainty to make decarbonization viable in high-growth regions. Planetive remains committed to driving practical, fair, and forward-looking solutions for a just energy transition.",
@@ -62,7 +68,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "acoa-2025",
         event: "Empowering Workforce Development & Economic Growth (ACOA), Kigali 2025",
         headline: "Shaping Africa’s Future: Workforce Innovation Meets Climate Action",
-        image: img("blob-399af62.png"),
+        image: img("shaping-africas-future-workforce-innovation-meets-climate-action.png"),
         body: [
           "At ACOA2025, Planetive’s CEO & Founder Ayla Majid emphasized the need to align workforce development with sustainable growth and climate action, positioning Africa as a leader in responsible investment. Citing ACCA’s upcoming Global Trends Report 2025, she outlined five forces shaping the future of work: technology, geo-economic shifts, economic uncertainty, demographic change, and climate impact.",
           "Notably, 80% of African accounting professionals aim to become entrepreneurs—far above the global average of 52%—with nearly half already managing side ventures. Ayla highlighted the crucial role of financial professionals in driving innovation, sustainability, and long-term value in Africa’s evolving economy.",
@@ -73,7 +79,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "liibs-2025",
         event: "Leaders In Islamabad Business Summit (LIIBS), 2025",
         headline: "Navigating the Unknown — Climate & Sustainability",
-        image: img("blob-7117595.png"),
+        image: img("navigating-the-unknown-climate-sustainability.png"),
         body: [
           "Ayla Majid, Planetive Founder & CEO, contributed her expertise to the 8th Leaders in Islamabad Business Summit (LIIBS) 2025, a premier platform for global and national leaders navigating the future amidst global shifts.",
           "As a panelist on the Climate and Sustainability session, Ayla emphasized the urgent need for bold climate action, the critical role of increased clean energy investment, the concerning rise in global CO₂ emissions, and the imperative for equitable clean energy transitions in emerging markets. This participation underscores Planetive's commitment to driving sustainable solutions through strategic ESG advisory, green finance innovation, and national upskilling initiatives, all aimed at supporting net-zero targets and fostering impactful climate partnerships for a sustainable future.",
@@ -83,7 +89,9 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "acca-bhc-2025",
         event: "ACCA & British High Commission on ESG and Climate Action in Pakistan, 2025",
         headline: "Strengthening ESG Frameworks for Sustainable Growth 2025",
-        image: img("blob-8b9492f.png"),
+        image: img("strengthening-esg-frameworks-sustainable-growth-2025.png"),
+        imageScale: 1.42,
+        imagePosition: "50% 48%",
         body: [
           "Planetive Founder & CEO, Ayla Majid, in her role as President of ACCA, actively participated in a significant meeting alongside ACCA Chief Executive Helen Brand and the ACCA Pakistan leadership team with Jo Moir, Development Director at the British High Commission in Pakistan.",
           "The focused discussion centered on catalyzing sustainable growth within Pakistan. Key areas addressed included the fortification of Environmental, Social, and Governance (ESG) frameworks, the advancement of robust climate action policies, the enhancement of public financial management practices, and the cultivation of youth development initiatives. This engagement underscores Planetive's unwavering commitment to contributing to impactful dialogues that shape a sustainable and prosperous future on a global scale.",
@@ -93,7 +101,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "pmif-2025",
         event: "Pakistan Minerals Investment Forum (PMIF), 2025",
         headline: "Sustainability and Climate Leadership at PMIF 2025",
-        image: img("blob-39dd253.png"),
+        image: img("sustainability-climate-leadership-pmif-2025.png"),
         body: [
           "Planetive Founder and CEO, Ayla Majid, participated as a panelist at the Pakistan Minerals Investment Forum Summit 2025, joining global leaders to shape the future of Pakistan’s $6 trillion mineral economy.",
           "Speaking on Social License, Sustainability, and Climate Leadership in Mining, Ayla emphasized community-driven development, stakeholder partnerships, and the financial benefits of ESG integration, including improved IRRs and access to green financing. She advocated for responsible finance mechanisms like green bonds and Panda bonds to enable sustainable growth. Planetive remains committed to advancing ESG advisory, pioneering green finance, and cultivating future-ready decarbonization talent in alignment with national mineral sector reforms.",
@@ -103,7 +111,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "ccus-mena-2025",
         event: "Carbon Capture MENA Summit Dubai, 2025",
         headline: "Financing CCUS — Joining Industry Leaders at MENA Summit 2025",
-        image: img("blob-89ad0f9.png"),
+        image: img("financing-ccus-mena-summit-2025.png"),
         body: [
           "Planetive CEO & Founder, Ayla Majid, spoke at the Carbon Capture MENA Summit 2025 in Dubai, joining industry leaders from Microsoft, ING, and Japan Bank for International Cooperation in a panel on financing Carbon Capture and Storage (CCS) projects.",
           "The discussion, expertly moderated by Bloomberg’s Salih Yilmaz, focused on key financing considerations, including the role of hub models, carbon markets, and shared infrastructure in scaling CCUS investments. As MENA advances its decarbonization efforts, collaboration and financial innovation remain crucial in driving sustainable energy solutions.",
@@ -113,7 +121,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "ief-riyadh-2025",
         event: "IEF Symposium on Energy Outlooks, Riyadh 2025",
         headline: "Riyadh Energy Forums: Advancing the Energy Transition",
-        image: img("blob-d4217fc.png"),
+        image: img("riyadh-energy-forums-advancing-energy-transition.png"),
         body: [
           "Planetive CEO & Founder, Ayla Majid, participated in two pivotal energy events in Riyadh, Saudi Arabia: the IEA-IEF-OPEC Symposium and the IEF Thought Leaders’ Roundtable. These high-level discussions brought together global energy leaders to address the complexities of the energy transition.",
           "Key insights included the critical role of Carbon Capture, Utilization, and Storage (CCUS), the future of low-carbon fuels, and the evolving energy mix balancing renewables with traditional sources. The discussions reinforced the urgency of data-driven decision-making and strategic investments for a resilient, sustainable energy ecosystem.",
@@ -124,7 +132,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "finance-minister-2025",
         event: "Driving ESG & Financial Transparency with Pakistan’s Finance Minister, 2025",
         headline: "Engaging with Pakistan’s Finance Leadership on ESG & Sustainability",
-        image: img("blob-d1302fd.png"),
+        image: img("engaging-pakistan-finance-leadership-esg-sustainability.png"),
         body: [
           "Representing ACCA as its Global President, Planetive CEO & Founder Ayla Majid met with Senator Muhammad Aurangzeb, Federal Minister for Finance & Revenue, and the Ministry of Finance leadership to discuss ESG, climate action, and sustainability reporting. The discussions also focused on transforming Public Financial Management (PFM) and capacity-building initiatives to enhance economic transparency and resilience.",
           "At Planetive, we believe strong financial governance and sustainability reporting are key to accelerating the transition to a low-carbon economy, shaping a more sustainable and future-ready financial framework.",
@@ -134,7 +142,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "lums-2025",
         event: "Fostering Sustainability and Innovation with LUMS, 2025",
         headline: "Exploring Opportunities for Sustainable Innovation",
-        image: img("blob-b3487f8.png"),
+        image: img("exploring-opportunities-sustainable-innovation.png"),
         body: [
           "Planetive CEO & Founder, Ayla Majid, in her role as ACCA’s Global President, engaged with Dr. Ali Cheema, Vice Chancellor of LUMS, and senior leadership to explore opportunities for sustainability, climate action, and digital transformation. The discussion emphasized integrating ESG principles into business and education, aligning with Planetive’s mission to drive a low-carbon economy.",
           "Strengthening collaborations between academia, industry, and sustainability leadership is key to building a resilient, future-ready economy.",
@@ -144,7 +152,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "wwf-2025",
         event: "Collaborating with WWF-Pak for Climate Action, 2025",
         headline: "Advancing Sustainable Climate Solutions",
-        image: img("blob-2c62f08.png"),
+        image: img("advancing-sustainable-climate-solutions.png"),
         body: [
           "Ayla Majid, CEO & Founder of Planetive as Global President of ACCA, met with Hammad Naqi Khan, CEO of WWF-Pakistan, and senior leadership to advance collaboration on sustainability and climate action. The discussion reinforced ACCA’s commitment to the UN SDGs, focusing on green financing, net-zero strategies, ESG integration, and gender inclusion.",
           "These shared priorities align with Planetive’s mission to drive impactful climate solutions and accelerate the transition to a low-carbon economy.",
@@ -154,7 +162,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "oicci-2025",
         event: "OICCI ESG & Climate Partnerships, 2025",
         headline: "Strengthening Strategic Partnerships for Sustainability and Climate Action",
-        image: img("blob-ad64a00.png"),
+        image: img("strengthening-strategic-partnerships-sustainability-climate-action.png"),
         body: [
           "Ayla Majid, CEO & Founder of Planetive in her role as Global President of ACCA, met with M. Abdul Aleem, CEO & Secretary General of the Overseas Investors Chamber of Commerce and Industry (OICCI), along with OICCI’s senior leadership. The discussion focused on strengthening strategic partnerships in Environmental, Social, and Governance (ESG) practices, advancing climate action, and promoting sustainability.",
           "With a strong emphasis on capacity building, the meeting underscored the need to enhance Pakistan’s business landscape by integrating responsible corporate practices and fostering a low-carbon economy. These priorities align with Planetive’s mission to drive impactful climate solutions, support sustainable business models, and contribute to a resilient economic future.",
@@ -167,7 +175,13 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
     kind: "highlight",
     title:
       "Planetive Team hosted Pakistan's Renewable Energy Risk Assessment Workshop in Collaboration with RELP and PPIB in Islamabad, March 2024.",
-    image: img("1736160996825.jpeg"),
+    images: [
+      img("hawkamah-esg-workshop-1.png"),
+      img("hawkamah-esg-workshop-2.png"),
+      img("hawkamah-esg-workshop-3.png"),
+      img("hawkamah-esg-workshop-4.png"),
+      img("hawkamah-esg-workshop-5.png"),
+    ],
   },
   {
     id: "year-2024",
@@ -180,7 +194,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "buraq-2024",
         event: "Buraq School Camp Speech, 2024",
         headline: "Inspiring the Next Generation of Sustainability Leaders at Buraq Camp",
-        image: img("blob-b3316e3.png"),
+        image: img("1736160996825.jpeg"),
         body: [
           "Our Founder & CEO, Ayla Majid, an ardent champion of sustainability, inspired a room full of eager young explorers at Buraq Camp. Through engaging discussions, she imparted her insights on sustainability, climate action, and the importance of decarbonization. Ayla emphasized the vital roles of innovation, collaboration, and responsible leadership in tackling the climate crisis.",
           "We are proud to empower the next generation of sustainability leaders, who are already showing tremendous passion and commitment to driving positive change for our planet.",
@@ -201,7 +215,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "wef-riyadh-2024",
         event: "WEF Special Meeting on Collaboration & Energy for Development 2024",
         headline: "Special Meeting on Global Collaboration, Growth and Energy for Development",
-        image: img("blob-d66454d.png"),
+        image: img("special-meeting-global-collaboration-growth-energy-development.png"),
         body: [
           "At the Special Meeting on Global Collaboration, Growth & Energy for Development 2024 held in Riyadh, where global leaders convened to discuss energy transition, sustainable growth, and international collaboration, Ayla Majid, Founder and CEO of Planetive, contributed insights on decarbonization, sustainable finance, and the role of carbon capture in accelerating climate action.",
           "She highlighted the importance of responsible investments and cross-border partnerships in driving the energy transition and achieving long-term sustainability goals.",
@@ -246,7 +260,12 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
     kind: "highlight",
     title:
       "Planetive Team conducted an ESG Workshop with Hawkamah for Board & Senior Leadership organized at DIFC, Dubai. May 2023",
-    image: img("blob-0551d0e.png"),
+    images: [
+      img("dubai-esg-workshop-1.png"),
+      img("dubai-esg-workshop-2.png"),
+      img("dubai-esg-workshop-3.png"),
+      img("dubai-esg-workshop-4.png"),
+    ],
   },
   {
     id: "year-2023",
@@ -259,7 +278,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "fii-2023",
         event: "Future Investment Initiative, Riyadh 2023",
         headline: "FII — Future Investment Initiative",
-        image: img("blob-2f69c1e.png"),
+        image: img("fii-future-investment-initiative.png"),
         body: [
           "Planetive attended the FII 2023 event in Riyadh, where noteworthy initiatives emerged, spanning green energy partnerships, strides in artificial intelligence, commitments to sustainable development goals, and strategies for bolstering global economic resilience.",
           "FII 2023 left an indelible mark as a platform where actionable initiatives converged, shaping the trajectory of global investments in response to contemporary challenges and opportunities.",
@@ -269,7 +288,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "cop28-2023",
         event: "Conference of the Parties COP 28, UAE 2023",
         headline: "The COP 28 UAE Conference",
-        image: img("blob-194eeeb.png"),
+        image: img("the-cop-28-uae-conference.png"),
         body: [
           "At COP28 our dedicated team along with RELP consistently engaged in impactful events, bringing forth innovative solutions for a greener future. Notably, we have fostered valuable collaborations, including our partnership with the iTrust initiative, amplifying our efforts towards responsible environmental stewardship.",
           "The iTrust will provide customized, program-based guarantees designed to enhance bankability and promote competition with minimal fiscal and financial impact. We are implementing the International Guarantee Trust Fund for Renewable Energy (iTrust) with the purpose of providing customized program-based guarantees to be automatically granted to all renewable energy projects awarded in eligible participating public auctions.",
@@ -279,7 +298,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "wef-gfc-2023",
         event: "WEF Annual Meeting of the Global Future Councils, 2023",
         headline: "WEF Global Future Council on Energy Transition",
-        image: img("blob-43b1dd0.png"),
+        image: img("wef-global-future-council-on-energy-transition.png"),
         relatedArticle:
           "How local banking can champion decarbonization in emerging markets — By Ayla Majid",
         body: [
@@ -291,7 +310,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "buraq-2023",
         event: "Buraq School Camp Speech, 2023",
         headline: "Youth Sustainability Awareness Program",
-        image: img("blob-b3316e3.png"),
+        image: img("youth-sustainability-awareness-program.png"),
         body: [
           "At Buraq Space Camp, the energy crackled with excitement as Our Founder & CEO Ayla Majid, a passionate advocate for sustainability, shared her message with a room full of wide-eyed explorers. The message was clear: protecting our planet isn't optional, it's the fuel that will propel our cosmic dreams!",
           "Ayla emphasized that every single one of these young minds has the power to be a climate hero. From the smallest steps to the grandest ideas, everyone has a role to play. Let's fuel the future with knowledge, because knowledge is power, and with that power, we can embark on an interstellar journey towards a sustainable future.",
@@ -301,8 +320,8 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
       {
         id: "eisenhower-2023",
         event: "Eisenhower Fellowships' 70th Anniversary, United States 2023",
-        headline: "Emerging Solutions for Global Challenges",
-        image: img("blob-600131b.png"),
+        headline: "Eisenhower Fellowships' 70th Anniversary Panel: Emerging Solutions for Global Challenges",
+        image: img("eisenhower-fellowships-70th-anniversary-panel-emerging-solutions-for-global-challenges.png"),
         body: [
           "Ayla Majid led the panel discussion at Eisenhower Fellowships' 70th Anniversary with substantive discussions on emerging solutions to some of the world's most pressing challenges.",
           "During the discussion, Governor Christine Todd Whitman discussed positive developments in farming and schools related to climate change and committed to a carbon-neutral economy by 2050. Argentina's Dr. Jose Luis Manzano emphasized the energy security implications of the Ukraine-Russia conflict and prioritized a 20% target for renewable energy by 2025.",
@@ -313,7 +332,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "gastech-2023",
         event: "GasTech Hydrogen, Singapore 2023",
         headline: "Strategic Conference at Gastech Hydrogen Singapore",
-        image: img("blob-12e43a7.png"),
+        image: img("strategic-conference-at-gastech-hydrogen-singapore.png"),
         relatedArticle:
           "What can Asian countries teach the rest of the world about financing hydrogen development? — By Ayla Majid",
         body: [
@@ -323,8 +342,8 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
       {
         id: "cpec-2023",
         event: "10 Years of CPEC — The Road to Prosperity, 2023",
-        headline: "CPEC — The Road to Prosperity",
-        image: img("blob-1f4d510.png"),
+        headline: "CPEC — The Road to Prosperity — 10 Years Celebration",
+        image: img("cpec-the-road-to-prosperity.png"),
         body: [
           'Ayla Majid emphasized the following points to pivot Gwadar as a green fuel hub, during the seminar on "Energy Sector Cooperation under CPEC" hosted by the National Institute of Maritime Affairs (NIMA) and Bahria University Islamabad, Pakistan.',
         ],
@@ -333,7 +352,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "liibs-2023",
         event: "Leaders In Islamabad Business Summit, 2023",
         headline: "Leaders in Islamabad Business Summit 2023 — #TheBigRethink",
-        image: img("blob-0a95719.png"),
+        image: img("leaders-in-islamabad-business-summit-2023-thebigrethink.png"),
         body: [
           "Our Founder and CEO, Ayla Majid, was part of the Leaders in Islamabad Business Summit 2023 — #TheBigRethink as a speaker, held on May 31 & June 1, 2023, at the Islamabad Serena Hotel!",
         ],
@@ -342,7 +361,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "finland-pakistan-2023",
         event: "Finland Pakistan Business Summit, 2023",
         headline: "Finland Pakistan Business Summit for Future of Energy",
-        image: img("blob-eef13e3.png"),
+        image: img("finland-pakistan-business-summit-for-future-of-energy.png"),
         body: [
           "Founder & CEO of Planetive Ayla Majid was among the speakers on #futureofenergy at the Finland Pakistan Business Summit! The future of energy is crucial for a country like Pakistan where a detailed long term strategy that includes generation, transmission planning, and supporting policy and investment ecosystem are required.",
           "There must be an absolute focus on reliable, affordable, and clean energy.",
@@ -352,7 +371,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "iwd-2023",
         event: "International Women's Day, 2023",
         headline: "Women Day Celebration",
-        image: img("blob-ef51049.png"),
+        image: img("women-day-celebration.png"),
         relatedArticle: "Why Board room equity matters? — By Ayla Majid",
         body: [
           "Ayla Majid the Founder & CEO of Planetive, was invited to deliver keynote speech at International Women's Day breakfast event held at the esteemed Islamabad Serena Hotel, where the First Lady of Pakistan, Mrs Samina Alvi and other dignitaries were in attendance.",
@@ -363,7 +382,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "leap-2023",
         event: "LEAP 2023 — Riyadh, Saudi Arabia",
         headline: "The Promise of Green Hydrogen",
-        image: img("blob-5ab1bdd.png"),
+        image: img("the-promise-of-green-hydrogen.png"),
         relatedArticle:
           "The Fuel of the Future: Hydrogen & the Middle East Advantage — By Ayla Majid",
         body: [
@@ -383,7 +402,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "cif-2021",
         event: "Keeping the Power On: Financing Energy Storage, 2021 CIF",
         headline: "Stakeholders for a Cohesive and Sustainable World",
-        image: img("blob-2e9d162.png"),
+        image: img("stakeholders-for-a-cohesive-and-sustainable-world.png"),
         body: [
           'On December 14, 2021, the Climate Investment Funds (CIF) hosted the virtual workshop "Keeping the Power On: Financing Energy Storage Solutions." This workshop brought together multilateral development banks, country officials, companies, and organizations investing in energy storage and other elements of clean energy to explore the unique aspects of energy storage finance and the relationship between private capital and concessional financing.',
         ],
@@ -392,7 +411,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "davos-2020",
         event: "World Economic Forum Annual Meeting, 2020 Davos",
         headline: "Stakeholders for a Cohesive and Sustainable World",
-        image: img("blob-42bf298.png"),
+        image: img("stakeholders-for-a-cohesive-and-sustainable-world.png"),
         body: [
           'Our Founder Ayla Majid participated in the annual meeting of the World Economic Forum in January 2020 in Davos. She moderated the session on Global Risk Report 2020 titled: "What are Global Risks?" Panelists included Ann Linde (Minister for Foreign Affairs of Sweden), Peter Brabeck-Letmathe (Vice Chairman, WEF), Eric Parado (Chief Economist Inter American Development Bank), Alison Martin (Group Chief Risk Officer Zurich), and WEF Change Maker Salvador Gomez.',
           "During the session, urgent environmental, economic and social risks were discussed.",
@@ -402,7 +421,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "wef-dalian-2020",
         event: "Annual Meeting of New Champions WEF, 2020 Dalian China",
         headline: "Accelerating the Cleantech Transition",
-        image: img("blob-845221b.png"),
+        image: img("accelerating-the-cleantech-transition.png"),
         body: [
           "Our Founder Ayla Majid participated in the World Economic Forum's Annual Meeting of New Champions in June 2019 in Dalian, China. With innovation, technology, and appropriate forward looking regulation countries can move forward towards CleanTech using the planet resources optimally & eliminating ecological impact.",
         ],
@@ -411,7 +430,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "wef-dubai-2020",
         event: "Annual Meeting of Global Future Councils WEF, 2020 Dubai",
         headline: "Global Future Council on Energy",
-        image: img("blob-72f153d.png"),
+        image: img("global-future-council-on-energy.png"),
         body: [
           "On the invitation of the World Economic Forum our Founder Ayla Majid joined the Global Future Council on Energy (GFC Energy), and attended the annual meeting held on 3—4 November 2019 in Dubai. GFC Energy works on agendas, projects and initiatives with a vision to create energy transition creating opportunities, ensuring energy sustainability, affordability, inclusiveness and security.",
         ],
@@ -420,7 +439,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         id: "ntu-2019",
         event: "YGLs at Nanyang Technological University Singapore, 2019",
         headline: "Executive Educational Module on Smart Cities",
-        image: img("blob-72f153d.png"),
+        image: img("executive-educational-module-on-smart-cities.png"),
         body: [
           'In October 2019, Ayla attended "Smart Cities Education Module" at the Nanyang Technology University Singapore, along with fellow Young Global Leaders of the World Economic Forum. The module was focused on applying technologies to urban development for smarter, healthier sustainable cities and infrastructure.',
         ],

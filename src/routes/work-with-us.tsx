@@ -5,7 +5,7 @@ import { Footer } from "@/components/site/Footer";
 import { WorkWithUsPageContent } from "@/components/site/WorkWithUsPageContent";
 
 const workWithUsSearchSchema = z.object({
-  interest: z.enum(["fellows", "champions", "partner"]).optional(),
+  interest: z.enum(["fellows", "champions", "senior", "partner"]).optional(),
 });
 
 export const Route = createFileRoute("/work-with-us")({
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/work-with-us")({
       {
         name: "description",
         content:
-          "Join Planetive as a Fellow or Champion, explore partnership opportunities, or apply to join our team advancing sustainability across the globe.",
+          "Join Planetive as a Fellow or Champion, apply as an experienced professional, explore partnership opportunities, or advance sustainability with our team worldwide.",
       },
       { property: "og:title", content: "Work With Us — Planetive" },
       {

@@ -154,21 +154,42 @@ function TeamSection({
   );
 }
 
+function isZoomedOut(member: TeamMember) {
+  return member.imageScale !== undefined && member.imageScale < 1;
+}
+
 function teamImageClassName(member: TeamMember, extra?: string) {
   return cn(
-    "h-full w-full object-cover [filter:none]",
-    !member.imagePosition && "object-top",
+    "object-cover [filter:none]",
+    isZoomedOut(member) ? "absolute max-w-none" : "h-full w-full",
+    !member.imagePosition && !isZoomedOut(member) && "object-top",
     extra,
   );
 }
 
 function teamImageStyle(member: TeamMember): CSSProperties | undefined {
   const style: CSSProperties = {};
+  const position = member.imagePosition ?? "50% 30%";
+  const [posX, posY] = position.split(/\s+/);
+  const x = posX ?? "50%";
+  const y = posY ?? "50%";
+
   if (member.imagePosition) style.objectPosition = member.imagePosition;
+
   if (member.imageScale) {
-    style.transform = `scale(${member.imageScale})`;
-    style.transformOrigin = member.imagePosition ?? "50% 30%";
+    if (member.imageScale < 1) {
+      const size = 100 / member.imageScale;
+      style.width = `${size}%`;
+      style.height = `${size}%`;
+      style.left = x;
+      style.top = y;
+      style.transform = "translate(-50%, -50%)";
+    } else {
+      style.transform = `scale(${member.imageScale})`;
+      style.transformOrigin = position;
+    }
   }
+
   return Object.keys(style).length ? style : undefined;
 }
 
@@ -185,7 +206,11 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
             <img
               src={member.image}
               alt={member.name}
-              className={cn("absolute inset-0", teamImageClassName(member))}
+              className={cn(
+                "absolute",
+                isZoomedOut(member) ? "" : "inset-0",
+                teamImageClassName(member),
+              )}
               style={teamImageStyle(member)}
               loading="lazy"
             />
@@ -265,10 +290,14 @@ function MemberCard({ member, delay }: { member: TeamMember; delay: number }) {
             <img
               src={member.image}
               alt={member.name}
-              className={teamImageClassName(
-                member,
-                !member.imageScale &&
-                  "transition-transform duration-500 group-hover:scale-[1.02]",
+              className={cn(
+                teamImageClassName(
+                  member,
+                  !isZoomedOut(member) &&
+                    !member.imageScale &&
+                    "transition-transform duration-500 group-hover:scale-[1.02]",
+                ),
+                isZoomedOut(member) && "absolute",
               )}
               style={teamImageStyle(member)}
               loading="lazy"
@@ -354,7 +383,7 @@ function AboutClosingCta() {
               partnerships.
             </p>
             <Link
-              to="/work-with-us"
+              to="/contact"
               className="mt-8 inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold btn-mint"
             >
               Work with us

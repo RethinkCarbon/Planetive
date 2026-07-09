@@ -36,7 +36,7 @@ export function EngagementProgramsSection({
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-7">
           {ENGAGEMENT_PROGRAMS.map((program, i) => {
             const Icon = program.icon;
             return (
@@ -53,9 +53,7 @@ export function EngagementProgramsSection({
                   </p>
                   {isPreview ? (
                     <Link
-                      to="/work-with-us"
-                      search={{ interest: program.id }}
-                      hash="apply"
+                      to="/contact"
                       className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-canopy hover:text-forest"
                     >
                       {program.cta}
@@ -79,7 +77,7 @@ export function EngagementProgramsSection({
         {isPreview && (
           <ScrollReveal className="mt-10 text-center">
             <Link
-              to="/work-with-us"
+              to="/contact"
               className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold btn-primary"
             >
               Work with Planetive

@@ -1,13 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Send } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   ENGAGEMENT_PROGRAM_IDS,
   PROGRAM_LABELS,
   WORK_WITH_US_HERO,
+  applicationMessagePlaceholder,
   type EngagementProgramId,
 } from "@/lib/engagement-programs-content";
-import { BookMeetingSection } from "@/components/site/BookMeetingSection";
 import { EngagementProgramsSection } from "@/components/site/EngagementProgramsSection";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { useSiteForm } from "@/hooks/use-site-form";
@@ -30,7 +29,6 @@ export function WorkWithUsPageContent() {
   return (
     <div className="work-with-us-page">
       <WorkWithUsHero />
-      <BookMeetingSection />
       <EngagementProgramsSection
         variant="full"
         onSelectProgram={(id) => {
@@ -38,7 +36,7 @@ export function WorkWithUsPageContent() {
           document.getElementById("apply")?.scrollIntoView({ behavior: "smooth" });
         }}
       />
-      <ApplicationSection interest={interest} form={form} onSelectInterest={selectInterest} />
+      <ApplicationSection interest={interest} onInterestChange={selectInterest} form={form} />
     </div>
   );
 }
@@ -78,14 +76,15 @@ function WorkWithUsHero() {
 
 function ApplicationSection({
   interest,
+  onInterestChange,
   form,
-  onSelectInterest,
 }: {
   interest: EngagementProgramId;
+  onInterestChange: (id: EngagementProgramId) => void;
   form: ReturnType<typeof useSiteForm>;
-  onSelectInterest: (id: EngagementProgramId) => void;
 }) {
   const { submit, isSubmitting, isSuccess, error } = form;
+
   return (
     <section id="apply" className="py-16 md:py-24 bg-white border-t border-n200/60 scroll-mt-28">
       <div className="container-x">
@@ -98,118 +97,113 @@ function ApplicationSection({
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-          <div className="lg:col-span-4 space-y-3">
-            {ENGAGEMENT_PROGRAM_IDS.map((id) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => onSelectInterest(id)}
-                className={cn(
-                  "w-full text-left rounded-2xl border px-5 py-4 transition-colors",
-                  interest === id
-                    ? "border-canopy bg-mint-soft/40 shadow-[var(--shadow-soft)]"
-                    : "border-n200 bg-[var(--n50)] hover:border-canopy/40",
-                )}
-              >
-                <span className="text-sm font-semibold text-forest">{PROGRAM_LABELS[id]}</span>
-              </button>
-            ))}
-          </div>
+        <ScrollReveal variant="fade-up" delay={80} className="max-w-2xl mx-auto">
+          <div className="rounded-[32px] bg-white border border-n200 p-8 md:p-10 shadow-[var(--shadow-soft)]">
+            <h3 className="font-ui font-semibold text-2xl text-forest">Apply to Planetive</h3>
+            <p className="mt-2 text-sm text-n600 leading-relaxed">
+              Tell us how you&apos;d like to get involved. We review every application and respond
+              within a few business days.
+            </p>
 
-          <ScrollReveal variant="fade-up" delay={80} className="lg:col-span-8">
-            <div className="rounded-[32px] bg-white border border-n200 p-8 md:p-10 shadow-[var(--shadow-soft)]">
-              <h3 className="font-ui font-semibold text-2xl text-forest">
-                Apply — {PROGRAM_LABELS[interest]}
-              </h3>
+            <form
+              className="mt-8 space-y-5"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const formEl = e.currentTarget;
+                const data = new FormData(formEl);
+                const ok = await submit({
+                  kind: "application",
+                  interest: PROGRAM_LABELS[interest],
+                  name: String(data.get("name") ?? ""),
+                  email: String(data.get("email") ?? ""),
+                  phone: String(data.get("phone") ?? "") || undefined,
+                  message: String(data.get("message") ?? ""),
+                });
+                if (ok) formEl.reset();
+              }}
+            >
+              <Field label="I'm applying as" required>
+                <select
+                  name="interest"
+                  required
+                  value={interest}
+                  disabled={isSubmitting || isSuccess}
+                  onChange={(e) => onInterestChange(e.target.value as EngagementProgramId)}
+                  className={INPUT_CLASS}
+                >
+                  {ENGAGEMENT_PROGRAM_IDS.map((id) => (
+                    <option key={id} value={id}>
+                      {PROGRAM_LABELS[id]}
+                    </option>
+                  ))}
+                </select>
+              </Field>
 
-              <form
-                className="mt-8 space-y-5"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const formEl = e.currentTarget;
-                  const data = new FormData(formEl);
-                  const ok = await submit({
-                    kind: "application",
-                    interest: PROGRAM_LABELS[interest],
-                    name: String(data.get("name") ?? ""),
-                    email: String(data.get("email") ?? ""),
-                    phone: String(data.get("phone") ?? "") || undefined,
-                    message: String(data.get("message") ?? ""),
-                  });
-                  if (ok) formEl.reset();
-                }}
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <Field label="Name" required>
-                    <input
-                      name="name"
-                      required
-                      disabled={isSubmitting || isSuccess}
-                      className={INPUT_CLASS}
-                      placeholder="Your full name"
-                      autoComplete="name"
-                    />
-                  </Field>
-                  <Field label="Phone">
-                    <input
-                      name="phone"
-                      type="tel"
-                      disabled={isSubmitting || isSuccess}
-                      className={INPUT_CLASS}
-                      placeholder="+92 …"
-                      autoComplete="tel"
-                    />
-                  </Field>
-                </div>
-                <Field label="Email" required>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <Field label="Name" required>
                   <input
-                    name="email"
+                    name="name"
                     required
-                    type="email"
                     disabled={isSubmitting || isSuccess}
                     className={INPUT_CLASS}
-                    placeholder="you@email.com"
-                    autoComplete="email"
+                    placeholder="Your full name"
+                    autoComplete="name"
                   />
                 </Field>
-                <Field label="Tell us about your interest" required>
-                  <textarea
-                    name="message"
-                    required
-                    rows={5}
+                <Field label="Phone">
+                  <input
+                    name="phone"
+                    type="tel"
                     disabled={isSubmitting || isSuccess}
-                    className={`${INPUT_CLASS} resize-none`}
-                    placeholder={
-                      interest === "partner"
-                        ? "Organization, collaboration goals, and timeline…"
-                        : "Why sustainability, and what you hope to learn…"
-                    }
+                    className={INPUT_CLASS}
+                    placeholder="+92 …"
+                    autoComplete="tel"
                   />
                 </Field>
-                <button
-                  type="submit"
+              </div>
+              <Field label="Email" required>
+                <input
+                  name="email"
+                  required
+                  type="email"
                   disabled={isSubmitting || isSuccess}
-                  className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-primary disabled:opacity-60"
-                >
-                  <Send size={14} aria-hidden />
-                  {isSubmitting ? "Submitting…" : "Submit application"}
-                </button>
-                {isSuccess && (
-                  <p className="text-sm text-canopy" role="status">
-                    Thanks — we&apos;ll review your application and respond within a few business
-                    days.
-                  </p>
-                )}
-                {error && (
-                  <p className="text-sm text-red-600" role="alert">
-                    {error}
-                  </p>
-                )}
-              </form>
-            </div>
-          </ScrollReveal>
-        </div>
+                  className={INPUT_CLASS}
+                  placeholder="you@email.com"
+                  autoComplete="email"
+                />
+              </Field>
+              <Field label="Tell us about your interest" required>
+                <textarea
+                  name="message"
+                  required
+                  rows={5}
+                  disabled={isSubmitting || isSuccess}
+                  className={`${INPUT_CLASS} resize-none`}
+                  placeholder={applicationMessagePlaceholder(interest)}
+                />
+              </Field>
+              <button
+                type="submit"
+                disabled={isSubmitting || isSuccess}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold btn-primary disabled:opacity-60"
+              >
+                <Send size={14} aria-hidden />
+                {isSubmitting ? "Submitting…" : "Submit application"}
+              </button>
+              {isSuccess && (
+                <p className="text-sm text-canopy" role="status">
+                  Thanks — we&apos;ll review your application and respond within a few business
+                  days.
+                </p>
+              )}
+              {error && (
+                <p className="text-sm text-red-600" role="alert">
+                  {error}
+                </p>
+              )}
+            </form>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

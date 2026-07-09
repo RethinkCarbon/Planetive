@@ -692,7 +692,7 @@ export function FinalCTASection() {
                 and the systems to sustain it.
               </p>
               <Link
-                to="/work-with-us"
+                to="/contact"
                 className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold btn-mint"
               >
                 Start a Conversation <ArrowRight size={16} />

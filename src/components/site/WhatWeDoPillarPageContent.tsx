@@ -212,7 +212,7 @@ export function WhatWeDoPillarPageContent({ pillar }: WhatWeDoPillarPageContentP
                   platforms, agents, and programs.
                 </p>
                 <Link
-                  to="/work-with-us"
+                  to="/contact"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-mint-soft hover:text-white transition-colors underline underline-offset-4"
                 >
                   Work with us
