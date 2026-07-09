@@ -118,7 +118,7 @@ export const TEAM: TeamMember[] = [
     name: "Umair Hussian Farooqi",
     role: "Financial Analyst",
     group: "team",
-    image: teamImg("umair-farooqi.jpeg"),
+    image: teamImg("umair.jpeg"),
     bio: [
       "Umair Hussian Farooqi is a financial analyst with experience in banking, audit, and accounts. He supports planning, reporting, and compliance.",
     ],
@@ -139,7 +139,7 @@ export const TEAM: TeamMember[] = [
     name: "Shahid Jamal",
     role: "Carbon Credit and Sustainable Agriculture Specialist",
     group: "team",
-    image: teamImg("shahid-jamal.jpeg"),
+    image: teamImg("shahid.jpeg"),
     imagePosition: "50% 28%",
     imageScale: 1.55,
     bio: [
@@ -162,6 +162,8 @@ export const TEAM: TeamMember[] = [
     role: "Business Analyst",
     group: "team",
     image: teamImg("haram-saad.jpeg"),
+    imagePosition: "50% 22%",
+    imageScale: 1.5,
     bio: [
       "Haram Saad is a business analyst supporting sustainability-focused initiatives. She contributes to research, data analysis, and project planning.",
     ],
@@ -171,7 +173,7 @@ export const TEAM: TeamMember[] = [
     name: "Sanam Gul",
     role: "Business Support and Communication Lead",
     group: "team",
-    image: teamImg("sanam-gul.png"),
+    image: teamImg("sanam.jpeg"),
     bio: [
       "Sanam Gul leads business support and communications at Planetive. She coordinates stakeholder engagement, internal operations, and external messaging to ensure clarity and consistency across the firm's advisory and project work.",
     ],
