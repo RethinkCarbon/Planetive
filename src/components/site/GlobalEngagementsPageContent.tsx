@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   GLOBAL_ENGAGEMENTS_HERO,
   GLOBAL_ENGAGEMENT_SECTIONS,
+  isAboveTheFoldEngagement,
   type GlobalEngagement,
   type GlobalEngagementSection,
 } from "@/lib/global-engagements-content";
@@ -17,7 +18,7 @@ const CATEGORY_FILTERS = [
   { id: "finance-policy", label: "Finance & Policy" },
   { id: "leadership-learning", label: "Leadership & Learning" },
   { id: "partnerships", label: "Partnerships" },
-  { id: "team-milestones", label: "Team milestones" },
+  { id: "workshop", label: "Workshop" },
 ] as const;
 
 const YEAR_FILTERS = [
@@ -80,7 +81,7 @@ function classifyEngagement(engagement: GlobalEngagement): CategoryFilterId {
     `${engagement.event} ${engagement.headline} ${engagement.body.join(" ")}`.toLowerCase();
 
   if (/(workshop|team hosted|team conducted|planetive team)/.test(text)) {
-    return "team-milestones";
+    return "workshop";
   }
   if (/(finance|investment|minister|policy|esg|transparency|public financial|bank)/.test(text)) {
     return "finance-policy";
@@ -129,7 +130,7 @@ export function GlobalEngagementsPageContent() {
         if (
           filterMode === "category" &&
           activeCategory !== "all" &&
-          activeCategory !== "team-milestones"
+          activeCategory !== "workshop"
         ) {
           return [];
         }
@@ -402,7 +403,12 @@ function SectionBlock({ section, index }: { section: GlobalEngagementSection; in
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7 items-stretch">
           {items.map((item, i) => (
-            <EngagementCard key={item.id} engagement={item} delay={i * 35} />
+            <EngagementCard
+              key={item.id}
+              engagement={item}
+              delay={i * 35}
+              priority={isAboveTheFoldEngagement(section.id, i)}
+            />
           ))}
         </div>
       </div>
@@ -525,7 +531,15 @@ function engagementImageStyle(engagement: GlobalEngagement): CSSProperties | und
   return Object.keys(style).length ? style : undefined;
 }
 
-function EngagementCard({ engagement, delay }: { engagement: GlobalEngagement; delay: number }) {
+function EngagementCard({
+  engagement,
+  delay,
+  priority = false,
+}: {
+  engagement: GlobalEngagement;
+  delay: number;
+  priority?: boolean;
+}) {
   const [expanded, setExpanded] = useState(false);
   const previewText = engagement.body.join(" ");
   const long = engagement.body.length > 1 || previewText.length > 240;
@@ -539,7 +553,8 @@ function EngagementCard({ engagement, delay }: { engagement: GlobalEngagement; d
             alt=""
             className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
             style={engagementImageStyle(engagement)}
-            loading="lazy"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
             decoding="async"
           />
         </div>

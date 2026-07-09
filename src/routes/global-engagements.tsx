@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { GlobalEngagementsPageContent } from "@/components/site/GlobalEngagementsPageContent";
+import { getGlobalEngagementPreloadUrls } from "@/lib/global-engagements-content";
 
 export const Route = createFileRoute("/global-engagements")({
   head: () => ({
@@ -19,6 +20,11 @@ export const Route = createFileRoute("/global-engagements")({
           "Empowering a sustainable future through global climate, energy, and finance engagements.",
       },
     ],
+    links: getGlobalEngagementPreloadUrls().map((href) => ({
+      rel: "preload",
+      as: "image",
+      href,
+    })),
   }),
   component: GlobalEngagementsPage,
 });

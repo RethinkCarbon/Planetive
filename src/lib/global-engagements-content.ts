@@ -1,5 +1,5 @@
 /** Local copies in public/images/global-engagements/ (from planetive.org, no fx-gs grayscale) */
-const IMG_VERSION = "11";
+const IMG_VERSION = "12";
 const img = (file: string) => `/images/global-engagements/${file}?v=${IMG_VERSION}`;
 
 export type GlobalEngagement = {
@@ -401,8 +401,8 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
       {
         id: "cif-2021",
         event: "Keeping the Power On: Financing Energy Storage, 2021 CIF",
-        headline: "Stakeholders for a Cohesive and Sustainable World",
-        image: img("stakeholders-for-a-cohesive-and-sustainable-world.png"),
+        headline: "Keeping the Power On: Financing Energy Storage",
+        image: img("keeping-the-power-on-financing-energy-storage-2021-cif.png"),
         body: [
           'On December 14, 2021, the Climate Investment Funds (CIF) hosted the virtual workshop "Keeping the Power On: Financing Energy Storage Solutions." This workshop brought together multilateral development banks, country officials, companies, and organizations investing in energy storage and other elements of clean energy to explore the unique aspects of energy storage finance and the relationship between private capital and concessional financing.',
         ],
@@ -452,3 +452,20 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
 export const ALL_GLOBAL_ENGAGEMENTS = GLOBAL_ENGAGEMENT_SECTIONS.flatMap((s) =>
   s.kind === "grid" ? (s.items ?? []) : [],
 );
+
+const ABOVE_THE_FOLD_SECTION_ID = "year-2025";
+const ABOVE_THE_FOLD_IMAGE_COUNT = 6;
+
+/** First visible engagement card images — used for route preload hints. */
+export function getGlobalEngagementPreloadUrls(
+  limit = ABOVE_THE_FOLD_IMAGE_COUNT,
+): string[] {
+  const section = GLOBAL_ENGAGEMENT_SECTIONS.find(
+    (s) => s.kind === "grid" && s.id === ABOVE_THE_FOLD_SECTION_ID,
+  );
+  return (section?.items ?? []).slice(0, limit).map((item) => item.image);
+}
+
+export function isAboveTheFoldEngagement(sectionId: string, cardIndex: number): boolean {
+  return sectionId === ABOVE_THE_FOLD_SECTION_ID && cardIndex < ABOVE_THE_FOLD_IMAGE_COUNT;
+}
