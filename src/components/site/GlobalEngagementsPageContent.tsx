@@ -19,6 +19,7 @@ const CATEGORY_FILTERS = [
   { id: "leadership-learning", label: "Leadership & Learning" },
   { id: "partnerships", label: "Partnerships" },
   { id: "workshop", label: "Workshop" },
+  { id: "cop", label: "COP" },
 ] as const;
 
 const YEAR_FILTERS = [
@@ -35,6 +36,9 @@ type FilterMode = "category" | "year";
 
 const ENGAGEMENT_CATEGORY_BY_ID: Record<string, CategoryFilterId> = {
   "pcc-2025": "finance-policy",
+  "ief-carbon-hydrogen-nov-2025": "partnerships",
+  "ief-carbon-markets-2025": "partnerships",
+  "ief-stabilizing-markets-2025": "partnerships",
   "ief-paris-2025": "finance-policy",
   "acoa-2025": "leadership-learning",
   "liibs-2025": "leadership-learning",
@@ -55,7 +59,9 @@ const ENGAGEMENT_CATEGORY_BY_ID: Record<string, CategoryFilterId> = {
   "mwc-2024": "climate-energy",
 
   "fii-2023": "finance-policy",
-  "cop28-2023": "climate-energy",
+  "cop29-2024": "cop",
+  "cop28-2023": "cop",
+  "cop27-2022": "cop",
   "wef-gfc-2023": "partnerships",
   "buraq-2023": "leadership-learning",
   "eisenhower-2023": "leadership-learning",
@@ -73,6 +79,44 @@ const ENGAGEMENT_CATEGORY_BY_ID: Record<string, CategoryFilterId> = {
   "ntu-2019": "leadership-learning",
 };
 
+function itemMatchesYear(
+  item: GlobalEngagement,
+  sectionId: string,
+  activeYear: YearFilterId,
+): boolean {
+  if (activeYear === "all") return true;
+
+  if (item.year !== undefined) {
+    switch (activeYear) {
+      case "year-2025":
+        return item.year === 2025;
+      case "year-2024":
+        return item.year === 2024;
+      case "year-2023":
+        return item.year === 2023;
+      case "year-earlier":
+        return item.year < 2023;
+      default:
+        return true;
+    }
+  }
+
+  return sectionId === activeYear;
+}
+
+function sectionMatchesYear(section: GlobalEngagementSection, activeYear: YearFilterId): boolean {
+  if (activeYear === "all") return true;
+  if (section.id === activeYear) return true;
+  if (activeYear === "year-2024" && section.id === "team-relp-2024") return true;
+  if (activeYear === "year-2023" && section.id === "team-hawkamah-2023") return true;
+
+  if (section.kind === "grid") {
+    return (section.items ?? []).some((item) => itemMatchesYear(item, section.id, activeYear));
+  }
+
+  return false;
+}
+
 function classifyEngagement(engagement: GlobalEngagement): CategoryFilterId {
   const curatedCategory = ENGAGEMENT_CATEGORY_BY_ID[engagement.id];
   if (curatedCategory) return curatedCategory;
@@ -80,6 +124,9 @@ function classifyEngagement(engagement: GlobalEngagement): CategoryFilterId {
   const text =
     `${engagement.event} ${engagement.headline} ${engagement.body.join(" ")}`.toLowerCase();
 
+  if (/(conference of the parties|\bcop\s*\d)/.test(text)) {
+    return "cop";
+  }
   if (/(workshop|team hosted|team conducted|planetive team)/.test(text)) {
     return "workshop";
   }
@@ -106,24 +153,20 @@ export function GlobalEngagementsPageContent() {
     if (filterMode !== "year" || activeYear === "all") return [];
 
     return GLOBAL_ENGAGEMENT_SECTIONS.flatMap((section) => {
-      if (section.kind !== "grid" || section.id !== activeYear) return [];
-      return (section.items ?? []).map((item) => ({
-        id: item.id,
-        label: item.event,
-      }));
+      if (section.kind !== "grid" || !sectionMatchesYear(section, activeYear)) return [];
+      return (section.items ?? [])
+        .filter((item) => itemMatchesYear(item, section.id, activeYear))
+        .map((item) => ({
+          id: item.id,
+          label: item.event,
+        }));
     });
   }, [filterMode, activeYear]);
 
   const visibleSections = useMemo(() => {
     return GLOBAL_ENGAGEMENT_SECTIONS.flatMap((section) => {
-      if (filterMode === "year") {
-        const sectionYearMatch =
-          activeYear === "all" ||
-          section.id === activeYear ||
-          (activeYear === "year-2024" && section.id === "team-relp-2024") ||
-          (activeYear === "year-2023" && section.id === "team-hawkamah-2023");
-
-        if (!sectionYearMatch) return [];
+      if (filterMode === "year" && !sectionMatchesYear(section, activeYear)) {
+        return [];
       }
 
       if (section.kind === "highlight") {
@@ -142,9 +185,13 @@ export function GlobalEngagementsPageContent() {
           filterMode !== "category" ||
           activeCategory === "all" ||
           classifyEngagement(item) === activeCategory;
+        const yearMatch =
+          filterMode !== "year" ||
+          activeYear === "all" ||
+          itemMatchesYear(item, section.id, activeYear);
         const eventMatch =
           filterMode !== "year" || activeEvent === "all" || item.id === activeEvent;
-        return categoryMatch && eventMatch;
+        return categoryMatch && yearMatch && eventMatch;
       });
 
       if (filteredItems.length === 0) return [];
@@ -543,20 +590,28 @@ function EngagementCard({
   const [expanded, setExpanded] = useState(false);
   const previewText = engagement.body.join(" ");
   const long = engagement.body.length > 1 || previewText.length > 240;
+  const gallery =
+    engagement.images?.length && engagement.images.length > 1
+      ? engagement.images
+      : null;
 
   return (
     <ScrollReveal variant="fade-up" delay={delay} className="h-full">
       <article className="group flex h-full min-h-0 flex-col overflow-hidden rounded-[26px] border border-n200/80 bg-white shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elevated)] transition-shadow duration-300">
         <div className="relative aspect-[4/3] shrink-0 overflow-hidden bg-n100">
-          <img
-            src={engagement.image}
-            alt=""
-            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-            style={engagementImageStyle(engagement)}
-            loading={priority ? "eager" : "lazy"}
-            fetchPriority={priority ? "high" : "auto"}
-            decoding="async"
-          />
+          {gallery ? (
+            <EngagementImageSlideshow images={gallery} />
+          ) : (
+            <img
+              src={engagement.image}
+              alt=""
+              className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+              style={engagementImageStyle(engagement)}
+              loading={priority ? "eager" : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
+              decoding="async"
+            />
+          )}
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col p-6 md:p-7">

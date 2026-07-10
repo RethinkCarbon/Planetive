@@ -1,5 +1,5 @@
 /** Local copies in public/images/global-engagements/ (from planetive.org, no fx-gs grayscale) */
-const IMG_VERSION = "12";
+const IMG_VERSION = "15";
 const img = (file: string) => `/images/global-engagements/${file}?v=${IMG_VERSION}`;
 
 export type GlobalEngagement = {
@@ -8,6 +8,10 @@ export type GlobalEngagement = {
   headline: string;
   body: string[];
   image: string;
+  /** Optional rotating gallery for card media */
+  images?: string[];
+  /** Year label for cross-section year filters */
+  year?: number;
   /** CSS object-position for card image framing */
   imagePosition?: string;
   /** Zoom factor to crop letterboxing (container clips overflow) */
@@ -52,6 +56,43 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         body: [
           "At the launch of the 3rd Pakistan Climate Conference Report by OICCI and SDPI, Ayla Majid, Founder & CEO of Planetive emphasized the urgent role of the private sector in achieving Pakistan’s NDC 3.0 targets ahead of COP 30. She highlighted the need for ESG transparency, innovative green finance, and collaboration to bridge the US$200 billion climate finance gap by 2030. Her focus was on strengthening supply chains, promoting a circular economy, and fostering a resilient ecosystem to drive Pakistan’s climate future forward.",
           "Under her leadership, Planetive is advancing ESG frameworks, green finance solutions, and capacity building to drive a resilient, low-carbon future.",
+        ],
+      },
+      {
+        id: "ief-carbon-hydrogen-nov-2025",
+        event:
+          "International Energy Forum (IEF) — Co-hosted with the IEF Seminar on Energy Market Transparency and JODI, November 2025",
+        headline: "Building Carbon Management and Hydrogen Markets",
+        image: img("building-carbon-management-hydrogen-markets-nov-2025.jpg"),
+        body: [
+          "Innovation and Technology Readiness — Building Scale & Patenting Breakthroughs",
+          "Ayla Majid participated as a panel speaker at the International Energy Forum (IEF), contributing to discussions on carbon management, CCUS, circular carbon economy, carbon markets, and innovative business models to accelerate affordable decarbonization through public-private collaboration and market-driven investment.",
+        ],
+      },
+      {
+        id: "ief-carbon-markets-2025",
+        event: "International Energy Forum (IEF), June 2025",
+        headline: "Building Markets to Scale Carbon Management Solutions",
+        image: img("ief-june-2025.jpg"),
+        images: [img("ief-june-2025.jpg"), img("ief-june-2025-2.jpg")],
+        body: [
+          "Building Carbon Management and Hydrogen Markets",
+          "Ayla Majid, CEO & Founder of Planetive and Global President of ACCA, joined global energy leaders as a speaker at the International Energy Forum (IEF) Roundtable on Building Carbon Management and Hydrogen Markets, discussing technology readiness, innovation, financing, and international collaboration to accelerate scalable carbon management and hydrogen value chains.",
+        ],
+      },
+      {
+        id: "ief-stabilizing-markets-2025",
+        event: "International Energy Forum (IEF), February 2025",
+        headline: "Stabilizing Energy Markets in a Disrupted World",
+        image: img("stabilizing-energy-markets-feb-2025.jpg"),
+        images: [
+          img("stabilizing-energy-markets-feb-2025.jpg"),
+          img("stabilizing-energy-markets-feb-2025-2.jpg"),
+          img("stabilizing-energy-markets-feb-2025-3.jpg"),
+        ],
+        body: [
+          "Critical Minerals: The New Foundations for a Clean, Resilient and Competitive Global Energy System",
+          "As a panel speaker at the International Energy Forum (IEF), Ayla Majid joined international policymakers and industry leaders to discuss the integration of clean electrons, low-carbon molecules, critical minerals, artificial intelligence, and resilient energy systems to strengthen energy security while advancing affordable and sustainable decarbonization.",
         ],
       },
       {
@@ -171,6 +212,47 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
     ],
   },
   {
+    id: "cop",
+    kind: "grid",
+    title: "COP",
+    subtitle: "Conference of the Parties",
+    items: [
+      {
+        id: "cop29-2024",
+        event: "Conference of the Parties COP 29, Azerbaijan 2024",
+        headline: "The COP 29 Azerbaijan Conference",
+        image: img("cop29.jpeg"),
+        year: 2024,
+        body: [
+          "At COP29 in Baku, Planetive joined global leaders to advance climate finance, carbon markets, and net-zero pathways. Our team engaged in dialogues on scaling green investment, strengthening ESG accountability, and supporting emerging markets in the energy transition.",
+          "Planetive remains committed to bridging the climate finance gap through practical advisory, innovative instruments, and partnerships that turn ambition into bankable action.",
+        ],
+      },
+      {
+        id: "cop28-2023",
+        event: "Conference of the Parties COP 28, UAE 2023",
+        headline: "The COP 28 UAE Conference",
+        image: img("the-cop-28-uae-conference.png"),
+        year: 2023,
+        body: [
+          "At COP28 our dedicated team along with RELP consistently engaged in impactful events, bringing forth innovative solutions for a greener future. Notably, we have fostered valuable collaborations, including our partnership with the iTrust initiative, amplifying our efforts towards responsible environmental stewardship.",
+          "The iTrust will provide customized, program-based guarantees designed to enhance bankability and promote competition with minimal fiscal and financial impact. We are implementing the International Guarantee Trust Fund for Renewable Energy (iTrust) with the purpose of providing customized program-based guarantees to be automatically granted to all renewable energy projects awarded in eligible participating public auctions.",
+        ],
+      },
+      {
+        id: "cop27-2022",
+        event: "Conference of the Parties COP 27, Egypt 2022",
+        headline: "The COP 27 Egypt Conference",
+        image: img("cop-27.jpeg"),
+        year: 2022,
+        body: [
+          "Planetive participated in COP27 in Sharm el-Sheikh, contributing to global conversations on climate finance, loss and damage, and the energy transition. Our team engaged with partners on accelerating renewable energy deployment and strengthening ESG frameworks across emerging markets.",
+          "The conference reinforced Planetive's commitment to collaborative climate action and practical solutions that support a resilient, low-carbon future.",
+        ],
+      },
+    ],
+  },
+  {
     id: "team-relp-2024",
     kind: "highlight",
     title:
@@ -271,7 +353,7 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
     id: "year-2023",
     kind: "grid",
     title: "2023",
-    subtitle: "Investment, COP28 & global councils",
+    subtitle: "Investment & global councils",
     year: 2023,
     items: [
       {
@@ -282,16 +364,6 @@ export const GLOBAL_ENGAGEMENT_SECTIONS: GlobalEngagementSection[] = [
         body: [
           "Planetive attended the FII 2023 event in Riyadh, where noteworthy initiatives emerged, spanning green energy partnerships, strides in artificial intelligence, commitments to sustainable development goals, and strategies for bolstering global economic resilience.",
           "FII 2023 left an indelible mark as a platform where actionable initiatives converged, shaping the trajectory of global investments in response to contemporary challenges and opportunities.",
-        ],
-      },
-      {
-        id: "cop28-2023",
-        event: "Conference of the Parties COP 28, UAE 2023",
-        headline: "The COP 28 UAE Conference",
-        image: img("the-cop-28-uae-conference.png"),
-        body: [
-          "At COP28 our dedicated team along with RELP consistently engaged in impactful events, bringing forth innovative solutions for a greener future. Notably, we have fostered valuable collaborations, including our partnership with the iTrust initiative, amplifying our efforts towards responsible environmental stewardship.",
-          "The iTrust will provide customized, program-based guarantees designed to enhance bankability and promote competition with minimal fiscal and financial impact. We are implementing the International Guarantee Trust Fund for Renewable Energy (iTrust) with the purpose of providing customized program-based guarantees to be automatically granted to all renewable energy projects awarded in eligible participating public auctions.",
         ],
       },
       {
