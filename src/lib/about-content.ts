@@ -140,7 +140,7 @@ export const TEAM: TeamMember[] = [
     role: "Carbon Credit and Sustainable Agriculture Specialist",
     group: "team",
     image: teamImg("shahid.jpeg"),
-    imagePosition: "50% 28%",
+    imagePosition: "50% 1%",
     imageScale: 1.55,
     bio: [
       "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
