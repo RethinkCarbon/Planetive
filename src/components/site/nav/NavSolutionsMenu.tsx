@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import {
   navMegaGroupTitleClass,
   navMegaLinkClass,
+  navMegaLinkDotClass,
   navMegaPanelClass,
   navTriggerClass,
 } from "./nav-menu-styles";
@@ -58,7 +59,7 @@ export function SolutionsMegaPanel({ onClose }: { onClose: () => void }) {
           {NAV_SOLUTION_GROUPS.map((group) => (
             <div key={group.title}>
               <p className={navMegaGroupTitleClass()}>{group.title}</p>
-              <ul className="mt-3 space-y-0.5">
+              <ul className="mt-3 space-y-1">
                 {group.items.map((item) => {
                   const active = pathname === item.to;
                   return (
@@ -68,10 +69,11 @@ export function SolutionsMegaPanel({ onClose }: { onClose: () => void }) {
                         role="menuitem"
                         onClick={onClose}
                         className={navMegaLinkClass(active)}
+                        aria-current={active ? "page" : undefined}
                       >
                         {item.color ? (
                           <span
-                            className="h-2 w-2 shrink-0 rounded-full"
+                            className={navMegaLinkDotClass(active)}
                             style={{ backgroundColor: item.color }}
                             aria-hidden
                           />
@@ -141,6 +143,8 @@ export function NavSolutionsMenu({
   onClose,
   variant = "dropdown",
 }: NavSolutionsMenuProps) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
   if (variant === "list") {
     return (
       <li>
@@ -150,25 +154,29 @@ export function NavSolutionsMenu({
         {NAV_SOLUTION_GROUPS.map((group) => (
           <div key={group.title} className="mb-3">
             <p className={cn(navMegaGroupTitleClass(), "px-3 pb-1")}>{group.title}</p>
-            <ul>
-              {group.items.map((item) => (
-                <li key={item.to}>
-                  <Link
-                    to={item.to}
-                    onClick={onClose}
-                    className={cn(navMegaLinkClass(false), "px-3")}
-                  >
-                    {item.color ? (
-                      <span
-                        className="h-2 w-2 shrink-0 rounded-full"
-                        style={{ backgroundColor: item.color }}
-                        aria-hidden
-                      />
-                    ) : null}
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-1">
+              {group.items.map((item) => {
+                const active = pathname === item.to;
+                return (
+                  <li key={item.to}>
+                    <Link
+                      to={item.to}
+                      onClick={onClose}
+                      className={cn(navMegaLinkClass(active), "mx-1")}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.color ? (
+                        <span
+                          className={navMegaLinkDotClass(active)}
+                          style={{ backgroundColor: item.color }}
+                          aria-hidden
+                        />
+                      ) : null}
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}

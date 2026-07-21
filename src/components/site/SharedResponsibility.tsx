@@ -5,6 +5,29 @@ import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { cn } from "@/lib/utils";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 
+/** Climate stakes that aren't already shown on the home mosaic. */
+const HOME_CLIMATE_STATS = [
+  {
+    value: 33,
+    prefix: "",
+    suffix: "M",
+    label: "People affected by Pakistan's 2022 climate floods",
+  },
+  {
+    value: 8,
+    prefix: "",
+    suffix: "th",
+    label: "Pakistan's rank among the world's most climate-vulnerable countries",
+  },
+  {
+    value: 2.7,
+    prefix: "",
+    suffix: "°C",
+    decimals: 1,
+    label: "Warming path under today's policies — far above 1.5°C",
+  },
+] as const;
+
 const HOW_WE_WORK_QUOTES = [
   {
     text: (
@@ -76,7 +99,6 @@ function useCountUp(target: number, durationMs: number, start: boolean) {
 
 export function SharedResponsibilitySection() {
   const { ref: gridRef, inView: gridIn } = useInView<HTMLDivElement>({ threshold: 0.08 });
-  const years = useCountUp(2030, 1400, gridIn);
   const reducedMotion = usePrefersReducedMotion();
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [quoteVisible, setQuoteVisible] = useState(true);
@@ -215,20 +237,75 @@ export function SharedResponsibilitySection() {
             className="col-span-3 md:col-span-2 row-span-2 bg-forest text-white"
           >
             <div className="text-[11px] font-mono tracking-wider text-mint-soft/80 uppercase">
-              Our horizon
+              Why it matters
             </div>
-            <div className="mt-auto">
-              <div className="font-ui font-semibold text-[clamp(2.6rem,5vw,4rem)] leading-none text-mint-soft">
-                {Math.round(years)}
-              </div>
-              <div className="mt-3 text-sm text-n200 max-w-[14rem]">
-                The decade we're building toward — measured, not promised.
-              </div>
-            </div>
+            <PresenceStats animate={gridIn} />
           </Tile>
         </div>
       </div>
     </section>
+  );
+}
+
+function PresenceStats({ animate }: { animate: boolean }) {
+  return (
+    <ul className="mt-auto space-y-4 pt-6">
+      {HOME_CLIMATE_STATS.map((stat, index) => (
+        <PresenceStatRow
+          key={stat.label}
+          value={stat.value}
+          prefix={stat.prefix}
+          suffix={stat.suffix}
+          decimals={"decimals" in stat ? stat.decimals : 0}
+          label={stat.label}
+          animate={animate}
+          delayMs={index * 120}
+        />
+      ))}
+    </ul>
+  );
+}
+
+function PresenceStatRow({
+  value,
+  prefix,
+  suffix,
+  decimals,
+  label,
+  animate,
+  delayMs,
+}: {
+  value: number;
+  prefix: string;
+  suffix: string;
+  decimals: number;
+  label: string;
+  animate: boolean;
+  delayMs: number;
+}) {
+  const [started, setStarted] = useState(false);
+  const count = useCountUp(value, 1100, started);
+
+  useEffect(() => {
+    if (!animate) return;
+    const timer = window.setTimeout(() => setStarted(true), delayMs);
+    return () => window.clearTimeout(timer);
+  }, [animate, delayMs]);
+
+  const display =
+    decimals > 0 ? count.toFixed(decimals) : String(Math.round(count));
+
+  return (
+    <li className="flex items-baseline justify-between gap-3 border-b border-white/10 pb-3 last:border-b-0 last:pb-0">
+      <span className="shrink-0 font-ui font-semibold text-[clamp(1.55rem,2.8vw,2.1rem)] leading-none text-mint-soft tabular-nums">
+        {prefix}
+        {display}
+        {suffix}
+      </span>
+      <span className="text-right text-[11px] md:text-xs text-n200 leading-snug max-w-[9.5rem]">
+        {label}
+      </span>
+    </li>
   );
 }
 

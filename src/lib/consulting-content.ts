@@ -4,7 +4,7 @@ export const CONSULTING_PAGE = {
   eyebrow: "Consulting",
   title: "Strategic advisory for complex transition mandates.",
   description:
-    "Planetive is an advisory firm at heart — supporting organizations across clean energy, climate finance, ESG, and sustainability with structured consulting from diagnosis through execution.",
+    "Advisory and project development, strengthened by digital tools and climate-tech systems that turn strategy into executable, measurable outcomes.",
   bookEyebrow: "Book a consultation",
   bookTitle: "Speak with our advisory team",
   bookDescription:

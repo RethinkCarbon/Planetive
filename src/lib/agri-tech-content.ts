@@ -11,10 +11,15 @@ export const AGRI_TECH_PAGE = {
 
 export const AGRI_TECH_VALUE_CHAIN = {
   title: "Designed Across The Agricultural Lifecycle",
+  description:
+    "From planning through community impact — one connected view of how Planetive supports the full agricultural value chain.",
   stages: [
     {
       id: "pre-production",
       label: "Pre-Production",
+      summary: "Plan with confidence before the season starts.",
+      detail:
+        "Ground decisions in soil health, seed quality, climate signals, and agronomic advice so production starts on a clear footing.",
       capabilities: [
         "Soil Testing",
         "Seed Management",
@@ -26,6 +31,9 @@ export const AGRI_TECH_VALUE_CHAIN = {
     {
       id: "production",
       label: "Production",
+      summary: "Modern growing with visibility on the ground.",
+      detail:
+        "Connect controlled-environment and field operations to monitoring, automation, and precision inputs in real time.",
       capabilities: [
         "Hydroponics",
         "Aeroponics",
@@ -37,21 +45,33 @@ export const AGRI_TECH_VALUE_CHAIN = {
     {
       id: "post-harvest",
       label: "Post-Harvest",
+      summary: "Protect quality after the crop leaves the field.",
+      detail:
+        "Document food safety, certification, and quality so downstream buyers and regulators can trust what you deliver.",
       capabilities: ["Certification", "Food Safety", "Quality Documentation"],
     },
     {
       id: "market",
       label: "Market Linkages",
+      summary: "Move product with market intelligence behind every decision.",
+      detail:
+        "Link pricing, supply chains, and export readiness so producers and service businesses capture value at scale.",
       capabilities: ["Market Intelligence", "Pricing", "Supply Chain", "Export", "Commerce"],
     },
     {
       id: "finance",
       label: "Finance & ESG",
+      summary: "Make sustainability measurable for investors and partners.",
+      detail:
+        "Tie operational performance to carbon, ROI, and ESG reporting so finance and impact stay in the same conversation.",
       capabilities: ["Carbon Credits", "ROI Analytics", "ESG Reporting"],
     },
     {
       id: "community",
       label: "Community",
+      summary: "Build lasting capacity beyond a single harvest.",
+      detail:
+        "Support enterprise development, training, and digital tools so communities can sustain modern agricultural livelihoods.",
       capabilities: ["Capacity Building", "Enterprise", "Digital Support"],
     },
   ] as const,

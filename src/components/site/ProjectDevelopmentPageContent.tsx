@@ -390,294 +390,42 @@ function ProjectEditorial({
               </div>
             ))
           : null}
-
-        <div className="mt-8 pt-8 border-t border-n200/60">
-          <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-n500 mb-4">Scope</p>
-          <ul className="flex flex-wrap gap-x-4 gap-y-2">
-            {project.scope.map((item) => (
-              <li key={item} className="text-sm text-n600">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
 
-      <div className="lg:col-span-6">
-        <ProjectVisual type={project.visual} reduced={reduced} />
+      <div className="lg:col-span-6 lg:sticky lg:top-28 self-start">
+        <ProjectHighlightCard project={project} />
       </div>
     </motion.article>
   );
 }
 
-function ProjectVisual({
-  type,
-  reduced,
-}: {
-  type: "pathway" | "expansion" | "ecosystem" | "infrastructure";
-  reduced: boolean;
-}) {
+function ProjectHighlightCard({ project }: { project: ExperienceProject }) {
   return (
-    <div
-      className="rounded-[24px] border border-n200/60 bg-[var(--n50)] p-8 md:p-12 min-h-[280px] flex items-center"
-      aria-hidden
-    >
-      {type === "pathway" ? <PathwayVisual reduced={reduced} /> : null}
-      {type === "expansion" ? <ExpansionVisual reduced={reduced} /> : null}
-      {type === "ecosystem" ? <EcosystemMapVisual reduced={reduced} /> : null}
-      {type === "infrastructure" ? <InfrastructureVisual reduced={reduced} /> : null}
+    <div className="relative overflow-hidden rounded-[28px] bg-forest text-white p-7 md:p-9 shadow-[0_22px_50px_-24px_rgba(10,61,46,0.45)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full border border-white/10"
+      />
+      <p className="relative z-10 font-mono text-[11px] tracking-[0.2em] uppercase text-mint-soft/75">
+        {project.label}
+      </p>
+      <h4 className="relative z-10 mt-4 font-ui font-semibold text-xl md:text-2xl leading-tight">
+        Delivery scope
+      </h4>
+      <p className="relative z-10 mt-3 text-sm md:text-base text-n200/85 leading-relaxed">
+        Planetive support across this initiative, from planning through delivery.
+      </p>
+      <div className="relative z-10 mt-8 flex flex-wrap gap-2">
+        {project.scope.map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white/90"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
     </div>
-  );
-}
-
-function PathwayVisual({ reduced }: { reduced: boolean }) {
-  return (
-    <svg viewBox="0 0 320 280" className="w-full h-auto" fill="none">
-      {[0, 1, 2, 3, 4].map((i) => (
-        <motion.g
-          key={i}
-          animate={reduced ? undefined : { opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-        >
-          <rect
-            x={40}
-            y={40 + i * 44}
-            width={240}
-            height={24}
-            rx="2"
-            stroke="#1A6B4A"
-            strokeOpacity={0.12 + i * 0.04}
-            fill="#1A6B4A"
-            fillOpacity={0.04}
-          />
-          {i < 4 ? (
-            <line
-              x1="160"
-              y1={64 + i * 44}
-              x2="160"
-              y2={84 + i * 44}
-              stroke="#2ECC8A"
-              strokeOpacity="0.25"
-              strokeWidth="1"
-            />
-          ) : null}
-        </motion.g>
-      ))}
-    </svg>
-  );
-}
-
-function ExpansionVisual({ reduced }: { reduced: boolean }) {
-  const nodes = [
-    { x: 160, y: 140, r: 6 },
-    { x: 100, y: 100, r: 4 },
-    { x: 220, y: 100, r: 4 },
-    { x: 80, y: 160, r: 3 },
-    { x: 240, y: 160, r: 3 },
-    { x: 120, y: 200, r: 3 },
-    { x: 200, y: 200, r: 3 },
-  ];
-
-  return (
-    <svg viewBox="0 0 320 280" className="w-full h-auto" fill="none">
-      {nodes.slice(1).map((node, i) => (
-        <motion.line
-          key={i}
-          x1={nodes[0].x}
-          y1={nodes[0].y}
-          x2={node.x}
-          y2={node.y}
-          stroke="#1A6B4A"
-          strokeOpacity="0.15"
-          strokeWidth="1"
-          animate={reduced ? undefined : { opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
-        />
-      ))}
-      {nodes.map((node, i) => (
-        <motion.circle
-          key={i}
-          cx={node.x}
-          cy={node.y}
-          r={node.r}
-          fill="#2ECC8A"
-          fillOpacity={i === 0 ? 0.5 : 0.35}
-          animate={reduced ? undefined : { scale: [1, 1.2, 1] }}
-          transition={{
-            duration: 4 + i * 0.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.2,
-          }}
-        />
-      ))}
-      <motion.circle
-        cx="160"
-        cy="140"
-        r="50"
-        stroke="#A8F0D4"
-        strokeOpacity="0.2"
-        strokeWidth="1"
-        strokeDasharray="4 6"
-        animate={reduced ? undefined : { r: [45, 55, 45] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </svg>
-  );
-}
-
-function EcosystemMapVisual({ reduced }: { reduced: boolean }) {
-  const sectors = [
-    { x: 160, y: 60, label: "" },
-    { x: 260, y: 120 },
-    { x: 240, y: 220 },
-    { x: 80, y: 220 },
-    { x: 60, y: 120 },
-  ];
-
-  return (
-    <svg viewBox="0 0 320 280" className="w-full h-auto" fill="none">
-      {sectors.map((s, i) => {
-        const next = sectors[(i + 1) % sectors.length];
-        return (
-          <motion.line
-            key={`line-${i}`}
-            x1={s.x}
-            y1={s.y}
-            x2={next.x}
-            y2={next.y}
-            stroke="#1A6B4A"
-            strokeOpacity="0.12"
-            strokeWidth="1"
-            animate={reduced ? undefined : { opacity: [0.15, 0.35, 0.15] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-          />
-        );
-      })}
-      {sectors.map((s, i) => (
-        <motion.g
-          key={i}
-          animate={reduced ? undefined : { opacity: [0.5, 0.9, 0.5] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.25 }}
-        >
-          <circle cx={s.x} cy={s.y} r="5" fill="#2ECC8A" fillOpacity="0.4" />
-          <line x1="160" y1="140" x2={s.x} y2={s.y} stroke="#A8F0D4" strokeOpacity="0.1" />
-        </motion.g>
-      ))}
-      <circle cx="160" cy="140" r="6" fill="#1A6B4A" fillOpacity="0.5" />
-    </svg>
-  );
-}
-
-function InfrastructureVisual({ reduced }: { reduced: boolean }) {
-  return (
-    <svg viewBox="0 0 320 280" className="w-full h-auto" fill="none">
-      <defs>
-        <linearGradient id="pd-hydro-flow" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#1A6B4A" stopOpacity="0.08" />
-          <stop offset="50%" stopColor="#2ECC8A" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#1A6B4A" stopOpacity="0.08" />
-        </linearGradient>
-      </defs>
-
-      <motion.path
-        d="M40 200 Q120 180 160 195 T280 185"
-        stroke="url(#pd-hydro-flow)"
-        strokeWidth="3"
-        strokeLinecap="round"
-        animate={
-          reduced
-            ? undefined
-            : {
-                d: [
-                  "M40 200 Q120 180 160 195 T280 185",
-                  "M40 202 Q120 178 160 197 T280 183",
-                  "M40 200 Q120 180 160 195 T280 185",
-                ],
-              }
-        }
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.path
-        d="M50 215 Q140 200 180 210 T290 205"
-        stroke="#2ECC8A"
-        strokeOpacity="0.18"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        animate={reduced ? undefined : { opacity: [0.12, 0.28, 0.12] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.path
-        d="M60 228 Q150 218 190 225 T300 220"
-        stroke="#1A6B4A"
-        strokeOpacity="0.12"
-        strokeWidth="1"
-        strokeLinecap="round"
-        animate={reduced ? undefined : { opacity: [0.1, 0.22, 0.1] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-      />
-
-      <motion.rect
-        x="100"
-        y="72"
-        width="120"
-        height="14"
-        rx="2"
-        stroke="#1A6B4A"
-        strokeOpacity="0.2"
-        fill="#1A6B4A"
-        fillOpacity="0.06"
-        animate={reduced ? undefined : { opacity: [0.5, 0.85, 0.5] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {[0, 1, 2, 3].map((i) => (
-        <motion.line
-          key={i}
-          x1={115 + i * 28}
-          y1="86"
-          x2={115 + i * 28}
-          y2={110 + i * 8}
-          stroke="#2ECC8A"
-          strokeOpacity="0.2"
-          strokeWidth="1"
-          animate={reduced ? undefined : { y2: [110 + i * 8, 118 + i * 8, 110 + i * 8] }}
-          transition={{
-            duration: 4 + i * 0.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.3,
-          }}
-        />
-      ))}
-
-      <motion.path
-        d="M80 140 L240 140"
-        stroke="#A8F0D4"
-        strokeOpacity="0.25"
-        strokeWidth="1"
-        strokeLinecap="round"
-        animate={reduced ? undefined : { pathLength: [0.4, 1, 0.4] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {[
-        { x: 80, y: 140 },
-        { x: 160, y: 140 },
-        { x: 240, y: 140 },
-      ].map((node, i) => (
-        <motion.circle
-          key={i}
-          cx={node.x}
-          cy={node.y}
-          r="3"
-          fill="#2ECC8A"
-          fillOpacity="0.35"
-          animate={reduced ? undefined : { opacity: [0.25, 0.6, 0.25] }}
-          transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-        />
-      ))}
-    </svg>
   );
 }
 

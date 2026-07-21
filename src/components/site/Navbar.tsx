@@ -97,27 +97,30 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
     <header
       ref={headerRef}
       className={cn(
-        "fixed top-0 inset-x-0 transition-all duration-300",
+        "site-header fixed top-0 inset-x-0 transition-all duration-300",
         mobileOpen ? "z-[70] max-lg:pointer-events-none" : "z-50",
         variant === "transparent" && "hero-enter",
-        isCompact ? "py-2" : "py-4",
+        isCompact ? "py-1.5 md:py-2" : "py-2 md:py-3",
       )}
     >
-      <div className="container-x">
+      <div className="container-x min-w-0">
         <nav
           className={cn(
-            "flex items-center justify-between gap-2 sm:gap-3 rounded-full px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 lg:grid lg:grid-cols-[1fr_auto_1fr]",
+            "site-header-nav flex min-w-0 items-center justify-between gap-2 sm:gap-3 overflow-hidden rounded-full pl-3 pr-2 sm:pl-4 sm:pr-2.5 md:px-5 lg:px-5 py-1.5 sm:py-2 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "glass shadow-[var(--shadow-soft)]",
             "transition-[opacity,transform,box-shadow] duration-[350ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
             mobileOpen &&
               "max-lg:pointer-events-none max-lg:scale-[0.97] max-lg:opacity-0 max-lg:translate-y-[-6px]",
           )}
         >
-          <Link to="/" className="flex shrink-0 items-center justify-self-start">
-            <PlanetiveLogo zoom className="-translate-y-px md:-translate-y-0.5" />
+          <Link
+            to="/"
+            className="flex h-8 sm:h-9 min-w-0 max-w-full shrink items-center justify-self-start overflow-hidden"
+          >
+            <PlanetiveLogo zoom className="site-header-logo max-w-full" />
           </Link>
 
-          <ul className="hidden lg:flex items-center justify-center gap-0 xl:gap-0.5">
+          <ul className="hidden lg:flex items-center justify-center gap-0 xl:gap-0.5 min-w-0">
             <li className="relative">
               <div {...solutionsHover}>
                 <SolutionsNavTrigger isSolid={isSolid} isOpen={openMenu === "solutions"} />
@@ -158,10 +161,10 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
             />
           </ul>
 
-          <div className="flex items-center justify-end gap-2 justify-self-end">
+          <div className="flex min-w-0 items-center justify-end gap-1.5 sm:gap-2 justify-self-end">
             <Link
               to="/work-with-us"
-              className="hidden md:inline-flex items-center rounded-full px-3 py-2 lg:px-4 lg:py-2.5 text-sm lg:text-sm font-semibold font-body btn-mint whitespace-normal text-center leading-tight"
+              className="site-header-cta hidden md:inline-flex items-center rounded-full px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] lg:text-[13px] xl:text-sm font-semibold font-body btn-mint whitespace-nowrap text-center leading-tight"
             >
               Work With Us
             </Link>
@@ -174,7 +177,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
                 close();
                 setMobileOpen(true);
               }}
-              className="lg:hidden inline-flex h-11 w-11 shrink-0 items-center justify-center text-forest touch-manipulation transition-transform duration-200 active:scale-90"
+              className="lg:hidden inline-flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center text-forest touch-manipulation transition-transform duration-200 active:scale-90"
             >
               <MobileMenuIcon open={false} />
             </button>

@@ -146,7 +146,7 @@ export function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
               }}
             >
               <Link to="/" onClick={onClose} className="flex min-w-0 items-center">
-                <PlanetiveLogo zoom className="-translate-y-px" />
+                <PlanetiveLogo zoom />
               </Link>
               <button
                 type="button"
@@ -403,6 +403,7 @@ const mobileTopLinkClass =
 const mobileTopLinkActiveClass = "bg-mint-soft/45 text-forest";
 
 const mobileSubLinkClass =
-  "flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium font-body text-n700 hover:bg-n50 hover:text-forest active:bg-n100 transition-colors duration-200";
+  "group flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium font-body text-n700 transition-[background-color,border-color,color,box-shadow] duration-200 ease-out border border-transparent hover:border-canopy/14 hover:bg-mint-soft/28 hover:text-forest active:border-canopy/18 active:bg-mint-soft/40 active:text-forest";
 
-const mobileSubLinkActiveClass = "bg-mint-soft/40 text-forest font-semibold";
+const mobileSubLinkActiveClass =
+  "border border-canopy/22 border-l-[3px] border-l-canopy bg-mint-soft/60 text-forest font-semibold shadow-[0_1px_2px_rgba(10,61,46,0.07)]";

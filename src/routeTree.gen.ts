@@ -27,6 +27,7 @@ import { Route as EcosystemInHouseAgentsRouteImport } from './routes/ecosystem/i
 import { Route as EcosystemEnergyTransitionWorkforceRouteImport } from './routes/ecosystem/energy-transition-workforce'
 import { Route as EcosystemEnergySectorIntelligenceRouteImport } from './routes/ecosystem/energy-sector-intelligence'
 import { Route as EcosystemDigitalMrvPlatformsRouteImport } from './routes/ecosystem/digital-mrv-platforms'
+import { Route as EcosystemDigitalMrvRouteImport } from './routes/ecosystem/digital-mrv'
 import { Route as EcosystemAgriTechSolutionsRouteImport } from './routes/ecosystem/agri-tech-solutions'
 import { Route as EcosystemAdvisoryHouseRouteImport } from './routes/ecosystem/advisory-house'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
@@ -125,6 +126,11 @@ const EcosystemDigitalMrvPlatformsRoute =
     path: '/ecosystem/digital-mrv-platforms',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EcosystemDigitalMrvRoute = EcosystemDigitalMrvRouteImport.update({
+  id: '/ecosystem/digital-mrv',
+  path: '/ecosystem/digital-mrv',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EcosystemAgriTechSolutionsRoute =
   EcosystemAgriTechSolutionsRouteImport.update({
     id: '/ecosystem/agri-tech-solutions',
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
   '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv': typeof EcosystemDigitalMrvRoute
   '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
   '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
   '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
   '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv': typeof EcosystemDigitalMrvRoute
   '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
   '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
   '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/ecosystem/advisory-house': typeof EcosystemAdvisoryHouseRoute
   '/ecosystem/agri-tech-solutions': typeof EcosystemAgriTechSolutionsRoute
+  '/ecosystem/digital-mrv': typeof EcosystemDigitalMrvRoute
   '/ecosystem/digital-mrv-platforms': typeof EcosystemDigitalMrvPlatformsRoute
   '/ecosystem/energy-sector-intelligence': typeof EcosystemEnergySectorIntelligenceRoute
   '/ecosystem/energy-transition-workforce': typeof EcosystemEnergyTransitionWorkforceRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/ecosystem/advisory-house'
     | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv'
     | '/ecosystem/digital-mrv-platforms'
     | '/ecosystem/energy-sector-intelligence'
     | '/ecosystem/energy-transition-workforce'
@@ -247,6 +257,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/ecosystem/advisory-house'
     | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv'
     | '/ecosystem/digital-mrv-platforms'
     | '/ecosystem/energy-sector-intelligence'
     | '/ecosystem/energy-transition-workforce'
@@ -270,6 +281,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/ecosystem/advisory-house'
     | '/ecosystem/agri-tech-solutions'
+    | '/ecosystem/digital-mrv'
     | '/ecosystem/digital-mrv-platforms'
     | '/ecosystem/energy-sector-intelligence'
     | '/ecosystem/energy-transition-workforce'
@@ -293,6 +305,7 @@ export interface RootRouteChildren {
   WorkWithUsRoute: typeof WorkWithUsRoute
   EcosystemAdvisoryHouseRoute: typeof EcosystemAdvisoryHouseRoute
   EcosystemAgriTechSolutionsRoute: typeof EcosystemAgriTechSolutionsRoute
+  EcosystemDigitalMrvRoute: typeof EcosystemDigitalMrvRoute
   EcosystemDigitalMrvPlatformsRoute: typeof EcosystemDigitalMrvPlatformsRoute
   EcosystemEnergySectorIntelligenceRoute: typeof EcosystemEnergySectorIntelligenceRoute
   EcosystemEnergyTransitionWorkforceRoute: typeof EcosystemEnergyTransitionWorkforceRoute
@@ -432,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EcosystemDigitalMrvPlatformsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ecosystem/digital-mrv': {
+      id: '/ecosystem/digital-mrv'
+      path: '/ecosystem/digital-mrv'
+      fullPath: '/ecosystem/digital-mrv'
+      preLoaderRoute: typeof EcosystemDigitalMrvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ecosystem/agri-tech-solutions': {
       id: '/ecosystem/agri-tech-solutions'
       path: '/ecosystem/agri-tech-solutions'
@@ -481,6 +501,7 @@ const rootRouteChildren: RootRouteChildren = {
   WorkWithUsRoute: WorkWithUsRoute,
   EcosystemAdvisoryHouseRoute: EcosystemAdvisoryHouseRoute,
   EcosystemAgriTechSolutionsRoute: EcosystemAgriTechSolutionsRoute,
+  EcosystemDigitalMrvRoute: EcosystemDigitalMrvRoute,
   EcosystemDigitalMrvPlatformsRoute: EcosystemDigitalMrvPlatformsRoute,
   EcosystemEnergySectorIntelligenceRoute:
     EcosystemEnergySectorIntelligenceRoute,

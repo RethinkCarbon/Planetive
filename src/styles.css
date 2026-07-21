@@ -99,13 +99,13 @@
   --gradient-hero: linear-gradient(135deg, #0a3d2e 0%, #1a6b4a 60%, #2ecc8a 100%);
   --gradient-mint: linear-gradient(135deg, #a8f0d4 0%, #f5faf7 100%);
 
-  /* Fluid type scale — smaller on narrow screens, grows with viewport */
-  --type-hero: clamp(1.75rem, 3.8vw + 0.85rem, 4.5rem);
-  --type-h1: clamp(1.625rem, 3.2vw + 0.75rem, 3.75rem);
-  --type-h2: clamp(1.3125rem, 1.8vw + 0.7rem, 2.75rem);
-  --type-h3: clamp(1.0625rem, 0.9vw + 0.72rem, 1.75rem);
-  --type-lead: clamp(0.9375rem, 0.35vw + 0.84rem, 1.25rem);
-  --type-body-lg: clamp(0.875rem, 0.2vw + 0.82rem, 1.125rem);
+  /* Fluid type scale — readable floors on phones/laptops, grows with viewport */
+  --type-hero: clamp(1.875rem, 3.6vw + 1rem, 4.5rem);
+  --type-h1: clamp(1.75rem, 3vw + 0.9rem, 3.75rem);
+  --type-h2: clamp(1.5rem, 1.7vw + 0.85rem, 2.75rem);
+  --type-h3: clamp(1.1875rem, 0.85vw + 0.85rem, 1.75rem);
+  --type-lead: clamp(1.0625rem, 0.35vw + 0.95rem, 1.25rem);
+  --type-body-lg: clamp(1rem, 0.2vw + 0.92rem, 1.125rem);
 }
 
 @layer base {
@@ -115,7 +115,8 @@
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
-    font-size: clamp(0.875rem, 0.82rem + 0.22vw, 1rem);
+    /* Keep rem near 16px so body/UI text doesn't feel tiny on laptops */
+    font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
   }
   body {
     background-color: var(--color-background);
@@ -256,31 +257,31 @@
 @media (max-width: 767px) {
   @layer utilities {
     .text-4xl {
-      font-size: 1.625rem;
+      font-size: 1.75rem;
       line-height: 1.15;
     }
     .text-3xl {
-      font-size: 1.4375rem;
+      font-size: 1.5625rem;
       line-height: 1.18;
     }
     .text-2xl {
-      font-size: 1.25rem;
+      font-size: 1.375rem;
       line-height: 1.22;
     }
     .text-xl {
-      font-size: 1.0625rem;
+      font-size: 1.1875rem;
       line-height: 1.3;
     }
     .text-lg {
-      font-size: 1rem;
+      font-size: 1.0625rem;
       line-height: 1.45;
     }
     .text-base {
-      font-size: 0.9375rem;
+      font-size: 1rem;
       line-height: 1.55;
     }
     .text-sm {
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       line-height: 1.5;
     }
   }
@@ -303,16 +304,56 @@
   .container-x {
     max-width: 1240px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.125rem;
+    width: 100%;
+    min-width: 0;
   }
   @media (min-width: 640px) {
     .container-x {
-      padding-inline: 1.25rem;
+      padding-inline: 1.5rem;
     }
   }
   @media (min-width: 768px) {
     .container-x {
       padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-x {
+      padding-inline: 2.25rem;
+    }
+  }
+
+  /* Short landscape / Nest Hub–class viewports: keep the sticky header slim */
+  @media (max-height: 720px) {
+    .site-header {
+      padding-block: 0.35rem !important;
+    }
+    .site-header-nav {
+      padding-block: 0.3rem !important;
+      padding-inline: 0.85rem !important;
+    }
+    .site-header-nav a,
+    .site-header-nav button {
+      min-height: 0 !important;
+      padding-block: 0.3rem !important;
+      font-size: 0.8125rem !important;
+    }
+    .site-header-cta {
+      padding-block: 0.35rem !important;
+      padding-inline: 0.75rem !important;
+      font-size: 0.75rem !important;
+    }
+    .site-header-logo {
+      height: 1.5rem !important;
+      width: 6.5rem !important;
+    }
+    .site-header-logo img {
+      height: 100% !important;
+      width: auto !important;
+      max-width: none !important;
+      object-fit: contain !important;
+      object-position: left center !important;
     }
   }
 
@@ -546,6 +587,12 @@
   transform: none;
 }
 
+.site-footer .reveal {
+  transition:
+    opacity var(--reveal-duration, 0.2s) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--reveal-duration, 0.2s) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Hero load-in */
 @keyframes hero-enter {
   from {
@@ -641,6 +688,15 @@
 }
 
 /* Rethink Carbon — mobile capability cards marquee */
+@keyframes mrv-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes rethink-cap-marquee {
   from {
     transform: translateX(0);

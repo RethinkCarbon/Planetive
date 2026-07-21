@@ -28,10 +28,11 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     id: "rethink-carbon",
     name: "Rethink Carbon",
     lines: ["Rethink", "Carbon"],
-    description: "ESG and Sustainability Management Solution for enterprises.",
+    description:
+      "Enterprise ESG and decarbonization—from baseline inventory to audit-ready reduction pathways.",
     shape: "circle",
     color: "#1a4d3a",
-    route: "/ecosystem/rethink-carbon",
+    url: "https://www.rethinkcarbon.io",
   },
   {
     id: "digital-mrv",
@@ -85,7 +86,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     name: "Planetive's In-house Agents",
     lines: ["In-house", "Agents"],
     description:
-      "Eco System of Opportunity Tracking, Partnership management, Financial Modelling Suite and HR Agents.",
+      "AI agents that support intelligence, operations, and decision-making across the organization.",
     shape: "triangle",
     color: "#2a6650",
     route: "/ecosystem/in-house-agents",

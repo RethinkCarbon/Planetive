@@ -202,6 +202,12 @@ export const TEAM: TeamMember[] = [
 
 export const PARTNER_LOGOS = [
   {
+    name: "IEF",
+    src: partnerImg("ief-logo.png"),
+    description:
+      "An international platform connecting energy producers and consumers for dialogue.",
+  },
+  {
     name: "The DO",
     src: partnerImg("the-do-logo.png"),
     description: "A global platform for purpose-driven leadership and systems change.",
@@ -230,11 +236,5 @@ export const PARTNER_LOGOS = [
     name: "RELP",
     src: partnerImg("relp-logo.png"),
     description: "A clean energy initiative enabling policy, risk, and project readiness.",
-  },
-  {
-    name: "IEF",
-    src: partnerImg("ief-logo.png"),
-    description:
-      "An international platform connecting energy producers and consumers for dialogue.",
   },
 ] as const;

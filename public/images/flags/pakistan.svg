@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="Flag of Pakistan">
+  <clipPath id="pk-clip"><circle cx="12" cy="12" r="12"/></clipPath>
+  <g clip-path="url(#pk-clip)">
+    <rect width="24" height="24" fill="#01411C"/>
+    <rect width="6.5" height="24" fill="#fff"/>
+    <circle cx="14.2" cy="12" r="4.2" fill="#fff"/>
+    <circle cx="15.35" cy="12" r="3.5" fill="#01411C"/>
+    <polygon
+      fill="#fff"
+      points="17.1,9.2 17.55,10.55 18.95,10.55 17.8,11.4 18.25,12.75 17.1,11.9 15.95,12.75 16.4,11.4 15.25,10.55 16.65,10.55"
+    />
+  </g>
+</svg>

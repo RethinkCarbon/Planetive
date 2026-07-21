@@ -330,123 +330,60 @@ function GridLensSection() {
   return (
     <MotionSection id="gridlens" className={cn(ECOSYSTEM_SURFACE.mint, "scroll-mt-24")}>
       <div className={cn(PAGE, SECTION)}>
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-16 items-start">
-          <div className="xl:col-span-5 xl:sticky xl:top-28">
-            <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
-            <h2 className="mt-4 font-ui font-semibold text-type-h2 text-forest leading-[1.02]">
-              {title}
-            </h2>
-            <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
-              {supportingTitle}
-            </p>
-            <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{description}</p>
-            <div className="mt-10 hidden xl:block">
-              <GridLensVisual reduced={!!reduced} />
-            </div>
-          </div>
+        <motion.div
+          className="max-w-3xl"
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-canopy">{label}</p>
+          <h2 className="mt-4 font-ui font-semibold text-type-h2 text-forest leading-[1.02]">
+            {title}
+          </h2>
+          <p className="mt-4 font-ui font-semibold text-xl md:text-2xl text-n800 leading-snug">
+            {supportingTitle}
+          </p>
+          <p className="mt-6 text-type-body-lg text-n600 leading-relaxed">{description}</p>
+        </motion.div>
 
-          <div className="xl:col-span-7 space-y-3 md:space-y-4">
-            <div className="xl:hidden mb-8">
-              <GridLensVisual reduced={!!reduced} />
-            </div>
-            {capabilities.map((cap, index) => (
-              <motion.div
-                key={cap.title}
+        <div className="mt-12 md:mt-14 space-y-3 md:space-y-4 max-w-4xl">
+          {capabilities.map((cap, index) => (
+            <motion.div
+              key={cap.title}
+              className={cn(
+                "rounded-[20px] border px-6 py-6 md:px-8 md:py-7 transition-colors duration-300 cursor-default",
+                active === index
+                  ? "border-canopy/30 bg-white shadow-[var(--shadow-soft)]"
+                  : "border-n200/70 bg-white/80 hover:border-canopy/20 hover:bg-white",
+              )}
+              onMouseEnter={() => setActive(index)}
+              onMouseLeave={() => setActive(null)}
+              onClick={() => setActive(active === index ? null : index)}
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: index * 0.05 }}
+            >
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
+                Capability {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
+                {cap.title}
+              </h3>
+              <p
                 className={cn(
-                  "rounded-[20px] border px-6 py-6 md:px-8 md:py-7 transition-colors duration-300 cursor-default",
-                  active === index
-                    ? "border-canopy/30 bg-white shadow-[var(--shadow-soft)]"
-                    : "border-n200/70 bg-white/80 hover:border-canopy/20 hover:bg-white",
+                  "text-sm md:text-base text-n600 leading-relaxed transition-all duration-300",
+                  active === index ? "mt-3 opacity-100" : "mt-0 h-0 opacity-0 overflow-hidden",
                 )}
-                onMouseEnter={() => setActive(index)}
-                onMouseLeave={() => setActive(null)}
-                onClick={() => setActive(active === index ? null : index)}
-                initial={reduced ? false : { opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: index * 0.05 }}
               >
-                <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-n400">
-                  Capability {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-ui font-semibold text-xl md:text-2xl text-forest leading-snug">
-                  {cap.title}
-                </h3>
-                <p
-                  className={cn(
-                    "text-sm md:text-base text-n600 leading-relaxed transition-all duration-300",
-                    active === index ? "mt-3 opacity-100" : "mt-0 h-0 opacity-0 overflow-hidden",
-                  )}
-                >
-                  {cap.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+                {cap.description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </MotionSection>
-  );
-}
-
-function GridLensVisual({ reduced }: { reduced: boolean }) {
-  return (
-    <div className="rounded-[24px] border border-n200/60 bg-white p-8 md:p-10" aria-hidden>
-      <svg viewBox="0 0 300 300" className="w-full h-auto" fill="none">
-        <defs>
-          <linearGradient id="gridlens-flow" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor="#A8F0D4" stopOpacity="0.1" />
-            <stop offset="50%" stopColor="#2ECC8A" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#A8F0D4" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-
-        {[0, 1, 2].map((i) => (
-          <motion.path
-            key={i}
-            d={`M${40 + i * 20} ${220 - i * 15} Q150 ${160 - i * 12} ${260 - i * 20} ${220 - i * 15}`}
-            stroke="url(#gridlens-flow)"
-            strokeWidth="1.5"
-            animate={reduced ? undefined : { opacity: [0.3, 0.65, 0.3] }}
-            transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.35 }}
-          />
-        ))}
-
-        {[
-          { x: 80, y: 120 },
-          { x: 150, y: 80 },
-          { x: 220, y: 120 },
-          { x: 200, y: 200 },
-          { x: 100, y: 200 },
-        ].map((node, i) => (
-          <motion.g
-            key={i}
-            animate={reduced ? undefined : { opacity: [0.35, 0.85, 0.35] }}
-            transition={{
-              duration: 4.5 + i * 0.3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.25,
-            }}
-          >
-            <line x1="150" y1="150" x2={node.x} y2={node.y} stroke="#1A6B4A" strokeOpacity="0.12" />
-            <circle cx={node.x} cy={node.y} r="4" fill="#2ECC8A" fillOpacity="0.4" />
-          </motion.g>
-        ))}
-
-        <motion.circle
-          cx="150"
-          cy="150"
-          r="8"
-          stroke="#1A6B4A"
-          strokeOpacity="0.2"
-          fill="#1A6B4A"
-          fillOpacity="0.08"
-          animate={reduced ? undefined : { scale: [1, 1.08, 1] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </svg>
-    </div>
   );
 }
 

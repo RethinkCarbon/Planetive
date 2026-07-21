@@ -69,18 +69,39 @@ export const ADVISORY_HOUSE_WORKSHOPS = {
   focusAreas: {
     title: "Focus Areas",
     items: [
-      "Board Readiness",
-      "Sustainability Practices",
-      "Strategic Alignment",
-      "Organizational Awareness",
+      {
+        title: "Board Readiness",
+        detail: "Equip directors to engage sustainability with clarity at the governance level.",
+      },
+      {
+        title: "Sustainability Practices",
+        detail: "Connect emerging ESG expectations to practical board oversight and decision rhythms.",
+      },
+      {
+        title: "Strategic Alignment",
+        detail: "Align sustainability priorities with long-term business and capital strategy.",
+      },
+      {
+        title: "Organizational Awareness",
+        detail: "Build shared language across leadership so transition agendas move with coherence.",
+      },
     ] as const,
   },
   outcomes: {
     title: "Outcomes",
     items: [
-      "Understanding ESG Impact",
-      "Supporting Sustainable Business Practices",
-      "Strengthening Leadership Perspectives",
+      {
+        title: "Understanding ESG Impact",
+        detail: "Clearer board-level view of where ESG creates risk, value, and accountability.",
+      },
+      {
+        title: "Supporting Sustainable Business Practices",
+        detail: "Practical framing for how leadership can reinforce sustainable operating choices.",
+      },
+      {
+        title: "Strengthening Leadership Perspectives",
+        detail: "Stronger confidence to guide organizations through shifting sustainability environments.",
+      },
     ] as const,
   },
   closing: "Supporting leaders through changing sustainability environments.",
@@ -113,16 +134,34 @@ export const ADVISORY_HOUSE_BANKABILITY_STUDY = {
   },
   decisionConfidence: {
     title: "Built Around Decision Confidence",
-    steps: [
-      "Variables",
-      "Indicators",
-      "Assessment",
-      "Insights",
-      "Bankability",
-      "Decision",
-    ] as const,
     supportingCopy:
       "Structured assessment approaches support stronger planning and investment readiness environments.",
+    steps: [
+      {
+        title: "Variables",
+        detail: "Identify the factors that shape project risk, return, and delivery across markets.",
+      },
+      {
+        title: "Indicators",
+        detail: "Translate variables into measurable signals teams can compare consistently.",
+      },
+      {
+        title: "Assessment",
+        detail: "Apply structured evaluation so projects can be reviewed on a common basis.",
+      },
+      {
+        title: "Insights",
+        detail: "Surface findings decision-makers can use for planning and prioritization.",
+      },
+      {
+        title: "Bankability",
+        detail: "Connect assessment outputs to investability and financing readiness.",
+      },
+      {
+        title: "Decision",
+        detail: "Support clearer choices on where capital and effort should move next.",
+      },
+    ] as const,
   },
   whoInsightsSupport: {
     title: "Who Insights Support",
@@ -144,11 +183,26 @@ export const ADVISORY_HOUSE_ONGOING_PROGRAM = {
   capabilityAreas: {
     title: "Capability Areas",
     items: [
-      "Energy Assessment",
-      "Risk Evaluation",
-      "Program Design",
-      "Auction Support",
-      "Industrial Capacity Planning",
+      {
+        title: "Energy Assessment",
+        detail: "Evaluate renewable potential, system constraints, and readiness across national program contexts.",
+      },
+      {
+        title: "Risk Evaluation",
+        detail: "Identify technical, market, and delivery risks that shape program design and investor confidence.",
+      },
+      {
+        title: "Program Design",
+        detail: "Structure multi-year transition programs with clear pathways from planning to implementation.",
+      },
+      {
+        title: "Auction Support",
+        detail: "Support auction design and preparation so competitive procurement can unlock bankable capacity.",
+      },
+      {
+        title: "Industrial Capacity Planning",
+        detail: "Align industrial and supply-chain capacity with national renewable deployment ambitions.",
+      },
     ] as const,
   },
   programDuration: {
