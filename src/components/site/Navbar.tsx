@@ -106,7 +106,7 @@ export function Navbar({ variant = "transparent" }: { variant?: "transparent" | 
       <div className="container-x min-w-0">
         <nav
           className={cn(
-            "site-header-nav flex min-w-0 items-center justify-between gap-2 sm:gap-3 overflow-hidden rounded-full pl-3 pr-2 sm:pl-4 sm:pr-2.5 md:px-5 lg:px-5 py-1.5 sm:py-2 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
+            "site-header-nav flex min-w-0 items-center justify-between gap-2 sm:gap-3 overflow-hidden lg:overflow-visible rounded-full pl-3 pr-2 sm:pl-4 sm:pr-2.5 md:px-5 lg:px-5 py-1.5 sm:py-2 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
             "glass shadow-[var(--shadow-soft)]",
             "transition-[opacity,transform,box-shadow] duration-[350ms] ease-[cubic-bezier(0.32,0.72,0,1)]",
             mobileOpen &&
