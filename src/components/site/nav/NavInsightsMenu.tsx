@@ -45,11 +45,11 @@ export function InsightsDropdownPanel({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className={cn(navMegaPanelClass(), "p-2 min-w-[12rem]")}
+      className={cn(navMegaPanelClass(), "w-max min-w-[10.5rem] p-1.5")}
       role="menu"
       onClick={(e) => e.stopPropagation()}
     >
-      <ul>
+      <ul className="space-y-0.5">
         {NAV_PUBLICATIONS_LINKS.map((item) => {
           const active = pathname === item.to || pathname.startsWith(`${item.to}/`);
           return (
@@ -58,7 +58,7 @@ export function InsightsDropdownPanel({ onClose }: { onClose: () => void }) {
                 to={item.to}
                 role="menuitem"
                 onClick={onClose}
-                className={cn(navMegaLinkClass(active), "px-3 py-2.5")}
+                className={cn(navMegaLinkClass(active), "px-2.5 py-1.5 text-sm")}
               >
                 {item.label}
               </Link>
