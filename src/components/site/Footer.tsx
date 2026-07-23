@@ -102,16 +102,12 @@ export function Footer() {
             style={{ ["--reveal-duration" as string]: "0.2s" }}
           >
             <PlanetiveLogo onDark zoom="footer" />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
-              Climate intelligence, strategy, technology, and implementation for a sustainable
-              future.
-            </p>
             <a
               href={LINKEDIN_URL}
               target="_blank"
               rel="noreferrer"
               className={cn(
-                "mt-7 inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5",
+                "mt-5 inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5",
                 "text-sm font-medium text-white transition-all duration-200 ease-out",
                 "hover:border-mint hover:bg-mint hover:text-forest hover:scale-[1.02]",
               )}
