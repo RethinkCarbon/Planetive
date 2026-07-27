@@ -509,6 +509,37 @@
     color: var(--forest);
     font-weight: 600;
   }
+  .blog-prose blockquote {
+    position: relative;
+    margin: 1.8em 0;
+    padding: 1.2rem 2.3rem;
+    border-radius: 1rem;
+    background: var(--n50);
+    border: 1px solid var(--n200);
+    color: #141a1f;
+    font-size: clamp(1.2rem, 2.6vw, 2.05rem);
+    line-height: 1.18;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .blog-prose blockquote::before,
+  .blog-prose blockquote::after {
+    position: absolute;
+    color: var(--n300);
+    font-size: 2.8rem;
+    line-height: 1;
+    font-weight: 800;
+  }
+  .blog-prose blockquote::before {
+    content: "“";
+    top: 0.15rem;
+    left: 0.55rem;
+  }
+  .blog-prose blockquote::after {
+    content: "”";
+    right: 0.55rem;
+    bottom: -0.65rem;
+  }
 
   .ecosystem-panel-enter {
     animation: ecosystem-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;

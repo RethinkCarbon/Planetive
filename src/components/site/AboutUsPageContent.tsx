@@ -10,7 +10,7 @@ import {
 } from "@/lib/about-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 
-type TeamCardLayout = "portrait" | "landscape";
+type TeamCardLayout = "portrait" | "landscape" | "ops-split";
 
 export function AboutUsPageContent() {
   const leadership = TEAM.filter((m) => m.group === "leadership");
@@ -23,13 +23,23 @@ export function AboutUsPageContent() {
       <AboutHero />
       <AboutIntro />
       <TeamSection title="Leadership" members={leadership} featured />
-      <TeamSection title="Team & Advisors" subtitle="Global advisors" members={advisors} />
-      <TeamSection title="Planetive Team" subtitle="Operations & specialists" members={team} />
+      <TeamSection
+        title="Team & Advisors"
+        subtitle="Global advisors"
+        members={advisors}
+        layout="ops-split"
+      />
+      <TeamSection
+        title="Planetive Team"
+        subtitle="Operations & specialists"
+        members={team}
+        layout="ops-split"
+      />
       <TeamSection
         title="Consultants"
         subtitle="Specialist expertise"
         members={consultants}
-        layout="landscape"
+        layout="ops-split"
       />
       <PartnersSection />
       <AboutClosingCta />
@@ -158,6 +168,8 @@ function TeamSection({
               <FeaturedMemberCard key={m.id} member={m} delay={i * 80} />
             ))}
           </div>
+        ) : layout === "ops-split" ? (
+          <OpsTeamGrid members={members} />
         ) : (
           <div
             className={cn(
@@ -229,7 +241,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
   return (
     <ScrollReveal variant="fade-up" delay={delay}>
       <article className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden rounded-[28px] md:rounded-[32px] border border-n200 bg-white shadow-[var(--shadow-soft)]">
-        <div className="lg:col-span-4 relative aspect-[3/4] min-h-[360px] sm:min-h-[400px] lg:min-h-[480px]">
+        <div className="lg:col-span-4 relative aspect-[4/5] min-h-[260px] sm:min-h-[280px] lg:min-h-[320px] lg:aspect-auto">
           {member.image ? (
             <img
               src={member.image}
@@ -256,23 +268,23 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-forest/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-transparent" />
         </div>
-        <div className="lg:col-span-8 p-8 md:p-10 lg:p-12 flex flex-col">
+        <div className="lg:col-span-8 flex flex-col justify-center p-6 md:p-8 lg:p-9">
           <span className="text-xs font-mono tracking-wider uppercase text-canopy">
             {member.role}
           </span>
-          <h3 className="mt-2 font-ui font-semibold text-3xl md:text-4xl text-forest">
+          <h3 className="mt-2 font-ui font-semibold text-2xl md:text-3xl text-forest">
             {member.name}
           </h3>
           <BioText
             paragraphs={member.bio}
-            className={cn("mt-5", isAyla && !expanded && "max-h-[9.5rem] overflow-hidden")}
+            className={cn("mt-4", isAyla && !expanded && "max-h-[7.5rem] overflow-hidden")}
           />
           {member.link && (
             <a
               href={member.link.href}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-canopy hover:text-mint"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-canopy hover:text-mint"
             >
               {member.link.label}
               <ExternalLink size={14} />
@@ -282,7 +294,7 @@ function FeaturedMemberCard({ member, delay }: { member: TeamMember; delay: numb
             <button
               type="button"
               onClick={() => setExpanded((e) => !e)}
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-canopy self-start"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-canopy self-start"
             >
               {expanded ? "Show less" : "Read more"}
               <ChevronDown
@@ -309,6 +321,60 @@ function BioText({ paragraphs, className }: { paragraphs: string[]; className?: 
   );
 }
 
+function OpsTeamGrid({ members }: { members: TeamMember[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 md:items-stretch">
+      {members.map((m, i) => (
+        <OpsMemberCard key={m.id} member={m} delay={i * 40} />
+      ))}
+    </div>
+  );
+}
+
+function OpsMemberCard({ member, delay }: { member: TeamMember; delay: number }) {
+  return (
+    <ScrollReveal variant="fade-up" delay={delay} className="h-full">
+      <article className="flex h-full min-h-[11.5rem] overflow-hidden rounded-[20px] border border-n200/80 bg-white shadow-[var(--shadow-soft)] sm:min-h-[12.5rem]">
+        <div className="relative w-[7.75rem] shrink-0 self-stretch overflow-hidden bg-[#1a3a52] sm:w-[9rem] md:w-[10rem]">
+          {member.image ? (
+            <img
+              src={member.image}
+              alt={member.name}
+              className="absolute inset-0 h-full w-full object-cover object-top"
+              style={{
+                objectPosition: member.imagePosition ?? "50% 18%",
+              }}
+              loading="lazy"
+            />
+          ) : (
+            <div
+              className="flex h-full items-center justify-center text-2xl font-ui font-semibold text-white"
+              style={{ background: "var(--gradient-hero)" }}
+            >
+              {member.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)}
+            </div>
+          )}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-2 px-5 py-4 sm:px-6 sm:py-5">
+          <h3 className="font-ui font-semibold text-lg leading-snug text-forest sm:text-xl">
+            {member.name}
+          </h3>
+          <p className="line-clamp-2 min-h-[2.5rem] text-[10px] font-mono font-medium uppercase tracking-[0.14em] text-canopy">
+            {member.role}
+          </p>
+          <p className="line-clamp-3 min-h-[3.9rem] text-sm leading-relaxed text-n700">
+            {member.bio[0]}
+          </p>
+        </div>
+      </article>
+    </ScrollReveal>
+  );
+}
+
 function MemberCard({
   member,
   delay,
@@ -316,7 +382,7 @@ function MemberCard({
 }: {
   member: TeamMember;
   delay: number;
-  layout?: TeamCardLayout;
+  layout?: Exclude<TeamCardLayout, "ops-split">;
 }) {
   return (
     <ScrollReveal variant="fade-up" delay={delay}>

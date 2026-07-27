@@ -25,6 +25,8 @@ export type TeamMember = {
   id: string;
   name: string;
   role: string;
+  /** Compact label for hover-expand ops cards (e.g. "Specialist") */
+  shortRole?: string;
   group: "leadership" | "advisors" | "team" | "consultants";
   image?: string;
   /** CSS object-position for portrait framing (e.g. "70% center") */
@@ -33,6 +35,8 @@ export type TeamMember = {
   imageScale?: number;
   bio: string[];
   link?: { href: string; label: string };
+  linkedin?: string;
+  email?: string;
 };
 
 /** Order matches planetive.org/about-us carousel / bios */
@@ -107,8 +111,10 @@ export const TEAM: TeamMember[] = [
     id: "kamal",
     name: "Kamal Rahim",
     role: "Head of Strategy & Growth",
+    shortRole: "Strategy",
     group: "team",
     image: teamImg("kamal-rahim.jpg"),
+    imagePosition: "50% 22%",
     bio: [
       "Kamal Rahim leads strategy and growth at Planetive. He has experience across energy, industrial digitization, and infrastructure sectors.",
     ],
@@ -117,8 +123,10 @@ export const TEAM: TeamMember[] = [
     id: "umair",
     name: "Umair Hussian Farooqi",
     role: "Financial Analyst",
+    shortRole: "Analyst",
     group: "team",
     image: teamImg("umair.jpeg"),
+    imagePosition: "50% 18%",
     bio: [
       "Umair Hussian Farooqi is a financial analyst with experience in banking, audit, and accounts. He supports planning, reporting, and compliance.",
     ],
@@ -127,9 +135,10 @@ export const TEAM: TeamMember[] = [
     id: "zainab",
     name: "Zainab Ahmed",
     role: "Business Analyst",
+    shortRole: "Analyst",
     group: "team",
     image: teamImg("zainab-ahmed.jpg"),
-    imagePosition: "50% 58%",
+    imagePosition: "50% 28%",
     bio: [
       "Zainab Ahmed is a business analyst focused on finance and sustainability projects. She supports research, analysis, and strategy development.",
     ],
@@ -138,10 +147,10 @@ export const TEAM: TeamMember[] = [
     id: "shahid",
     name: "Shahid Jamal",
     role: "Carbon Credit and Sustainable Agriculture Specialist",
+    shortRole: "Specialist",
     group: "team",
     image: teamImg("shahid.jpeg"),
-    imagePosition: "50% 1%",
-    imageScale: 1.55,
+    imagePosition: "50% 12%",
     bio: [
       "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
     ],
@@ -150,8 +159,10 @@ export const TEAM: TeamMember[] = [
     id: "farhan",
     name: "Farhan Hassan Rizvi",
     role: "Product Engineer",
+    shortRole: "Engineer",
     group: "team",
     image: teamImg("farhan-hassan-rizvi.jpeg"),
+    imagePosition: "50% 18%",
     bio: [
       "Farhan Hassan Rizvi is a product engineer focused on building practical climate-tech solutions. He works across product development, implementation, and continuous improvement.",
     ],
@@ -160,10 +171,10 @@ export const TEAM: TeamMember[] = [
     id: "haram",
     name: "Haram Saad",
     role: "Business Analyst",
+    shortRole: "Analyst",
     group: "team",
     image: teamImg("haram-saad.jpeg"),
-    imagePosition: "50% 22%",
-    imageScale: 1.5,
+    imagePosition: "50% 12%",
     bio: [
       "Haram Saad is a business analyst supporting sustainability-focused initiatives. She contributes to research, data analysis, and project planning.",
     ],
@@ -172,8 +183,10 @@ export const TEAM: TeamMember[] = [
     id: "sanam",
     name: "Sanam Gul",
     role: "Business Support and Communication Lead",
+    shortRole: "Communications",
     group: "team",
     image: teamImg("sanam.jpeg"),
+    imagePosition: "50% 16%",
     bio: [
       "Sanam Gul leads business support and communications at Planetive. She coordinates stakeholder engagement, internal operations, and external messaging to ensure clarity and consistency across the firm's advisory and project work.",
     ],
@@ -184,6 +197,7 @@ export const TEAM: TeamMember[] = [
     role: "Consultant",
     group: "consultants",
     image: teamImg("hira-mumtaz.jpg"),
+    imagePosition: "62% 18%",
     bio: [
       "Hira Mumtaz is an energy and climate consultant. She works on energy policy, renewables, climate finance, and carbon markets.",
     ],
@@ -194,6 +208,7 @@ export const TEAM: TeamMember[] = [
     role: "Consultant",
     group: "consultants",
     image: teamImg("maha-kamal.jpg"),
+    imagePosition: "68% 20%",
     bio: [
       "Maha Kamal is a climate governance and policy specialist. Her work focuses on SDGs, energy transition, and climate policy.",
     ],
