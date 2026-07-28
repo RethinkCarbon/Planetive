@@ -3,6 +3,7 @@ import { Linkedin } from "lucide-react";
 import { ScrollReveal, ScrollRevealGroup } from "@/components/site/ScrollReveal";
 import { PlanetiveLogo } from "@/components/site/PlanetiveLogo";
 import { useSiteForm } from "@/hooks/use-site-form";
+import { RETHINK_CARBON } from "@/lib/industries-content";
 import { cn } from "@/lib/utils";
 
 const FOOTER_PAGES = [
@@ -17,7 +18,7 @@ const FOOTER_PAGES = [
 ] as const;
 
 const FOOTER_SOLUTIONS: Array<{ label: string; to?: string; href?: string }> = [
-  { label: "Rethink Carbon", href: "https://www.rethinkcarbon.io" },
+  { label: "Rethink Carbon", href: RETHINK_CARBON.url },
   { label: "Digital MRV Platforms", to: "/ecosystem/digital-mrv-platforms" },
   { label: "Agri Tech Solutions", to: "/ecosystem/agri-tech-solutions" },
   { label: "Agri-Co Platform", href: "/ecosystem/agri-tech-solutions#agri-co" },

@@ -96,12 +96,19 @@ export function ProcessSection() {
 }
 
 /* ------------------------------- Ecosystem ------------------------------ */
-const ecosystem: { name: string; desc: string; icon: LucideIcon; tone: "forest" | "mint" }[] = [
+const ecosystem: {
+  name: string;
+  desc: string;
+  icon: LucideIcon;
+  tone: "forest" | "mint";
+  href?: string;
+}[] = [
   {
     name: "Rethink Carbon",
     desc: "Carbon measurement, planning, and decarbonization SaaS.",
     icon: BarChart3,
     tone: "forest",
+    href: RETHINK_CARBON.url,
   },
   {
     name: "ETW",
@@ -167,28 +174,50 @@ export function EcosystemSection() {
           className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           stagger={70}
         >
-          {ecosystem.map(({ name, desc, icon: Icon, tone }) => (
-            <article
-              key={name}
-              className="group relative overflow-hidden rounded-[28px] bg-white border border-n200 p-7 hover:border-mint transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elevated)]"
-            >
-              <GeometricCorner tone={tone} />
-              <div
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                  tone === "forest"
-                    ? "bg-[var(--forest)] text-[var(--mint-soft)]"
-                    : "bg-mint-soft text-forest"
-                }`}
-              >
-                <Icon size={20} />
-              </div>
-              <h3 className="mt-5 font-ui font-semibold text-xl text-forest">{name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-n600">{desc}</p>
-              <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-canopy group-hover:text-mint transition-colors">
-                Learn more <ArrowUpRight size={14} />
-              </div>
-            </article>
-          ))}
+          {ecosystem.map(({ name, desc, icon: Icon, tone, href }) => {
+            const body = (
+              <>
+                <GeometricCorner tone={tone} />
+                <div
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
+                    tone === "forest"
+                      ? "bg-[var(--forest)] text-[var(--mint-soft)]"
+                      : "bg-mint-soft text-forest"
+                  }`}
+                >
+                  <Icon size={20} />
+                </div>
+                <h3 className="mt-5 font-ui font-semibold text-xl text-forest">{name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-n600">{desc}</p>
+                <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-canopy group-hover:text-mint transition-colors">
+                  Learn more <ArrowUpRight size={14} />
+                </div>
+              </>
+            );
+
+            const cardClass =
+              "group relative overflow-hidden rounded-[28px] bg-white border border-n200 p-7 hover:border-mint transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elevated)]";
+
+            if (href) {
+              return (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${cardClass} block`}
+                >
+                  {body}
+                </a>
+              );
+            }
+
+            return (
+              <article key={name} className={cardClass}>
+                {body}
+              </article>
+            );
+          })}
         </ScrollRevealGroup>
       </div>
     </section>

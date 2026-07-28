@@ -1,9 +1,13 @@
 /** Site-wide navigation structure — ecosystem routes are canonical. */
 
+import { RETHINK_CARBON } from "@/lib/industries-content";
+
 export type NavLink = {
   to: string;
   label: string;
   color?: string;
+  /** Opens in a new tab when true (or when `to` is an absolute http(s) URL). */
+  external?: boolean;
 };
 
 export type NavLinkGroup = {
@@ -11,11 +15,20 @@ export type NavLinkGroup = {
   items: readonly NavLink[];
 };
 
+export function isExternalNavLink(link: Pick<NavLink, "to" | "external">) {
+  return Boolean(link.external) || /^https?:\/\//i.test(link.to);
+}
+
 export const NAV_SOLUTION_GROUPS: readonly NavLinkGroup[] = [
   {
     title: "Platforms",
     items: [
-      { to: "/ecosystem/rethink-carbon", label: "Rethink Carbon", color: "#1a4d3a" },
+      {
+        to: RETHINK_CARBON.url,
+        label: "Rethink Carbon",
+        color: "#1a4d3a",
+        external: true,
+      },
       { to: "/ecosystem/digital-mrv-platforms", label: "Digital MRV Platforms", color: "#1e5340" },
       { to: "/ecosystem/agri-tech-solutions", label: "Agri Tech Solutions", color: "#244c42" },
       {

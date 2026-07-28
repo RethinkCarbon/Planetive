@@ -239,7 +239,7 @@ function SegmentWedge({
             {segment.lines.map((line) => (
               <span
                 key={line}
-                className="block whitespace-nowrap text-[0.6rem] font-semibold leading-tight text-white sm:text-[0.7rem] md:text-[0.8rem]"
+                className="block whitespace-nowrap text-[0.65rem] font-semibold leading-tight text-white sm:text-[0.75rem] md:text-[0.85rem]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 {line}
@@ -258,7 +258,7 @@ function SegmentWedge({
             }}
           >
             <p
-              className="max-w-[6.5rem] text-center text-[0.6rem] leading-snug text-white sm:max-w-[8rem] sm:text-[0.7rem] md:max-w-[10rem] md:text-[0.8rem]"
+              className="max-w-[7.5rem] text-center text-[0.62rem] leading-snug text-white sm:max-w-[9rem] sm:text-[0.72rem] md:max-w-[11rem] md:text-[0.82rem]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               {segment.description}
@@ -426,7 +426,7 @@ export function PlanetiveEcosystemWheel({
       )}
       onMouseLeave={handleWheelLeave}
       role="group"
-      aria-label="Planetive ecosystem — nine ventures in a rotating wheel"
+      aria-label="Planetive ecosystem — eight ventures in a rotating wheel"
     >
       <div className="relative aspect-square">
         <StaticCenter />

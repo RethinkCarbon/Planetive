@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react";
 import { INDUSTRIES_NAV } from "@/lib/industries-content";
 import { NAV_EXPLORE_LINKS, NAV_SOLUTION_GROUPS } from "@/lib/site-nav-content";
 import { cn } from "@/lib/utils";
+import { NavItemLink } from "./NavItemLink";
 import {
   navMegaGroupTitleClass,
   navMegaLinkClass,
@@ -64,8 +65,8 @@ export function SolutionsMegaPanel({ onClose }: { onClose: () => void }) {
                   const active = pathname === item.to;
                   return (
                     <li key={item.to}>
-                      <Link
-                        to={item.to}
+                      <NavItemLink
+                        item={item}
                         role="menuitem"
                         onClick={onClose}
                         className={navMegaLinkClass(active)}
@@ -79,7 +80,7 @@ export function SolutionsMegaPanel({ onClose }: { onClose: () => void }) {
                           />
                         ) : null}
                         {item.label}
-                      </Link>
+                      </NavItemLink>
                     </li>
                   );
                 })}
@@ -159,8 +160,8 @@ export function NavSolutionsMenu({
                 const active = pathname === item.to;
                 return (
                   <li key={item.to}>
-                    <Link
-                      to={item.to}
+                    <NavItemLink
+                      item={item}
                       onClick={onClose}
                       className={cn(navMegaLinkClass(active), "mx-1")}
                       aria-current={active ? "page" : undefined}
@@ -173,7 +174,7 @@ export function NavSolutionsMenu({
                         />
                       ) : null}
                       {item.label}
-                    </Link>
+                    </NavItemLink>
                   </li>
                 );
               })}

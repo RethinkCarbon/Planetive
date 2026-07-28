@@ -1,3 +1,5 @@
+import { RETHINK_CARBON } from "@/lib/industries-content";
+
 export type EcosystemWheelShape =
   | "circle"
   | "crescent"
@@ -32,7 +34,7 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
       "Enterprise ESG and decarbonization—from baseline inventory to audit-ready reduction pathways.",
     shape: "circle",
     color: "#1a4d3a",
-    url: "https://www.rethinkcarbon.io",
+    url: RETHINK_CARBON.url,
   },
   {
     id: "digital-mrv",
@@ -80,16 +82,6 @@ export const ECOSYSTEM_WHEEL_SEGMENTS: EcosystemWheelSegment[] = [
     shape: "wave",
     color: "#2f6e50",
     route: "/ecosystem/energy-transition-workforce",
-  },
-  {
-    id: "in-house-agents",
-    name: "Planetive's In-house Agents",
-    lines: ["In-house", "Agents"],
-    description:
-      "AI agents that support intelligence, operations, and decision-making across the organization.",
-    shape: "triangle",
-    color: "#2a6650",
-    route: "/ecosystem/in-house-agents",
   },
   {
     id: "advisory-house",

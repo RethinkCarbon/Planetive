@@ -16,6 +16,7 @@ import {
   isSolutionsPath,
 } from "@/lib/site-nav-content";
 import { cn } from "@/lib/utils";
+import { NavItemLink } from "./NavItemLink";
 
 const DRAWER_EASE = [0.32, 0.72, 0, 1] as const;
 const DRAWER_OPEN_MS = 0.42;
@@ -180,8 +181,8 @@ export function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
                           const active = pathname === item.to;
                           return (
                             <li key={item.to}>
-                              <Link
-                                to={item.to}
+                              <NavItemLink
+                                item={item}
                                 onClick={onClose}
                                 className={cn(
                                   mobileSubLinkClass,
@@ -196,7 +197,7 @@ export function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
                                   />
                                 ) : null}
                                 {item.label}
-                              </Link>
+                              </NavItemLink>
                             </li>
                           );
                         })}

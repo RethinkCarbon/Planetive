@@ -150,7 +150,8 @@ export const TEAM: TeamMember[] = [
     shortRole: "Specialist",
     group: "team",
     image: teamImg("shahid.jpeg"),
-    imagePosition: "50% 12%",
+    imagePosition: "50% 10%",
+    imageScale: 1.75,
     bio: [
       "Shahid Jamal specializes in carbon credits and sustainable agriculture. He works on regenerative practices and carbon sequestration initiatives.",
     ],
@@ -174,7 +175,8 @@ export const TEAM: TeamMember[] = [
     shortRole: "Analyst",
     group: "team",
     image: teamImg("haram-saad.jpeg"),
-    imagePosition: "50% 12%",
+    imagePosition: "50% 10%",
+    imageScale: 1.5,
     bio: [
       "Haram Saad is a business analyst supporting sustainability-focused initiatives. She contributes to research, data analysis, and project planning.",
     ],

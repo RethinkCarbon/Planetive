@@ -9,9 +9,7 @@ import {
   type TeamMember,
 } from "@/lib/about-content";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
-
 type TeamCardLayout = "portrait" | "landscape" | "ops-split";
-
 export function AboutUsPageContent() {
   const leadership = TEAM.filter((m) => m.group === "leadership");
   const advisors = TEAM.filter((m) => m.group === "advisors");
@@ -343,6 +341,11 @@ function OpsMemberCard({ member, delay }: { member: TeamMember; delay: number })
               className="absolute inset-0 h-full w-full object-cover object-top"
               style={{
                 objectPosition: member.imagePosition ?? "50% 18%",
+                transform:
+                  member.imageScale !== undefined && member.imageScale > 1
+                    ? `scale(${member.imageScale})`
+                    : undefined,
+                transformOrigin: member.imagePosition ?? "50% 18%",
               }}
               loading="lazy"
             />
@@ -402,8 +405,9 @@ function MemberCard({
               className={cn(
                 teamImageClassName(
                   member,
-                  member.imageScale === undefined &&
-                    "transition-transform duration-500 group-hover:scale-[1.02]",
+                  member.imageScale === undefined
+                    ? "transition-transform duration-500 group-hover:scale-[1.02]"
+                    : undefined,
                 ),
                 isZoomedOut(member) && "absolute",
               )}
