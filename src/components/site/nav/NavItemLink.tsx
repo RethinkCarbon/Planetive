@@ -25,7 +25,7 @@ export function NavItemLink({
       <a
         href={item.to}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         role={role}
         onClick={onClick}
         className={className}

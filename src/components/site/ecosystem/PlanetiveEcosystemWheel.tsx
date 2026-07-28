@@ -174,6 +174,7 @@ function SegmentWedge({
   const labelY = roundPct(50 + Math.sin(labelRad) * LABEL_RADIUS_PCT);
   const shapeCorner = segmentShapeCornerPercent(index);
 
+  const isExternal = Boolean(segment.url);
   const isInteractive = Boolean(segment.route || segment.url);
   const ariaNavigate = segment.route
     ? `${segment.name} (opens page)`
@@ -181,35 +182,16 @@ function SegmentWedge({
       ? `${segment.name} (opens in new tab)`
       : segment.name;
 
-  return (
-    <div
-      className={cn(
-        "ecosystem-segment-scene absolute inset-0 cursor-pointer outline-none",
-        (isHovered || isHighlighted) && "z-[15]",
-      )}
-      style={{
-        clipPath: annularWedgeClipPath(index),
-        transform: `translate(${pop.x}%, ${pop.y}%)`,
-      }}
-      role={isInteractive ? "link" : "button"}
-      tabIndex={0}
-      aria-label={ariaNavigate}
-      aria-current={isHighlighted ? "page" : undefined}
-      onMouseEnter={onActivate}
-      onFocus={onActivate}
-      onBlur={onDeactivate}
-      onClick={() => onNavigate(segment)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          if (isInteractive) {
-            onNavigate(segment);
-          } else {
-            onActivate();
-          }
-        }
-      }}
-    >
+  const sharedClassName = cn(
+    "ecosystem-segment-scene absolute inset-0 cursor-pointer outline-none",
+    (isHovered || isHighlighted) && "z-[15]",
+  );
+  const sharedStyle = {
+    clipPath: annularWedgeClipPath(index),
+    transform: `translate(${pop.x}%, ${pop.y}%)`,
+  } as const;
+
+  const body = (
       <div
         className={cn(
           "ecosystem-segment-body absolute inset-0",
@@ -266,6 +248,51 @@ function SegmentWedge({
           </div>
         </div>
       </div>
+  );
+
+  if (isExternal && segment.url) {
+    return (
+      <a
+        href={segment.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={sharedClassName}
+        style={sharedStyle}
+        aria-label={ariaNavigate}
+        aria-current={isHighlighted ? "page" : undefined}
+        onMouseEnter={onActivate}
+        onFocus={onActivate}
+        onBlur={onDeactivate}
+      >
+        {body}
+      </a>
+    );
+  }
+
+  return (
+    <div
+      className={sharedClassName}
+      style={sharedStyle}
+      role={isInteractive ? "link" : "button"}
+      tabIndex={0}
+      aria-label={ariaNavigate}
+      aria-current={isHighlighted ? "page" : undefined}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+      onBlur={onDeactivate}
+      onClick={() => onNavigate(segment)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (isInteractive) {
+            onNavigate(segment);
+          } else {
+            onActivate();
+          }
+        }
+      }}
+    >
+      {body}
     </div>
   );
 }
